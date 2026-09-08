@@ -15,6 +15,7 @@
 
 import { LANGS, LANG_META, makeT } from './i18n.js';
 import { SCHEMES, LESSONS, TIPS, PHRASES } from './content.js';
+import { initCursor } from './cursor.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -43,6 +44,9 @@ const state = {
   history: [],
   pending: null,      // action awaiting confirmation
   draft: { payee: null, amount: '' },
+  // Signup is the one flow that spans three screens, so its half-finished
+  // state lives here rather than being read back out of the DOM.
+  signup: null,
   queue: store.get('queue', []),
 };
 
@@ -360,6 +364,309 @@ async function refreshAccount() {
   renderBalance();
 }
 
+// ─────────────────────────────────────────────────────────── signup + OTP
+//
+// Three screens: pick a contact, enter the code, choose a name and password.
+// The server never keeps a "this person is half signed up" session — a correct
+// code buys a signed verification token, the client holds it, and registration
+// presents it back. Same reasoning as the pending-transfer object: no sticky
+// state on the web tier, so replicas stay interchangeable.
+//
+// SAFETY: no SMS gateway or email provider is wired up. The code is printed to
+// the server log, and in DEBUG the API echoes it so the flow is demonstrable.
+// The screen says so, in the user's own language, rather than implying a text
+// message is on its way.
+
+const OTP_ERRORS = {
+  bad_phone: 'errBadPhone',
+  bad_email: 'errBadEmail',
+  bad_channel: 'errGeneric',
+  already_registered: 'errAlreadyRegistered',
+  cooldown: 'errCooldown',
+  too_many: 'errTooMany',
+  wrong_code: 'errWrongCode',
+  expired: 'errExpired',
+  already_used: 'errExpired',
+  locked: 'errLocked',
+  not_found: 'errNotFound',
+  verification_expired: 'errVerificationExpired',
+  verification_invalid: 'errNotFound',
+};
+
+// Turn an API failure into a sentence in the user's language. Falls back to the
+// server's English prose only for a code this build has not seen — better an
+// unfamiliar English string than a silent dead end.
+function otpMessage(err) {
+  const data = err?.data || {};
+  if (data.error === 'wrong_code' && Number.isFinite(data.attempts_remaining)) {
+    return t('errWrongCodeLeft', { n: data.attempts_remaining });
+  }
+  const key = OTP_ERRORS[data.error];
+  if (key === 'errCooldown') return t('errCooldown', { n: data.retry_after ?? 30 });
+  if (key) return t(key);
+  if (!err?.status) return t('networkError');
+  return data.detail || t('errGeneric');
+}
+
+function startSignup() {
+  state.signup = {
+    channel: 'phone',
+    destination: '',
+    challengeId: null,
+    verificationToken: null,
+    expiresAt: 0,
+    resendAt: 0,
+    devCode: null,
+  };
+  go('signup');
+}
+
+function renderSignup() {
+  const signup = state.signup;
+  if (!signup) { go('auth', { reset: true }); return; }
+
+  const phone = signup.channel === 'phone';
+  $$('.seg-btn').forEach((btn) => {
+    btn.setAttribute('aria-selected', String(btn.dataset.channel === signup.channel));
+  });
+
+  $('#dest-label').textContent = t(phone ? 'phoneLabel' : 'emailLabel');
+  $('#dest-hint').textContent = t(phone ? 'phoneHint' : 'emailHint');
+
+  const input = $('#dest-input');
+  input.value = signup.destination;
+  input.placeholder = t(phone ? 'phonePlaceholder' : 'emailPlaceholder');
+  // A numeric keypad for a phone number and an @-bearing keyboard for an email
+  // is the difference between one tap and five on a cheap Android keyboard.
+  input.type = phone ? 'tel' : 'email';
+  input.inputMode = phone ? 'numeric' : 'email';
+  input.autocomplete = phone ? 'tel' : 'email';
+  input.maxLength = phone ? 15 : 254;
+
+  $('#dest-error').hidden = true;
+}
+
+async function requestCode({ resend = false } = {}) {
+  const signup = state.signup;
+  const input = $('#dest-input');
+  const destination = resend ? signup.destination : input.value.trim();
+  const errorBox = resend ? $('#otp-error') : $('#dest-error');
+
+  if (!destination) return;
+  signup.destination = destination;
+  errorBox.hidden = true;
+
+  const button = resend ? $('#btn-resend') : $('#signup-form button[type="submit"]');
+  button.disabled = true;
+  try {
+    const data = await api('/api/accounts/otp/request/', {
+      method: 'POST',
+      body: { channel: signup.channel, destination },
+    });
+    signup.challengeId = data.challenge_id;
+    signup.masked = data.destination_masked;
+    signup.expiresAt = Date.now() + (data.expires_in ?? 300) * 1000;
+    signup.resendAt = Date.now() + (data.resend_in ?? 30) * 1000;
+    signup.devCode = data.dev_code ?? null;
+
+    if (resend) { renderOtp(); toast(t('sendCode')); }
+    else go('otp');
+  } catch (err) {
+    errorBox.textContent = otpMessage(err);
+    errorBox.hidden = false;
+    speak(errorBox.textContent);
+    // An already-registered contact is a wrong turn, not a failure: send them
+    // to the sign-in screen instead of leaving them staring at a red line.
+    if (err?.data?.error === 'already_registered') setTimeout(() => go('auth', { reset: true }), 2200);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+// One interval drives the expiry countdown and the resend cooldown. go() clears
+// it, so leaving the screen cannot leave a timer ticking against a stale
+// challenge.
+let otpTimer = null;
+
+function stopOtpTimer() {
+  clearInterval(otpTimer);
+  otpTimer = null;
+}
+
+function renderOtp() {
+  const signup = state.signup;
+  if (!signup?.challengeId) { go('signup', { reset: true }); return; }
+
+  // The icon must match the channel: an envelope over a phone number reads as
+  // the app having sent the code somewhere the user did not ask for.
+  $('#otp-icon').textContent = signup.channel === 'phone' ? '📱' : '✉️';
+  $('#otp-destination').textContent = signup.masked || signup.destination;
+  $('#otp-error').hidden = true;
+
+  const grid = $('#otp-grid');
+  grid.innerHTML = '';
+  const boxes = [];
+  for (let i = 0; i < 6; i += 1) {
+    const box = document.createElement('input');
+    box.className = 'otp-box';
+    box.inputMode = 'numeric';
+    box.maxLength = 1;
+    box.setAttribute('aria-label', `${i + 1}`);
+    // Android and iOS offer to fill an SMS code into a field marked this way.
+    // It does nothing here (no SMS is sent) but costs nothing and is correct.
+    if (i === 0) box.autocomplete = 'one-time-code';
+    boxes.push(box);
+    grid.append(box);
+  }
+
+  const focusFirstEmpty = () => (boxes.find((b) => !b.value) || boxes[5]).focus();
+
+  boxes.forEach((box, i) => {
+    box.addEventListener('input', () => {
+      box.value = box.value.replace(/\D/g, '').slice(-1);
+      box.classList.toggle('filled', Boolean(box.value));
+      if (box.value && i < 5) boxes[i + 1].focus();
+      if (boxes.every((b) => b.value)) verifyCode();
+    });
+    box.addEventListener('keydown', (event) => {
+      if (event.key === 'Backspace' && !box.value && i > 0) {
+        boxes[i - 1].value = '';
+        boxes[i - 1].classList.remove('filled');
+        boxes[i - 1].focus();
+        event.preventDefault();
+      }
+      if (event.key === 'ArrowLeft' && i > 0) boxes[i - 1].focus();
+      if (event.key === 'ArrowRight' && i < 5) boxes[i + 1].focus();
+    });
+    // Pasting the whole code into any box fills the row, which is what people
+    // actually do when the code is on screen next to the field.
+    box.addEventListener('paste', (event) => {
+      const digits = (event.clipboardData?.getData('text') || '').replace(/\D/g, '').slice(0, 6);
+      if (!digits) return;
+      event.preventDefault();
+      digits.split('').forEach((digit, k) => {
+        boxes[k].value = digit;
+        boxes[k].classList.add('filled');
+      });
+      focusFirstEmpty();
+      if (boxes.every((b) => b.value)) verifyCode();
+    });
+  });
+
+  const dev = $('#dev-code');
+  dev.hidden = !signup.devCode;
+  if (signup.devCode) $('#dev-code-value').textContent = signup.devCode;
+
+  stopOtpTimer();
+  tickOtp();
+  otpTimer = setInterval(tickOtp, 1000);
+  boxes[0].focus();
+}
+
+function tickOtp() {
+  const signup = state.signup;
+  if (!signup) { stopOtpTimer(); return; }
+
+  const left = Math.max(0, Math.round((signup.expiresAt - Date.now()) / 1000));
+  const clock = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`;
+  $('#otp-countdown').textContent = left > 0 ? t('expiresIn', { time: clock }) : t('codeExpired');
+
+  const cooling = Math.max(0, Math.ceil((signup.resendAt - Date.now()) / 1000));
+  const resend = $('#btn-resend');
+  resend.disabled = cooling > 0;
+  resend.textContent = cooling > 0 ? t('resendIn', { n: cooling }) : t('resendCode');
+
+  if (left === 0) $('#btn-verify').disabled = true;
+}
+
+let verifying = false;
+
+async function verifyCode() {
+  const signup = state.signup;
+  if (!signup?.challengeId || verifying) return;
+
+  const boxes = $$('.otp-box');
+  const code = boxes.map((b) => b.value).join('');
+  if (code.length < 6) {
+    const box = $('#otp-error');
+    box.textContent = t('errWrongCode');
+    box.hidden = false;
+    return;
+  }
+
+  verifying = true;
+  $('#btn-verify').disabled = true;
+  try {
+    const data = await api('/api/accounts/otp/verify/', {
+      method: 'POST',
+      body: { challenge_id: signup.challengeId, code },
+    });
+    signup.verificationToken = data.verification_token;
+    stopOtpTimer();
+    go('details');
+  } catch (err) {
+    const message = otpMessage(err);
+    const box = $('#otp-error');
+    box.textContent = message;
+    box.hidden = false;
+    speak(message);
+
+    const grid = $('#otp-grid');
+    grid.classList.remove('shake');
+    void grid.offsetWidth;           // restart the animation
+    grid.classList.add('shake');
+
+    boxes.forEach((b) => { b.value = ''; b.classList.remove('filled'); });
+    boxes[0].focus();
+  } finally {
+    verifying = false;
+    $('#btn-verify').disabled = false;
+  }
+}
+
+async function completeRegistration(event) {
+  event.preventDefault();
+  const signup = state.signup;
+  const errorBox = $('#details-error');
+  errorBox.hidden = true;
+
+  if (!signup?.verificationToken) { go('signup', { reset: true }); return; }
+
+  const name = $('#reg-name').value.trim();
+  const password = $('#reg-password').value;
+  if (!name || password.length < 4) return;
+
+  const button = $('#details-form button[type="submit"]');
+  button.disabled = true;
+  try {
+    const data = await api('/api/accounts/register/', {
+      method: 'POST',
+      body: {
+        verification_token: signup.verificationToken,
+        display_name: name,
+        password,
+        language: state.lang,
+      },
+    });
+    state.token = data.token;
+    state.user = data.user;
+    store.set('token', state.token);
+    store.set('user', state.user);
+    state.signup = null;
+
+    await refreshAccount();
+    go('home', { reset: true });
+    const greeting = t('welcome', { name });
+    toast(greeting);
+    speak(greeting);
+  } catch (err) {
+    errorBox.textContent = otpMessage(err);
+    errorBox.hidden = false;
+  } finally {
+    button.disabled = false;
+  }
+}
+
 // ─────────────────────────────────────────────────────────── navigation
 function go(screen, { reset = false, push = true } = {}) {
   if (reset) state.history = [];
@@ -368,8 +675,11 @@ function go(screen, { reset = false, push = true } = {}) {
   state.screen = screen;
   $$('.screen').forEach((el) => { el.hidden = el.dataset.screen !== screen; });
 
-  const chromeless = screen === 'language' || screen === 'auth';
+  // The signup screens carry their own primary action; a mic bar under them
+  // would offer voice input for a flow the dialog layer does not handle yet.
+  const chromeless = ['language', 'auth', 'signup', 'otp', 'details'].includes(screen);
   $('#micbar').hidden = chromeless || !state.token;
+  if (screen !== 'otp') stopOtpTimer();
   $('#btn-back').hidden = state.history.length === 0 || screen === 'home';
   $('#btn-lang').hidden = screen === 'language';
 
@@ -523,7 +833,12 @@ function renderTransactions() {
         <span class="txn-when"></span>
       </span>
       <span class="txn-amt"></span>`;
-    $('.txn-who', row).textContent = txn.counterparty_name || txn.counterparty_vpa || '—';
+    // The ledger stores the Latin name; the history should read in the script the
+    // user picked, the same way the confirmation prompt does. Falling back to the
+    // ledger name is fine -- it is a payee outside their contact list.
+    const known = state.contacts.find((c) => c.vpa === txn.counterparty_vpa);
+    $('.txn-who', row).textContent =
+      known?.name_local || known?.name || txn.counterparty_name || txn.counterparty_vpa || '—';
     $('.txn-when', row).textContent = new Date(txn.created_at).toLocaleString([], {
       day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
     });
@@ -704,6 +1019,9 @@ function renderAuth() {
 function renderScreen(screen) {
   switch (screen) {
     case 'auth':    renderAuth(); break;
+    case 'signup':  renderSignup(); break;
+    case 'otp':     renderOtp(); break;
+    case 'details': $('#details-error').hidden = true; $('#reg-name').focus(); break;
     case 'home':
       renderTiles();
       renderBalance();
@@ -784,6 +1102,26 @@ function wire() {
     }
   });
 
+  $('#btn-new-account').addEventListener('click', startSignup);
+
+  $$('.seg-btn').forEach((btn) => btn.addEventListener('click', () => {
+    if (!state.signup) return;
+    state.signup.channel = btn.dataset.channel;
+    state.signup.destination = '';
+    renderSignup();
+    $('#dest-input').focus();
+  }));
+
+  $('#signup-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    requestCode();
+  });
+  $('#dest-input').addEventListener('input', () => { $('#dest-error').hidden = true; });
+
+  $('#btn-verify').addEventListener('click', verifyCode);
+  $('#btn-resend').addEventListener('click', () => requestCode({ resend: true }));
+  $('#details-form').addEventListener('submit', completeRegistration);
+
   $('#mic').addEventListener('click', startListening);
   $('#btn-type').addEventListener('click', () => {
     const form = $('#type-form');
@@ -842,6 +1180,7 @@ function wire() {
 // ─────────────────────────────────────────────────────────── boot
 async function boot() {
   wire();
+  initCursor();
 
   if (!state.lang || !LANGS.includes(state.lang)) {
     state.lang = 'hi';

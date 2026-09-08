@@ -7,8 +7,12 @@ English, Tamil, or Telugu; navigate by icon; get answers spoken back.
 > ### ⚠️ This is a simulation
 > Every banking and UPI operation runs against a **sandbox ledger inside this
 > project's own database**. No real bank, payment service provider, or payment
-> network is contacted. The app never asks for and never stores real account
-> numbers, card numbers, Aadhaar numbers, PINs, or OTPs. Financial literacy content
+> network is contacted. The app never asks for and never stores a real account
+> number, card number, Aadhaar number, or bank PIN, and it never asks for an OTP
+> belonging to a real bank or payment app. Sign-up does use a one-time code, but
+> it is **this project's own code**, generated and checked locally — and no SMS
+> gateway or email provider is wired up, so the code is printed to the server log
+> and shown on screen (see [Signing up](#signing-up)). Financial literacy content
 > is **educational only** and is not personalised investment or financial advice.
 
 ---
@@ -79,6 +83,37 @@ and the shop **ramkirana** — all with the password `demo1234`. They hold play
 money in your local database. The sign-in screen offers them as one-tap buttons
 so a demo does not open on a signup form.
 
+### Signing up
+
+"Create a new account" runs a three-step flow: choose a mobile number or an email
+address, enter the six-digit code, then pick a name and password. The account opens
+with ₹2,000 of play money so a new user can try a transfer immediately.
+
+**There is no SMS gateway and no email provider in this project.** The code is
+written to the `runserver` console:
+
+```
+INFO apps.accounts.otp OTP [phone -> ******0001] 418302  (expires in 300s)
+```
+
+and, because `DEBUG` is on in development, the app also shows it on the code screen
+behind a loud "no SMS was sent" label. `OTP_ECHO_IN_RESPONSE = False` in
+`prod.py` turns that off. Everything around the delivery hop is real and worth
+looking at in `backend/apps/accounts/otp.py`:
+
+| Property | Where |
+|---|---|
+| Codes generated with `secrets`, never `random` | `otp.issue` |
+| Stored as a password hash, never plaintext | `OtpChallenge.code_hash` |
+| Expire (5 min), single-use, lock after 5 wrong tries | `otp.verify` |
+| Resend cooldown (30 s) + hourly cap per destination | `otp._enforce_send_limits` |
+| Phone/email read from a **signed token**, not the request body | `RegisterView` |
+| No server-side half-signed-up session | `otp.make_verification_token` |
+
+That last pair is the same design decision as the pending-transfer object in the
+voice dialog: the client carries the state, so no web worker holds any, and the API
+scales by adding replicas.
+
 ### Trying it without a microphone
 
 Chrome's speech recognition needs a mic and a network. The `☰` button beside the
@@ -98,6 +133,17 @@ server-side ASR proves weak on them. Try:
 serves the files directly. The service worker needs origin-root scope and the
 project's real complexity is in the model and ledger layers, so a bundler would
 add a compile between an edit and a reload without buying anything yet.
+
+`cursor.js` replaces the desktop pointer with a tracking dot and a trailing ring
+that grows over anything tappable and pulls cards slightly towards the cursor. It
+attaches **only** on a fine pointer with motion allowed, and detaches the moment a
+touch event arrives — on the phone this app is actually for, the native behaviour is
+left completely alone.
+
+The design keeps the graded accessibility constraints ahead of the styling: light
+ground for daylight readability, ≥88px tap targets on the primary path, and meaning
+carried by colour *and* icon *and* text *and* an audio affordance, never colour
+alone. `styles.css` opens with that list.
 
 Docker (added Day 7):
 

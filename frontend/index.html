@@ -48,6 +48,15 @@
     <h1 class="screen-title" data-i18n="whoAreYou">आप कौन हैं?</h1>
     <div id="demo-users" class="people-grid"></div>
 
+    <div class="auth-actions">
+      <button id="btn-new-account" class="btn btn-primary btn-lg">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;flex:0 0 auto"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-i18n="createAccount">नया खाता बनाइए</span>
+      </button>
+    </div>
+
+    <div class="divider"><span data-i18n="orSignIn">या</span></div>
+
     <details class="disclosure">
       <summary data-i18n="otherAccount">दूसरा खाता</summary>
       <form id="login-form" class="form">
@@ -62,6 +71,89 @@
         <button class="btn btn-primary" type="submit" data-i18n="signIn">अंदर आइए</button>
       </form>
     </details>
+
+    <p class="sandbox-note" data-i18n="sandboxNote"></p>
+  </section>
+
+  <!-- ──────────── sign up, step 1: which contact do we verify? ───── -->
+  <section class="screen" data-screen="signup" hidden>
+    <div class="steps" aria-hidden="true">
+      <span class="step now"></span><span class="step"></span><span class="step"></span>
+    </div>
+    <h1 class="screen-title" data-i18n="signupTitle">नया खाता बनाइए</h1>
+    <p class="screen-sub" data-i18n="signupSub">हम आपको एक कोड भेजेंगे।</p>
+
+    <div class="segmented" role="tablist" aria-label="Verification channel">
+      <button class="seg-btn" role="tab" data-channel="phone" aria-selected="true">
+        <span class="seg-emoji" aria-hidden="true">📱</span>
+        <span data-i18n="channelPhone">मोबाइल नंबर</span>
+      </button>
+      <button class="seg-btn" role="tab" data-channel="email" aria-selected="false">
+        <span class="seg-emoji" aria-hidden="true">✉️</span>
+        <span data-i18n="channelEmail">ईमेल</span>
+      </button>
+    </div>
+
+    <form id="signup-form" class="form">
+      <label class="field">
+        <span id="dest-label" data-i18n="phoneLabel">मोबाइल नंबर</span>
+        <input id="dest-input" name="destination" inputmode="numeric" autocomplete="tel"
+               data-i18n-ph="phonePlaceholder" required />
+        <span id="dest-hint" class="field-hint" data-i18n="phoneHint"></span>
+        <span id="dest-error" class="field-error" hidden></span>
+      </label>
+      <button class="btn btn-primary btn-lg" type="submit" data-i18n="sendCode">कोड भेजिए</button>
+    </form>
+
+    <p class="sandbox-note" data-i18n="otpSandboxNote"></p>
+  </section>
+
+  <!-- ─────────────── sign up, step 2: the code ──────────── -->
+  <section class="screen" data-screen="otp" hidden>
+    <div class="steps" aria-hidden="true">
+      <span class="step done"></span><span class="step now"></span><span class="step"></span>
+    </div>
+    <h1 class="screen-title" data-i18n="otpTitle">कोड डालिए</h1>
+    <p class="sent-to"><span id="otp-icon" aria-hidden="true"></span> <span id="otp-destination"></span></p>
+
+    <div class="otp-grid" id="otp-grid"></div>
+    <p id="otp-error" class="field-error" hidden></p>
+
+    <div class="otp-meta">
+      <span id="otp-countdown" class="countdown"></span>
+      <button id="btn-resend" class="link-btn" type="button" data-i18n="resendCode">दोबारा भेजिए</button>
+    </div>
+
+    <button class="btn btn-primary btn-lg" id="btn-verify" data-i18n="verify">आगे बढ़िए</button>
+
+    <div id="dev-code" class="dev-chip" hidden>
+      <span aria-hidden="true">🛠️</span>
+      <span><span data-i18n="devCodeNote"></span> <code id="dev-code-value"></code></span>
+    </div>
+  </section>
+
+  <!-- ──────────── sign up, step 3: name and password ───────── -->
+  <section class="screen" data-screen="details" hidden>
+    <div class="steps" aria-hidden="true">
+      <span class="step done"></span><span class="step done"></span><span class="step now"></span>
+    </div>
+    <h1 class="screen-title" data-i18n="detailsTitle">आपका नाम?</h1>
+    <p class="screen-sub" data-i18n="detailsSub">यही नाम आपको स्क्रीन पर दिखेगा।</p>
+
+    <form id="details-form" class="form">
+      <label class="field">
+        <span data-i18n="yourName">आपका नाम</span>
+        <input id="reg-name" name="display_name" autocomplete="name" required maxlength="64" />
+      </label>
+      <label class="field">
+        <span data-i18n="choosePassword">पासवर्ड बनाइए</span>
+        <input id="reg-password" name="password" type="password" autocomplete="new-password"
+               minlength="4" required />
+        <span class="field-hint" data-i18n="passwordHint"></span>
+      </label>
+      <p id="details-error" class="field-error" hidden></p>
+      <button class="btn btn-primary btn-lg" type="submit" data-i18n="finish">खाता बनाइए</button>
+    </form>
 
     <p class="sandbox-note" data-i18n="sandboxNote"></p>
   </section>

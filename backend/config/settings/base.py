@@ -143,6 +143,33 @@ NOTE_MODEL_PATH = os.getenv("NOTE_MODEL_PATH", str(ML_ARTIFACTS_DIR / "notes"))
 ASR_MIN_CONFIDENCE = float(os.getenv("ASR_MIN_CONFIDENCE", "0.45"))
 INTENT_MIN_CONFIDENCE = float(os.getenv("INTENT_MIN_CONFIDENCE", "0.55"))
 
+# ---------------------------------------------------------------- OTP / signup
+# One-time codes for new-account verification.
+#
+# SCOPE: no real SMS gateway or transactional email provider is integrated in
+# this project. OTP_DELIVERY="console" writes the code to the server log, and
+# the email channel additionally goes through Django's console email backend.
+# Everything else about the flow -- hashing at rest, expiry, single use, attempt
+# limits, resend cooldown -- is real, so swapping in a provider later is one
+# function in apps/accounts/otp.py.
+OTP_DELIVERY = os.getenv("OTP_DELIVERY", "console")
+OTP_LENGTH = int(os.getenv("OTP_LENGTH", "6"))
+OTP_TTL_SECONDS = int(os.getenv("OTP_TTL_SECONDS", "300"))
+OTP_MAX_ATTEMPTS = int(os.getenv("OTP_MAX_ATTEMPTS", "5"))
+OTP_RESEND_COOLDOWN_SECONDS = int(os.getenv("OTP_RESEND_COOLDOWN_SECONDS", "30"))
+OTP_MAX_PER_HOUR = int(os.getenv("OTP_MAX_PER_HOUR", "5"))
+# How long the "this destination is verified" token stays valid, i.e. how long a
+# user has to finish the rest of the signup form after entering the code.
+OTP_VERIFICATION_TTL_SECONDS = int(os.getenv("OTP_VERIFICATION_TTL_SECONDS", "900"))
+# Echo the code in the API response so the flow is demonstrable without a
+# carrier. Tied to DEBUG in dev.py; must stay False anywhere real.
+OTP_ECHO_IN_RESPONSE = False
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@vaanisaathi.local")
+EMAIL_BACKEND = os.getenv(
+    "DJANGO_EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
+
 SUPPORTED_LANGUAGES = ["hi", "en", "ta", "te"]
 DEFAULT_LANGUAGE = "hi"
 

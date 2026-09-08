@@ -5,20 +5,70 @@ change without updating both sides. Live interactive docs: `/api/docs/`.
 
 **Safety:** every banking and UPI endpoint operates on a simulated ledger in this
 project's own database. No real bank, PSP, or payment network is contacted, and no
-real account numbers, card numbers, Aadhaar numbers, PINs, or OTPs are ever accepted.
+real account number, card number, Aadhaar number, or bank PIN is ever accepted. No
+OTP belonging to a real bank or payment app is ever requested: the one-time codes
+below are this project's own, issued and verified locally, and no SMS gateway or
+email provider is integrated -- see `POST /api/accounts/otp/request/`.
 
-Auth: `Authorization: Token <token>` on everything except `/api/accounts/register/`
-and `/api/accounts/login/`.
+Auth: `Authorization: Token <token>` on everything except `/api/accounts/otp/*`,
+`/api/accounts/register/` and `/api/accounts/login/`.
 
 ---
 
 ## accounts
 
+Signing up is three calls: request a code, verify it, then register with the
+signed token the verification returned. The server keeps no half-signed-up
+session -- the token is the whole state, so any replica can serve any of the
+three requests.
+
+### `POST /api/accounts/otp/request/`
+```json
+{"channel": "phone", "destination": "+91 98765 00001"}
+```
+`channel` is `phone` or `email`. `destination` is normalised server-side (a `+91`
+or leading `0` is stripped; email is lowercased).
+
+→ `201 {"challenge_id": "uuid", "channel": "phone", "destination_masked": "******0001",
+       "expires_in": 300, "code_length": 6, "resend_in": 30, "delivery": "console",
+       "dev_code": "418302"}`
+
+`dev_code` is present only when `OTP_ECHO_IN_RESPONSE` is on, which `dev.py` ties to
+DEBUG. **No SMS gateway or email provider is integrated in this project**: the code
+is written to the server log, and the email channel additionally goes through
+Django's console email backend. Everything else about the flow is real -- codes are
+hashed at rest, expire after `OTP_TTL_SECONDS`, are single-use, lock after
+`OTP_MAX_ATTEMPTS` wrong guesses, and are rate limited per destination by both a
+resend cooldown and an hourly cap.
+
+→ `409 {"error": "already_registered"}` if that contact already has an account
+  (checked *before* a code is sent).
+→ `429 {"error": "cooldown", "retry_after": 23}` or `{"error": "too_many"}`
+→ `400 {"error": "bad_phone" | "bad_email"}`
+
+### `POST /api/accounts/otp/verify/`
+```json
+{"challenge_id": "uuid", "code": "418302"}
+```
+→ `200 {"verification_token": "...", "channel": "phone",
+       "destination_masked": "******0001", "expires_in": 900}`
+→ `400 {"error": "wrong_code", "attempts_remaining": 3}`
+→ `400 {"error": "expired" | "locked" | "already_used" | "not_found"}`
+
 ### `POST /api/accounts/register/`
 ```json
-{"username": "sita", "phone": "9876500001", "password": "...", "language": "hi"}
+{"verification_token": "...", "display_name": "Kamla Devi", "password": "...",
+ "language": "hi", "literacy_level": "none"}
 ```
-→ `201 {"token": "...", "user": {...}, "profile": {...}}`
+Phone and email are **not** accepted here; they are read out of the signed token, so
+a client cannot verify one number and register a different one. `username` is
+optional and derived when omitted (from the name, else the email local part, else
+the phone number) because it also becomes the sandbox VPA.
+
+→ `201 {"token": "...", "user": {...}, "profile": {...},
+       "account": {"vpa": "kamladevi@sandbox", "balance": "2000.00"}}`
+→ `409 {"error": "already_registered"}`
+→ `400 {"error": "verification_expired" | "verification_invalid"}`
 
 ### `POST /api/accounts/login/`
 ```json

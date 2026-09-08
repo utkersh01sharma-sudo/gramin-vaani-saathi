@@ -89,7 +89,7 @@ def compute_metrics(eval_pred):
 
 
 # ------------------------------------------------------------------ evaluation
-def evaluate_artifact(model_dir: Path, rows: list[dict], batch_size: int = 64) -> dict:
+def evaluate_artifact(model_dir: Path, rows: list[dict], batch_size: int = 32) -> dict:
     """Score a saved artifact on held-out rows. Returns the full report dict."""
     import torch
     from sklearn.metrics import confusion_matrix, f1_score, precision_recall_fscore_support
@@ -212,7 +212,11 @@ def print_report(report: dict, baseline: dict | None) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--epochs", type=float, default=4)
-    parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--batch-size", type=int, default=8)
+    # The 4070 has 8 GB, and a desktop session with a browser open is already
+    # holding 2-3 GB of it. Batch 8 x 2 accumulation trains at an effective
+    # batch of 16 without competing with the machine the demo runs on.
+    parser.add_argument("--grad-accum", type=int, default=2)
     parser.add_argument("--lr", type=float, default=2e-5)
     parser.add_argument("--max-length", type=int, default=64)
     parser.add_argument("--seed", type=int, default=42)
@@ -265,7 +269,8 @@ def main() -> None:
             output_dir=str(ROOT / "ml" / "artifacts" / "_intent_checkpoints"),
             num_train_epochs=args.epochs,
             per_device_train_batch_size=args.batch_size,
-            per_device_eval_batch_size=64,
+            per_device_eval_batch_size=32,
+            gradient_accumulation_steps=args.grad_accum,
             learning_rate=args.lr,
             warmup_ratio=0.1,
             weight_decay=0.01,
@@ -313,7 +318,8 @@ def main() -> None:
     if not args.eval_only:
         report["train_minutes"] = round(minutes, 2)
         report["hyperparameters"] = {
-            "epochs": args.epochs, "batch_size": args.batch_size, "lr": args.lr,
+            "epochs": args.epochs, "batch_size": args.batch_size,
+            "grad_accum": args.grad_accum, "lr": args.lr,
             "max_length": args.max_length, "seed": args.seed,
         }
         report["validation_generated"] = {

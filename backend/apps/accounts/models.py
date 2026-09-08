@@ -4,8 +4,12 @@ The profile fields are deliberately the *exact* inputs the government-scheme
 eligibility engine needs (see apps/schemes/engine.py), so a user answers the
 onboarding questions once and never re-enters them per scheme.
 """
+import uuid
+
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 class Language(models.TextChoices):
@@ -39,14 +43,37 @@ class Occupation(models.TextChoices):
 
 
 class User(AbstractUser):
-    """Phone number is the real identifier; rural users rarely have email."""
+    """Phone is the primary handle; email is the fallback for people who have one.
 
-    phone = models.CharField(max_length=15, unique=True, db_index=True)
+    Both are nullable and unique. Rural users overwhelmingly sign up with a
+    mobile number, but a shopkeeper or a student may only have email, and
+    forcing a placeholder phone number would corrupt the one field the OTP
+    channel actually depends on. Empty strings are normalised to NULL by
+    :meth:`save` so the unique constraint does not collide on "".
+    """
+
+    phone = models.CharField(
+        max_length=15, unique=True, db_index=True, null=True, blank=True
+    )
+    email = models.EmailField(unique=True, null=True, blank=True)
+
+    # Which channel the account was verified through, and when. Kept because an
+    # account created before OTP was introduced is legitimately unverified, and
+    # the difference should be visible rather than assumed.
+    verified_channel = models.CharField(max_length=8, blank=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = "username"
 
+    def save(self, *args, **kwargs):
+        # UNIQUE treats every "" as equal but every NULL as distinct. Two users
+        # without email must both be storable, so blank becomes NULL here.
+        self.phone = self.phone or None
+        self.email = self.email or None
+        return super().save(*args, **kwargs)
+
     def __str__(self) -> str:
-        return f"{self.username} ({self.phone})"
+        return f"{self.username} ({self.phone or self.email or 'no contact'})"
 
 
 class UserProfile(models.Model):
@@ -113,3 +140,78 @@ class Contact(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} <{self.vpa}>"
+
+
+class OtpChallenge(models.Model):
+    """A one-time code sent to a phone or an email, and the state of its use.
+
+    SAFETY / SCOPE: this project does not integrate a real SMS gateway or a
+    transactional email provider. ``OTP_DELIVERY`` decides where the code
+    actually goes -- in this build it goes to the server console (and, for the
+    email channel, through Django's console email backend). The verification
+    *logic* is real: codes are hashed at rest, expire, are single-use, and are
+    rate limited. What is simulated is only the last hop, the carrier.
+
+    The code is stored as a password hash, never in plaintext. A student project
+    database ends up in screenshots, on USB sticks, and in a GitHub repo; a
+    column of live OTPs is exactly the kind of thing that should not be sitting
+    in any of those places.
+    """
+
+    class Channel(models.TextChoices):
+        PHONE = "phone", "Mobile number"
+        EMAIL = "email", "Email address"
+
+    class Purpose(models.TextChoices):
+        REGISTER = "register", "Create a new account"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    channel = models.CharField(max_length=8, choices=Channel.choices)
+    destination = models.CharField(max_length=254, db_index=True)
+    purpose = models.CharField(
+        max_length=16, choices=Purpose.choices, default=Purpose.REGISTER
+    )
+
+    code_hash = models.CharField(max_length=128)
+    attempts = models.PositiveSmallIntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    expires_at = models.DateTimeField()
+    consumed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=["destination", "created_at"])]
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return f"OTP<{self.channel}:{self.masked_destination()}>"
+
+    # ---------------------------------------------------------------- state
+    def is_expired(self) -> bool:
+        return timezone.now() >= self.expires_at
+
+    def is_locked(self) -> bool:
+        return self.attempts >= settings.OTP_MAX_ATTEMPTS
+
+    def is_usable(self) -> bool:
+        return self.consumed_at is None and not self.is_expired() and not self.is_locked()
+
+    def attempts_remaining(self) -> int:
+        return max(0, settings.OTP_MAX_ATTEMPTS - self.attempts)
+
+    def seconds_remaining(self) -> int:
+        return max(0, int((self.expires_at - timezone.now()).total_seconds()))
+
+    # ---------------------------------------------------------------- display
+    def masked_destination(self) -> str:
+        """What the UI is allowed to echo back.
+
+        The user needs to recognise the destination to catch a typo, without the
+        full value being readable over their shoulder or from a screenshot.
+        """
+        value = self.destination
+        if self.channel == self.Channel.EMAIL:
+            local, _, domain = value.partition("@")
+            head = local[:2] if len(local) > 3 else local[:1]
+            return f"{head}{'*' * max(3, len(local) - len(head))}@{domain}"
+        return f"{'*' * max(0, len(value) - 4)}{value[-4:]}"

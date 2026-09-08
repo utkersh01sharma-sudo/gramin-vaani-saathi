@@ -1,13 +1,13 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-from .models import Contact, User, UserProfile
+from .models import Contact, OtpChallenge, User, UserProfile
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "phone", "first_name", "last_name"]
+        fields = ["id", "username", "phone", "email", "first_name", "last_name"]
         read_only_fields = ["id"]
 
 
@@ -37,10 +37,30 @@ class ContactSerializer(serializers.ModelSerializer):
         read_only_fields = ["id"]
 
 
+class OtpRequestSerializer(serializers.Serializer):
+    """Ask for a code. One of phone / email, chosen by ``channel``."""
+
+    channel = serializers.ChoiceField(choices=OtpChallenge.Channel.choices)
+    destination = serializers.CharField(max_length=254)
+
+
+class OtpVerifySerializer(serializers.Serializer):
+    challenge_id = serializers.CharField()
+    code = serializers.CharField(max_length=16)
+
+
 class RegisterSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=64)
-    phone = serializers.CharField(max_length=15)
+    """Create an account against a destination that has already been verified.
+
+    Phone and email are deliberately *not* accepted here. They come out of the
+    signed verification token, so a client cannot verify one number and register
+    a different one.
+    """
+
+    verification_token = serializers.CharField()
+    display_name = serializers.CharField(max_length=64)
     password = serializers.CharField(write_only=True, min_length=4)
+    username = serializers.CharField(max_length=64, required=False, allow_blank=True)
     language = serializers.ChoiceField(
         choices=["hi", "en", "ta", "te"], default="hi", required=False
     )
@@ -49,17 +69,10 @@ class RegisterSerializer(serializers.Serializer):
     )
 
     def validate_username(self, value: str) -> str:
-        if User.objects.filter(username=value).exists():
-            raise serializers.ValidationError("That username is taken.")
+        value = (value or "").strip()
+        if value and User.objects.filter(username__iexact=value).exists():
+            raise serializers.ValidationError("That name is taken.")
         return value
-
-    def validate_phone(self, value: str) -> str:
-        digits = "".join(ch for ch in value if ch.isdigit())
-        if len(digits) != 10:
-            raise serializers.ValidationError("Enter a 10-digit mobile number.")
-        if User.objects.filter(phone=digits).exists():
-            raise serializers.ValidationError("That phone number is already registered.")
-        return digits
 
 
 class LoginSerializer(serializers.Serializer):

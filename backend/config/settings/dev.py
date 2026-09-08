@@ -13,3 +13,7 @@ DATABASES = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
+
+# Dev only: the PWA shows the code on screen so the signup flow can be walked
+# through end to end without an SMS provider. prod.py leaves this False.
+OTP_ECHO_IN_RESPONSE = True

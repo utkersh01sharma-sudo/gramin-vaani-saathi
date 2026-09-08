@@ -1,0 +1,39 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# --- Django ---
+db.sqlite3
+backend/media/
+backend/staticfiles/
+*.log
+
+# --- Secrets ---
+.env
+.env.local
+
+# --- ML artifacts (large; distributed via GitHub Releases, not git) ---
+ml/artifacts/
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.ckpt
+ml/data/notes_raw/
+ml/data/notes_dataset/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/dev-dist/
+.vite/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

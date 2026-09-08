@@ -1,0 +1,183 @@
+{"text": "जरा देखो मेरे पास कितना पैसा रह गया", "intent": "check_balance", "language": "hi"}
+{"text": "खाता खाली तो नहीं हो गया", "intent": "check_balance", "language": "hi"}
+{"text": "bank mein kitna bacha hua hai mera", "intent": "check_balance", "language": "hi"}
+{"text": "paisa kitna hai account me abhi", "intent": "check_balance", "language": "hi"}
+{"text": "मेरी जमा पूंजी कितनी है", "intent": "check_balance", "language": "hi"}
+{"text": "just tell me how much i have got left", "intent": "check_balance", "language": "en"}
+{"text": "is there any money in my account", "intent": "check_balance", "language": "en"}
+{"text": "read out my available funds", "intent": "check_balance", "language": "en"}
+{"text": "என்னிடம் இப்போது எவ்வளவு பணம் மிச்சம்", "intent": "check_balance", "language": "ta"}
+{"text": "வங்கியில் என் பணம் எவ்வளவு", "intent": "check_balance", "language": "ta"}
+{"text": "கணக்கு காலியா இருக்கா", "intent": "check_balance", "language": "ta"}
+{"text": "నా దగ్గర ఇప్పుడు ఎంత డబ్బు మిగిలింది", "intent": "check_balance", "language": "te"}
+{"text": "బ్యాంకులో నా డబ్బు ఎంత ఉంది", "intent": "check_balance", "language": "te"}
+{"text": "ఖాతా ఖాళీ అయిపోయిందా", "intent": "check_balance", "language": "te"}
+{"text": "सुरेश के नंबर पर तीन सौ रुपये डाल दो", "intent": "send_money", "language": "hi"}
+{"text": "गीता को सात सौ का भुगतान कर दीजिए", "intent": "send_money", "language": "hi"}
+{"text": "mujhe mohan ko 450 dena hai abhi", "intent": "send_money", "language": "hi"}
+{"text": "kamala ke paas 900 rupaye pahucha do", "intent": "send_money", "language": "hi"}
+{"text": "दूध वाले को दो सौ रुपये चुका दो", "intent": "send_money", "language": "hi"}
+{"text": "please move 350 rupees over to Lakshmi", "intent": "send_money", "language": "en"}
+{"text": "settle 1200 with Raju from my account", "intent": "send_money", "language": "en"}
+{"text": "i owe Geeta 600, send it across", "intent": "send_money", "language": "en"}
+{"text": "செல்வத்திற்கு நானூறு ரூபாய் கொடுத்துவிடு", "intent": "send_money", "language": "ta"}
+{"text": "கீதா கணக்கிற்கு 750 போட்டுவிடு", "intent": "send_money", "language": "ta"}
+{"text": "பால்காரருக்கு இருநூறு ரூபாய் கட்டு", "intent": "send_money", "language": "ta"}
+{"text": "సురేష్ కి మూడు వందల రూపాయలు వేసేయ్", "intent": "send_money", "language": "te"}
+{"text": "గీత ఖాతాలో 750 జమ చెయ్యి", "intent": "send_money", "language": "te"}
+{"text": "పాలవాడికి రెండు వందలు కట్టేయ్", "intent": "send_money", "language": "te"}
+{"text": "इस हफ्ते के सारे खर्चे दिखा दो", "intent": "transaction_history", "language": "hi"}
+{"text": "पिछली बार किसको भेजा था पैसा", "intent": "transaction_history", "language": "hi"}
+{"text": "purana hisaab kitaab dikha do zara", "intent": "transaction_history", "language": "hi"}
+{"text": "kaunse payment hue the is mahine", "intent": "transaction_history", "language": "hi"}
+{"text": "list out everything i spent this week", "intent": "transaction_history", "language": "en"}
+{"text": "who received money from me last time", "intent": "transaction_history", "language": "en"}
+{"text": "read my recent account activity", "intent": "transaction_history", "language": "en"}
+{"text": "இந்த வாரம் நான் செலவழித்ததை காட்டு", "intent": "transaction_history", "language": "ta"}
+{"text": "கடைசியா யாருக்கு பணம் போச்சு", "intent": "transaction_history", "language": "ta"}
+{"text": "பழைய கணக்கை காட்டுங்க", "intent": "transaction_history", "language": "ta"}
+{"text": "ఈ వారం నేను ఖర్చు చేసినవి చూపించు", "intent": "transaction_history", "language": "te"}
+{"text": "చివరిసారి ఎవరికి డబ్బు వెళ్ళింది", "intent": "transaction_history", "language": "te"}
+{"text": "పాత లెక్కలు చూపించండి", "intent": "transaction_history", "language": "te"}
+{"text": "गरीब किसान को सरकार क्या देती है", "intent": "find_scheme", "language": "hi"}
+{"text": "छोटा धंधा शुरू करने के लिए मदद कहां मिलेगी", "intent": "find_scheme", "language": "hi"}
+{"text": "budhape ke liye sarkar ki koi madad hai", "intent": "find_scheme", "language": "hi"}
+{"text": "gaon walon ke liye kya kya yojana chal rahi hai", "intent": "find_scheme", "language": "hi"}
+{"text": "मेरी बेटी की पढ़ाई के लिए कोई सरकारी मदद", "intent": "find_scheme", "language": "hi"}
+{"text": "what does the government offer poor farmers", "intent": "find_scheme", "language": "en"}
+{"text": "where can i get help to start a small shop", "intent": "find_scheme", "language": "en"}
+{"text": "any subsidy programmes for village women", "intent": "find_scheme", "language": "en"}
+{"text": "ஏழை விவசாயிக்கு அரசு என்ன தருது", "intent": "find_scheme", "language": "ta"}
+{"text": "சிறு தொழில் தொடங்க எங்க உதவி கிடைக்கும்", "intent": "find_scheme", "language": "ta"}
+{"text": "கிராம பெண்களுக்கு ஏதாவது உதவித்தொகை உண்டா", "intent": "find_scheme", "language": "ta"}
+{"text": "పేద రైతుకు ప్రభుత్వం ఏమి ఇస్తుంది", "intent": "find_scheme", "language": "te"}
+{"text": "చిన్న దుకాణం పెట్టడానికి సహాయం ఎక్కడ దొరుకుతుంది", "intent": "find_scheme", "language": "te"}
+{"text": "గ్రామ మహిళలకు ఏమైనా సబ్సిడీ ఉందా", "intent": "find_scheme", "language": "te"}
+{"text": "मेरी उम्र साठ है क्या पेंशन बन सकती है", "intent": "check_eligibility", "language": "hi"}
+{"text": "दो एकड़ जमीन है क्या किसान वाली मदद मिलेगी", "intent": "check_eligibility", "language": "hi"}
+{"text": "kya meri income par ye scheme lagu hoti hai", "intent": "check_eligibility", "language": "hi"}
+{"text": "main iske liye apply kar sakta hoon ya nahi", "intent": "check_eligibility", "language": "hi"}
+{"text": "i am sixty years old, do i qualify for pension", "intent": "check_eligibility", "language": "en"}
+{"text": "with two acres of land will i get farmer support", "intent": "check_eligibility", "language": "en"}
+{"text": "does my income allow me to apply for this", "intent": "check_eligibility", "language": "en"}
+{"text": "எனக்கு அறுபது வயசு ஓய்வூதியம் கிடைக்குமா", "intent": "check_eligibility", "language": "ta"}
+{"text": "இரண்டு ஏக்கர் நிலம் இருக்கு தகுதி உண்டா", "intent": "check_eligibility", "language": "ta"}
+{"text": "நான் இதற்கு விண்ணப்பிக்க முடியுமா", "intent": "check_eligibility", "language": "ta"}
+{"text": "నాకు అరవై ఏళ్లు పెన్షన్ వస్తుందా", "intent": "check_eligibility", "language": "te"}
+{"text": "రెండు ఎకరాల భూమి ఉంది అర్హత ఉందా", "intent": "check_eligibility", "language": "te"}
+{"text": "నేను దీనికి దరఖాస్తు చేసుకోవచ్చా", "intent": "check_eligibility", "language": "te"}
+{"text": "दुकानदार ने कोड दिखाया है उसे पढ़ो", "intent": "scan_qr", "language": "hi"}
+{"text": "कैमरा चालू करके यह चौकोर कोड देखो", "intent": "scan_qr", "language": "hi"}
+{"text": "ye chipka hua code padh ke batao", "intent": "scan_qr", "language": "hi"}
+{"text": "dukan wale ka code check karke bolo kiska hai", "intent": "scan_qr", "language": "hi"}
+{"text": "the shopkeeper showed a code, read it for me", "intent": "scan_qr", "language": "en"}
+{"text": "point the camera at this square code", "intent": "scan_qr", "language": "en"}
+{"text": "verify the sticker code on this counter", "intent": "scan_qr", "language": "en"}
+{"text": "கடைக்காரர் காட்டிய கோடை படிச்சு சொல்லு", "intent": "scan_qr", "language": "ta"}
+{"text": "கேமராவை வெச்சு இந்த சதுர கோடை பாரு", "intent": "scan_qr", "language": "ta"}
+{"text": "இந்த ஒட்டப்பட்ட கோடு யாருடையது", "intent": "scan_qr", "language": "ta"}
+{"text": "దుకాణదారుడు చూపిన కోడ్ చదివి చెప్పు", "intent": "scan_qr", "language": "te"}
+{"text": "కెమెరా పెట్టి ఈ చతురస్ర కోడ్ చూడు", "intent": "scan_qr", "language": "te"}
+{"text": "ఈ అతికించిన కోడ్ ఎవరిది", "intent": "scan_qr", "language": "te"}
+{"text": "हाथ में जो कागज है वो कितने का है", "intent": "identify_note", "language": "hi"}
+{"text": "गुलाबी वाला नोट कितने रुपये का होता है", "intent": "identify_note", "language": "hi"}
+{"text": "ye kagaz ka paisa kितne ka hai batao", "intent": "identify_note", "language": "hi"}
+{"text": "camera se dekho ye note kaunsa wala hai", "intent": "identify_note", "language": "hi"}
+{"text": "look at this paper money and tell me its value", "intent": "identify_note", "language": "en"}
+{"text": "how many rupees is the pink coloured note", "intent": "identify_note", "language": "en"}
+{"text": "use the camera and name this currency", "intent": "identify_note", "language": "en"}
+{"text": "கையில் இருக்கிற தாள் எவ்வளவு மதிப்பு", "intent": "identify_note", "language": "ta"}
+{"text": "இந்த இளஞ்சிவப்பு நோட்டு எத்தனை ரூபாய்", "intent": "identify_note", "language": "ta"}
+{"text": "கேமராவால் பார்த்து இந்த பணத்தை சொல்லு", "intent": "identify_note", "language": "ta"}
+{"text": "చేతిలో ఉన్న కాగితం ఎంత విలువ", "intent": "identify_note", "language": "te"}
+{"text": "ఈ గులాబీ రంగు నోటు ఎన్ని రూపాయలు", "intent": "identify_note", "language": "te"}
+{"text": "కెమెరాతో చూసి ఈ డబ్బు చెప్పు", "intent": "identify_note", "language": "te"}
+{"text": "कल रात कोई मेरा पैसा ले गया शिकायत करो", "intent": "report_scam", "language": "hi"}
+{"text": "बैंक वाला बनकर किसी ने मुझसे नंबर ले लिया", "intent": "report_scam", "language": "hi"}
+{"text": "meri jama punji koi le gaya complaint likhwao", "intent": "report_scam", "language": "hi"}
+{"text": "phone par baat karke mera account khali kar diya", "intent": "report_scam", "language": "hi"}
+{"text": "someone emptied my account last night, file a complaint", "intent": "report_scam", "language": "en"}
+{"text": "a man pretended to be from the bank and took my details", "intent": "report_scam", "language": "en"}
+{"text": "i lost money to a cheat, help me complain", "intent": "report_scam", "language": "en"}
+{"text": "நேற்று இரவு யாரோ என் பணத்தை எடுத்துட்டாங்க புகார் பண்ணு", "intent": "report_scam", "language": "ta"}
+{"text": "வங்கி ஆள் மாதிரி பேசி என் விவரம் வாங்கிட்டாங்க", "intent": "report_scam", "language": "ta"}
+{"text": "ஏமாத்திட்டாங்க புகார் கொடுக்கணும்", "intent": "report_scam", "language": "ta"}
+{"text": "నిన్న రాత్రి ఎవరో నా డబ్బు తీసుకున్నారు ఫిర్యాదు చేయి", "intent": "report_scam", "language": "te"}
+{"text": "బ్యాంకు వ్యక్తిలా మాట్లాడి నా వివరాలు తీసుకున్నారు", "intent": "report_scam", "language": "te"}
+{"text": "మోసం జరిగింది ఫిర్యాదు ఇవ్వాలి", "intent": "report_scam", "language": "te"}
+{"text": "एक मैसेज आया है कि लॉटरी लगी है सच है क्या", "intent": "check_scam", "language": "hi"}
+{"text": "कोई फोन करके कह रहा है केवाईसी बंद हो जाएगी", "intent": "check_scam", "language": "hi"}
+{"text": "whatsapp par link aaya hai kholu ya nahi", "intent": "check_scam", "language": "hi"}
+{"text": "koi bol raha hai bijli kat jayegi paise bhejo sahi hai kya", "intent": "check_scam", "language": "hi"}
+{"text": "i got a message saying i won a lottery, is it true", "intent": "check_scam", "language": "en"}
+{"text": "a caller says my kyc will be blocked, should i believe it", "intent": "check_scam", "language": "en"}
+{"text": "should i open this link that came on whatsapp", "intent": "check_scam", "language": "en"}
+{"text": "லாட்டரி அடிச்சிருக்கு னு மெசேஜ் வந்திருக்கு உண்மையா", "intent": "check_scam", "language": "ta"}
+{"text": "கேஒய்சி முடிஞ்சிடும்னு போன் வருது நம்பலாமா", "intent": "check_scam", "language": "ta"}
+{"text": "வாட்ஸ்அப்பில் வந்த இந்த லிங்கை திறக்கலாமா", "intent": "check_scam", "language": "ta"}
+{"text": "లాటరీ వచ్చిందని సందేశం వచ్చింది నిజమా", "intent": "check_scam", "language": "te"}
+{"text": "కేవైసీ ఆగిపోతుందని ఫోన్ వస్తోంది నమ్మాలా", "intent": "check_scam", "language": "te"}
+{"text": "వాట్సాప్‌లో వచ్చిన ఈ లింక్ తెరవాలా", "intent": "check_scam", "language": "te"}
+{"text": "ब्याज दर का मतलब क्या होता है समझा दो", "intent": "learn_topic", "language": "hi"}
+{"text": "पैसे बचाने का सही तरीका सिखाओ", "intent": "learn_topic", "language": "hi"}
+{"text": "upi kaam kaise karta hai thoda samjhao", "intent": "learn_topic", "language": "hi"}
+{"text": "bima lene se kya fayda hota hai bataiye", "intent": "learn_topic", "language": "hi"}
+{"text": "explain what an interest rate actually means", "intent": "learn_topic", "language": "en"}
+{"text": "teach me the right way to save money", "intent": "learn_topic", "language": "en"}
+{"text": "what is the benefit of taking insurance", "intent": "learn_topic", "language": "en"}
+{"text": "வட்டி விகிதம் என்றால் என்ன விளக்குங்க", "intent": "learn_topic", "language": "ta"}
+{"text": "பணத்தை சேமிக்கிற சரியான வழி சொல்லுங்க", "intent": "learn_topic", "language": "ta"}
+{"text": "காப்பீடு எடுத்தா என்ன பயன்", "intent": "learn_topic", "language": "ta"}
+{"text": "వడ్డీ రేటు అంటే ఏమిటో వివరించు", "intent": "learn_topic", "language": "te"}
+{"text": "డబ్బు దాచుకునే సరైన పద్ధతి నేర్పు", "intent": "learn_topic", "language": "te"}
+{"text": "బీమా తీసుకుంటే ఏమి లాభం", "intent": "learn_topic", "language": "te"}
+{"text": "मुझे तमिल में सुनना है बदल दो", "intent": "set_language", "language": "hi"}
+{"text": "अब से अंग्रेजी में जवाब देना", "intent": "set_language", "language": "hi"}
+{"text": "ab hindi chhod ke telugu kar do", "intent": "set_language", "language": "hi"}
+{"text": "switch me over to Tamil from now on", "intent": "set_language", "language": "en"}
+{"text": "answer me in english after this", "intent": "set_language", "language": "en"}
+{"text": "can you talk to me in telugu instead", "intent": "set_language", "language": "en"}
+{"text": "இனிமேல் தமிழில் பதில் சொல்லுங்க", "intent": "set_language", "language": "ta"}
+{"text": "ஆங்கிலத்திற்கு மாத்துங்க", "intent": "set_language", "language": "ta"}
+{"text": "ఇక నుండి తెలుగులో సమాధానం చెప్పు", "intent": "set_language", "language": "te"}
+{"text": "ఇంగ్లీషుకు మార్చు", "intent": "set_language", "language": "te"}
+{"text": "मुझे कुछ समझ नहीं आ रहा क्या करूं बताओ", "intent": "help", "language": "hi"}
+{"text": "यह मशीन कैसे इस्तेमाल करते हैं सिखाओ", "intent": "help", "language": "hi"}
+{"text": "main naya hoon mujhe guide karo", "intent": "help", "language": "hi"}
+{"text": "kya kya option hai mujhe suna do", "intent": "help", "language": "hi"}
+{"text": "i am new here, guide me through this", "intent": "help", "language": "en"}
+{"text": "read out all the options available to me", "intent": "help", "language": "en"}
+{"text": "teach me how to operate this thing", "intent": "help", "language": "en"}
+{"text": "எனக்கு ஒன்னும் புரியல என்ன பண்ணனும் சொல்லு", "intent": "help", "language": "ta"}
+{"text": "நான் புதுசு எனக்கு வழிகாட்டுங்க", "intent": "help", "language": "ta"}
+{"text": "என்னென்ன வசதி இருக்கு சொல்லுங்க", "intent": "help", "language": "ta"}
+{"text": "నాకు ఏమీ అర్థం కావట్లేదు ఏం చేయాలో చెప్పు", "intent": "help", "language": "te"}
+{"text": "నేను కొత్త నాకు దారి చూపించు", "intent": "help", "language": "te"}
+{"text": "ఏమేమి సౌకర్యాలు ఉన్నాయో చెప్పు", "intent": "help", "language": "te"}
+{"text": "आवाज धीमी थी जरा दोहरा दीजिए", "intent": "repeat", "language": "hi"}
+{"text": "समझ नहीं आया फिर से कहिए", "intent": "repeat", "language": "hi"}
+{"text": "aawaz nahi aayi wapas boliye", "intent": "repeat", "language": "hi"}
+{"text": "your voice was too soft, say it once more", "intent": "repeat", "language": "en"}
+{"text": "i missed that, could you repeat", "intent": "repeat", "language": "en"}
+{"text": "sorry, tell me that again slowly", "intent": "repeat", "language": "en"}
+{"text": "சத்தம் கேட்கல மறுபடி சொல்லுங்க", "intent": "repeat", "language": "ta"}
+{"text": "புரியல இன்னொரு தடவை சொல்லு", "intent": "repeat", "language": "ta"}
+{"text": "శబ్దం వినిపించలేదు మళ్ళీ చెప్పండి", "intent": "repeat", "language": "te"}
+{"text": "అర్థం కాలేదు ఇంకోసారి చెప్పు", "intent": "repeat", "language": "te"}
+{"text": "आज बारिश होगी क्या खेत में जाना है", "intent": "unknown", "language": "hi"}
+{"text": "मेरी तबीयत ठीक नहीं है दवा बताओ", "intent": "unknown", "language": "hi"}
+{"text": "train kitne baje aayegi station par", "intent": "unknown", "language": "hi"}
+{"text": "bhains ka doodh aaj kam nikla", "intent": "unknown", "language": "hi"}
+{"text": "अच्छा चलो अब बंद करो", "intent": "unknown", "language": "hi"}
+{"text": "will it rain today, i have to go to the field", "intent": "unknown", "language": "en"}
+{"text": "i am not feeling well, suggest some medicine", "intent": "unknown", "language": "en"}
+{"text": "what time does the train reach the station", "intent": "unknown", "language": "en"}
+{"text": "okay that is enough, close it now", "intent": "unknown", "language": "en"}
+{"text": "இன்னைக்கு மழை பெய்யுமா வயலுக்கு போகணும்", "intent": "unknown", "language": "ta"}
+{"text": "உடம்பு சரியில்ல மருந்து சொல்லுங்க", "intent": "unknown", "language": "ta"}
+{"text": "ரயில் எத்தனை மணிக்கு வரும்", "intent": "unknown", "language": "ta"}
+{"text": "சரி போதும் நிறுத்துங்க", "intent": "unknown", "language": "ta"}
+{"text": "ఈరోజు వర్షం పడుతుందా పొలానికి వెళ్లాలి", "intent": "unknown", "language": "te"}
+{"text": "ఒంట్లో బాగోలేదు మందు చెప్పండి", "intent": "unknown", "language": "te"}
+{"text": "రైలు ఎన్ని గంటలకు వస్తుంది", "intent": "unknown", "language": "te"}
+{"text": "సరే చాలు ఇక ఆపేయ్", "intent": "unknown", "language": "te"}

@@ -1,0 +1,924 @@
+{"text": "मैसेज चेक करो", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "जी maine suna nahi भैया", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "um show me the options please", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "is this this link safe", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "hey how do i use this app", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "सुनो लेनदेन का इतिहास दिखाओ भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "send 200 rupees to Raju thanks", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Raju", "amount": "200"}}
+{"text": "5000 rupees geeta ko send karo", "intent": "send_money", "language": "hi", "script": "latin", "slots": {"person": "Geeta", "amount": "5000"}}
+{"text": "ఈ క్యూఆర్ కోడ్ చేయి స్కాన్ అన్నా", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "எனக்கு பிஎம் கிசான் கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "பிஎம் கிசான்"}}
+{"text": "can I get Ujjwala please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Ujjwala"}}
+{"text": "interest kya hota hai भैया", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "interest"}}
+{"text": "WHAT NOTE IS THIS", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "அண்ணா நீங்கள் என்ன செய்ய செய்ய முடியும் ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "मुद्रा लोन के लिए क्या शर्तें हैं भैया", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "मुद्रा लोन"}}
+{"text": "அண்ணா பரிவர்த்தனை வரலாறு ப்ளீஸ்", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "balance dikhao जी", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సరే నేను ఎవరికి డబ్బు", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "kya main Jan Dhan ke liye eligible hoon", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Jan Dhan"}}
+{"text": "भैया क्यूआर कोड स्कैन करो", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "हां तो ye link safe hai kya जी", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "मुझे नहीं पता क्या करूं प्लीज", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "show me the options please", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "जी kya ye sms asli hai hai भैया", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "இந்த செயலியை எப்படி பயன்படுத்துவது", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "இது ரூபாய் நோட்டு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "నాకు English కావాలి అన్నా", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "English"}}
+{"text": "um what are the conditions for Mudra loan thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Mudra loan"}}
+{"text": "क्यूआर से पेमेंट करना है", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "um someone is asking for my please OTP", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "pay Kamala 5000 please", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Kamala", "amount": "5000"}}
+{"text": "எனக்கு हिन्दी வேண்டும் அண்ணா", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "हिन्दी"}}
+{"text": "सुनो government scheme chahiye", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா முருகன் க்கு ஐநூறு செலுத்து", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "முருகன்", "amount": "ஐநூறு"}}
+{"text": "అన్నా మోసం గురించి చెప్పు ప్లీజ్", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "మోసం"}}
+{"text": "जी जी dobara kaho", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "கேளுங்க மோசடியை புகார் செய்ய வேண்டும்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "how does loan work thanks", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "loan"}}
+{"text": "పాట పెట్టు ప్లీజ్", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "hey who did i pay recently", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "పాట పెట్టు పెట్టు ప్లీజ్", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "am i eligible for atal pension", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Atal Pension"}}
+{"text": "பிஎம் பிஎம் கிசான் பற்றி சொல்லுங்கள் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {"scheme": "பிஎம் கிசான்"}}
+{"text": "तुम कौन हो जी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "tamil mein baat karo", "intent": "set_language", "language": "hi", "script": "latin", "slots": {"language": "Tamil"}}
+{"text": "என் பணம் போய்விட்டது", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "Atal Pension ke mein bare batao प्लीज", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {"scheme": "Atal Pension"}}
+{"text": "क्या मुझे योजना मिलेगी", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "kya main jan dhan ke liye eligible hoon", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Jan Dhan"}}
+{"text": "సరే నేను వినలేదు", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "is this link link safe please", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த இணைப்பு இணைப்பு பாதுகாப்பானதா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி எனது பரிவர்த்தனைகளைக் காட்டு", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "hindi mein baat karo जी", "intent": "set_language", "language": "hi", "script": "latin", "slots": {"language": "Hindi"}}
+{"text": "what did you say", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி எனக்கு வட்டி கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "வட்டி"}}
+{"text": "EXPLAIN INSURANCE THANKS", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "insurance"}}
+{"text": "వినండి నేను జన్ ధన్ కి అర్హుడినా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "జన్ ధన్"}}
+{"text": "సరే నాకు అటల్ పెన్షన్ వస్తుందా ప్లీజ్", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "అటల్ పెన్షన్"}}
+{"text": "लोन की कोई सरकारी स्कीम है", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "जी मुझे घर बनाने के लिए योजना चाहिए", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "um what can you do", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "tum kaun ho जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "SCAN AND PAY THANKS", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "please check this QR please", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "ఈ క్యూఆర్ కోడ్ చేయి", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "सुनो क्यूआर कोड स्कैन करो", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి ఈ క్యూఆర్ సరైనదా అన్నా", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "तो हां namaste भैया", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "भैया batao ye note kitne ka hai", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "నాకు Telugu కావాలి", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "Telugu"}}
+{"text": "மீண்டும் சொல்", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "kisan ke liye scheme scheme hai kya", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {}}
+{"text": "నా ఖాతాలో ఎంత మిగిలింది ప్లీజ్", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "mujhe jan dhan mil sakta hai kya भैया", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Jan Dhan"}}
+{"text": "இது இது எத்தனை ரூபாய் நோட்டு அண்ணா", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "budget ke bare mein batao", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "budget"}}
+{"text": "సీత కి 1000 చెల్లించు అన్నా", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "సీత", "amount": "1000"}}
+{"text": "బ్యాలెన్స్ బ్యాలెన్స్ చెప్పు ప్లీజ్", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "அண்ணா நான் ஏமாற்றப்பட்டேன் ப்ளீஸ்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "मुझे తెలుగు चाहिए", "intent": "set_language", "language": "hi", "script": "native", "slots": {"language": "తెలుగు"}}
+{"text": "ye message sahi hai", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "am I eligible for Jan Dhan please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Jan Dhan"}}
+{"text": "సరే మోసంపై ఫిర్యాదు చేయాలి ప్లీజ్", "intent": "report_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "మీరు ఏమి చేయగలరు ప్లీజ్", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "हां तो phir se bolo", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "வணக்கம் ப்ளீஸ்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "what was my transaction last", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "phir bolo जी", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "మరోసారి చెప్పండి ప్లీజ్ ప్లీజ్", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "बैंक से मैसेज है आया सही है क्या", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "அண்ணா என் கணக்கிலிருந்து பணம் போய்விட்டது", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "கேளுங்க சேமிப்பு என்றால் என்ன", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "கேளுங்க பரிவர்த்தனை வரலாறு ப்ளீஸ்", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "अच्छा मैंने किसे पैसे भेजे", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "tell the me denomination", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "LISTEN IDENTIFY THIS CURRENCY NOTE", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "கேளுங்க இது யாருடைய க்யூஆர்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "వినండి నాకు పీఎం కిసాన్ వస్తుందా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "పీఎం కిసాన్"}}
+{"text": "சரி எனக்கு அடல் ஓய்வூதியம் கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "அடல் ஓய்வூதியம்"}}
+{"text": "टीवी चालू करो भैया भैया", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "i want to send 100 to raju thanks", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Raju", "amount": "100"}}
+{"text": "मेरे खाते में कितना पैसा बचा है जी", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "சரி என் இருப்பு என்ன ப்ளீஸ்", "intent": "check_balance", "language": "ta", "script": "native", "slots": {}}
+{"text": "अच्छा interest ke bare mein batao", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "interest"}}
+{"text": "கேளுங்க யாரோ என் பணத்தை திருடிவிட்டார்கள்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "அண்ணா நான் ஏமாற்றப்பட்டேன்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "200 రూపాయలు సీత కి పంపించు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "సీత", "amount": "200"}}
+{"text": "Tamil mein karo प्लीज", "intent": "set_language", "language": "hi", "script": "latin", "slots": {"language": "Tamil"}}
+{"text": "verify this message", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो aap kya kar sakte ho प्लीज", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "तुम कौन कौन हो", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "क्या क्या कर सकते सकते हो जी", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "వాతావరణం ఎలా ఉంది ప్లీజ్", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "pay ramesh 1000 please", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Ramesh", "amount": "1000"}}
+{"text": "how does UPI work", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "UPI"}}
+{"text": "నేను పీఎం కిసాన్ కి అర్హుడినా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "పీఎం కిసాన్"}}
+{"text": "ఈ లింక్ సురక్షితమేనా సురక్షితమేనా", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "పాస్‌బుక్ గురించి చెప్పు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "పాస్‌బుక్"}}
+{"text": "மோசடியை புகார் புகார் செய்ய வேண்டும் ப்ளீஸ்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "నా తనిఖీ చేయి ప్లీజ్", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "अच्छा ye kaun sa note hai प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "क्रिकेट का स्कोर बताओ", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "గురించి యూపీఐ చెప్పు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "యూపీఐ"}}
+{"text": "BHASHA BADLO", "intent": "set_language", "language": "hi", "script": "latin", "slots": {}}
+{"text": "I NOT HEAR YOU THANKS", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "ye link safe hai kya जी", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "నాకు వడ్డీ నేర్పించు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "వడ్డీ"}}
+{"text": "ye qr check karo प्लीज", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "set language to తెలుగు", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "తెలుగు"}}
+{"text": "so tell me a joke", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "teach me about interest", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "interest"}}
+{"text": "உதவி செய்யுங்கள் செய்யுங்கள் அண்ணா", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "मेरी पात्रता जांचो", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "मुझे खेती के लिए पैसा", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "రమేష్ కి రెండు చెల్లించు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "రమేష్", "amount": "రెండు వందలు"}}
+{"text": "சேமிப்பு என்றால் என்ன ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "सुनो पिछले महीने का हिसाब बताओ भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "hey open camera to scan", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो क्या कहा आपने जी", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "thank you जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "भैया note pehchano प्लीज प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "how much money I have thanks", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा बस कब आएगी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "OKAY SO NOTE IS THIS PLEASE", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "అర్హతను నా తనిఖీ చేయి ప్లీజ్", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "जी PHIR SE BOLO", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "முருகன் க்கு இரண்டாயிரம் செலுத்து", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "முருகன்", "amount": "இரண்டாயிரம்"}}
+{"text": "अरे ye link safe hai kya जी", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "do i qualify for this scheme please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो qr qr code scan karo जी", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "రుణం అంటే ఏమిటి", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "రుణం"}}
+{"text": "come come again thanks", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "सुकन्या समृद्धि के बारे में बताओ भैया", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {"scheme": "सुकन्या समृद्धि"}}
+{"text": "మరోసారి చెప్పండి అన్నా", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "எனக்கு முத்ரா கடன் கிடைக்குமா கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "முத்ரா கடன்"}}
+{"text": "please what did you say", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "qr code scan karo", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సమయం ఎంత ప్లీజ్ ప్లీజ్", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "రైతులకు పథకం ఉందా ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "I want to learn about loan", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "loan"}}
+{"text": "okay so explain savings", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "savings"}}
+{"text": "UM IS THERE A SCHEME FOR FARMERS PLEASE", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "hey how much money do i have", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி இந்த செயலியை எப்படி பயன்படுத்துவது ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "सुनो मेरा बैलेंस क्या है भैया", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "MERI ELIGIBILITY CHECK KARO भैया", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {}}
+{"text": "వినండి ఎవరో నా డబ్బు దొంగిలించారు ప్లీజ్", "intent": "report_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "um repeat please thanks", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "यह नंबर नंबर धोखेबाज है क्या जी", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "अच्छा language change karo", "intent": "set_language", "language": "hi", "script": "latin", "slots": {}}
+{"text": "हां तो खाना क्या बनाऊं जी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "यह नोट पहचानो प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "पिछले पेमेंट पेमेंट क्या थे प्लीज", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "भैया fraud samjhao जी", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "fraud"}}
+{"text": "please one more time", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "சேமிப்பு விளக்கவும்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "రైతులకు పథకం ఉందా", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "हां तो मुझे समझ नहीं आ रहा", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "மீண்டும் சொல் சொல் அண்ணா", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "இந்த க்யூஆர் ஸ்கேன் கோடை செய்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "రమేష్ కి 50 రూపాయలు పంపు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "రమేష్", "amount": "50"}}
+{"text": "जी ye kaun sa note hai प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா இந்த செய்தி உண்மையானதா ப்ளீஸ்", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி இன்று எப்படி", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "அண்ணா எனக்கு உதவி வேண்டும்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "switch to తెలుగు please", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "తెలుగు"}}
+{"text": "खाते में कितने पैसे हैं भैया", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "सुनो क्या मुझे यह योजना मिलेगी जी", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "यह कितने रुपये का का है प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "um I want तेलुगु", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "hey show me government schemes thanks", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த க்யூஆர் க்யூஆர் சரியானதா ப்ளீஸ்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "someone took my OTP and withdrew money", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "um how much is left in in my account please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "రమేష్ కి 250 రూపాయలు పంపు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "రమేష్", "amount": "250"}}
+{"text": "அண்ணா வேளாண்மைக்கு பணம் வேண்டும் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி என் இருப்பு என்ன அண்ணா", "intent": "check_balance", "language": "ta", "script": "native", "slots": {}}
+{"text": "सुनो क्या कहा आपने", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "అన్నా ఖాతాలో ఎంత డబ్బు ఉంది", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "இன்று இன்று வானிலை எப்படி", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "ఈ అన్నా యాప్ ఎలా వాడాలి", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "um do i qualify for this scheme", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {}}
+{"text": "అన్నా నాకు ఏ పథకం వర్తిస్తుంది అన్నా", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "నాకు English కావాలి", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "English"}}
+{"text": "నోటు నోటు విలువ చెప్పు", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "மோசடி விளக்கவும் ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "மோசடி"}}
+{"text": "मेरे लिए कौन सी योजना है भैया", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "अच्छा note pehchano", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "यह नोट कितने का है भाई जी", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "i have been scammed please", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி மோசடியை புகார் செய்ய வேண்டும் ப்ளீஸ்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "अरे बैलेंस बताओ", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "please I need money for", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "ఇది మోసపు ఎస్ఎంఎస్ ఆ", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "कौन कौन से पैसे आए जी", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "ఇది మోసపు ఎస్ఎంఎస్ ఆ అన్నా అన్నా", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "YE QR CHECK KARO", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "पांच हजार रुपए गीता के खाते में डालो प्लीज", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "गीता", "amount": "पांच हजार"}}
+{"text": "batao ye note kitne ka", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "send money to Kamala thanks", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Kamala"}}
+{"text": "ముద్ర రుణం గురించి చెప్పు అన్నా", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "ముద్ర రుణం"}}
+{"text": "मुझे सुकन्या समृद्धि मिल सकता है क्या", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "सुकन्या समृद्धि"}}
+{"text": "बैलेंस बताओ भैया", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "సురేష్ కి 2000 రూపాయలు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "సురేష్", "amount": "2000"}}
+{"text": "పథకం ఉందా ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "tell me my balance thanks", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "please which scheme is for me please", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு எந்த திட்டம் திட்டம் பொருந்தும்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "हां तो मेरा स्टेटमेंट दिखाओ", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "how much money do i have", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "నాకు ఉజ్వల వస్తుందా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "ఉజ్వల"}}
+{"text": "theek hai जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "यह मैसेज सही है क्या जी", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "सुनो रमेश को पैसे भेजने हैं 1000", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "रमेश", "amount": "1000"}}
+{"text": "जी फ्रॉड की शिकायत करनी है जी", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "want to report a fraud", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "मुझे बचत सीखना है जी", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "बचत"}}
+{"text": "भैया यह कितने रुपये का है भैया", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "explain passbook please", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "passbook"}}
+{"text": "ఈరోజు ఈరోజు వాతావరణం ఎలా ఉంది అన్నా", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "अच्छा क्या मैं इस योजना के लिए पात्र हूं", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "పాట పెట్టు పెట్టు అన్నా", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "நான் உஜ்வாலா க்கு தகுதியானவனா அண்ணா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "உஜ்வாலா"}}
+{"text": "சரி என்ன சொன்னீர்கள்", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "సరే Tamil లో మాట్లాడు", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "Tamil"}}
+{"text": "तमिल లో మాట్లాడు అన్నా", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "तमिल"}}
+{"text": "నాకు तेलुगु కావాలి", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "kya main pm kisan ke liye eligible hoon", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "PM Kisan"}}
+{"text": "அண்ணா இன்று வானிலை எப்படி", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "ఇది మోసపు ఎస్ఎంఎస్ ఆ ప్లీజ్", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "please scan and pay thanks", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे यूपीआई के बारे में सिखाओ प्लीज", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "यूपीआई"}}
+{"text": "अरे कैमरा खोलो क्यूआर के लिए प्लीज", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "who did I pay recently thanks", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया ye message sahi hai kya", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "okay so open camera to scan please", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "सुनो फ्रॉड की शिकायत करनी है", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "मुझे एटीएम सीखना है भैया", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "एटीएम"}}
+{"text": "సరే నేను జన్ ధన్ కి అర్హుడినా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "జన్ ధన్"}}
+{"text": "अच्छा यह क्यूआर किसका है", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "um is there a scheme for farmers", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "ஆயிரம் ரூபாய் கீதா க்கு அனுப்பவும்", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "கீதா", "amount": "ஆயிரம்"}}
+{"text": "हां तो सरकार से मदद कैसे मिलेगी जी", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "listen government help for small business thanks", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "ரமேஷ் க்கு 1000 செலுத்து அண்ணா", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "ரமேஷ்", "amount": "1000"}}
+{"text": "सुनो नोट की कीमत बताओ प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "அண்ணா என் கணக்கிலிருந்து பணம் போய்விட்டது அண்ணா", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "अकाउंट बैलेंस बैलेंस दिखाओ", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "okay so speak in तेलुगु thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "तेलुगु में बोलो", "intent": "set_language", "language": "hi", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "వినండి ప్రభుత్వ పథకాలు చూపించు ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "I want अंग्रेजी", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "अंग्रेजी"}}
+{"text": "पिछले पेमेंट पेमेंट क्या थे जी", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "हां तो किसी ने ओटीपी लेकर पैसे निकाल लिए", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "okay so show me government schemes please", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "hey repeat please please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so show me government schemes", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "SHOW ME THE OPTIONS PLEASE", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "नोट की कीमत बताओ", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "how much is left in my please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "hey balance enquiry", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया koi otp maang raha hai kya karu", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "यह कितने का नोट है प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "मुझे अनिल को दो हजार रुपये देने हैं भैया", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "अनिल", "amount": "दो हजार"}}
+{"text": "pay Mohan 2000", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Mohan", "amount": "2000"}}
+{"text": "भैया mujhe atal pension mil sakta hai kya भैया", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Atal Pension"}}
+{"text": "यूपीआई के बारे में बताओ प्लीज", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "यूपीआई"}}
+{"text": "फिर फिर से बोलो भैया", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "अरे dobara kaho", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "கீதா க்கு பணம் அனுப்பு 1000 ப்ளீஸ்", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "கீதா", "amount": "1000"}}
+{"text": "um play some music", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so how far is the market please", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "सुनो pichle transaction dikhao", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "சரி சரி வணக்கம் ப்ளீஸ்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "அண்ணா மோசடி விளக்கவும்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "மோசடி"}}
+{"text": "அண்ணா என் கணக்கிலிருந்து பணம் போய்விட்டது ப்ளீஸ்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "యాభై రూపాయలు రాజు కి పంపించు", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "రాజు", "amount": "యాభై"}}
+{"text": "கேளுங்க பரிவர்த்தனை வரலாறு", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "LISTEN SAY THAT AGAIN THANKS", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "what was last my transaction", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "please check this QR", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "um show me government schemes please", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "listen i am confused", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "please say that again thanks", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "how do I use this app", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "సరే నాకు ఏ పథకం వర్తిస్తుంది", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "లక్ష్మి కి డబ్బు పంపు 500 అన్నా", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "లక్ష్మి", "amount": "500"}}
+{"text": "ఎవరో నా డబ్బు దొంగిలించారు అన్నా", "intent": "report_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "మీరు ఏమి చేయగలరు చేయగలరు ప్లీజ్", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "say that again thanks", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "AAP KYA KAR SAKTE HO भैया", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "నేను అటల్ పెన్షన్ కి అర్హుడినా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "అటల్ పెన్షన్"}}
+{"text": "um balance enquiry thanks", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "PLEASE IDENTIFY THIS CURRENCY CURRENCY NOTE", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "ఈ క్యూఆర్ క్యూఆర్ సరైనదా ప్లీజ్", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "இது எத்தனை நோட்டு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "किसी ने ओटीपी मांगा है क्या करूं", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "telugu mein baat karo प्लीज", "intent": "set_language", "language": "hi", "script": "latin", "slots": {"language": "Telugu"}}
+{"text": "balance balance batao भैया", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "भैया पिछले महीने का हिसाब बताओ", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "அண்ணா அரசு திட்டங்களைக் காட்டு ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "సరే కెమెరా తెరువు స్కాన్ చేయడానికి", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "ఈ లింక్ సురక్షితమేనా", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "सुनो kya ye sms asli hai", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "రెండు వందలు రూపాయలు సురేష్ ఖాతాకు బదిలీ చేయి", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "సురేష్", "amount": "రెండు వందలు"}}
+{"text": "हां तो qr se payment karna hai", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "अरे mujhe thaga gaya hai जी", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "um pension available schemes", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो batao ye note kitne ka hai प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா எனக்கு angrezi வேண்டும்", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "angrezi"}}
+{"text": "இது எவ்வளவு எவ்வளவு நோட்டு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "हां तो यह नोट कितने का है भाई", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "क्या मैं सुकन्या समृद्धि के लिए योग्य हूं भैया", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "सुकन्या समृद्धि"}}
+{"text": "okay so how much money do I have", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "AAP KYA KAR SAKTE HO", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "what can you do please", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "கேளுங்க எனக்கு வட்டி கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "வட்டி"}}
+{"text": "சேமிப்பு விளக்கவும் ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "சீதா க்கு ஐம்பது செலுத்து அண்ணா", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "சீதா", "amount": "ஐம்பது"}}
+{"text": "అన్నా నాకు தமிழ் కావాలి ప్లీజ్", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "தமிழ்"}}
+{"text": "వినండి ఇది ఎన్ని రూపాయల నోటు ప్లీజ్", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "CHECK BALANCE", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "um whose qr code is this", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so what was my last transaction please", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு மோசடி கற்றுக்கொடு ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "மோசடி"}}
+{"text": "सुनो आज मौसम कैसा है जी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "అన్నా లక్ష్మి కి 1500 1500 చెల్లించు ప్లీజ్", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "లక్ష్మి", "amount": "1500"}}
+{"text": "भैया यह कॉल फ्रॉड तो नहीं प्लीज", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "please how much money I do have", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "చివరి లావాదేవీ ఏమిటి", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "मेरे धोखा हुआ है", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "English mein baat karo प्लीज", "intent": "set_language", "language": "hi", "script": "latin", "slots": {"language": "English"}}
+{"text": "बताओ कितने रुपये हैं खाते में भैया", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "um government help for small business", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "hey check this this qr thanks", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा बचत कैसे काम करता है प्लीज", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "बचत"}}
+{"text": "um scan this QR code", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "మోసం గురించి చెప్పు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "మోసం"}}
+{"text": "ఇది ఇది ఎవరి క్యూఆర్", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "please which rupee note is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "listen I have been scammed thanks", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "transfer 50 to Suresh", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Suresh", "amount": "50"}}
+{"text": "నా తనిఖీ చేయి", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "play some music", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "యాభై రూపాయలు సురేష్ ఖాతాకు బదిలీ చేయి", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "సురేష్", "amount": "యాభై"}}
+{"text": "i want to send 2000 to lakshmi", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Lakshmi", "amount": "2000"}}
+{"text": "की कीमत बताओ जी", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "கடன் என்றால் என்ன ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "கடன்"}}
+{"text": "um what is my balance thanks", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "వినండి బ్యాలెన్స్ చూపించు", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "నా అర్హతను తనిఖీ చేయి ప్లీజ్", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "hey come again please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "கேளுங்க இந்த செயலியை எப்படி பயன்படுத்துவது", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "okay so is this QR code safe", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "show me government schemes", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो sarkari yojana batao", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {}}
+{"text": "पासबुक क्या होता है", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "पासबुक"}}
+{"text": "Mudra loan ke bare mein batao", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {"scheme": "Mudra loan"}}
+{"text": "अच्छा ye qr check karo भैया", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "अरे theek hai", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "i want to report a fraud thanks", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा मुझे हिंदी चाहिए", "intent": "set_language", "language": "hi", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "Kamala ko paanch sau rupaye bhejo", "intent": "send_money", "language": "hi", "script": "latin", "slots": {"person": "Kamala", "amount": "paanch sau"}}
+{"text": "బీమా గురించి చెప్పు చెప్పు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "బీమా"}}
+{"text": "जन धन के लिए क्या शर्तें हैं प्लीज", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "जन धन"}}
+{"text": "பரிவர்த்தனை வரலாறு அண்ணா", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "whose code QR is this", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "WHICH SCHEME IS FOR ME", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "వినండి ఈ ఎలా యాప్ వాడాలి", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "listen tell me the denomination", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "mere account mein kitne rupaye hain", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "kya main Mudra loan ke liye eligible hoon", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Mudra loan"}}
+{"text": "సరే సహాయం చేయండి", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "புகார் மோசடியை செய்ய வேண்டும்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "which rupee note is thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "please someone took my OTP and withdrew money thanks", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "అన్నా ప్రభుత్వ పథకాలు చూపించు", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "अच्छा मुझे Tamil चाहिए", "intent": "set_language", "language": "hi", "script": "native", "slots": {"language": "Tamil"}}
+{"text": "show me the options", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "பணம் வேண்டும் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "QR SE PAYMENT KARNA HAI भैया", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "tell me my balance please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "um which rupee note is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "mera balance kya hai", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "అన్నా లావాదేవీల చరిత్ర అన్నా", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "सुनो बैंक से मैसेज आया है सही है क्या भैया", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "upi transfer five hundred rupees to geeta", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Geeta", "amount": "five hundred"}}
+{"text": "show the options thanks", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "నాకు సహాయం కావాలి కావాలి ప్లీజ్", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "సరే చివరి లావాదేవీ ఏమిటి ఏమిటి", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "what is UPI please", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "UPI"}}
+{"text": "हां तो उज्ज्वला के लिए क्या शर्तें हैं प्लीज", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "उज्ज्वला"}}
+{"text": "क्या यह एसएमएस असली है भैया", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "someone is asking my OTP", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி இது மோசடி எஸ்எம்எஸ்ஸா ப்ளீஸ்", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "கேளுங்க இந்த செய்தி உண்மையானதா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "सुनो theek hai", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா இந்த செயலியை எப்படி பயன்படுத்துவது", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "kya main Atal Pension ke liye eligible hoon जी", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "Atal Pension"}}
+{"text": "scan this qr", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி திற ஸ்கேன் செய்ய", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "సరే బ్యాలెన్స్ చెప్పు", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "okay so what note is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "NAMASTE", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "do I for this scheme", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {}}
+{"text": "మీరు ఎవరు", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "hey what was my last transaction", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा दोबारा कहो", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "mere sath dhokha hua hai प्लीज", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா இந்த க்யூஆர் ஸ்கேன் கோடை செய் அண்ணா", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "last payment kya tha भैया", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "am i eligible for ujjwala thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Ujjwala"}}
+{"text": "what is loan thanks", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "loan"}}
+{"text": "அண்ணா பாட்டு போடு", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "यह कॉल फ्रॉड तो नहीं जी", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి బీమా వివరించు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "బీమా"}}
+{"text": "HEY PENSION SCHEMES AVAILABLE", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "MADAD CHAHIYE", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సరే 5000 రూపాయలు రమేష్ ఖాతాకు బదిలీ చేయి", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "రమేష్", "amount": "5000"}}
+{"text": "please government help for small business", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so am I eligible for PM Kisan please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "PM Kisan"}}
+{"text": "last payment kya tha जी", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "ye app kaise chalaye भैया", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "சரி பரிவர்த்தனை வரலாறு", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி அறிக்கை காட்டு காட்டு", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "सुनो bhasha badlo प्लीज", "intent": "set_language", "language": "hi", "script": "latin", "slots": {}}
+{"text": "what was was my last transaction", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे मेरा स्टेटमेंट दिखाओ भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి నమస్కారం", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "இந்த இந்த க்யூஆர் சரியானதா அண்ணா", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "జన్ ధన్ గురించి చెప్పు అన్నా", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "జన్ ధన్"}}
+{"text": "क्या कहा आपने", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "check if this message fraud is", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "HOW MUCH IS LEFT IN MY ACCOUNT", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "aap kya sakte ho", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "ராஜு க்கு 2000 ரூபாய் அனுப்பு ப்ளீஸ்", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "ராஜு", "amount": "2000"}}
+{"text": "I want to send two hundred to Kamala thanks", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Kamala", "amount": "two hundred"}}
+{"text": "जी repeat karo", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "ரமேஷ் க்கு 2000 செலுத்து", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "ரமேஷ்", "amount": "2000"}}
+{"text": "அண்ணா நோட்டின் மதிப்பு சொல்", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "వినండి ఈ యాప్ ఎలా వాడాలి అన్నా", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "maine kise bheje जी", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "madad madad chahiye प्लीज", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "ye app kaise प्लीज chalaye", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "சரி அடல் ஓய்வூதியம் பற்றி சொல்லுங்கள் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {"scheme": "அடல் ஓய்வூதியம்"}}
+{"text": "how how much is left in my account", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு முத்ரா கடன் கிடைக்குமா அண்ணா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "முத்ரா கடன்"}}
+{"text": "OPEN CAMERA TO SCAN", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "MINI STATEMENT PLEASE", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "सुनो मदद चाहिए", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి వినండి పాట పెట్టు", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "சரி எத்தனை இது ரூபாய் நோட்டு அண்ணா", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "मोहन को पचास रुपये भेजो प्लीज", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "मोहन", "amount": "पचास"}}
+{"text": "பணம் எவ்வளவு உள்ளது ப்ளீஸ்", "intent": "check_balance", "language": "ta", "script": "native", "slots": {}}
+{"text": "जी मुझे ठगा गया है भैया", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "हिंदी లో మాట్లాడు", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "సరే ఈ సురక్షితమేనా", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "जी transaction history dikhao भैया", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "scan this code QR", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "what what is the weather today", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा ठीक है भैया", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "क्या कहा कहा आपने", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "ఈ క్యూఆర్ కోడ్ స్కాన్ చేయి చేయి ప్లీజ్", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "एक बार और बोलो जी", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "हां तो mujhe thaga gaya hai प्लीज", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "எனக்கு எனக்கு பிஎம் கிசான் கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "பிஎம் கிசான்"}}
+{"text": "फिर से बताओ जी", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "send money to mohan", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Mohan"}}
+{"text": "I want to learn about savings thanks", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "savings"}}
+{"text": "tell me about PM Kisan", "intent": "find_scheme", "language": "en", "script": "native", "slots": {"scheme": "PM Kisan"}}
+{"text": "अच्छा batao ye note kitne ka hai", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா நான் நான் ஏமாற்றப்பட்டேன்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "how much is this note thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "um come again", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "ఈ గుర్తించు ప్లీజ్", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "are who you thanks", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "please i need help", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு சேமிப்பு கற்றுக்கொடு அண்ணா", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "வட்டி விளக்கவும்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "வட்டி"}}
+{"text": "whose qr code is this", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "how does insurance work please", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "insurance"}}
+{"text": "అన్నా కెమెరా తెరువు స్కాన్ చేయడానికి", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "यह क्यूआर चेक करो जी", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "கேளுங்க விவசாயிகளுக்கு திட்டம் உள்ளதா", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "अरे mujhe budget hai sikhna", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "budget"}}
+{"text": "हां तो मेरे हाथ में कौन सा नोट है", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి ఈ క్యూఆర్ కోడ్ స్కాన్ చేయి ప్లీజ్", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "who are please you", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "listen what is the weather today thanks", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "यह कितने रुपये का है प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "கேளுங்க இந்த நோட்டை அடையாளம் காணு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "లావాదేవీల చరిత్ర", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "help help me please", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "மீண்டும் மீண்டும் சொல் அண்ணா", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "அண்ணா எனது பரிவர்த்தனைகளைக் காட்டு ப்ளீஸ்", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "okay so repeat please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "i want report a fraud thanks", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे मेरा खाता कितना है", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "UPI ke bare mein batao भैया", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "UPI"}}
+{"text": "um tell me a joke", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "what are the conditions for Ujjwala thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Ujjwala"}}
+{"text": "बैंक से आया मैसेज है सही है क्या जी", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "SHOW LAST PAYMENTS THANKS", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "um repeat please please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "మోసం వివరించు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "మోసం"}}
+{"text": "last payment kya tha", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "is SMS this a scam", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा एक बार और बोलो", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "I DID NOT HEAR YOU THANKS", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "ராஜு க்கு 1500 ரூபாய் அனுப்பு அண்ணா", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "ராஜு", "amount": "1500"}}
+{"text": "show me government schemes thanks", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया क्यूआर से पेमेंट करना है जी", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "ye message sahi hai kya भैया", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "అన్నా నాకు ముద్ర రుణం వస్తుందా అన్నా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "ముద్ర రుణం"}}
+{"text": "ఇది ఎస్ఎంఎస్ ఆ", "intent": "check_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "transfer 500 to Ramesh", "intent": "send_money", "language": "hi", "script": "latin", "slots": {"person": "Ramesh", "amount": "500"}}
+{"text": "am I eligible for housing scheme thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "housing scheme"}}
+{"text": "mujhe PM Kisan mil sakta hai kya", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "PM Kisan"}}
+{"text": "हां तो namaste जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "PLEASE CURRENT BALANCE PLEASE", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "please check balance please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "send money to Sita", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Sita"}}
+{"text": "எனக்கு तेलुगु வேண்டும்", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "what note this", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "పొదుపు వివరించు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "పొదుపు"}}
+{"text": "okay so what did you say", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "HELLO", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "money disappeared from my account please", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "theek theek hai प्लीज", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "हां तो कैमरा खोलो क्यूआर के लिए", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "నాకు పొదుపు నేర్పించు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "పొదుపు"}}
+{"text": "um okay fine", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "switch to Tamil thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "Tamil"}}
+{"text": "जी dobara kaho जी", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "transaction history please", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "speak in angrezi", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "angrezi"}}
+{"text": "I did not hear hear you thanks", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "मुझे ठगा गया है जी", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "சரி இருப்பு காட்டு", "intent": "check_balance", "language": "ta", "script": "native", "slots": {}}
+{"text": "i want to learn about budget", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "budget"}}
+{"text": "how do I use this app app", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த இந்த க்யூஆர் கோடை ஸ்கேன் செய்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "am I eligible for Jan Dhan", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Jan Dhan"}}
+{"text": "திரும்ப சொல்லுங்கள்", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "అన్నా నేను వినలేదు", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "make a payment of 5000 to mohan", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Mohan", "amount": "5000"}}
+{"text": "அறிக்கை காட்டு ப்ளீஸ் ப்ளீஸ்", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "बैंक में कितना पैसा है जी", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "क्या मैं उज्ज्वला के लिए योग्य हूं जी", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "उज्ज्वला"}}
+{"text": "how do i i use this app thanks", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த இந்த செயலியை எப்படி பயன்படுத்துவது ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "teach me about UPI thanks", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "UPI"}}
+{"text": "అన్నా నాకు నాకు సహాయం కావాలి అన్నా", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "ఈ క్యూఆర్ క్యూఆర్ సరైనదా అన్నా", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "okay so scheme for girl child", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "बताओ यह कौन सा सा नोट है", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "am I eligible for PM Kisan please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "PM Kisan"}}
+{"text": "sarkari yojana batao प्लीज", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {}}
+{"text": "verify this message message", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "WHAT CAN YOU DO PLEASE", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "how does loan work please", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "loan"}}
+{"text": "how do I use use this app", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "what did you please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "मेरा स्टेटमेंट दिखाओ", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "అటల్ పెన్షన్ గురించి", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "అటల్ పెన్షన్"}}
+{"text": "भैया language change karo प्लीज", "intent": "set_language", "language": "hi", "script": "latin", "slots": {}}
+{"text": "हां तो बैंक से मैसेज आया है सही है क्या प्लीज", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "యూపీఐ గురించి చెప్పు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "యూపీఐ"}}
+{"text": "गाना बजाओ", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "जी मेरा बैलेंस क्या है", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "जी आखिरी लेनदेन बताओ", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "मदद चाहिए प्लीज प्लीज", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "अरे ye kitne ka note hai जी", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "అన్నా మళ్లీ చెప్పు", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "సరే పీఎం కిసాన్ గురించి చెప్పు", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "పీఎం కిసాన్"}}
+{"text": "कल छुट्टी है क्या प्लीज", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "अरे उज्ज्वला के लिए क्या शर्तें हैं", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "उज्ज्वला"}}
+{"text": "kamala ko paise bhejo 5000 जी", "intent": "send_money", "language": "hi", "script": "latin", "slots": {"person": "Kamala", "amount": "5000"}}
+{"text": "PLEASE IS THIS MESSAGE GENUINE", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "ముద్ర రుణం గురించి చెప్పు ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "ముద్ర రుణం"}}
+{"text": "um who did I pay recently please", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "खाते में कितने पैसे हैं", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "okay so I want to report a fraud please", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "जी मुझे समझ नहीं आ रहा", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "um I did not hear you", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "సరే మరోసారి చెప్పండి అన్నా", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "i want to learn about interest", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "interest"}}
+{"text": "सुनो balance batao", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "identify currency note please", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "check this QR", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "kya main housing scheme ke liye eligible hoon", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "housing scheme"}}
+{"text": "please what are the conditions for PM Kisan please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "PM Kisan"}}
+{"text": "రుణం గురించి చెప్పు ప్లీజ్", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "రుణం"}}
+{"text": "நீங்கள் யார்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "सुनो मुझे ठगा गया है जी", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "okay so what note is thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "मुझे शांति को 500 रुपये देने हैं", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "शांति", "amount": "500"}}
+{"text": "अरे यह मैसेज चेक करो भैया", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "இது அண்ணா எத்தனை ரூபாய் நோட்டு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "எனக்கு உதவி வேண்டும் ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "हां तो मुझे योजना मिल सकता है क्या प्लीज", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "आवास योजना"}}
+{"text": "अच्छा यह नंबर धोखेबाज है क्या प्लीज", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "transaction history", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "mujhe PM Kisan mil hai sakta kya प्लीज", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {"scheme": "PM Kisan"}}
+{"text": "um show me the options", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे क्या क्या कर सकते हो", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "सुनो मेरे हाथ में कौन सा नोट है प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "switch to angrezi", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "angrezi"}}
+{"text": "यह कितने रुपये का", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "డబ్బు ఎంత ఉంది ప్లీజ్", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "நீங்கள் என்ன செய்ய முடியும்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "अच्छा फिर से बताओ भैया", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "tell me the denomination", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so am i eligible for mudra loan", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Mudra loan"}}
+{"text": "அண்ணா வணக்கம்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "వినండి మరోసారి చెప్పండి అన్నా", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "சேமிப்பு பற்றி சொல்லுங்கள்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "यूपीआई से अनिल को 1000 भेजो जी", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "अनिल", "amount": "1000"}}
+{"text": "English में बात करो जी", "intent": "set_language", "language": "hi", "script": "native", "slots": {"language": "English"}}
+{"text": "फ्रॉड की शिकायत करनी है प्लीज", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "which rupee is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "अच्छा YE CALL FRAUD TO NAHI HAI", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "எனக்கு வட்டி கற்றுக்கொடு கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "வட்டி"}}
+{"text": "जी transaction history dikhao प्लीज", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "QR SE PAYMENT KARNA HAI प्लीज", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "government help for small business", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "upi transfer fifty rupees to kamala thanks", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Kamala", "amount": "fifty"}}
+{"text": "அண்ணா மொழியை மாற்று ப்ளீஸ்", "intent": "set_language", "language": "ta", "script": "native", "slots": {}}
+{"text": "मेरी पात्रता जांचो जी", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "అన్నా నేను ఉజ్వల కి అర్హుడినా అన్నా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "ఉజ్వల"}}
+{"text": "okay so is this SMS a scam", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "ரமேஷ் க்கு ஆயிரம் ரூபாய் அனுப்பு", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "ரமேஷ்", "amount": "ஆயிரம்"}}
+{"text": "अरे ye kaun sa note hai प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "अरे दोबारा कहो", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "scheme for girl", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "அண்ணா கடைசி பரிவர்த்தனை என்ன", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "அண்ணா பாட்டு போடு அண்ணா", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "డబ్బు డబ్బు ఎంత ఉంది", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "OKAY SO SOMEONE STOLE MY MONEY", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "जी बस कब आएगी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "listen speak in తెలుగు thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "తెలుగు"}}
+{"text": "how does savings work", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "savings"}}
+{"text": "MERE ACCOUNT SE PAISE GAYAB HO GAYE", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "i want to send 1500 to suresh", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Suresh", "amount": "1500"}}
+{"text": "अच्छा ब्याज क्या होता है", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "ब्याज"}}
+{"text": "listen scan this QR code please", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "கேளுங்க மொழியை மாற்று", "intent": "set_language", "language": "ta", "script": "native", "slots": {}}
+{"text": "हां तो qr code scan karo प्लीज", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "okay so what note is this please", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "సమయం ఎంత ఎంత అన్నా", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "ఏమన్నారు అన్నా", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "um who are you", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "बैलेंस चेक करो जी", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "gana bajao जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "listen come again again", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "அண்ணா கமலா க்கு 200 ரூபாய் அனுப்பு", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "கமலா", "amount": "200"}}
+{"text": "hey show me the", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "phir phir se bolo", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "um tell me about housing scheme", "intent": "find_scheme", "language": "en", "script": "native", "slots": {"scheme": "housing scheme"}}
+{"text": "मैंने किसे पैसे भेजे", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "what is loan please", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "loan"}}
+{"text": "hey hey show my account balance", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு உஜ்வாலா கிடைக்குமா அண்ணா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "உஜ்வாலா"}}
+{"text": "సరే నేను మోసపోయాను అన్నా", "intent": "report_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "கேமராவைத் திற ஸ்கேன் ஸ்கேன் செய்ய", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "எனக்கு எனக்கு சேமிப்பு கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "okay so is this SMS a scam please", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "upi transfer two hundred rupees to mohan", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Mohan", "amount": "two hundred"}}
+{"text": "लोन की कोई सरकारी स्कीम है है", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "हां तो help karo", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "இந்த செயலியை செயலியை எப்படி பயன்படுத்துவது ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "अच्छा यह नंबर धोखेबाज है क्या", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "అన్నా నాకు సహాయం కావాలి అన్నా", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "கடன் விளக்கவும் அண்ணா", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "கடன்"}}
+{"text": "किसी ने ओटीपी लेकर पैसे निकाल लिए", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "సరే వ్యవసాయానికి డబ్బు డబ్బు కావాలి", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "கேளுங்க கேளுங்க மீண்டும் சொல்", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "இந்த க்யூஆர் க்யூஆர் சரியானதா", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "வேளாண்மைக்கு பணம் வேண்டும் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "இந்த செய்தி செய்தி உண்மையானதா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "pichle transaction dikhao भैया", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "கேளுங்க तमिल இல் பேசு", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "तमिल"}}
+{"text": "पिछले पेमेंट क्या थे", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "यूपीआई से सीता को 100 भेजो", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "सीता", "amount": "100"}}
+{"text": "दुकान का क्यूआर स्कैन करना है है भैया", "intent": "scan_qr", "language": "hi", "script": "native", "slots": {}}
+{"text": "மீண்டும் சொல் ப்ளீஸ்", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "जी क्या यह एसएमएस असली है", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "रमेश को 1500 ट्रांसफर करो प्लीज", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "रमेश", "amount": "1500"}}
+{"text": "పాట పెట్టు అన్నా అన్నా", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "kitna paisa hai भैया", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "please how much is this note worth thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "यह मैसेज करो जी", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "pension schemes schemes available", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "மோசடி என்றால் என்ன ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "மோசடி"}}
+{"text": "వినండి వినండి నా అర్హతను తనిఖీ చేయి", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "Telugu లో మాట్లాడు", "intent": "set_language", "language": "te", "script": "native", "slots": {"language": "Telugu"}}
+{"text": "அரசு திட்டங்களைக் காட்டு", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "మోసంపై ఫిర్యాదు చేయాలి చేయాలి", "intent": "report_scam", "language": "te", "script": "native", "slots": {}}
+{"text": "ఈ యాప్ ఎలా వాడాలి ప్లీజ్", "intent": "help", "language": "te", "script": "native", "slots": {}}
+{"text": "किसानों के लिए कोई योजना है क्या भैया", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "नोट की कीमत बताओ जी जी", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "లక్ష్మి కి డబ్బు పంపు 50", "intent": "send_money", "language": "te", "script": "native", "slots": {"person": "లక్ష్మి", "amount": "50"}}
+{"text": "मुझे सीता को 250 रुपये देने हैं हैं प्लीज", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "सीता", "amount": "250"}}
+{"text": "கேளுங்க யாரோ என் பணத்தை திருடிவிட்டார்கள் ப்ளீஸ்", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "भैया बैंक से मैसेज आया है सही है क्या", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "hey is this link safe thanks", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "எனக்கு பிஎம் பிஎம் கிசான் கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "பிஎம் கிசான்"}}
+{"text": "mujhe thaga gaya hai प्लीज", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "सुनो mere account se gayab ho gaye भैया", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "KYA KYA YE SMS ASLI HAI", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సమయం ఎంత ఎంత ప్లీజ్", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "எனக்கு காப்பீடு கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "காப்பீடு"}}
+{"text": "சேமிப்பு சேமிப்பு விளக்கவும் ப்ளீஸ்", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "um money disappeared from my account", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "मेरे खाते से पैसे गायब हो गए भैया", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "मुझे सुकन्या समृद्धि मिल सकता है क्या भैया", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "सुकन्या समृद्धि"}}
+{"text": "ఈ కోడ్ స్కాన్ చేయి", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "को दो सौ ट्रांसफर करो", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "कमला", "amount": "दो सौ"}}
+{"text": "भेजो पांच सौ लक्ष्मी को", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "लक्ष्मी", "amount": "पांच सौ"}}
+{"text": "लोन मुद्रा के बारे में बताओ", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {"scheme": "मुद्रा लोन"}}
+{"text": "भैया तुम हो कौन", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "HELP KARO प्लीज", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "maine kise kise paise bheje", "intent": "transaction_history", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா இந்த நோட்டை காணு அடையாளம்", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி எனக்கு हिंदी வேண்டும்", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "సరే ఇది ఎన్ని రూపాయల నోటు అన్నా", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "எனது பரிவர்த்தனைகளைக் காட்டு ப்ளீஸ்", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "भैया किसी ने मेरे पैसे चुरा लिए", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "ब्याज के बारे में बताओ प्लीज", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "ब्याज"}}
+{"text": "என் என் கணக்கிலிருந்து பணம் போய்விட்டது அண்ணா", "intent": "report_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "repeat karo भैया", "intent": "repeat", "language": "hi", "script": "latin", "slots": {}}
+{"text": "கேளுங்க இது எவ்வளவு நோட்டு அண்ணா", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "अरे किसी ने ने ओटीपी मांगा है क्या करूं भैया", "intent": "check_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "அண்ணா நேரம் என்ன ப்ளீஸ்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "REPORT FRAUD CYBER PLEASE", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "భాష మార్చు", "intent": "set_language", "language": "te", "script": "native", "slots": {}}
+{"text": "இந்த செய்தி உண்மையானதா உண்மையானதா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "hey who are you", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "who did I pay", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "set language to हिंदी thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "भेजो 2000 लक्ष्मी को जी", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "लक्ष्मी", "amount": "2000"}}
+{"text": "இது மோசடி எஸ்எம்எஸ்ஸா எஸ்எம்எஸ்ஸா அண்ணா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "నేను ఎవరికి డబ్బు పంపాను పంపాను", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "who did i pay recently please", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया किसानों के कोई योजना है क्या", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "hey how far is the market", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "వినండి రుణం రుణం వివరించు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "రుణం"}}
+{"text": "hey transaction history", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "how much is this note worth worth", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "money disappeared from from my account please", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे scan karo ye code", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "identify this currency thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "say that again again", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "I want तमिल thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "तमिल"}}
+{"text": "சீதா க்கு 1500 ரூபாய் அனுப்பு ப்ளீஸ்", "intent": "send_money", "language": "ta", "script": "native", "slots": {"person": "சீதா", "amount": "1500"}}
+{"text": "someone stole money", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "क्या मैं इस योजना के लिए पात्र हूं प्लीज", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి వడ్డీ గురించి చెప్పు", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "వడ్డీ"}}
+{"text": "సరే లావాదేవీల చరిత్ర అన్నా", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "ye message sahi hai kya प्लीज", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సమయం ఎంత అన్నా", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "இந்த க்யூஆர் ஸ்கேன் செய் ப்ளீஸ்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "please what are the conditions for housing scheme please", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "housing scheme"}}
+{"text": "இன்று எப்படி வானிலை ப்ளீஸ்", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "please set language to हिन्दी", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "हिन्दी"}}
+{"text": "मुझे घर बनाने के लिए योजना चाहिए", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "यूपीआई के बारे में बताओ", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "यूपीआई"}}
+{"text": "அண்ணா இது எவ்வளவு நோட்டு அண்ணா", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "जी tum kaun ho भैया", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "அண்ணா எனக்கு हिंदी வேண்டும் அண்ணா", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "मुझे धोखाधड़ी रिपोर्ट करनी है", "intent": "report_scam", "language": "hi", "script": "native", "slots": {}}
+{"text": "अच्छा gana bajao", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "make a payment of 2000 to kamala", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Kamala", "amount": "2000"}}
+{"text": "please set language to हिंदी thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "हिंदी"}}
+{"text": "kya ye sms asli hai प्लीज", "intent": "check_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "KITNA PAISA HAI जी", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "show my transactions thanks", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த செய்தி உண்மையானதா அண்ணா", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "अच्छा अटल पेंशन के लिए क्या शर्तें हैं", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {"scheme": "अटल पेंशन"}}
+{"text": "check this QR please", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "atal pension ke bare mein batao भैया", "intent": "find_scheme", "language": "hi", "script": "latin", "slots": {"scheme": "Atal Pension"}}
+{"text": "నోటు సరే విలువ చెప్పు", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "UM ONE MORE TIME", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "मेरे लिए कौन सी योजना है जी", "intent": "find_scheme", "language": "hi", "script": "native", "slots": {}}
+{"text": "పీఎం కిసాన్ చెప్పు ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {"scheme": "పీఎం కిసాన్"}}
+{"text": "send two hundred rupees to sita please", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Sita", "amount": "two hundred"}}
+{"text": "இந்த கோடை ஸ்கேன் செய்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "ప్రభుత్వ పథకాలు చూపించు ప్లీజ్", "intent": "find_scheme", "language": "te", "script": "native", "slots": {}}
+{"text": "explain upi", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "UPI"}}
+{"text": "बताओ यह कौन सा नोट है", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "भैया क्या मुझे यह योजना मिलेगी प्लीज", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "please say that again please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "CURRENT BALANCE PLEASE THANKS", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "hey transaction history thanks", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "show me options the thanks", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "is this QR code safe", "intent": "scan_qr", "language": "en", "script": "native", "slots": {}}
+{"text": "अरे meri eligibility check karo प्लीज", "intent": "check_eligibility", "language": "hi", "script": "latin", "slots": {}}
+{"text": "how does interest work", "intent": "learn_topic", "language": "en", "script": "native", "slots": {"topic": "interest"}}
+{"text": "मुझे नहीं क्या करूं", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "यूपीआई अनिल को सौ भेजो प्लीज", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "अनिल", "amount": "सौ"}}
+{"text": "account balance check karo", "intent": "check_balance", "language": "hi", "script": "latin", "slots": {}}
+{"text": "hey what are the conditions for Jan Dhan thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Jan Dhan"}}
+{"text": "I want to send 5000 to Suresh please", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Suresh", "amount": "5000"}}
+{"text": "கேளுங்க இந்த க்யூஆர் சரியானதா", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "please how much is this note worth", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "खाना बनाऊं क्या जी", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "report cyber fraud", "intent": "report_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "बीमा के बारे में बताओ", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "बीमा"}}
+{"text": "जी qr code scan karo प्लीज", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సరే ఈరోజు వాతావరణం ఎలా ఎలా ఉంది", "intent": "unknown", "language": "te", "script": "native", "slots": {}}
+{"text": "पिछले लेनदेन दिखाओ दिखाओ", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "hey what are the conditions for Jan Dhan", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Jan Dhan"}}
+{"text": "अच्छा मदद करो", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "note is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "சரி இது நோட்டு எவ்வளவு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "எனக்கு முத்ரா கடன் கிடைக்குமா ப்ளீஸ்", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "முத்ரா கடன்"}}
+{"text": "నాకు జన్ ధన్ వస్తుందా", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {"scheme": "జన్ ధన్"}}
+{"text": "time is it", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "यह नोट कितने का है भाई भैया", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "వినండి నా అర్హతను తనిఖీ చేయి", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "సరే బీమా వివరించు ప్లీజ్", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "బీమా"}}
+{"text": "hey what note is this thanks", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "ஜன் தன் கிடைக்குமா", "intent": "check_eligibility", "language": "ta", "script": "native", "slots": {"scheme": "ஜன் தன்"}}
+{"text": "hey do I qualify for this scheme thanks", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {}}
+{"text": "तेलुगु இல் பேசு", "intent": "set_language", "language": "ta", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "savings kya hota hai", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "savings"}}
+{"text": "अच्छा ठीक है है", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "எனக்கு சேமிப்பு கற்றுக்கொடு", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "current current balance please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया बताओ यह कौन सा नोट है जी", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "loan kya hota hai जी", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "loan"}}
+{"text": "hey help me", "intent": "help", "language": "en", "script": "native", "slots": {}}
+{"text": "switch to तेलुगु", "intent": "set_language", "language": "en", "script": "native", "slots": {"language": "तेलुगु"}}
+{"text": "CURRENT CURRENT BALANCE PLEASE", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "हां तो mujhe savings sikhna hai", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "savings"}}
+{"text": "ஜன் தன் பற்றி சொல்லுங்கள் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {"scheme": "ஜன் தன்"}}
+{"text": "அண்ணா மீண்டும் சொல் அண்ணா", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "अरे मेरे हाथ में सा कौन नोट है प्लीज", "intent": "identify_note", "language": "hi", "script": "native", "slots": {}}
+{"text": "అన్నా ఈ క్యూఆర్ కోడ్ స్కాన్ చేయి", "intent": "scan_qr", "language": "te", "script": "native", "slots": {}}
+{"text": "ఖాతాలో ఎంత మిగిలింది అన్నా", "intent": "check_balance", "language": "te", "script": "native", "slots": {}}
+{"text": "भैया ye app kaise chalaye भैया", "intent": "help", "language": "hi", "script": "latin", "slots": {}}
+{"text": "कितना पैसा है मेरे पास प्लीज", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "సరే స్టేట్‌మెంట్ ప్లీజ్ చూపించు", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "கேளுங்க ஜன் தன் பற்றி சொல்லுங்கள்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {"scheme": "ஜன் தன்"}}
+{"text": "पिछले दिखाओ प्लीज", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "क्या मुझे यह योजना मिलेगी जी", "intent": "check_eligibility", "language": "hi", "script": "native", "slots": {}}
+{"text": "செய்தி உண்மையானதா ப்ளீஸ்", "intent": "check_scam", "language": "ta", "script": "native", "slots": {}}
+{"text": "am I eligible eligible for Atal Pension", "intent": "check_eligibility", "language": "en", "script": "native", "slots": {"scheme": "Atal Pension"}}
+{"text": "um change language thanks", "intent": "set_language", "language": "en", "script": "native", "slots": {}}
+{"text": "ye kitne ka note भैया", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "सुनो namaste जी", "intent": "unknown", "language": "hi", "script": "latin", "slots": {}}
+{"text": "listen who did I pay recently thanks", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "मेरे खाते में कितना पैसा बचा है भैया", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "um check balance please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "సరే స్టేట్‌మెంట్ చూపించు ప్లీజ్", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "send five hundred rupees to geeta", "intent": "send_money", "language": "en", "script": "native", "slots": {"person": "Geeta", "amount": "five hundred"}}
+{"text": "வணக்கம் அண்ணா", "intent": "unknown", "language": "ta", "script": "native", "slots": {}}
+{"text": "कल छुट्टी है क्या", "intent": "unknown", "language": "hi", "script": "native", "slots": {}}
+{"text": "is message this genuine", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "SOMEONE IS ASKING FOR MY OTP", "intent": "check_scam", "language": "en", "script": "native", "slots": {}}
+{"text": "వినండి నా లావాదేవీలు చూపించు ప్లీజ్", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "come again again please", "intent": "repeat", "language": "en", "script": "native", "slots": {}}
+{"text": "இந்த நோட்டை அடையாளம் அடையாளம் காணு", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "சேமிப்பு என்றால் என்றால் என்ன அண்ணா", "intent": "learn_topic", "language": "ta", "script": "native", "slots": {"topic": "சேமிப்பு"}}
+{"text": "SCAN KARO YE CODE प्लीज", "intent": "scan_qr", "language": "hi", "script": "latin", "slots": {}}
+{"text": "WHAT IS THE WEATHER TODAY", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "okay so identify this currency note", "intent": "identify_note", "language": "en", "script": "native", "slots": {}}
+{"text": "जी लेनदेन का इतिहास दिखाओ भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "அண்ணா பரிவர்த்தனை வரலாறு அண்ணா", "intent": "transaction_history", "language": "ta", "script": "native", "slots": {}}
+{"text": "कौन कौन से पैसे आए भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}
+{"text": "um how much is left in my account", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "hey show show my statement thanks", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "भैया यूपीआई क्या होता है", "intent": "learn_topic", "language": "hi", "script": "native", "slots": {"topic": "यूपीआई"}}
+{"text": "ఇది ఎంత నోటు ప్లీజ్", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "सुनो फिर से बताओ भैया", "intent": "repeat", "language": "hi", "script": "native", "slots": {}}
+{"text": "भैया mere account se paise gayab ho gaye", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "సరే సరే మరోసారి చెప్పండి అన్నా", "intent": "repeat", "language": "te", "script": "native", "slots": {}}
+{"text": "पांच सौ रुपये लक्ष्मी को भेज दो", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "लक्ष्मी", "amount": "पांच सौ"}}
+{"text": "what time is it please", "intent": "unknown", "language": "en", "script": "native", "slots": {}}
+{"text": "क्या क्या कर हो भैया", "intent": "help", "language": "hi", "script": "native", "slots": {}}
+{"text": "எனக்கு எந்த திட்டம் பொருந்தும்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {}}
+{"text": "fraud ki shikayat karni karni hai", "intent": "report_scam", "language": "hi", "script": "latin", "slots": {}}
+{"text": "अकाउंट बैलेंस दिखाओ जी", "intent": "check_balance", "language": "hi", "script": "native", "slots": {}}
+{"text": "please pension schemes available please", "intent": "find_scheme", "language": "en", "script": "native", "slots": {}}
+{"text": "கேளுங்க நீங்கள் என்ன செய்ய முடியும் முடியும் ப்ளீஸ்", "intent": "help", "language": "ta", "script": "native", "slots": {}}
+{"text": "పాస్‌బుక్ వివరించు అన్నా", "intent": "learn_topic", "language": "te", "script": "native", "slots": {"topic": "పాస్‌బుక్"}}
+{"text": "చివరి లావాదేవీ ఏమిటి అన్నా", "intent": "transaction_history", "language": "te", "script": "native", "slots": {}}
+{"text": "भैया ye kitne ka note hai प्लीज", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "जी सौ रुपए शांति के खाते में जी", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "शांति", "amount": "सौ"}}
+{"text": "budget samjhao जी", "intent": "learn_topic", "language": "hi", "script": "latin", "slots": {"topic": "budget"}}
+{"text": "అన్నా నా అర్హతను తనిఖీ చేయి ప్లీజ్", "intent": "check_eligibility", "language": "te", "script": "native", "slots": {}}
+{"text": "சரி திரும்ப சொல்லுங்கள் அண்ணா", "intent": "repeat", "language": "ta", "script": "native", "slots": {}}
+{"text": "balance enquiry thanks", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "show my account balance please", "intent": "check_balance", "language": "en", "script": "native", "slots": {}}
+{"text": "show my transactions", "intent": "transaction_history", "language": "en", "script": "native", "slots": {}}
+{"text": "వినండి నోటు విలువ చెప్పు ప్లీజ్", "intent": "identify_note", "language": "te", "script": "native", "slots": {}}
+{"text": "சரி இந்த நோட்டை அடையாளம் காணு ப்ளீஸ்", "intent": "identify_note", "language": "ta", "script": "native", "slots": {}}
+{"text": "YE KAUN SA NOTE HAI जी", "intent": "identify_note", "language": "hi", "script": "latin", "slots": {}}
+{"text": "என் இருப்பு என்ன ப்ளீஸ்", "intent": "check_balance", "language": "ta", "script": "native", "slots": {}}
+{"text": "சரி உஜ்வாலா பற்றி சொல்லுங்கள் ப்ளீஸ்", "intent": "find_scheme", "language": "ta", "script": "native", "slots": {"scheme": "உஜ்வாலா"}}
+{"text": "கேளுங்க கேமராவைத் திற ஸ்கேன் செய்ய ப்ளீஸ்", "intent": "scan_qr", "language": "ta", "script": "native", "slots": {}}
+{"text": "भेजो 1000 मोहन को भैया", "intent": "send_money", "language": "hi", "script": "native", "slots": {"person": "मोहन", "amount": "1000"}}
+{"text": "महीने का हिसाब बताओ भैया", "intent": "transaction_history", "language": "hi", "script": "native", "slots": {}}

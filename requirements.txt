@@ -1,0 +1,37 @@
+# --- Web / API ---
+Django==5.0.9
+djangorestframework==3.15.2
+django-cors-headers==4.4.0
+drf-spectacular==0.27.2
+python-dotenv==1.0.1
+dj-database-url==2.2.0
+gunicorn==23.0.0
+whitenoise==6.7.0
+
+# --- Async / infra ---
+celery==5.4.0
+redis==5.0.8
+
+# --- Testing ---
+pytest==8.3.3
+pytest-django==4.9.0
+
+# --- Speech ---
+faster-whisper==1.0.3
+gTTS==2.5.3
+
+# --- Vision ---
+opencv-python==4.10.0.84
+pyzbar==0.1.9
+Pillow==10.4.0
+
+# --- ML ---
+transformers==4.44.2
+datasets==2.21.0
+accelerate==0.34.2
+scikit-learn==1.5.2
+sentence-transformers==3.1.1
+numpy==1.26.4
+pandas==2.2.3
+matplotlib==3.9.2
+seaborn==0.13.2

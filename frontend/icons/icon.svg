@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Vaani Saathi">
+  <rect width="128" height="128" rx="28" fill="#0E7C6B"/>
+  <g fill="none" stroke="#FAF7F2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 30a12 12 0 0 1 12 12v22a12 12 0 0 1-24 0V42a12 12 0 0 1 12-12z"/>
+    <path d="M40 62a24 24 0 0 0 48 0"/>
+    <path d="M64 86v14"/>
+  </g>
+  <g stroke="#F4B860" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9">
+    <path d="M24 52c-4 8-4 16 0 24"/>
+    <path d="M104 52c4 8 4 16 0 24"/>
+  </g>
+</svg>

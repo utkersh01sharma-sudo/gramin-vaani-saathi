@@ -1,0 +1,13 @@
+{
+  "model": "keyword_baseline",
+  "test_set": "intent_test_handwritten.jsonl",
+  "n": 183,
+  "accuracy": 0.7104,
+  "macro_f1": 0.7536,
+  "per_language": {
+    "hi": 0.569,
+    "en": 0.7209,
+    "ta": 0.7805,
+    "te": 0.8293
+  }
+}

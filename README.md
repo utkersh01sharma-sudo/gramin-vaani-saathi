@@ -44,7 +44,7 @@ Metrics are reported on a **hand-written** test set
 ## Architecture
 
 ```
-PWA (React + Workbox + IndexedDB queue)
+PWA (no-build ES modules, service worker, offline action queue)
         │  REST
 Django 5 + DRF  ──  Celery workers  ──  Redis
         │                  │
@@ -66,10 +66,38 @@ python -m venv .venv
 .venv/Scripts/pip install -r requirements.txt      # Linux/macOS: .venv/bin/pip
 cp .env.example .env
 python backend/manage.py migrate
+python backend/manage.py seed_demo
 python backend/manage.py runserver
 ```
 
-API docs at http://localhost:8000/api/docs/.
+Then open <http://localhost:8000/> — Django serves the PWA and the API from the
+same origin, so there is no second dev server and no CORS setup. API docs are at
+<http://localhost:8000/api/docs/>.
+
+`seed_demo` creates four sandbox identities — **sita**, **ramesh**, **lakshmi**,
+and the shop **ramkirana** — all with the password `demo1234`. They hold play
+money in your local database. The sign-in screen offers them as one-tap buttons
+so a demo does not open on a signup form.
+
+### Trying it without a microphone
+
+Chrome's speech recognition needs a mic and a network. The `☰` button beside the
+mic opens a text box that runs the typed sentence through the **same** NLU and
+dialog path, which is also the documented fallback for Tamil and Telugu if
+server-side ASR proves weak on them. Try:
+
+```
+मेरा बैलेंस बताओ
+रमेश को पांच सौ रुपये भेज दो
+నా బ్యాలెన్స్ చెప్పు
+```
+
+### Frontend
+
+`frontend/` is plain HTML, CSS, and ES modules with **no build step** — Django
+serves the files directly. The service worker needs origin-root scope and the
+project's real complexity is in the model and ledger layers, so a bundler would
+add a compile between an edit and a reload without buying anything yet.
 
 Docker (added Day 7):
 
@@ -82,7 +110,7 @@ docker compose up
 ```
 backend/    Django project: config/, apps/ (8 apps), ai/ (adapter layer)
 ml/         dataset generators, training scripts, evaluation
-frontend/   Vite + React PWA
+frontend/   PWA: no-build HTML/CSS/ES modules, service worker, icon-first UI
 docs/       api.md, RESULTS.md, SDG_MAPPING.md, DEMO.md
 ```
 

@@ -1,0 +1,17 @@
+{
+  "name": "ग्रामीण वाणी साथी · Gramin Vaani Saathi",
+  "short_name": "वाणी साथी",
+  "description": "Voice-first financial companion for rural communities. All banking is simulated.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF7F2",
+  "theme_color": "#0E7C6B",
+  "lang": "hi",
+  "categories": ["finance", "education"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

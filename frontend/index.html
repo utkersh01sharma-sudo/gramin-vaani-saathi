@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0E7C6B" />
+<title>ग्रामीण वाणी साथी · Gramin Vaani Saathi</title>
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<div id="offline-banner" class="banner" hidden>
+  <span class="banner-dot"></span><span data-i18n="offline">आप ऑफलाइन हैं</span>
+  <span id="queue-count" class="queue-count" hidden></span>
+</div>
+
+<header class="topbar">
+  <button id="btn-back" class="icon-btn" hidden aria-label="Back">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <div class="brand">
+    <img src="/icons/icon.svg" alt="" class="brand-mark" />
+    <span id="brand-name">वाणी साथी</span>
+  </div>
+  <button id="btn-lang" class="lang-chip" aria-label="Change language">
+    <span id="lang-label">हिं</span>
+  </button>
+</header>
+
+<main id="app">
+
+  <!-- ─────────────────────────────── language ─────────────────────────────── -->
+  <section class="screen" data-screen="language">
+    <h1 class="screen-title" data-i18n="chooseLanguage">अपनी भाषा चुनिए</h1>
+    <p class="screen-sub" data-i18n="chooseLanguageSub">Choose your language</p>
+    <div class="lang-grid">
+      <button class="lang-card" data-lang="hi"><span class="lang-native">हिन्दी</span><span class="lang-latin">Hindi</span></button>
+      <button class="lang-card" data-lang="en"><span class="lang-native">English</span><span class="lang-latin">English</span></button>
+      <button class="lang-card" data-lang="ta"><span class="lang-native">தமிழ்</span><span class="lang-latin">Tamil</span></button>
+      <button class="lang-card" data-lang="te"><span class="lang-native">తెలుగు</span><span class="lang-latin">Telugu</span></button>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────── sign in ────────────────────────────── -->
+  <section class="screen" data-screen="auth" hidden>
+    <h1 class="screen-title" data-i18n="whoAreYou">आप कौन हैं?</h1>
+    <div id="demo-users" class="people-grid"></div>
+
+    <details class="disclosure">
+      <summary data-i18n="otherAccount">दूसरा खाता</summary>
+      <form id="login-form" class="form">
+        <label class="field">
+          <span data-i18n="username">नाम</span>
+          <input name="username" autocomplete="username" required />
+        </label>
+        <label class="field">
+          <span data-i18n="password">पासवर्ड</span>
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button class="btn btn-primary" type="submit" data-i18n="signIn">अंदर आइए</button>
+      </form>
+    </details>
+
+    <p class="sandbox-note" data-i18n="sandboxNote"></p>
+  </section>
+
+  <!-- ────────────────────────────────── home ─────────────────────────────── -->
+  <section class="screen" data-screen="home" hidden>
+    <div class="greeting">
+      <span id="greeting-text" class="greeting-text"></span>
+      <button id="btn-signout" class="text-btn" data-i18n="signOut">बाहर</button>
+    </div>
+
+    <button class="balance-card" data-go="balance">
+      <span class="balance-label" data-i18n="balanceLabel">आपके पैसे</span>
+      <span class="balance-amount"><span class="rupee">₹</span><span id="home-balance">—</span></span>
+      <span id="balance-stamp" class="balance-stamp"></span>
+    </button>
+
+    <div class="tile-grid" id="tile-grid"></div>
+
+    <button class="help-strip" data-go="help">
+      <span class="help-icon" aria-hidden="true">🆘</span>
+      <span data-i18n="helpTitle">मदद चाहिए?</span>
+    </button>
+  </section>
+
+  <!-- ───────────────────────────────── balance ───────────────────────────── -->
+  <section class="screen" data-screen="balance" hidden>
+    <h1 class="screen-title" data-i18n="balanceTitle">आपके पैसे</h1>
+    <div class="big-amount"><span class="rupee">₹</span><span id="detail-balance">—</span></div>
+    <p id="detail-vpa" class="screen-sub"></p>
+    <button class="btn btn-ghost speak-btn" data-speak="#detail-balance">
+      <span aria-hidden="true">🔊</span> <span data-i18n="listen">सुनिए</span>
+    </button>
+    <h2 class="section-head" data-i18n="historyTitle">पिछले लेनदेन</h2>
+    <ul id="txn-list" class="txn-list"></ul>
+  </section>
+
+  <!-- ────────────────────────────────── send ─────────────────────────────── -->
+  <section class="screen" data-screen="send" hidden>
+    <h1 class="screen-title" data-i18n="sendTitle">पैसे भेजिए</h1>
+    <p class="screen-sub" data-i18n="chooseContact">किसे भेजना है?</p>
+    <div id="contact-grid" class="people-grid"></div>
+
+    <div id="amount-block" hidden>
+      <p class="screen-sub"><span data-i18n="enterAmount">कितने रुपये?</span> <strong id="amount-payee"></strong></p>
+      <div class="amount-display"><span class="rupee">₹</span><span id="amount-value">0</span></div>
+      <div class="chip-row" id="quick-amounts"></div>
+      <div class="keypad" id="keypad"></div>
+      <button class="btn btn-primary btn-lg" id="btn-review" data-i18n="payNow">आगे बढ़िए</button>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────── schemes ───────────────────────────── -->
+  <section class="screen" data-screen="schemes" hidden>
+    <h1 class="screen-title" data-i18n="schemesTitle">सरकारी योजनाएँ</h1>
+    <div id="scheme-list" class="card-list"></div>
+    <p class="sample-note" data-i18n="sampleContent"></p>
+  </section>
+
+  <!-- ────────────────────────────────── learn ────────────────────────────── -->
+  <section class="screen" data-screen="learn" hidden>
+    <h1 class="screen-title" data-i18n="learnTitle">सीखिए</h1>
+    <div id="lesson-list" class="card-list"></div>
+    <p class="sample-note" data-i18n="sampleContent"></p>
+  </section>
+
+  <!-- ────────────────────────────────── scan ─────────────────────────────── -->
+  <section class="screen" data-screen="scan" hidden>
+    <h1 class="screen-title" data-i18n="scanTitle">कोड या नोट दिखाइए</h1>
+    <div class="scan-choice">
+      <button class="scan-card" data-scan="qr">
+        <span class="scan-emoji" aria-hidden="true">🔳</span>
+        <span data-i18n="scanQr">क्यूआर कोड</span>
+      </button>
+      <button class="scan-card" data-scan="note">
+        <span class="scan-emoji" aria-hidden="true">💵</span>
+        <span data-i18n="scanNote">नोट पहचानिए</span>
+      </button>
+    </div>
+    <div id="camera-wrap" class="camera-wrap" hidden>
+      <video id="camera" playsinline muted></video>
+      <button class="btn btn-primary btn-lg" id="btn-capture" data-i18n="capture">तस्वीर लीजिए</button>
+    </div>
+    <p id="scan-status" class="sample-note"></p>
+  </section>
+
+  <!-- ───────────────────────────────── safety ───────────────────────────── -->
+  <section class="screen" data-screen="safety" hidden>
+    <h1 class="screen-title" data-i18n="safetyTitle">ठगी से बचिए</h1>
+    <label class="field">
+      <span data-i18n="pasteMessage">संदेश यहाँ डालिए</span>
+      <textarea id="scam-input" rows="3"></textarea>
+    </label>
+    <button class="btn btn-primary" id="btn-scam-check" data-i18n="checkMessage">जाँचिए</button>
+    <div id="scam-result" class="verdict" hidden></div>
+    <h2 class="section-head" data-i18n="safetyTips">याद रखिए</h2>
+    <div id="tip-list" class="card-list"></div>
+  </section>
+
+  <!-- ────────────────────────────────── help ────────────────────────────── -->
+  <section class="screen" data-screen="help" hidden>
+    <h1 class="screen-title" data-i18n="helpTitle">मदद</h1>
+    <p class="screen-sub" data-i18n="helpIntro">आप ये कह सकते हैं:</p>
+    <div id="phrase-list" class="card-list"></div>
+    <p class="sandbox-note" data-i18n="sandboxNote"></p>
+  </section>
+
+</main>
+
+<!-- ────────────────────────────── confirmation ────────────────────────────── -->
+<div id="confirm-sheet" class="sheet" hidden role="dialog" aria-modal="true">
+  <div class="sheet-inner">
+    <p id="confirm-text" class="confirm-text"></p>
+    <div class="confirm-actions">
+      <button id="btn-no" class="btn btn-no btn-lg"><span aria-hidden="true">✕</span> <span data-i18n="no">नहीं</span></button>
+      <button id="btn-yes" class="btn btn-yes btn-lg"><span aria-hidden="true">✓</span> <span data-i18n="yes">हाँ</span></button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<!-- ───────────────────────────────── mic bar ─────────────────────────────── -->
+<footer class="micbar" id="micbar" hidden>
+  <div id="heard" class="heard" hidden></div>
+  <div class="micbar-row">
+    <button id="btn-type" class="icon-btn ghost" aria-label="Type instead">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
+    <button id="mic" class="mic" aria-label="Speak">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/>
+        <path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>
+      </svg>
+    </button>
+    <button id="btn-home" class="icon-btn ghost" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>
+    </button>
+  </div>
+  <p id="mic-hint" class="mic-hint" data-i18n="tapToSpeak">बोलने के लिए दबाइए</p>
+  <form id="type-form" class="type-form" hidden>
+    <input id="type-input" data-i18n-ph="typePlaceholder" autocomplete="off" />
+    <button class="btn btn-primary" type="submit" data-i18n="go">भेजिए</button>
+  </form>
+</footer>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

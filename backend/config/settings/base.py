@@ -143,6 +143,11 @@ NOTE_MODEL_PATH = os.getenv("NOTE_MODEL_PATH", str(ML_ARTIFACTS_DIR / "notes"))
 ASR_MIN_CONFIDENCE = float(os.getenv("ASR_MIN_CONFIDENCE", "0.45"))
 INTENT_MIN_CONFIDENCE = float(os.getenv("INTENT_MIN_CONFIDENCE", "0.55"))
 
+# One spoken sentence is a few seconds of opus, i.e. tens of kilobytes. The cap
+# is generous enough for a slow speaker and small enough that a malformed or
+# hostile upload cannot fill the disk while a worker decodes it.
+VOICE_MAX_UPLOAD_BYTES = int(os.getenv("VOICE_MAX_UPLOAD_BYTES", str(8 * 1024 * 1024)))
+
 # ---------------------------------------------------------------- OTP / signup
 # One-time codes for new-account verification.
 #

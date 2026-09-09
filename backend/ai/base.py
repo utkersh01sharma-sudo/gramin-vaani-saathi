@@ -71,8 +71,14 @@ class ASRAdapter(ABC):
 
 class TTSAdapter(ABC):
     @abstractmethod
-    def synthesize(self, text: str, language: str) -> str:
-        """Return a MEDIA_ROOT-relative path to the rendered audio file."""
+    def synthesize(self, text: str, language: str, slow: bool = False) -> str | None:
+        """Return a MEDIA_ROOT-relative path to the rendered audio file.
+
+        Returning ``None`` is a supported outcome, not a failure: it tells the
+        client to speak the reply with the browser's own voice. Offline is the
+        normal case for this app, so the pipeline must never depend on a
+        synthesiser being reachable.
+        """
 
 
 class NLUAdapter(ABC):

@@ -1,0 +1,44 @@
+[
+  {
+    "file": "hi_balance.mp3",
+    "language": "hi",
+    "text": "मेरा बैलेंस कितना है",
+    "intent": "check_balance"
+  },
+  {
+    "file": "hi_send.mp3",
+    "language": "hi",
+    "text": "रमेश को पांच सौ रुपये भेज दो",
+    "intent": "send_money"
+  },
+  {
+    "file": "hi_scheme.mp3",
+    "language": "hi",
+    "text": "मुझे खेती के लिए सरकारी योजना चाहिए",
+    "intent": "find_scheme"
+  },
+  {
+    "file": "en_balance.mp3",
+    "language": "en",
+    "text": "how much money do I have in my account",
+    "intent": "check_balance"
+  },
+  {
+    "file": "en_scam.mp3",
+    "language": "en",
+    "text": "is this message asking for my OTP a scam",
+    "intent": "check_scam"
+  },
+  {
+    "file": "ta_balance.mp3",
+    "language": "ta",
+    "text": "என் கணக்கில் எவ்வளவு பணம் இருக்கு",
+    "intent": "check_balance"
+  },
+  {
+    "file": "te_balance.mp3",
+    "language": "te",
+    "text": "నా ఖాతాలో ఎంత డబ్బు ఉంది",
+    "intent": "check_balance"
+  }
+]

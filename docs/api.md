@@ -91,52 +91,100 @@ Any subset of the profile fields. These double as scheme-eligibility inputs.
 
 ## voice — the orchestrator
 
+> **Contract change, Day 2.** The Day 1 draft threaded multi-turn state through a
+> `session_id`. It does not any more. The pending action is handed back to the
+> client and sent up again on the next turn, which keeps every web worker
+> stateless — you scale by adding replicas, not by adding sticky sessions. The
+> field is `pending`, and it is opaque to the client: echo it back unmodified.
+
 ### `POST /api/voice/query/` (multipart)
 | field | type | notes |
 |---|---|---|
-| `audio` | file | webm/ogg/wav from `MediaRecorder` |
+| `audio` | file | webm/ogg/opus/wav/m4a/mp4/mp3/flac from `MediaRecorder`; ≤ 8 MB |
 | `language` | string | `hi` \| `en` \| `ta` \| `te`; defaults to the profile language |
-| `session_id` | string | optional; carries multi-turn confirmation state |
+| `pending` | string | optional; the previous response's `pending` object, JSON-encoded |
 
-→ `202 {"task_id": "..."}`
+Two response shapes, and the client handles both:
+
+* **with a broker** (`CELERY_TASK_ALWAYS_EAGER=false`) →
+  `202 {"status": "queued", "task_id": "...", "poll_url": "/api/voice/result/<id>/"}`
+* **without one** (laptop demo, no Redis) the task runs inline →
+  `200 <VoiceResult>` with `"status": "done"`
+
+Read `status`, not the HTTP code, to decide whether to poll.
+
+The uploaded recording is deleted as soon as it has been transcribed. Audio of
+someone saying a payee's name and an amount is personal data with no further use
+once the text exists.
 
 ### `POST /api/voice/text/`
-Same pipeline, skipping ASR. Used by the text fallback and by tests.
+Same pipeline, skipping ASR. Used by the text fallback, by the browser's own
+speech recognition where it exists, and by tests.
 ```json
-{"text": "मेरा बैलेंस क्या है", "language": "hi", "session_id": "..."}
+{"text": "मेरा बैलेंस क्या है", "language": "hi", "pending": null}
 ```
 → `200 <VoiceResult>`
 
+### `POST /api/voice/confirm/`
+Explicit tap-to-confirm for users who would rather press the green tick than say
+the word. Same code path and same idempotency key as answering "हाँ".
+```json
+{"pending": {"action": "send_money", "amount": "500", "payee_vpa": "...",
+             "idempotency_key": "..."}, "language": "hi"}
+```
+→ `201 <VoiceResult>`
+
 ### `GET /api/voice/result/<task_id>/`
-→ `200 {"status": "pending"}` or `200 <VoiceResult>`
+→ `202 {"status": "pending"}` · `200 <VoiceResult>` · `200 {"status": "failed", ...}`
+
+Only meaningful when a broker is configured; in eager mode the result was already
+returned by `/api/voice/query/` and is not stored anywhere.
 
 ### `VoiceResult`
 ```json
 {
   "status": "done",
+  "task_id": "8f1c...",
   "transcript": "मेरा बैलेंस क्या है",
   "language": "hi",
-  "asr_confidence": 0.91,
   "intent": "check_balance",
-  "intent_confidence": 0.97,
-  "slots": {"amount": null, "person": null},
-  "needs_confirmation": false,
-  "confirmation_prompt": null,
-  "action_taken": "balance_read",
+  "confidence": 0.97,
+  "asr_confidence": 0.91,
+  "audio_seconds": 2.4,
+  "slots": {},
   "reply_text": "आपके खाते में 4,250 रुपये हैं।",
-  "reply_audio_url": "/media/tts/9f3c...mp3",
+  "reply_audio_url": "/media/tts/9f3c....mp3",
   "icon": "wallet",
-  "data": {"balance": "4250.00"},
-  "latency_ms": 2840
+  "screen": "balance",
+  "action_taken": "balance_read",
+  "needs_confirmation": false,
+  "pending": null,
+  "nlu_backend": "muril_intent",
+  "low_confidence": false,
+  "timings": {"asr_ms": 1180, "nlu_ms": 24, "tts_ms": 310, "total_ms": 1514}
 }
 ```
 
-`needs_confirmation: true` means the intent moves money. The client must speak
-`confirmation_prompt` and send the user's yes/no back on `/api/voice/text/` with the
-same `session_id`. Nothing is executed on the first utterance.
+`reply_audio_url` is `null` when synthesis was unavailable — offline, or the TTS
+host unreachable. That is a supported outcome, not an error: the client speaks
+`reply_text` with the browser's own voice. The user hears the sentence either
+way; only the voice changes.
 
-Low confidence (`asr_confidence < 0.45` or `intent_confidence < 0.55`) returns
-`intent: "unknown"` with a reply asking the user to repeat or tap an icon. The
+`nlu_backend` names the implementation that actually answered (`muril_intent` or
+`keyword_baseline`), so a demo can never silently report baseline numbers as
+model numbers.
+
+`timings` is reported rather than reduced to a pass/fail against the 4 s budget.
+A number you cannot see is a number you cannot defend.
+
+`needs_confirmation: true` means the intent moves money. The client speaks
+`reply_text` — which is the confirmation question — and sends the user's yes/no
+back to `/api/voice/text/` (or `/api/voice/query/`) along with `pending`
+unchanged. Nothing is executed on the first utterance.
+
+Low confidence (`asr_confidence < ASR_MIN_CONFIDENCE` or
+`confidence < INTENT_MIN_CONFIDENCE`) returns `intent: "unknown"` and
+`low_confidence: true` with a reply asking the user to repeat or tap an icon. The
 system declines to guess rather than misrouting a payment.
 
 ---

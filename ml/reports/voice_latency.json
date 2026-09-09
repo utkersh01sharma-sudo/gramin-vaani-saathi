@@ -1,0 +1,152 @@
+{
+  "device": "cuda (NVIDIA GeForce RTX 4070 Laptop GPU)",
+  "asr_model": "small",
+  "clips": 7,
+  "cold_start_ms": 4863,
+  "warm": {
+    "p50_ms": 1277,
+    "p95_ms": 1681,
+    "mean_ms": 1198,
+    "mean_asr_ms": 505,
+    "mean_nlu_ms": 2,
+    "mean_tts_ms": 689
+  },
+  "intent_correct": 4,
+  "budget_ms": 4000,
+  "note": "Clips are gTTS-rendered, i.e. clean studio speech. These numbers are a latency floor and a wiring check, not an accuracy result. Word error rate must be measured on phone recordings of real speakers.",
+  "runs": [
+    {
+      "file": "hi_balance.mp3",
+      "language": "hi",
+      "expected_intent": "check_balance",
+      "reference_text": "मेरा बैलेंस कितना है",
+      "transcript": "मेरा बेलेस कितना है",
+      "intent": "unknown",
+      "intent_correct": false,
+      "asr_confidence": 0.6625,
+      "audio_seconds": 1.97,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 4860,
+        "nlu_ms": 2,
+        "tts_ms": 0,
+        "total_ms": 4863
+      },
+      "wall_ms": 4875
+    },
+    {
+      "file": "hi_send.mp3",
+      "language": "hi",
+      "expected_intent": "send_money",
+      "reference_text": "रमेश को पांच सौ रुपये भेज दो",
+      "transcript": "रमेश को पाथ सो रुप्ये बहीज दो",
+      "intent": "unknown",
+      "intent_correct": false,
+      "asr_confidence": 0.6731,
+      "audio_seconds": 2.76,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 562,
+        "nlu_ms": 1,
+        "tts_ms": 0,
+        "total_ms": 563
+      },
+      "wall_ms": 564
+    },
+    {
+      "file": "hi_scheme.mp3",
+      "language": "hi",
+      "expected_intent": "find_scheme",
+      "reference_text": "मुझे खेती के लिए सरकारी योजना चाहिए",
+      "transcript": "मुझे खेती के लिए सर्कारी योजना चाहीे",
+      "intent": "find_scheme",
+      "intent_correct": true,
+      "asr_confidence": 0.7241,
+      "audio_seconds": 3.46,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 688,
+        "nlu_ms": 0,
+        "tts_ms": 992,
+        "total_ms": 1681
+      },
+      "wall_ms": 1681
+    },
+    {
+      "file": "en_balance.mp3",
+      "language": "en",
+      "expected_intent": "check_balance",
+      "reference_text": "how much money do I have in my account",
+      "transcript": "How much money do I have in my account?",
+      "intent": "check_balance",
+      "intent_correct": true,
+      "asr_confidence": 0.7374,
+      "audio_seconds": 3.02,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 373,
+        "nlu_ms": 2,
+        "tts_ms": 621,
+        "total_ms": 997
+      },
+      "wall_ms": 997
+    },
+    {
+      "file": "en_scam.mp3",
+      "language": "en",
+      "expected_intent": "check_scam",
+      "reference_text": "is this message asking for my OTP a scam",
+      "transcript": "Is this message asking for my OTPS scam?",
+      "intent": "check_scam",
+      "intent_correct": true,
+      "asr_confidence": 0.6509,
+      "audio_seconds": 3.65,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 382,
+        "nlu_ms": 1,
+        "tts_ms": 1010,
+        "total_ms": 1393
+      },
+      "wall_ms": 1394
+    },
+    {
+      "file": "ta_balance.mp3",
+      "language": "ta",
+      "expected_intent": "check_balance",
+      "reference_text": "என் கணக்கில் எவ்வளவு பணம் இருக்கு",
+      "transcript": "என் கணக்கில் எவ்வளவு பணம் இருக்கு?",
+      "intent": "check_balance",
+      "intent_correct": true,
+      "asr_confidence": 0.8207,
+      "audio_seconds": 3.12,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 536,
+        "nlu_ms": 1,
+        "tts_ms": 631,
+        "total_ms": 1169
+      },
+      "wall_ms": 1170
+    },
+    {
+      "file": "te_balance.mp3",
+      "language": "te",
+      "expected_intent": "check_balance",
+      "reference_text": "నా ఖాతాలో ఎంత డబ్బు ఉంది",
+      "transcript": "ना काता लो येंता ड़ब वूंदी",
+      "intent": "unknown",
+      "intent_correct": false,
+      "asr_confidence": 0.5416,
+      "audio_seconds": 2.71,
+      "nlu_backend": "keyword_baseline",
+      "timings": {
+        "asr_ms": 491,
+        "nlu_ms": 9,
+        "tts_ms": 885,
+        "total_ms": 1386
+      },
+      "wall_ms": 1387
+    }
+  ]
+}

@@ -134,6 +134,26 @@ serves the files directly. The service worker needs origin-root scope and the
 project's real complexity is in the model and ledger layers, so a bundler would
 add a compile between an edit and a reload without buying anything yet.
 
+`icons.js` holds the entire icon set: about thirty-five shapes drawn as strokes on
+a 24px grid, inheriting `currentColor`. Markup carries `data-icon="wallet"` and the
+app hydrates it once at boot. This replaced emoji, and the reason is worth stating,
+because emoji look like the cheap option and are not: they render in whatever font
+the device ships, at that vendor's weight and colour, so the same screen looks
+different on every phone and no icon ever matches the interface around it. A stroked
+set inherits its colour from context, which is why the warning icon in a caution
+strip is caution-coloured without a second asset existing.
+
+`styles.css` works from a token set built around a light ground, one deep green
+primary, and six category tones. The tones are information, not decoration: each
+home tile tints its icon chip to 8% of its own tone, so the six are separable at a
+glance without six saturated blocks fighting each other. Two typographic details
+that are easy to get wrong here: numerals use a proportional face with
+`font-variant-numeric: tabular-nums` rather than a monospace stack, because a
+monospace face gives the group separator a full digit advance and renders ₹3,750 as
+"3 , 750"; and the uppercase letter-spaced eyebrow labels are scoped to
+`html[lang="en"]`, because Devanagari, Tamil and Telugu have no letter case and
+tracking pushes matras off the consonants they belong to.
+
 `cursor.js` replaces the desktop pointer with a tracking dot and a trailing ring
 that grows over anything tappable and pulls cards slightly towards the cursor. It
 attaches **only** on a fine pointer with motion allowed, and detaches the moment a

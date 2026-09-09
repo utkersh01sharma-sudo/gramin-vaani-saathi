@@ -16,6 +16,7 @@
 import { LANGS, LANG_META, makeT } from './i18n.js';
 import { SCHEMES, LESSONS, TIPS, PHRASES } from './content.js';
 import { initCursor } from './cursor.js';
+import { iconSvg, setIcon } from './icons.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -62,13 +63,16 @@ const DEMO_USERS = [
 ];
 const DEMO_PASSWORD = 'demo1234';
 
+// Each tile gets one icon and one tone. The tone tints the icon chip at 8%
+// and colours the icon itself, so the six are distinguishable at a glance
+// without six saturated blocks competing for attention on one screen.
 const TILES = [
-  { screen: 'balance', key: 'tileBalance', emoji: '💰', bg: '#E1F1ED' },
-  { screen: 'send',    key: 'tileSend',    emoji: '📤', bg: '#FCEBDD' },
-  { screen: 'schemes', key: 'tileSchemes', emoji: '📋', bg: '#E7EDFA' },
-  { screen: 'learn',   key: 'tileLearn',   emoji: '🎓', bg: '#FDF3D8' },
-  { screen: 'scan',    key: 'tileScan',    emoji: '📷', bg: '#EDE7F8' },
-  { screen: 'safety',  key: 'tileSafety',  emoji: '🛡️', bg: '#FBE6E4' },
+  { screen: 'balance', key: 'tileBalance', icon: 'wallet', tone: 'var(--tone-money)'  },
+  { screen: 'send',    key: 'tileSend',    icon: 'send',   tone: 'var(--tone-send)'   },
+  { screen: 'schemes', key: 'tileSchemes', icon: 'scheme', tone: 'var(--tone-scheme)' },
+  { screen: 'learn',   key: 'tileLearn',   icon: 'learn',  tone: 'var(--tone-learn)'  },
+  { screen: 'scan',    key: 'tileScan',    icon: 'scan',   tone: 'var(--tone-scan)'   },
+  { screen: 'safety',  key: 'tileSafety',  icon: 'shield', tone: 'var(--tone-safety)' },
 ];
 
 // ─────────────────────────────────────────────────────────── api
@@ -499,7 +503,7 @@ function renderOtp() {
 
   // The icon must match the channel: an envelope over a phone number reads as
   // the app having sent the code somewhere the user did not ask for.
-  $('#otp-icon').textContent = signup.channel === 'phone' ? '📱' : '✉️';
+  setIcon($('#otp-icon'), signup.channel === 'phone' ? 'phone' : 'mail');
   $('#otp-destination').textContent = signup.masked || signup.destination;
   $('#otp-error').hidden = true;
 
@@ -761,17 +765,17 @@ function personCard({ initial, color, name, sub, onClick }) {
   return card;
 }
 
-function infoCard({ emoji, title, text, onSpeak }) {
+function infoCard({ icon, tone, title, text, onSpeak }) {
   const card = document.createElement('div');
   card.className = 'info-card';
   card.innerHTML = `
-    <span class="info-emoji" aria-hidden="true"></span>
+    <span class="info-icon">${iconSvg(icon || 'info')}</span>
     <span class="info-body">
       <span class="info-title"></span>
       <span class="info-text"></span>
     </span>
-    <button class="info-speak" aria-label="Listen">🔊</button>`;
-  $('.info-emoji', card).textContent = emoji;
+    <button class="info-speak" aria-label="Listen">${iconSvg('speaker')}</button>`;
+  if (tone) card.style.setProperty('--tone', tone);
   $('.info-title', card).textContent = title;
   $('.info-text', card).textContent = text;
   $('.info-speak', card).addEventListener('click', onSpeak);
@@ -792,13 +796,11 @@ function renderTiles() {
     const label = t(tile.key);
     const button = document.createElement('button');
     button.className = 'tile';
+    button.style.setProperty('--tone', tile.tone);
     button.innerHTML = `
-      <span class="tile-emoji" aria-hidden="true"></span>
+      <span class="tile-icon">${iconSvg(tile.icon)}</span>
       <span class="tile-label"></span>
-      <span class="tile-speak" role="button" tabindex="0" aria-label="Listen">🔊</span>`;
-    const emoji = $('.tile-emoji', button);
-    emoji.textContent = tile.emoji;
-    emoji.style.background = tile.bg;
+      <span class="tile-speak" role="button" tabindex="0" aria-label="Listen">${iconSvg('speaker')}</span>`;
     $('.tile-label', button).textContent = label;
 
     // The speaker reads the label without navigating: a user who cannot read
@@ -827,7 +829,7 @@ function renderTransactions() {
     const row = document.createElement('li');
     row.className = 'txn' + (txn.status === 'failed' ? ' failed' : '');
     row.innerHTML = `
-      <span class="txn-arrow ${out ? 'out' : 'in'}" aria-hidden="true">${out ? '↑' : '↓'}</span>
+      <span class="txn-arrow ${out ? 'out' : 'in'}">${iconSvg(out ? 'arrowOut' : 'arrowIn')}</span>
       <span class="txn-body">
         <span class="txn-who"></span>
         <span class="txn-when"></span>
@@ -857,7 +859,7 @@ function renderTransactions() {
 function renderSend() {
   const grid = $('#contact-grid');
   grid.innerHTML = '';
-  const palette = ['#0E7C6B', '#DD6B20', '#6B46C1', '#2F7D32', '#B3261E', '#1D4ED8'];
+  const palette = ['#0A6152', '#A85A15', '#574192', '#256B3C', '#9E2B24', '#1D4E7A'];
 
   state.contacts.forEach((contact, i) => {
     const display = contact.name_local || contact.name;
@@ -945,7 +947,7 @@ function renderSchemes() {
     const title = scheme.title[state.lang];
     const text = scheme.text[state.lang];
     list.append(infoCard({
-      emoji: scheme.emoji, title, text,
+      icon: scheme.icon, tone: scheme.tone, title, text,
       onSpeak: () => speak(`${title}. ${text}`),
     }));
   }
@@ -958,7 +960,7 @@ function renderLessons() {
     const title = lesson.title[state.lang];
     const text = lesson.text[state.lang];
     list.append(infoCard({
-      emoji: lesson.emoji, title, text,
+      icon: lesson.icon, tone: lesson.tone, title, text,
       onSpeak: () => speak(`${title}. ${text}`),
     }));
   }
@@ -971,7 +973,7 @@ function renderTips() {
     const title = tip.title[state.lang];
     const text = tip.text[state.lang];
     list.append(infoCard({
-      emoji: tip.emoji, title, text,
+      icon: tip.icon, tone: tip.tone, title, text,
       onSpeak: () => speak(`${title}. ${text}`),
     }));
   }
@@ -984,7 +986,7 @@ function renderPhrases() {
     // Tapping a phrase runs it through the same NLU endpoint speech uses, so
     // the help screen doubles as a live test harness during development.
     list.append(infoCard({
-      emoji: '💬', title: phrase, text: '',
+      icon: 'chat', tone: 'var(--primary)', title: phrase, text: '',
       onSpeak: () => speak(phrase),
     }));
     list.lastElementChild.addEventListener('click', (event) => {
@@ -1178,7 +1180,14 @@ function wire() {
 }
 
 // ─────────────────────────────────────────────────────────── boot
+// The markup carries data-icon="name" rather than inline SVG, so index.html
+// stays readable and every icon comes from the one set in icons.js.
+function hydrateIcons(root = document) {
+  $$('[data-icon]', root).forEach((el) => setIcon(el, el.dataset.icon));
+}
+
 async function boot() {
+  hydrateIcons();
   wire();
   initCursor();
 

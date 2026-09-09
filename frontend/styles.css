@@ -1,12 +1,22 @@
 /* Gramin Vaani Saathi — visual system.
 
-   The look is deliberately modern: hairline borders, layered soft shadows, a
-   restrained palette, fluid type, and motion with real easing curves. None of
-   that is decoration for its own sake — a financial app that looks unfinished
-   does not get trusted with money, and this one is asking people who have been
-   defrauded before to trust it.
+   This is a financial app for people who have been defrauded before. It has to
+   look like an institution, not a toy: if it looks improvised, it does not get
+   trusted with money, and nothing else in the project matters. So the whole
+   system is deliberately quiet — a narrow neutral palette, one brand colour used
+   with discipline, tight radii, hairline rules, and shadows that suggest a sheet
+   of paper rather than a floating bubble.
 
-   What the polish is NOT allowed to cost, because these are the graded
+   Three rules were applied throughout, and they are the difference between this
+   and the version before it:
+   · No emoji anywhere. Every glyph is a stroked icon from icons.js, drawn on one
+     24px grid, inheriting currentColor. Emoji render in the vendor's font at the
+     vendor's weight and colour, so they never match the interface around them.
+   · Colour is information, not decoration. Tinted surfaces appear only where a
+     tint means something — a category, a state, a warning.
+   · Motion is short and directional. Nothing bounces, spins, or wobbles.
+
+   What the restraint is NOT allowed to cost, because these are the graded
    accessibility constraints and they win every conflict:
    · Light ground. Cheap phone screens in daylight wash out dark themes.
    · Every tap target at least 88px on the primary path.
@@ -18,62 +28,77 @@
 
 /* ═══════════════════════════════════════════════════════════════ tokens ══ */
 :root {
-  /* ground */
-  --bg:          #FBFAF8;
-  --bg-tint-a:   rgba(20, 164, 135, .07);   /* ambient wash, top-left     */
-  --bg-tint-b:   rgba(244, 150, 60, .07);   /* ambient wash, bottom-right */
-  --surface:     #FFFFFF;
-  --surface-2:   #F4F2EE;
-  --surface-3:   #EAE7E1;
+  /* Ground and surfaces: a cool near-neutral, not cream. Warm off-whites read as
+     friendly-casual; this app wants to read as considered. */
+  --bg:        #F4F5F6;
+  --surface:   #FFFFFF;
+  --surface-2: #EEF0F1;
+  --surface-3: #E2E5E7;
 
-  /* ink */
-  --ink:         #14201F;
-  --ink-2:       #566B68;
-  --ink-3:       #8C9A97;
+  /* Ink runs on one hue so greys never fight the brand green. */
+  --ink:   #16211F;
+  --ink-2: #5A6B68;
+  --ink-3: #8A9996;
 
-  /* lines are alpha, so they read correctly on white and on tinted cards alike */
-  --line:        rgba(20, 32, 31, .09);
-  --line-strong: rgba(20, 32, 31, .16);
+  /* Hairlines are alpha, so they read correctly on white and on tinted cards. */
+  --line:        rgba(22, 33, 31, .10);
+  --line-strong: rgba(22, 33, 31, .18);
 
-  /* brand */
-  --primary:      #0B7A68;
-  --primary-2:    #14A487;
-  --primary-ink:  #064B40;
-  --primary-soft: #E4F3EF;
+  /* Brand: a single deep green. Darker and less saturated than a "fresh" teal —
+     it is closer to the colour a bank would choose, which is the point. */
+  --primary:      #0A6152;
+  --primary-2:    #0D7A66;
+  --primary-ink:  #063E34;
+  --primary-soft: #E8F0EE;
 
-  --accent:       #E0761C;
-  --accent-2:     #F59A42;
-  --accent-ink:   #8A4310;
-  --accent-soft:  #FDF0E1;
+  /* Accent earns its place on exactly two things: the microphone and the focus
+     ring. A second colour used everywhere is what makes an interface look loud. */
+  --accent:      #A85A15;
+  --accent-2:    #C26E1E;
+  --accent-ink:  #6B3A0C;
+  --accent-soft: #F7EEE4;
 
-  --gold:        #B8860B;  --gold-soft:   #FBF2D9;
-  --danger:      #B3261E;  --danger-soft: #FBE9E7;
-  --ok:          #2A7D46;  --ok-soft:     #E4F2E8;
+  --gold:   #8A6A12;  --gold-soft:   #F6F1E2;
+  --danger: #9E2B24;  --danger-soft: #F7EAE9;
+  --ok:     #256B3C;  --ok-soft:     #E7F0EA;
 
-  /* geometry */
-  --r-sm:  12px;
-  --r:     18px;
-  --r-lg:  24px;
-  --r-xl:  32px;
-  --tap:   88px;
+  /* Category tones for the home tiles and list icons. All at roughly the same
+     lightness and chroma so no single tile shouts louder than its neighbours. */
+  --tone-money:  #0A6152;
+  --tone-send:   #A85A15;
+  --tone-scheme: #1D4E7A;
+  --tone-learn:  #574192;
+  --tone-scan:   #14646E;
+  --tone-safety: #9E2B24;
 
-  /* depth — each step is a close pair so edges stay crisp instead of smearing */
-  --sh-1: 0 1px 2px rgba(20, 32, 31, .04), 0 2px 6px -2px rgba(20, 32, 31, .06);
-  --sh-2: 0 1px 3px rgba(20, 32, 31, .05), 0 10px 24px -10px rgba(20, 32, 31, .14);
-  --sh-3: 0 2px 6px rgba(20, 32, 31, .06), 0 24px 56px -16px rgba(20, 32, 31, .22);
-  --sh-primary: 0 10px 30px -10px rgba(11, 122, 104, .55);
-  --sh-accent:  0 10px 30px -8px  rgba(224, 118, 28, .45);
+  /* Geometry. The radii are roughly half what they were: soft corners read as
+     playful past about 16px, and this interface should not read as playful. */
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --tap:  88px;
 
-  /* motion */
-  --ease:   cubic-bezier(.22, .8, .28, 1);
-  --spring: cubic-bezier(.34, 1.4, .5, 1);
-  --fast:   .16s;
-  --med:    .28s;
+  /* Depth. Tight and low-opacity — a card lifted 2px off the page, never a
+     glowing pill. The primary shadow is neutral, not tinted: coloured shadows
+     under coloured buttons are the fastest way to look amateur. */
+  --sh-1: 0 1px 1px rgba(22, 33, 31, .04), 0 1px 3px rgba(22, 33, 31, .05);
+  --sh-2: 0 1px 2px rgba(22, 33, 31, .05), 0 6px 14px -6px rgba(22, 33, 31, .12);
+  --sh-3: 0 2px 4px rgba(22, 33, 31, .06), 0 18px 36px -12px rgba(22, 33, 31, .20);
 
-  --font: "Noto Sans", "Nirmala UI", "Noto Sans Devanagari", "Noto Sans Tamil",
-          "Noto Sans Telugu", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  /* Money gets compared column to column; proportional digits make that harder. */
-  --num: "SF Mono", "Segoe UI Variable", system-ui, sans-serif;
+  /* Motion */
+  --ease: cubic-bezier(.2, .7, .3, 1);
+  --fast: .14s;
+  --med:  .22s;
+
+  --font: system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI",
+          "Noto Sans", Roboto, "Nirmala UI", "Noto Sans Devanagari",
+          "Noto Sans Tamil", "Noto Sans Telugu", sans-serif;
+  /* Money gets compared column to column, so digits must share one advance
+     width -- but a real monospace face also widens the comma, which turns
+     "3,750" into "3 , 750". A proportional face with tabular figures (set
+     per component via font-variant-numeric) gets the alignment without that. */
+  --num: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -94,32 +119,24 @@ body {
   font-family: var(--font);
   font-size: clamp(17px, 1.6vw, 18px);
   line-height: 1.55;
+  letter-spacing: -.005em;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
 }
 
-/* Two soft washes behind everything. Cheaper than an image, never blocks paint,
-   and gives the flat surfaces something to sit on. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -20vmax;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(38vmax 38vmax at 18% 8%,  var(--bg-tint-a), transparent 65%),
-    radial-gradient(42vmax 42vmax at 88% 92%, var(--bg-tint-b), transparent 65%);
-}
-
 button, input, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; background: none; }
-svg { width: 100%; height: 100%; fill: none; stroke: currentColor;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* One stroke weight for the whole icon set. Set here rather than per icon so a
+   size change never leaves one icon looking heavier than the rest. */
+svg { fill: none; stroke: currentColor; stroke-width: 1.75;
+      stroke-linecap: round; stroke-linejoin: round; }
+.icon { width: 24px; height: 24px; flex: 0 0 auto; display: block; }
 
 :focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 10px;
+  outline: 2.5px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 ::selection { background: var(--primary-soft); color: var(--primary-ink); }
@@ -140,18 +157,17 @@ svg { width: 100%; height: 100%; fill: none; stroke: currentColor;
   will-change: transform;
 }
 .cursor-dot {
-  width: 7px; height: 7px;
-  margin: -3.5px 0 0 -3.5px;
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
   background: var(--primary);
   transition: opacity var(--fast) linear, background-color var(--med) var(--ease);
 }
 .cursor-ring {
-  width: 34px; height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1.6px solid color-mix(in srgb, var(--primary) 55%, transparent);
-  background: color-mix(in srgb, var(--primary) 6%, transparent);
-  transition: width var(--med) var(--spring), height var(--med) var(--spring),
-              margin var(--med) var(--spring), border-radius var(--med) var(--ease),
+  width: 30px; height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 1.4px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  transition: width var(--med) var(--ease), height var(--med) var(--ease),
+              margin var(--med) var(--ease), border-radius var(--med) var(--ease),
               border-color var(--med) var(--ease), background-color var(--med) var(--ease),
               opacity var(--fast) linear;
 }
@@ -164,23 +180,23 @@ body.cursor-on summary,
 body.cursor-on [role="button"] { cursor: none; }
 
 .cursor-ring.is-over {
-  width: 62px; height: 62px; margin: -31px 0 0 -31px;
-  border-color: color-mix(in srgb, var(--primary) 75%, transparent);
-  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  width: 52px; height: 52px; margin: -26px 0 0 -26px;
+  border-color: color-mix(in srgb, var(--primary) 62%, transparent);
+  background: color-mix(in srgb, var(--primary) 7%, transparent);
 }
 .cursor-ring.is-card { border-radius: var(--r); }
-.cursor-ring.is-down { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+.cursor-ring.is-down { width: 24px; height: 24px; margin: -12px 0 0 -12px; }
 .cursor-ring.on-accent {
-  border-color: color-mix(in srgb, var(--accent) 78%, transparent);
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
 }
 .cursor-dot.is-over { background: var(--accent); }
 .cursor-hidden { opacity: 0; }
 
 /* The pull an element exerts on the pointer. Applied by cursor.js as a
-   transform on the element itself, so it reads as the button leaning towards
+   transform on the element itself, so it reads as the control leaning towards
    your hand rather than the pointer being dragged off the thing you aimed at. */
-.magnetic { transition: transform var(--med) var(--spring); }
+.magnetic { transition: transform var(--med) var(--ease); }
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-dot, .cursor-ring { display: none !important; }
@@ -192,104 +208,90 @@ body.cursor-on [role="button"] { cursor: none; }
   position: sticky; top: 0; z-index: 30;
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: saturate(1.6) blur(14px);
-  -webkit-backdrop-filter: saturate(1.6) blur(14px);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--line);
 }
-/* A hairline of brand colour under the bar: enough to read as designed, not
-   enough to compete with the content. */
-.topbar::after {
-  content: "";
-  position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
-  background: linear-gradient(90deg, transparent,
-              color-mix(in srgb, var(--primary) 45%, transparent), transparent);
-}
 
-.brand { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; }
-.brand-mark { width: 30px; height: 30px; border-radius: 9px; }
+.brand { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.brand-mark { width: 28px; height: 28px; border-radius: 7px; }
 #brand-name {
-  font-weight: 700; font-size: 1.02rem; letter-spacing: -.01em;
-  color: var(--primary-ink);
+  font-weight: 600; font-size: .98rem; letter-spacing: -.012em;
+  color: var(--ink);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .icon-btn {
-  width: 46px; height: 46px; flex: 0 0 auto;
+  width: 44px; height: 44px; flex: 0 0 auto;
   display: grid; place-items: center;
-  border-radius: 14px;
+  border-radius: var(--r-sm);
   background: var(--surface);
   border: 1px solid var(--line);
   color: var(--ink);
-  box-shadow: var(--sh-1);
-  transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
-.icon-btn svg { width: 23px; height: 23px; }
-.icon-btn:active { transform: scale(.92); }
-.icon-btn.ghost { background: transparent; border-color: transparent; box-shadow: none; color: var(--ink-2); }
-.icon-btn.ghost:hover { background: var(--surface-2); }
+.icon-btn .icon, .icon-btn svg { width: 21px; height: 21px; }
+.icon-btn:hover  { border-color: var(--line-strong); }
+.icon-btn:active { background: var(--surface-2); }
+.icon-btn.ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
+.icon-btn.ghost:hover { background: var(--surface-2); color: var(--ink); }
 
 .lang-chip {
-  min-width: 58px; height: 46px; padding: 0 15px;
-  border-radius: 23px;
-  background: var(--primary-soft);
+  min-width: 54px; height: 44px; padding: 0 14px;
+  border-radius: var(--r-sm);
+  background: var(--surface);
   color: var(--primary-ink);
-  font-weight: 700; letter-spacing: .01em;
-  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
-  transition: transform var(--fast) var(--ease);
+  font-weight: 600; font-size: .95rem;
+  border: 1px solid var(--line);
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
-.lang-chip:active { transform: scale(.94); }
+.lang-chip:hover { border-color: var(--line-strong); background: var(--surface-2); }
 
 /* ══════════════════════════════════════════════════════════════ banner ══ */
 .banner {
   display: flex; align-items: center; justify-content: center; gap: 9px;
-  padding: 10px 14px;
+  padding: 9px 14px;
   background: var(--gold-soft);
-  color: #7A5A10;
-  font-size: .93rem; font-weight: 650;
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  color: var(--gold);
+  font-size: .9rem; font-weight: 600;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 24%, transparent);
 }
-.banner-dot {
-  width: 9px; height: 9px; border-radius: 50%; background: var(--gold);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 55%, transparent);
-  animation: ping 2s var(--ease) infinite;
-}
-@keyframes ping { 70%, 100% { box-shadow: 0 0 0 9px transparent; } }
+.banner-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
 .queue-count {
   background: var(--gold); color: #fff; border-radius: 999px;
-  padding: 1px 9px; font-size: .84rem; font-weight: 700;
+  padding: 1px 8px; font-size: .8rem; font-weight: 700;
 }
 
 /* ═════════════════════════════════════════════════════════════ screens ══ */
-#app { max-width: 580px; margin: 0 auto; padding: 20px 16px 8px; }
+#app { max-width: 560px; margin: 0 auto; padding: 22px 16px 8px; }
 
-/* Children enter staggered rather than the screen sliding as a block. It reads
-   as the page assembling itself, which is the cheapest way to look considered. */
-/* The whole sequence finishes inside 300ms on purpose: any longer and a screen
-   change shows a blank page first, which on a slow phone is indistinguishable
-   from the app having hung. */
-.screen > * { animation: rise .2s var(--ease) both; }
-.screen > *:nth-child(2)   { animation-delay: .025s; }
-.screen > *:nth-child(3)   { animation-delay: .05s; }
-.screen > *:nth-child(4)   { animation-delay: .075s; }
-.screen > *:nth-child(n+5) { animation-delay: .1s; }
-@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+/* Children enter staggered rather than the screen sliding as a block. The whole
+   sequence finishes inside 250ms on purpose: any longer and a screen change
+   shows a blank page first, which on a slow phone is indistinguishable from the
+   app having hung. */
+.screen > * { animation: rise .18s var(--ease) both; }
+.screen > *:nth-child(2)   { animation-delay: .02s; }
+.screen > *:nth-child(3)   { animation-delay: .04s; }
+.screen > *:nth-child(4)   { animation-delay: .06s; }
+.screen > *:nth-child(n+5) { animation-delay: .08s; }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } }
 
 .screen-title {
-  font-size: clamp(1.5rem, 5.4vw, 1.75rem);
-  line-height: 1.2; letter-spacing: -.022em;
-  margin: 6px 0;
+  font-size: clamp(1.44rem, 5vw, 1.66rem);
+  font-weight: 640;
+  line-height: 1.22; letter-spacing: -.028em;
+  margin: 4px 0 6px;
 }
-.screen-sub { color: var(--ink-2); margin: 0 0 20px; }
+.screen-sub { color: var(--ink-2); margin: 0 0 22px; font-size: .98rem; }
+
 .section-head {
-  font-size: 1.1rem; letter-spacing: -.01em;
-  margin: 30px 0 12px;
-  display: flex; align-items: center; gap: 10px;
+  font-size: .86rem; font-weight: 660;
+  color: var(--ink-3);
+  margin: 32px 0 12px;
+  display: flex; align-items: center; gap: 12px;
 }
-.section-head::after {
-  content: ""; flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--line), transparent);
-}
+.section-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
 @media (prefers-reduced-motion: reduce) {
   .screen > * { animation: none; }
@@ -297,554 +299,617 @@ body.cursor-on [role="button"] { cursor: none; }
 }
 
 /* ═══════════════════════════════════════════════════ language chooser ══ */
-.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 .lang-card {
-  position: relative; overflow: hidden;
-  min-height: 122px; padding: 18px 12px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--sh-1);
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease),
-              border-color var(--med) var(--ease);
-}
-.lang-card:hover { transform: translateY(-3px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
-.lang-card:active { transform: scale(.97); }
-.lang-card[aria-pressed="true"] {
-  border-color: var(--primary);
-  background: linear-gradient(150deg, var(--primary-soft), var(--surface) 70%);
-  box-shadow: var(--sh-2);
-}
-.lang-card[aria-pressed="true"]::after {
-  content: "✓";
-  position: absolute; top: 10px; right: 12px;
-  color: var(--primary); font-weight: 800; font-size: 1rem;
-}
-.lang-native { font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em; }
-.lang-latin  { font-size: .87rem; color: var(--ink-3); }
-
-/* ══════════════════════════════════════════════════════════ people grid ══ */
-.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(146px, 1fr)); gap: 12px; }
-.person-card {
-  min-height: var(--tap); padding: 18px 12px;
-  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  position: relative;
+  min-height: 112px; padding: 18px 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  box-shadow: var(--sh-1);
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease),
-              border-color var(--med) var(--ease);
+  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+              transform var(--fast) var(--ease);
 }
-.person-card:hover { transform: translateY(-3px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
-.person-card:active { transform: scale(.97); }
-.avatar {
-  width: 56px; height: 56px; border-radius: 50%;
+.lang-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.lang-card:active { transform: scale(.985); }
+.lang-card[aria-pressed="true"] {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+.lang-card[aria-pressed="true"]::after {
+  content: "✓";
+  position: absolute; top: 9px; right: 9px;
+  width: 20px; height: 20px; border-radius: 50%;
   display: grid; place-items: center;
-  font-size: 1.4rem; font-weight: 700; color: #fff;
-  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, .16), 0 4px 12px -4px rgba(20, 32, 31, .4);
+  background: var(--primary); color: #fff;
+  font-size: .66rem; font-weight: 800;
 }
-.person-name { font-weight: 650; text-align: center; line-height: 1.25; }
-.person-sub  { font-size: .82rem; color: var(--ink-3); }
+.lang-native { font-size: 1.4rem; font-weight: 640; letter-spacing: -.018em; }
+.lang-latin  { font-size: .82rem; color: var(--ink-3); letter-spacing: .01em; }
+
+/* ══════════════════════════════════════════════════════════ people grid ══ */
+.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(142px, 1fr)); gap: 10px; }
+.person-card {
+  min-height: var(--tap); padding: 16px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+              transform var(--fast) var(--ease);
+}
+.person-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.person-card:active { transform: scale(.985); }
+/* A flat disc with an initial. The previous version had an inset highlight and a
+   drop shadow on a 56px circle, which is a lot of effects for one letter. */
+.avatar {
+  width: 50px; height: 50px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 1.22rem; font-weight: 600; color: #fff;
+  letter-spacing: -.01em;
+}
+.person-name { font-weight: 600; text-align: center; line-height: 1.3; font-size: .97rem; }
+.person-sub  { font-size: .8rem; color: var(--ink-3); }
 
 /* ═════════════════════════════════════════════════════════════ balance ══ */
 .greeting {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 12px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 18px;
 }
-.greeting-text { font-size: 1.18rem; font-weight: 650; letter-spacing: -.015em; }
+.greeting-text { font-size: 1.1rem; font-weight: 620; letter-spacing: -.02em; }
 .text-btn {
-  color: var(--ink-2); font-size: .92rem; font-weight: 600;
-  padding: 7px 12px; border-radius: 999px;
+  color: var(--ink-2); font-size: .88rem; font-weight: 600;
+  padding: 8px 13px; border-radius: var(--r-sm);
   border: 1px solid var(--line);
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .text-btn:hover { background: var(--surface-2); color: var(--ink); }
 
+/* The one saturated surface in the app. It is the number people open the app to
+   see, so it gets to be the loudest thing on the screen — and because it is the
+   only one, it stays loud. */
 .balance-card {
   position: relative; overflow: hidden;
   width: 100%; text-align: left;
-  padding: 22px; margin-bottom: 22px;
-  display: flex; flex-direction: column; gap: 2px;
+  padding: 22px; margin-bottom: 20px;
+  display: flex; flex-direction: column; gap: 3px;
   color: #fff;
-  background: linear-gradient(142deg, #12A187 0%, var(--primary) 52%, #075A4C 100%);
+  background: var(--primary);
   border-radius: var(--r-lg);
-  box-shadow: var(--sh-primary), var(--sh-2);
-  transition: transform var(--med) var(--spring);
+  transition: transform var(--fast) var(--ease), background-color var(--med) var(--ease);
 }
-.balance-card:hover { transform: translateY(-3px); }
-.balance-card:active { transform: scale(.985); }
+.balance-card:hover  { background: var(--primary-2); }
+.balance-card:active { transform: scale(.992); }
+/* A single hairline of light along the top edge. This replaces a radial glow —
+   same job, a hundredth of the visual noise. */
 .balance-card::before {
   content: "";
-  position: absolute; inset: -60% -20%;
-  background: radial-gradient(42% 60% at 22% 18%, rgba(255, 255, 255, .28), transparent 70%);
-  pointer-events: none;
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: rgba(255, 255, 255, .22);
 }
-.balance-label { font-size: .92rem; opacity: .85; font-weight: 600; letter-spacing: .01em; }
+.balance-label {
+  font-size: .8rem; font-weight: 600;
+  color: rgba(255, 255, 255, .74);
+}
 .balance-amount {
   font-family: var(--num);
-  font-size: clamp(2.3rem, 9vw, 2.9rem); font-weight: 700; line-height: 1.1;
-  letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+  font-size: clamp(2.2rem, 8.5vw, 2.7rem); font-weight: 600; line-height: 1.15;
+  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
 }
-.balance-stamp { font-size: .78rem; opacity: .82; }
-.rupee { margin-right: 4px; font-weight: 600; }
+.balance-stamp { font-size: .76rem; color: rgba(255, 255, 255, .66); }
+/* The stamp only exists when the figure is cached. Without this the empty span
+   still claims a line box and the card sits with a hole under the number. */
+.balance-stamp:empty { display: none; }
+.rupee { margin-right: 3px; font-weight: 500; }
 
 .big-amount {
   font-family: var(--num);
-  font-size: clamp(2.8rem, 12vw, 3.4rem); font-weight: 700;
-  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
-  color: var(--primary-ink); margin: 8px 0 2px;
+  font-size: clamp(2.6rem, 11vw, 3.1rem); font-weight: 600;
+  letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+  color: var(--ink); margin: 6px 0 2px;
 }
 
 /* ═══════════════════════════════════════════════════════════════ tiles ══ */
-.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 @media (max-width: 384px) { .tile-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .tile {
-  position: relative; overflow: hidden;
-  min-height: 128px; padding: 18px 8px 14px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  box-shadow: var(--sh-1);
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease),
-              border-color var(--med) var(--ease);
-}
-.tile:hover { transform: translateY(-4px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
-.tile:active { transform: scale(.96); }
-.tile-emoji {
-  width: 58px; height: 58px; border-radius: 17px;
-  display: grid; place-items: center; font-size: 1.7rem;
-  box-shadow: inset 0 0 0 1px rgba(20, 32, 31, .04);
-  transition: transform var(--med) var(--spring);
-}
-.tile:hover .tile-emoji { transform: scale(1.07) rotate(-3deg); }
-.tile-label { font-size: .93rem; font-weight: 650; text-align: center; line-height: 1.25; }
-.tile-speak {
-  position: absolute; top: 6px; right: 6px;
-  width: 30px; height: 30px; border-radius: 50%;
-  display: grid; place-items: center; font-size: .76rem;
-  color: var(--ink-3); background: var(--surface-2);
-  transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease);
-}
-.tile-speak:hover { background: var(--primary-soft); transform: scale(1.12); }
-
-.help-strip {
-  width: 100%; margin-top: 16px; min-height: 68px;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  background: linear-gradient(120deg, var(--accent-soft), var(--surface) 130%);
-  color: var(--accent-ink);
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
-  border-radius: var(--r);
-  font-weight: 650; font-size: 1.02rem;
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease);
-}
-.help-strip:hover { transform: translateY(-2px); box-shadow: var(--sh-accent); }
-.help-icon { font-size: 1.35rem; }
-
-/* ═══════════════════════════════════════════════════════════════ lists ══ */
-.card-list { display: flex; flex-direction: column; gap: 12px; }
-.info-card {
-  width: 100%; text-align: left; padding: 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  box-shadow: var(--sh-1);
-  display: flex; gap: 14px; align-items: flex-start;
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease),
-              border-color var(--med) var(--ease);
-}
-.info-card:hover { transform: translateY(-2px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
-.info-emoji { font-size: 1.6rem; flex: 0 0 auto; line-height: 1.3; }
-.info-body  { flex: 1; min-width: 0; }
-.info-title { font-weight: 700; margin-bottom: 3px; letter-spacing: -.01em; }
-.info-text  { color: var(--ink-2); font-size: .94rem; }
-.info-speak {
-  flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%;
-  display: grid; place-items: center; background: var(--surface-2);
-  transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease);
-}
-.info-speak:hover { background: var(--primary-soft); transform: scale(1.08); }
-
-.txn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.txn {
-  display: flex; align-items: center; gap: 13px; padding: 14px 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  box-shadow: var(--sh-1);
-}
-.txn-arrow {
-  width: 42px; height: 42px; border-radius: 13px;
-  display: grid; place-items: center; font-size: 1.05rem; font-weight: 700;
-}
-.txn-arrow.out { background: var(--accent-soft); color: var(--accent-ink); }
-.txn-arrow.in  { background: var(--ok-soft);     color: #1E5C34; }
-.txn-body { flex: 1; min-width: 0; }
-.txn-who  { font-weight: 650; }
-.txn-when { font-size: .83rem; color: var(--ink-3); }
-.txn-amt  {
-  font-family: var(--num); font-weight: 700; white-space: nowrap;
-  font-variant-numeric: tabular-nums; letter-spacing: -.01em;
-}
-.txn.failed { opacity: .72; border-style: dashed; }
-.txn-failed-tag { font-size: .78rem; color: var(--danger); }
-
-/* ═════════════════════════════════════════════════════════ amount entry ══ */
-.amount-display {
-  font-family: var(--num);
-  font-size: clamp(2.3rem, 10vw, 2.8rem); font-weight: 700;
-  letter-spacing: -.03em; font-variant-numeric: tabular-nums;
-  text-align: center; padding: 16px; margin: 12px 0;
-  background: var(--surface);
-  border: 2px solid var(--line);
-  border-radius: var(--r);
-  box-shadow: var(--sh-1);
-}
-.chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-.chip {
-  min-height: 52px; padding: 0 21px; border-radius: 26px;
-  background: var(--primary-soft); color: var(--primary-ink);
-  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
-  font-weight: 700;
-  transition: transform var(--fast) var(--spring), background-color var(--fast) var(--ease);
-}
-.chip:hover { background: color-mix(in srgb, var(--primary) 16%, var(--surface)); transform: translateY(-2px); }
-.chip:active { transform: scale(.95); }
-
-.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
-.key {
-  min-height: 68px; font-size: 1.45rem; font-weight: 700;
-  font-family: var(--num); font-variant-numeric: tabular-nums;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  box-shadow: var(--sh-1);
-  transition: transform var(--fast) var(--spring), background-color var(--fast) var(--ease);
-}
-.key:hover  { background: var(--surface-2); }
-.key:active { transform: scale(.93); background: var(--surface-3); }
-
-/* ═══════════════════════════════════════════════════════════════ forms ══ */
-.form  { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-.field { display: flex; flex-direction: column; gap: 7px; font-weight: 650; font-size: .95rem; }
-.field input, .field textarea, .field select {
-  min-height: 58px; padding: 13px 15px;
-  background: var(--surface);
-  border: 2px solid var(--line);
-  border-radius: 14px;
-  font-weight: 400; font-size: 1.02rem;
-  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
-}
-.field textarea { min-height: 96px; resize: vertical; }
-.field input:focus, .field textarea:focus, .field select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 13%, transparent);
-  outline: none;
-}
-.field-hint  { font-weight: 400; font-size: .86rem; color: var(--ink-3); }
-.field-error { font-weight: 600; font-size: .88rem; color: var(--danger); }
-
-.btn {
-  min-height: 58px; padding: 0 24px; border-radius: 16px;
-  font-weight: 700; letter-spacing: -.005em;
-  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-  transition: transform var(--fast) var(--spring), box-shadow var(--med) var(--ease),
-              background-color var(--fast) var(--ease), opacity var(--fast) linear;
-}
-.btn:active   { transform: scale(.97); }
-.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-.btn-lg { min-height: 68px; width: 100%; font-size: 1.12rem; }
-.btn-primary {
-  color: #fff;
-  background: linear-gradient(140deg, var(--primary-2), var(--primary) 65%);
-  box-shadow: var(--sh-primary);
-}
-.btn-primary:hover:not(:disabled) { box-shadow: var(--sh-primary), var(--sh-2); transform: translateY(-2px); }
-.btn-ghost {
-  background: var(--surface); color: var(--ink);
-  border: 1px solid var(--line); box-shadow: var(--sh-1);
-}
-.btn-ghost:hover { background: var(--surface-2); }
-.btn-yes {
-  color: #fff; background: linear-gradient(140deg, #3A9159, var(--ok) 70%);
-  box-shadow: 0 10px 26px -10px rgba(42, 125, 70, .6);
-}
-.btn-no { background: var(--surface); border: 2px solid var(--danger); color: var(--danger); }
-.speak-btn { margin-top: 16px; }
-
-.link-btn {
-  color: var(--primary-ink); font-weight: 700; font-size: .96rem;
-  padding: 10px 6px;
-  text-decoration: underline; text-underline-offset: 3px;
-  text-decoration-thickness: 2px;
-  text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
-}
-.link-btn:hover    { text-decoration-color: var(--primary); }
-.link-btn:disabled { opacity: .45; cursor: not-allowed; }
-
-.disclosure { margin-top: 24px; }
-.disclosure summary {
-  padding: 15px 16px; border-radius: 14px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: var(--sh-1);
-  font-weight: 650; cursor: pointer;
-  list-style: none;
-}
-.disclosure summary::-webkit-details-marker { display: none; }
-.disclosure summary::after      { content: " ▾"; color: var(--ink-3); }
-.disclosure[open] summary::after { content: " ▴"; }
-
-.sandbox-note {
-  margin-top: 28px; padding: 15px 16px;
-  background: var(--gold-soft);
-  border: 1px solid color-mix(in srgb, var(--gold) 28%, transparent);
-  border-radius: 14px;
-  font-size: .89rem; color: #7A5A10; line-height: 1.5;
-}
-.sample-note { margin-top: 20px; font-size: .84rem; color: var(--ink-3); font-style: italic; }
-
-/* ═══════════════════════════════════════════════════════ signup + OTP ══ */
-/* Progress bars. Three steps is short enough that someone who cannot read the
-   labels can still see how much is left, which is the whole point. */
-.steps { display: flex; align-items: center; gap: 8px; margin: 2px 0 18px; }
-.step {
-  height: 6px; flex: 1; border-radius: 999px;
-  background: var(--surface-3);
-  transition: background-color var(--med) var(--ease);
-}
-.step.done { background: color-mix(in srgb, var(--primary) 45%, transparent); }
-.step.now  { background: linear-gradient(90deg, var(--primary-2), var(--primary)); }
-
-/* Channel picker: phone or email. */
-.segmented {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-  padding: 7px;
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  margin-bottom: 20px;
-}
-.seg-btn {
-  min-height: 62px; border-radius: var(--r-sm);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  font-weight: 650; font-size: .95rem; color: var(--ink-2);
-  transition: background-color var(--med) var(--ease), color var(--med) var(--ease),
-              box-shadow var(--med) var(--ease), transform var(--fast) var(--spring);
-}
-.seg-btn .seg-emoji { font-size: 1.3rem; }
-.seg-btn[aria-selected="true"] {
-  background: var(--surface); color: var(--primary-ink);
-  box-shadow: var(--sh-1);
-}
-.seg-btn:active { transform: scale(.96); }
-
-/* Six separate boxes rather than one field: it shows the expected length
-   without anyone having to read a hint, and a wrong digit is obvious. */
-.otp-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; margin: 6px 0 14px; }
-.otp-box {
-  width: 100%; min-height: 68px; padding: 0;
-  text-align: center;
-  font-family: var(--num); font-size: 1.6rem; font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  background: var(--surface);
-  border: 2px solid var(--line);
-  border-radius: 14px;
-  box-shadow: var(--sh-1);
-  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease),
-              transform var(--fast) var(--spring), background-color var(--fast) var(--ease);
-}
-.otp-box:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
-  outline: none; transform: translateY(-2px);
-}
-.otp-box.filled {
-  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
-  background: var(--primary-soft);
-}
-.otp-grid.shake { animation: shake .4s var(--ease); }
-@keyframes shake {
-  20% { transform: translateX(-7px); } 40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); } 80% { transform: translateX(2px); }
-}
-@media (max-width: 380px) {
-  .otp-grid { gap: 6px; }
-  .otp-box { min-height: 58px; font-size: 1.3rem; }
-}
-
-.otp-meta {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 6px; font-size: .9rem; color: var(--ink-2);
-}
-.countdown { font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 700; }
-
-.sent-to {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 9px 14px; margin-bottom: 16px;
-  background: var(--primary-soft);
-  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
-  border-radius: 999px;
-  font-weight: 650; font-size: .93rem; color: var(--primary-ink);
-  font-variant-numeric: tabular-nums;
-}
-
-/* The dev-only code chip. Loud on purpose: it must be impossible to mistake for
-   something a real user would ever be shown. */
-.dev-chip {
-  display: flex; align-items: center; gap: 10px;
-  margin: 14px 0 4px; padding: 12px 14px;
-  background: repeating-linear-gradient(45deg, #FFF6E5, #FFF6E5 10px, #FDF0D9 10px, #FDF0D9 20px);
-  border: 1px dashed var(--gold);
-  border-radius: 12px;
-  font-size: .86rem; color: #7A5A10;
-}
-.dev-chip code {
-  font-family: var(--num); font-size: 1.2rem; font-weight: 700;
-  letter-spacing: .14em; color: var(--ink);
-}
-
-.auth-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-.divider {
-  display: flex; align-items: center; gap: 12px;
-  margin: 22px 0 4px; color: var(--ink-3); font-size: .86rem;
-}
-.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-
-/* ════════════════════════════════════════════════════════════════ scan ══ */
-.scan-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.scan-card {
-  min-height: 138px;
+  position: relative;
+  min-height: 122px; padding: 18px 8px 14px;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  box-shadow: var(--sh-1);
-  font-weight: 650;
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease);
+  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+              transform var(--fast) var(--ease);
 }
-.scan-card:hover  { transform: translateY(-3px); box-shadow: var(--sh-2); }
-.scan-card:active { transform: scale(.97); }
-.scan-emoji { font-size: 2.2rem; }
+.tile:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.tile:active { transform: scale(.985); }
+
+/* Each tile carries a --tone. The chip is a 8% wash of it and the icon is the
+   tone at full strength: enough colour to tell the six apart at a glance without
+   six saturated blocks competing on one screen. */
+.tile-icon {
+  width: 46px; height: 46px; border-radius: var(--r-sm);
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--tone, var(--primary)) 8%, var(--surface));
+  color: var(--tone, var(--primary));
+  transition: background-color var(--med) var(--ease);
+}
+.tile-icon .icon { width: 24px; height: 24px; }
+.tile:hover .tile-icon { background: color-mix(in srgb, var(--tone, var(--primary)) 14%, var(--surface)); }
+.tile-label { font-size: .9rem; font-weight: 600; text-align: center; line-height: 1.28; }
+
+/* The speaker reads the label aloud without navigating. Small, quiet, and in the
+   corner: it is a secondary affordance and should not compete with the tile. */
+.tile-speak {
+  position: absolute; top: 6px; right: 6px;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--ink-3);
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.tile-speak .icon { width: 15px; height: 15px; }
+.tile-speak:hover { background: var(--surface-2); color: var(--primary); }
+
+.help-strip {
+  width: 100%; margin-top: 14px; min-height: 66px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--surface);
+  color: var(--accent-ink);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  border-radius: var(--r);
+  font-weight: 600; font-size: 1rem;
+  transition: background-color var(--med) var(--ease), border-color var(--med) var(--ease);
+}
+.help-strip:hover { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+.help-strip .icon { width: 22px; height: 22px; color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════ lists ══ */
+.card-list { display: flex; flex-direction: column; gap: 10px; }
+.info-card {
+  width: 100%; text-align: left; padding: 15px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+.info-card:hover { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.info-icon {
+  width: 38px; height: 38px; border-radius: var(--r-sm); flex: 0 0 auto;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--tone, var(--primary)) 8%, var(--surface));
+  color: var(--tone, var(--primary));
+}
+.info-icon .icon { width: 20px; height: 20px; }
+.info-body  { flex: 1; min-width: 0; }
+/* Both are spans, so without display:block the title and the body text reflow
+   into one paragraph and the card loses its heading entirely. */
+.info-title { display: block; font-weight: 640; margin-bottom: 3px; letter-spacing: -.014em; }
+.info-text  { display: block; color: var(--ink-2); font-size: .92rem; line-height: 1.5; }
+.info-text:empty { display: none; }
+.info-speak {
+  flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--ink-3);
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.info-speak .icon { width: 18px; height: 18px; }
+.info-speak:hover { background: var(--surface-2); color: var(--primary); }
+
+.txn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.txn {
+  display: flex; align-items: center; gap: 13px; padding: 13px 15px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.txn-arrow {
+  width: 36px; height: 36px; border-radius: var(--r-sm);
+  display: grid; place-items: center; flex: 0 0 auto;
+}
+.txn-arrow .icon { width: 18px; height: 18px; }
+.txn-arrow.out { background: var(--accent-soft); color: var(--accent); }
+.txn-arrow.in  { background: var(--ok-soft);     color: var(--ok); }
+.txn-body { flex: 1; min-width: 0; }
+/* Same reason as .info-title: these are spans, and the payee and the timestamp
+   belong on separate lines. */
+.txn-who  { display: block; font-weight: 600; font-size: .97rem; }
+.txn-when { display: block; font-size: .8rem; color: var(--ink-3); }
+.txn-amt  {
+  font-family: var(--num); font-weight: 600; white-space: nowrap;
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+.txn.failed { opacity: .7; }
+.txn.failed .txn-arrow { background: var(--surface-2); color: var(--ink-3); }
+.txn-failed-tag { font-size: .76rem; color: var(--danger); }
+
+/* ═════════════════════════════════════════════════════════ amount entry ══ */
+.amount-display {
+  font-family: var(--num);
+  font-size: clamp(2.2rem, 9vw, 2.6rem); font-weight: 600;
+  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
+  text-align: center; padding: 18px; margin: 12px 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip {
+  min-height: 48px; padding: 0 18px; border-radius: var(--r-sm);
+  background: var(--surface); color: var(--primary-ink);
+  border: 1px solid var(--line);
+  font-weight: 600; font-family: var(--num); font-size: .96rem;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.chip:hover  { background: var(--primary-soft); border-color: color-mix(in srgb, var(--primary) 34%, transparent); }
+.chip:active { transform: scale(.97); }
+
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+.key {
+  min-height: 64px; font-size: 1.35rem; font-weight: 500;
+  font-family: var(--num); font-variant-numeric: tabular-nums;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.key:hover  { background: var(--surface-2); border-color: var(--line-strong); }
+.key:active { background: var(--surface-3); transform: scale(.97); }
+
+/* ═══════════════════════════════════════════════════════════════ forms ══ */
+.form  { display: flex; flex-direction: column; gap: 18px; margin-top: 16px; }
+.field { display: flex; flex-direction: column; gap: 7px; font-weight: 600; font-size: .88rem; }
+.field > span:first-child { color: var(--ink-2); letter-spacing: .01em; }
+.field input, .field textarea, .field select {
+  min-height: 56px; padding: 13px 15px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  font-weight: 400; font-size: 1.02rem;
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.field textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
+  outline: none;
+}
+.field-hint  { font-weight: 400; font-size: .84rem; color: var(--ink-3); }
+.field-error { font-weight: 600; font-size: .86rem; color: var(--danger); }
+
+.btn {
+  min-height: 56px; padding: 0 22px; border-radius: var(--r-sm);
+  font-weight: 620; font-size: 1rem; letter-spacing: -.008em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease),
+              transform var(--fast) var(--ease), opacity var(--fast) linear;
+}
+.btn .icon { width: 20px; height: 20px; }
+.btn:active   { transform: scale(.985); }
+.btn:disabled { opacity: .42; cursor: not-allowed; transform: none; }
+.btn-lg { min-height: 64px; width: 100%; font-size: 1.06rem; }
+.btn-primary { color: #fff; background: var(--primary); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-2); }
+.btn-ghost {
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line-strong);
+}
+.btn-ghost:hover { background: var(--surface-2); }
+.btn-yes { color: #fff; background: var(--ok); }
+.btn-yes:hover { background: #2E7E48; }
+.btn-no  { background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); }
+.btn-no:hover { background: var(--surface-2); }
+.speak-btn { margin-top: 16px; }
+
+.link-btn {
+  color: var(--primary); font-weight: 600; font-size: .93rem;
+  padding: 10px 4px;
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: color-mix(in srgb, var(--primary) 34%, transparent);
+}
+.link-btn:hover    { text-decoration-color: var(--primary); }
+.link-btn:disabled { opacity: .42; cursor: not-allowed; }
+
+.disclosure { margin-top: 22px; }
+.disclosure summary {
+  padding: 15px 16px; border-radius: var(--r-sm);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-weight: 600; font-size: .96rem; cursor: pointer;
+  list-style: none;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.disclosure summary::-webkit-details-marker { display: none; }
+/* A drawn chevron rather than a "▾" glyph, which renders at a different size and
+   baseline in every font the four languages fall back to. */
+.disclosure summary::after {
+  content: ""; width: 7px; height: 7px; margin-right: 3px;
+  border-right: 1.75px solid var(--ink-3);
+  border-bottom: 1.75px solid var(--ink-3);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform var(--med) var(--ease);
+}
+.disclosure[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+
+/* The i18n strings carry no warning glyph any more, and applyStrings() sets
+   textContent, so an icon child would be wiped on every language change. A
+   background image on the padding box survives that. */
+.sandbox-note {
+  margin-top: 26px; padding: 14px 16px 14px 46px;
+  background: var(--surface)
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%238A6A12" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 16.5h.01"/></svg>')
+    16px 15px / 18px 18px no-repeat;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-sm);
+  font-size: .87rem; color: var(--ink-2); line-height: 1.55;
+}
+.sample-note { margin-top: 20px; font-size: .82rem; color: var(--ink-3); }
+
+/* ═══════════════════════════════════════════════════════ signup + OTP ══ */
+/* Three steps is short enough that someone who cannot read the labels can still
+   see how much is left, which is the whole point. */
+.steps { display: flex; align-items: center; gap: 6px; margin: 2px 0 20px; }
+.step {
+  height: 3px; flex: 1; border-radius: 999px;
+  background: var(--surface-3);
+  transition: background-color var(--med) var(--ease);
+}
+.step.done { background: color-mix(in srgb, var(--primary) 40%, transparent); }
+.step.now  { background: var(--primary); }
+
+/* Channel picker: phone or email. */
+.segmented {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: var(--r);
+  margin-bottom: 22px;
+}
+.seg-btn {
+  min-height: 56px; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  font-weight: 600; font-size: .94rem; color: var(--ink-2);
+  transition: background-color var(--med) var(--ease), color var(--med) var(--ease),
+              box-shadow var(--med) var(--ease);
+}
+.seg-btn .icon { width: 19px; height: 19px; }
+.seg-btn[aria-selected="true"] {
+  background: var(--surface); color: var(--primary-ink);
+  box-shadow: var(--sh-1);
+}
+
+/* Six separate boxes rather than one field: it shows the expected length
+   without anyone having to read a hint, and a wrong digit is obvious. */
+.otp-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 6px 0 16px; }
+.otp-box {
+  width: 100%; min-height: 64px; padding: 0;
+  text-align: center;
+  font-family: var(--num); font-size: 1.5rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease),
+              background-color var(--fast) var(--ease);
+}
+.otp-box:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
+  outline: none;
+}
+.otp-box.filled { border-color: var(--primary); }
+.otp-grid.shake { animation: shake .36s var(--ease); }
+@keyframes shake {
+  20% { transform: translateX(-6px); } 40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); } 80% { transform: translateX(2px); }
+}
+@media (max-width: 380px) {
+  .otp-grid { gap: 6px; }
+  .otp-box { min-height: 56px; font-size: 1.25rem; }
+}
+
+.otp-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 8px; font-size: .88rem; color: var(--ink-2);
+}
+.countdown { font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.sent-to {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 9px 14px; margin: 0 0 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-weight: 600; font-size: .92rem; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.sent-to .icon { width: 18px; height: 18px; color: var(--ink-3); }
+
+/* The dev-only code chip. Loud on purpose: it must be impossible to mistake for
+   something a real user would ever be shown. */
+.dev-chip {
+  display: flex; align-items: center; gap: 11px;
+  margin: 16px 0 4px; padding: 12px 14px;
+  background: var(--gold-soft);
+  border: 1px dashed color-mix(in srgb, var(--gold) 50%, transparent);
+  border-radius: var(--r-sm);
+  font-size: .85rem; color: var(--gold); line-height: 1.45;
+}
+.dev-chip .icon { width: 18px; height: 18px; flex: 0 0 auto; }
+.dev-chip code {
+  font-family: var(--num); font-size: 1.15rem; font-weight: 700;
+  letter-spacing: .14em; color: var(--ink);
+}
+
+.auth-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 20px 0 4px; color: var(--ink-3); font-size: .84rem;
+}
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* ════════════════════════════════════════════════════════════════ scan ══ */
+.scan-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.scan-card {
+  min-height: 130px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  font-weight: 600; font-size: .96rem;
+  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+              transform var(--fast) var(--ease);
+}
+.scan-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.scan-card:active { transform: scale(.985); }
+.scan-card .icon { width: 34px; height: 34px; color: var(--tone-scan); stroke-width: 1.5; }
 .camera-wrap { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
 .camera-wrap video {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
   background: #101514; border-radius: var(--r);
-  box-shadow: var(--sh-2);
 }
 
 /* ═════════════════════════════════════════════════════════════ verdict ══ */
-.verdict { margin-top: 18px; padding: 17px; border-radius: var(--r); border: 2px solid; }
-.verdict.safe       { background: var(--ok-soft);     border-color: color-mix(in srgb, var(--ok) 32%, transparent);     color: #1E5C34; }
-.verdict.suspicious { background: var(--gold-soft);   border-color: color-mix(in srgb, var(--gold) 34%, transparent);   color: #7A5A10; }
-.verdict.scam       { background: var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 34%, transparent); color: #8A1D17; }
-.verdict.pending    { background: var(--surface-2);   border-color: var(--line); color: var(--ink-2); }
-.verdict-head { font-weight: 700; font-size: 1.06rem; margin-bottom: 8px; display: flex; align-items: center; gap: 9px; }
-.verdict ul { margin: 0; padding-left: 20px; }
+.verdict {
+  margin-top: 18px; padding: 16px;
+  border-radius: var(--r);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+}
+.verdict.safe       { border-left-color: var(--ok);      background: var(--ok-soft); }
+.verdict.suspicious { border-left-color: var(--gold);    background: var(--gold-soft); }
+.verdict.scam       { border-left-color: var(--danger);  background: var(--danger-soft); }
+.verdict.pending    { border-left-color: var(--ink-3);   background: var(--surface-2); color: var(--ink-2); }
+.verdict-head {
+  font-weight: 660; font-size: 1.02rem; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 9px; letter-spacing: -.014em;
+}
+.verdict-head .icon { width: 20px; height: 20px; }
+.verdict.safe       .verdict-head { color: var(--ok); }
+.verdict.suspicious .verdict-head { color: var(--gold); }
+.verdict.scam       .verdict-head { color: var(--danger); }
+.verdict ul { margin: 0; padding-left: 20px; font-size: .93rem; line-height: 1.6; color: var(--ink-2); }
 
 /* ══════════════════════════════════════════════════ confirmation sheet ══ */
 .sheet {
   position: fixed; inset: 0; z-index: 70;
   display: grid; align-items: end;
-  background: rgba(16, 26, 25, .46);
-  backdrop-filter: blur(3px);
-  animation: fade .2s var(--ease);
+  background: rgba(16, 24, 23, .40);
+  backdrop-filter: blur(2px);
+  animation: fade .18s var(--ease);
 }
 @keyframes fade { from { opacity: 0; } }
 .sheet-inner {
   background: var(--surface);
   border-radius: var(--r-xl) var(--r-xl) 0 0;
-  padding: 12px 20px calc(26px + env(safe-area-inset-bottom));
-  max-width: 580px; width: 100%; margin: 0 auto;
-  box-shadow: 0 -12px 48px rgba(16, 26, 25, .26);
-  animation: slideUp .3s var(--ease);
+  padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
+  max-width: 560px; width: 100%; margin: 0 auto;
+  box-shadow: 0 -8px 32px rgba(16, 24, 23, .18);
+  animation: slideUp .26s var(--ease);
 }
 @keyframes slideUp { from { transform: translateY(100%); } }
 /* The grab handle: reads as "this can be dismissed" without needing a label. */
 .sheet-inner::before {
   content: "";
-  display: block; width: 44px; height: 5px; margin: 0 auto 18px;
+  display: block; width: 38px; height: 4px; margin: 0 auto 20px;
   border-radius: 999px; background: var(--surface-3);
 }
 .confirm-text {
-  font-size: clamp(1.2rem, 5vw, 1.34rem); font-weight: 650;
-  text-align: center; margin: 0 0 24px; line-height: 1.4;
+  font-size: clamp(1.16rem, 4.6vw, 1.28rem); font-weight: 600;
+  text-align: center; margin: 0 0 22px; line-height: 1.45;
+  letter-spacing: -.018em;
 }
-.confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* ═════════════════════════════════════════════════════════════ mic bar ══ */
 .micbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
   padding: 12px 16px calc(14px + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(1.6) blur(16px);
-  -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-top: 1px solid var(--line);
 }
 .micbar-row {
-  max-width: 580px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: center; gap: 28px;
+  max-width: 560px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 30px;
 }
 .mic {
   position: relative;
-  width: 86px; height: 86px; border-radius: 50%;
+  width: 80px; height: 80px; border-radius: 50%;
   display: grid; place-items: center; color: #fff;
-  background: linear-gradient(150deg, var(--accent-2), var(--accent) 70%);
-  box-shadow: var(--sh-accent);
-  transition: transform var(--med) var(--spring), box-shadow var(--med) var(--ease);
+  background: var(--accent);
+  transition: background-color var(--med) var(--ease), transform var(--fast) var(--ease);
 }
-.mic:hover  { transform: translateY(-3px) scale(1.03); }
-.mic:active { transform: scale(.93); }
-.mic svg { width: 34px; height: 34px; stroke-width: 2.2; }
-.mic.listening { animation: halo 1.5s var(--ease) infinite; }
+.mic:hover  { background: var(--accent-2); }
+.mic:active { transform: scale(.96); }
+.mic .icon, .mic svg { width: 31px; height: 31px; stroke-width: 1.9; }
+.mic.listening { animation: halo 1.6s var(--ease) infinite; }
 @keyframes halo {
-  0%, 100% { box-shadow: var(--sh-accent), 0 0 0 0 rgba(224, 118, 28, .34); }
-  55%      { box-shadow: var(--sh-accent), 0 0 0 20px rgba(224, 118, 28, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 30%, transparent); }
+  60%      { box-shadow: 0 0 0 16px color-mix(in srgb, var(--accent) 0%, transparent); }
 }
-.mic.busy { background: linear-gradient(150deg, #7C8B88, var(--ink-2)); box-shadow: none; }
+.mic.busy { background: var(--ink-2); }
 
-.mic-hint { text-align: center; margin: 9px 0 0; font-size: .88rem; color: var(--ink-3); }
+.mic-hint { text-align: center; margin: 10px 0 0; font-size: .85rem; color: var(--ink-3); }
 .heard {
-  max-width: 580px; margin: 0 auto 10px; padding: 13px 16px;
+  max-width: 560px; margin: 0 auto 10px; padding: 13px 16px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
   box-shadow: var(--sh-1);
-  font-size: 1rem;
-  animation: rise .26s var(--ease);
+  font-size: .98rem;
+  animation: rise .22s var(--ease);
 }
-.heard .heard-you { color: var(--ink-3); font-size: .8rem; display: block; margin-bottom: 2px; }
+.heard .heard-you {
+  color: var(--ink-3); font-size: .78rem; display: block; margin-bottom: 3px;
+  font-weight: 600;
+}
 .heard .heard-reply {
-  display: block; margin-top: 9px; padding-top: 9px;
+  display: block; margin-top: 10px; padding-top: 10px;
   border-top: 1px solid var(--line);
-  font-weight: 650; color: var(--primary-ink);
+  font-weight: 600; color: var(--primary-ink);
 }
 
-.type-form { max-width: 580px; margin: 12px auto 0; display: flex; gap: 10px; }
+.type-form { max-width: 560px; margin: 12px auto 0; display: flex; gap: 10px; }
 .type-form input {
-  flex: 1; min-height: 58px; padding: 0 15px;
-  border: 2px solid var(--line); border-radius: 14px; background: var(--surface);
+  flex: 1; min-height: 56px; padding: 0 15px;
+  border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface);
 }
 .type-form input:focus {
   border-color: var(--primary); outline: none;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 13%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+/* Small-caps eyebrows read as considered in Latin and as broken in an abugida:
+   Devanagari, Tamil and Telugu have no case, and tracking pushes a matra off
+   the consonant it belongs to. So the treatment is applied only when the
+   interface is actually in English. */
+html[lang="en"] .section-head,
+html[lang="en"] .balance-label,
+html[lang="en"] .divider,
+html[lang="en"] .heard .heard-you {
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-size: .78rem;
 }
 
 /* ═══════════════════════════════════════════════════════════════ toast ══ */
 .toast {
-  position: fixed; left: 50%; bottom: 218px; transform: translateX(-50%);
+  position: fixed; left: 50%; bottom: 214px; transform: translateX(-50%);
   z-index: 90; max-width: 90vw;
-  padding: 14px 21px; border-radius: 16px;
-  background: rgba(20, 32, 31, .96);
-  backdrop-filter: blur(8px);
-  color: #fff; font-weight: 650; font-size: .96rem;
+  padding: 13px 20px; border-radius: var(--r-sm);
+  background: var(--ink);
+  color: #fff; font-weight: 600; font-size: .94rem;
   box-shadow: var(--sh-3);
-  animation: toastIn .3s var(--spring);
+  animation: toastIn .24s var(--ease);
 }
-@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 14px); } }
-.toast.error { background: rgba(179, 38, 30, .96); }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 10px); } }
+.toast.error { background: var(--danger); }
 
 /* ══════════════════════════════════════════════════════════ wide screens ══ */
 /* The app is designed for a phone, and on a laptop it stays phone-width rather
@@ -852,5 +917,5 @@ body.cursor-on [role="button"] { cursor: none; }
    would misrepresent what the thing actually is. */
 @media (min-width: 900px) {
   body { padding-bottom: 230px; }
-  #app { padding-top: 26px; }
+  #app { padding-top: 28px; }
 }

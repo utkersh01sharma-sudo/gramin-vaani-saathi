@@ -25,13 +25,13 @@ const INTERACTIVE =
 // which lean towards the pointer.
 const CARD = '.tile, .lang-card, .person-card, .info-card, .scan-card, .balance-card, .seg-btn';
 const MAGNETIC = '.tile, .lang-card, .person-card, .scan-card, .seg-btn, .mic, .btn-lg, .key, .chip';
-const ACCENT = '.mic, .help-strip, .btn-no, .tile-speak';
+const ACCENT = '.mic, .help-strip';
 
 // How far a magnetic element is allowed to lean, in px. Small on purpose: past
 // about a sixth of the element it stops feeling responsive and starts feeling
 // like the button is dodging you.
-const PULL = 0.16;
-const PULL_MAX = 9;
+const PULL = 0.11;
+const PULL_MAX = 6;
 
 export function initCursor() {
   if (!FINE_POINTER.matches || REDUCED.matches) return;

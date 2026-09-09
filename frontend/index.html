@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0E7C6B" />
+<meta name="theme-color" content="#0A6152" />
 <title>ग्रामीण वाणी साथी · Gramin Vaani Saathi</title>
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
@@ -17,9 +17,7 @@
 </div>
 
 <header class="topbar">
-  <button id="btn-back" class="icon-btn" hidden aria-label="Back">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-  </button>
+  <button id="btn-back" class="icon-btn" hidden aria-label="Back" data-icon="back"></button>
   <div class="brand">
     <img src="/icons/icon.svg" alt="" class="brand-mark" />
     <span id="brand-name">वाणी साथी</span>
@@ -50,7 +48,7 @@
 
     <div class="auth-actions">
       <button id="btn-new-account" class="btn btn-primary btn-lg">
-        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;flex:0 0 auto"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-icon="plus"></span>
         <span data-i18n="createAccount">नया खाता बनाइए</span>
       </button>
     </div>
@@ -85,11 +83,11 @@
 
     <div class="segmented" role="tablist" aria-label="Verification channel">
       <button class="seg-btn" role="tab" data-channel="phone" aria-selected="true">
-        <span class="seg-emoji" aria-hidden="true">📱</span>
+        <span data-icon="phone"></span>
         <span data-i18n="channelPhone">मोबाइल नंबर</span>
       </button>
       <button class="seg-btn" role="tab" data-channel="email" aria-selected="false">
-        <span class="seg-emoji" aria-hidden="true">✉️</span>
+        <span data-icon="mail"></span>
         <span data-i18n="channelEmail">ईमेल</span>
       </button>
     </div>
@@ -127,7 +125,7 @@
     <button class="btn btn-primary btn-lg" id="btn-verify" data-i18n="verify">आगे बढ़िए</button>
 
     <div id="dev-code" class="dev-chip" hidden>
-      <span aria-hidden="true">🛠️</span>
+      <span data-icon="wrench"></span>
       <span><span data-i18n="devCodeNote"></span> <code id="dev-code-value"></code></span>
     </div>
   </section>
@@ -174,7 +172,7 @@
     <div class="tile-grid" id="tile-grid"></div>
 
     <button class="help-strip" data-go="help">
-      <span class="help-icon" aria-hidden="true">🆘</span>
+      <span data-icon="help"></span>
       <span data-i18n="helpTitle">मदद चाहिए?</span>
     </button>
   </section>
@@ -185,7 +183,7 @@
     <div class="big-amount"><span class="rupee">₹</span><span id="detail-balance">—</span></div>
     <p id="detail-vpa" class="screen-sub"></p>
     <button class="btn btn-ghost speak-btn" data-speak="#detail-balance">
-      <span aria-hidden="true">🔊</span> <span data-i18n="listen">सुनिए</span>
+      <span data-icon="speaker"></span> <span data-i18n="listen">सुनिए</span>
     </button>
     <h2 class="section-head" data-i18n="historyTitle">पिछले लेनदेन</h2>
     <ul id="txn-list" class="txn-list"></ul>
@@ -225,11 +223,11 @@
     <h1 class="screen-title" data-i18n="scanTitle">कोड या नोट दिखाइए</h1>
     <div class="scan-choice">
       <button class="scan-card" data-scan="qr">
-        <span class="scan-emoji" aria-hidden="true">🔳</span>
+        <span data-icon="qr"></span>
         <span data-i18n="scanQr">क्यूआर कोड</span>
       </button>
       <button class="scan-card" data-scan="note">
-        <span class="scan-emoji" aria-hidden="true">💵</span>
+        <span data-icon="note"></span>
         <span data-i18n="scanNote">नोट पहचानिए</span>
       </button>
     </div>
@@ -247,7 +245,7 @@
       <span data-i18n="pasteMessage">संदेश यहाँ डालिए</span>
       <textarea id="scam-input" rows="3"></textarea>
     </label>
-    <button class="btn btn-primary" id="btn-scam-check" data-i18n="checkMessage">जाँचिए</button>
+    <button class="btn btn-primary btn-lg" id="btn-scam-check" data-i18n="checkMessage">जाँचिए</button>
     <div id="scam-result" class="verdict" hidden></div>
     <h2 class="section-head" data-i18n="safetyTips">याद रखिए</h2>
     <div id="tip-list" class="card-list"></div>
@@ -268,8 +266,8 @@
   <div class="sheet-inner">
     <p id="confirm-text" class="confirm-text"></p>
     <div class="confirm-actions">
-      <button id="btn-no" class="btn btn-no btn-lg"><span aria-hidden="true">✕</span> <span data-i18n="no">नहीं</span></button>
-      <button id="btn-yes" class="btn btn-yes btn-lg"><span aria-hidden="true">✓</span> <span data-i18n="yes">हाँ</span></button>
+      <button id="btn-no" class="btn btn-no btn-lg"><span data-icon="close"></span> <span data-i18n="no">नहीं</span></button>
+      <button id="btn-yes" class="btn btn-yes btn-lg"><span data-icon="check"></span> <span data-i18n="yes">हाँ</span></button>
     </div>
   </div>
 </div>
@@ -280,18 +278,9 @@
 <footer class="micbar" id="micbar" hidden>
   <div id="heard" class="heard" hidden></div>
   <div class="micbar-row">
-    <button id="btn-type" class="icon-btn ghost" aria-label="Type instead">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-    </button>
-    <button id="mic" class="mic" aria-label="Speak">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/>
-        <path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>
-      </svg>
-    </button>
-    <button id="btn-home" class="icon-btn ghost" aria-label="Home">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>
-    </button>
+    <button id="btn-type" class="icon-btn ghost" aria-label="Type instead" data-icon="keyboard"></button>
+    <button id="mic" class="mic" aria-label="Speak" data-icon="mic"></button>
+    <button id="btn-home" class="icon-btn ghost" aria-label="Home" data-icon="home"></button>
   </div>
   <p id="mic-hint" class="mic-hint" data-i18n="tapToSpeak">बोलने के लिए दबाइए</p>
   <form id="type-form" class="type-form" hidden>

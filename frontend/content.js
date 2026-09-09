@@ -13,7 +13,7 @@
 
 export const SCHEMES = [
   {
-    id: 'pm-kisan', emoji: '🌾',
+    id: 'pm-kisan', icon: 'sprout', tone: 'var(--tone-scheme)',
     title: { hi: 'पीएम किसान', en: 'PM-KISAN', ta: 'பிஎம் கிசான்', te: 'పీఎం కిసాన్' },
     text: {
       hi: 'छोटे किसानों को साल में ₹6,000 तीन किस्तों में सीधे खाते में।',
@@ -23,7 +23,7 @@ export const SCHEMES = [
     },
   },
   {
-    id: 'jan-dhan', emoji: '🏦',
+    id: 'jan-dhan', icon: 'bank', tone: 'var(--tone-scheme)',
     title: { hi: 'जन धन खाता', en: 'Jan Dhan Account', ta: 'ஜன் தன் கணக்கு', te: 'జన్ ధన్ ఖాతా' },
     text: {
       hi: 'बिना कोई पैसा रखे बैंक खाता, साथ में दुर्घटना बीमा और रुपे कार्ड।',
@@ -33,7 +33,7 @@ export const SCHEMES = [
     },
   },
   {
-    id: 'mudra', emoji: '🛠️',
+    id: 'mudra', icon: 'wrench', tone: 'var(--tone-scheme)',
     title: { hi: 'मुद्रा ऋण', en: 'MUDRA Loan', ta: 'முத்ரா கடன்', te: 'ముద్ర రుణం' },
     text: {
       hi: 'छोटा धंधा शुरू करने या बढ़ाने के लिए ₹10 लाख तक का कर्ज़, बिना गारंटी।',
@@ -43,7 +43,7 @@ export const SCHEMES = [
     },
   },
   {
-    id: 'pmjjby', emoji: '🛡️',
+    id: 'pmjjby', icon: 'shield', tone: 'var(--tone-scheme)',
     title: { hi: 'जीवन ज्योति बीमा', en: 'Jeevan Jyoti Insurance', ta: 'ஜீவன் ஜோதி காப்பீடு', te: 'జీవన్ జ్యోతి బీమా' },
     text: {
       hi: 'साल में ₹436 देकर ₹2 लाख का जीवन बीमा, 18 से 50 साल की उम्र तक।',
@@ -53,7 +53,7 @@ export const SCHEMES = [
     },
   },
   {
-    id: 'sukanya', emoji: '👧',
+    id: 'sukanya', icon: 'girl', tone: 'var(--tone-scheme)',
     title: { hi: 'सुकन्या समृद्धि', en: 'Sukanya Samriddhi', ta: 'சுகன்யா சம்ரித்தி', te: 'సుకన్య సమృద్ధి' },
     text: {
       hi: 'बेटी के नाम बचत खाता, ऊँचा ब्याज और टैक्स में छूट। 10 साल से छोटी उम्र में खोलिए।',
@@ -63,7 +63,7 @@ export const SCHEMES = [
     },
   },
   {
-    id: 'nrega', emoji: '⛏️',
+    id: 'nrega', icon: 'pickaxe', tone: 'var(--tone-scheme)',
     title: { hi: 'मनरेगा', en: 'MGNREGA', ta: 'மகாத்மா காந்தி வேலைத் திட்டம்', te: 'ఎంజీఎన్ఆర్ఈజీఏ' },
     text: {
       hi: 'हर ग्रामीण परिवार को साल में 100 दिन का काम, तय मज़दूरी के साथ।',
@@ -76,7 +76,7 @@ export const SCHEMES = [
 
 export const LESSONS = [
   {
-    id: 'upi', emoji: '📲',
+    id: 'upi', icon: 'upi', tone: 'var(--tone-learn)',
     title: { hi: 'यूपीआई क्या है?', en: 'What is UPI?', ta: 'யுபிஐ என்றால் என்ன?', te: 'యూపీఐ అంటే ఏమిటి?' },
     text: {
       hi: 'यूपीआई से आप फ़ोन से सीधे किसी के बैंक खाते में पैसा भेज सकते हैं। इसके लिए बस उनका यूपीआई नाम या क्यूआर कोड चाहिए। पैसा तुरंत पहुँचता है और कोई फ़ीस नहीं लगती।',
@@ -86,7 +86,7 @@ export const LESSONS = [
     },
   },
   {
-    id: 'pin', emoji: '🔒',
+    id: 'pin', icon: 'lock', tone: 'var(--tone-learn)',
     title: { hi: 'पिन कभी मत बताइए', en: 'Never share your PIN', ta: 'உங்கள் பின்னை ஒருபோதும் சொல்லாதீர்கள்', te: 'మీ పిన్ ఎప్పుడూ చెప్పకండి' },
     text: {
       hi: 'आपका यूपीआई पिन और ओटीपी सिर्फ़ आपका है। बैंक, पुलिस या कोई सरकारी अफ़सर कभी फ़ोन पर पिन नहीं माँगता। पैसा लेने के लिए कभी पिन नहीं डालना पड़ता — पिन सिर्फ़ पैसा देने के लिए होता है।',
@@ -96,7 +96,7 @@ export const LESSONS = [
     },
   },
   {
-    id: 'interest', emoji: '📈',
+    id: 'interest', icon: 'growth', tone: 'var(--tone-learn)',
     title: { hi: 'ब्याज क्या होता है?', en: 'What is interest?', ta: 'வட்டி என்றால் என்ன?', te: 'వడ్డీ అంటే ఏమిటి?' },
     text: {
       hi: 'ब्याज कर्ज़ की कीमत है। ₹10,000 का कर्ज़ 12% ब्याज पर लिया, तो साल भर में ₹1,200 ज़्यादा लौटाने होंगे। बचत खाते में उल्टा होता है — बैंक आपको ब्याज देता है।',
@@ -106,7 +106,7 @@ export const LESSONS = [
     },
   },
   {
-    id: 'saving', emoji: '🪙',
+    id: 'saving', icon: 'coins', tone: 'var(--tone-learn)',
     title: { hi: 'थोड़ा-थोड़ा बचाइए', en: 'Save a little, often', ta: 'கொஞ்சம் கொஞ்சமாகச் சேமியுங்கள்', te: 'కొంచెం కొంచెం దాచుకోండి' },
     text: {
       hi: 'रोज़ ₹20 बचाने से साल में ₹7,300 जमा हो जाते हैं। बड़ी रकम का इंतज़ार मत कीजिए — छोटी और नियमित बचत ही काम आती है, ख़ास तौर पर अचानक बीमारी या फ़सल ख़राब होने पर।',
@@ -116,7 +116,7 @@ export const LESSONS = [
     },
   },
   {
-    id: 'passbook', emoji: '📒',
+    id: 'passbook', icon: 'passbook', tone: 'var(--tone-learn)',
     title: { hi: 'पासबुक कैसे पढ़ें', en: 'How to read a passbook', ta: 'பாஸ்புக்கை எப்படிப் படிப்பது', te: 'పాస్‌బుక్ ఎలా చదవాలి' },
     text: {
       hi: 'पासबुक में तीन बातें देखिए: तारीख़, कितना आया या गया, और उसके बाद कितना बचा। अगर कोई ऐसा लेनदेन दिखे जो आपने नहीं किया, तो उसी दिन बैंक जाइए।',
@@ -129,7 +129,7 @@ export const LESSONS = [
 
 export const TIPS = [
   {
-    id: 'otp', emoji: '🚫',
+    id: 'otp', icon: 'noOtp', tone: 'var(--tone-safety)',
     title: { hi: 'ओटीपी कभी मत बताइए', en: 'Never share an OTP', ta: 'ஓடிபியை ஒருபோதும் சொல்லாதீர்கள்', te: 'ఓటీపీ ఎప్పుడూ చెప్పకండి' },
     text: {
       hi: 'कोई भी असली बैंक ओटीपी या पिन नहीं माँगता। जो माँगे, वही ठग है।',
@@ -139,7 +139,7 @@ export const TIPS = [
     },
   },
   {
-    id: 'receive', emoji: '💸',
+    id: 'receive', icon: 'arrowIn', tone: 'var(--tone-safety)',
     title: { hi: 'पैसा लेने में पिन नहीं लगता', en: 'Receiving money needs no PIN', ta: 'பணம் பெற பின் தேவையில்லை', te: 'డబ్బు అందుకోవడానికి పిన్ అవసరం లేదు' },
     text: {
       hi: '“पैसा भेजने के लिए पिन डालिए” — यह सबसे आम ठगी है। पिन डालते ही पैसा आपके खाते से जाएगा।',
@@ -149,7 +149,7 @@ export const TIPS = [
     },
   },
   {
-    id: 'urgency', emoji: '⏰',
+    id: 'urgency', icon: 'clock', tone: 'var(--tone-safety)',
     title: { hi: 'जल्दबाज़ी ठगी की निशानी है', en: 'Urgency is the warning sign', ta: 'அவசரமே எச்சரிக்கை அறிகுறி', te: 'తొందర పెట్టడమే ప్రమాద సంకేతం' },
     text: {
       hi: '“दो घंटे में खाता बंद हो जाएगा” जैसे संदेश डराने के लिए होते हैं। रुकिए, फ़ोन काटिए, बैंक जाकर पूछिए।',
@@ -159,7 +159,7 @@ export const TIPS = [
     },
   },
   {
-    id: 'qr', emoji: '🔳',
+    id: 'qr', icon: 'qr', tone: 'var(--tone-safety)',
     title: { hi: 'दुकान का क्यूआर जाँचिए', en: 'Check the shop’s QR', ta: 'கடையின் க்யூஆரை சரிபாருங்கள்', te: 'దుకాణం క్యూఆర్ తనిఖీ చేయండి' },
     text: {
       hi: 'ठग असली क्यूआर के ऊपर अपना स्टिकर चिपका देते हैं। पैसे भेजने से पहले स्क्रीन पर दुकानदार का नाम पढ़कर मिलाइए।',
@@ -169,7 +169,7 @@ export const TIPS = [
     },
   },
   {
-    id: 'lottery', emoji: '🎁',
+    id: 'lottery', icon: 'gift', tone: 'var(--tone-safety)',
     title: { hi: 'मुफ़्त इनाम कोई नहीं देता', en: 'Nobody gives free prizes', ta: 'யாரும் இலவசப் பரிசு தர மாட்டார்கள்', te: 'ఉచిత బహుమతులు ఎవరూ ఇవ్వరు' },
     text: {
       hi: 'लॉटरी, इनाम या नौकरी के लिए पहले पैसा माँगा जाए — तो वह ठगी ही है, चाहे संदेश कितना भी असली लगे।',

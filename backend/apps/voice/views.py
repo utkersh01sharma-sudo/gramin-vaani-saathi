@@ -17,6 +17,7 @@ import json
 import uuid
 from pathlib import Path
 
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, status
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -190,7 +191,7 @@ class VoiceQueryView(APIView):
         )
 
 
-@extend_schema(tags=["voice"])
+@extend_schema(tags=["voice"], responses=OpenApiTypes.OBJECT)
 class VoiceResultView(APIView):
     """Poll a queued transcription.
 

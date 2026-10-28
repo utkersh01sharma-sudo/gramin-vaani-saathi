@@ -67,6 +67,12 @@ def main() -> int:
         print("No demo user. Run: python backend/manage.py seed_demo", file=sys.stderr)
         return 1
 
+    # Load every model first, so the warm numbers below are not inflated by
+    # whichever model the first scheme or scam query happened to wake up.
+    from ai.warmup import warmup
+
+    model_load_ms = warmup(include_asr=True)
+
     runs = []
     for clip in clips:
         src = FIXTURES / clip["file"]
@@ -121,6 +127,7 @@ def main() -> int:
         "device": _device_label(),
         "asr_model": settings.ASR_MODEL_SIZE,
         "clips": len(runs),
+        "model_load_ms": model_load_ms,
         "cold_start_ms": runs[0]["timings"].get("total_ms", runs[0]["wall_ms"]),
         "warm": {
             "p50_ms": int(statistics.median(totals)),

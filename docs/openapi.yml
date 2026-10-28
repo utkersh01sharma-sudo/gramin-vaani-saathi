@@ -1,0 +1,1267 @@
+openapi: 3.0.3
+info:
+  title: Gramin Vaani Saathi API
+  version: 1.0.0
+  description: Voice-first financial companion for rural communities. All banking
+    and UPI operations are SIMULATED against a sandbox ledger. No real bank, PSP,
+    or payment network is contacted.
+paths:
+  /api/accounts/contacts/:
+    get:
+      operationId: api_accounts_contacts_retrieve
+      tags:
+      - accounts
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+    post:
+      operationId: api_accounts_contacts_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contact'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+  /api/accounts/login/:
+    post:
+      operationId: api_accounts_login_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /api/accounts/me/:
+    get:
+      operationId: api_accounts_me_retrieve
+      tags:
+      - accounts
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/accounts/otp/request/:
+    post:
+      operationId: api_accounts_otp_request_create
+      description: |-
+        Send a one-time code to a phone number or an email address.
+
+        SCOPE: no SMS gateway or email provider is integrated in this project. The
+        code is written to the server console (see apps/accounts/otp.py), and in
+        DEBUG it is echoed back as ``dev_code`` so the signup flow can be walked
+        through without a carrier. Everything else -- hashing at rest, expiry,
+        single use, attempt limits, rate limiting -- behaves as it would in
+        production.
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OtpRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OtpRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OtpRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OtpRequest'
+          description: ''
+  /api/accounts/otp/verify/:
+    post:
+      operationId: api_accounts_otp_verify_create
+      description: Exchange a correct code for a short-lived signed verification token.
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OtpVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OtpVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OtpVerify'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OtpVerify'
+          description: ''
+  /api/accounts/profile/:
+    patch:
+      operationId: api_accounts_profile_partial_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserProfile'
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+          description: ''
+  /api/accounts/register/:
+    post:
+      operationId: api_accounts_register_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/banking/account/:
+    get:
+      operationId: api_banking_account_retrieve
+      tags:
+      - banking
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: ''
+  /api/banking/transactions/:
+    get:
+      operationId: api_banking_transactions_retrieve
+      tags:
+      - banking
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: ''
+  /api/banking/transfer/:
+    post:
+      operationId: api_banking_transfer_create
+      description: |-
+        Move play money between sandbox accounts.
+
+        A failed transfer still returns 201 with ``status: "failed"``: a declined
+        payment is a recorded ledger event the user needs read back to them, not an
+        HTTP-level error the client has to special-case.
+      tags:
+      - banking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+  /api/fraud/check/:
+    post:
+      operationId: api_fraud_check_create
+      description: Is this message a scam? Returns a verdict, the reasons, and what
+        to do.
+      tags:
+      - fraud
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Check'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Check'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Check'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/fraud/history/:
+    get:
+      operationId: api_fraud_history_retrieve
+      tags:
+      - fraud
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/fraud/report/:
+    post:
+      operationId: api_fraud_report_create
+      description: |-
+        Record what happened and return the steps to take, in order.
+
+        The app does not -- cannot -- file a police complaint. The response says
+        where to file one, and the first step for lost money is always the 1930
+        helpline because only a fast call can get funds held.
+      tags:
+      - fraud
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Report'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Report'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/literacy/lessons/:
+    get:
+      operationId: api_literacy_lessons_retrieve
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+      tags:
+      - literacy
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/literacy/lessons/{lesson_id}/quiz/:
+    post:
+      operationId: api_literacy_lessons_quiz_create
+      description: Grade a quiz. Returns per-question correctness and the explanation
+        for each.
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - literacy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quiz'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Quiz'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Quiz'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/schemes/:
+    get:
+      operationId: api_schemes_retrieve
+      description: Every scheme, with this user's verdict and the reasons for it.
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+        description: hi | en | ta | te
+      tags:
+      - schemes
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/schemes/check/:
+    post:
+      operationId: api_schemes_check_create
+      description: |-
+        Check one scheme, or all, against the profile plus optional overrides.
+
+        Overrides answer "what if I were 60?" without writing to the profile, which
+        is what the eligibility questions on the client use before saving.
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+        description: hi | en | ta | te
+      tags:
+      - schemes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/schemes/search/:
+    get:
+      operationId: api_schemes_search_retrieve
+      description: Natural-language search, in any of the four languages.
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+        description: hi | en | ta | te
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: What the user said
+      tags:
+      - schemes
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/sync/replay/:
+    post:
+      operationId: api_sync_replay_create
+      tags:
+      - sync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Replay'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Replay'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Replay'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/vision/note/:
+    post:
+      operationId: api_vision_note_create
+      description: Recognise a banknote's denomination from a photo.
+      tags:
+      - vision
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                language:
+                  type: string
+                  enum:
+                  - hi
+                  - en
+                  - ta
+                  - te
+              required:
+              - image
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/vision/qr/:
+    post:
+      operationId: api_vision_qr_create
+      description: Decode a UPI QR from a photo, check it, and say who it pays.
+      tags:
+      - vision
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                language:
+                  type: string
+                  enum:
+                  - hi
+                  - en
+                  - ta
+                  - te
+              required:
+              - image
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/voice/confirm/:
+    post:
+      operationId: api_voice_confirm_create
+      description: |-
+        Explicit tap-to-confirm, for users who would rather press the green tick
+        than say the word. Same code path, same idempotency key.
+      tags:
+      - voice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Confirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Confirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Confirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Confirm'
+          description: ''
+  /api/voice/query/:
+    post:
+      operationId: api_voice_query_create
+      description: |-
+        Spoken utterance in, spoken reply out.
+
+        The response shape depends on how the deployment is wired, and the client
+        handles both because both are real:
+
+        * with a broker (``CELERY_TASK_ALWAYS_EAGER=false``) this returns **202** and
+          a ``task_id``; the client polls ``/api/voice/result/<id>/``. That is the
+          configuration that scales, because the web worker is free again in
+          milliseconds while a dedicated worker holds the GPU.
+        * without one -- a laptop demo, an exam hall with no Redis -- the task runs
+          inline and this returns **200** with the finished result. Same code path,
+          same task function, no separate synchronous implementation to drift.
+
+        Either way ``status`` says which happened, so the PWA never has to guess.
+      tags:
+      - voice
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VoiceQuery'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VoiceQuery'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceQuery'
+          description: ''
+  /api/voice/result/{task_id}/:
+    get:
+      operationId: api_voice_result_retrieve
+      description: |-
+        Poll a queued transcription.
+
+        Kept dumb on purpose: it reports state and nothing else. The PWA polls this
+        every 400 ms while showing a listening indicator, and a poll that costs a
+        Redis lookup can be answered by any replica.
+      parameters:
+      - in: path
+        name: task_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - voice
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/voice/text/:
+    post:
+      operationId: api_voice_text_create
+      tags:
+      - voice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceText'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VoiceText'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VoiceText'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceText'
+          description: ''
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        vpa:
+          type: string
+          description: e.g. sita@sandbox
+          maxLength: 64
+        masked_account_number:
+          type: string
+          readOnly: true
+        bank_name:
+          type: string
+          maxLength: 64
+        ifsc:
+          type: string
+          maxLength: 11
+        balance:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        daily_limit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        spent_today:
+          type: string
+          readOnly: true
+      required:
+      - masked_account_number
+      - spent_today
+      - vpa
+    ActionEnum:
+      enum:
+      - send_money
+      type: string
+      description: '* `send_money` - send_money'
+    BlankEnum:
+      enum:
+      - ''
+    ChannelEnum:
+      enum:
+      - phone
+      - email
+      type: string
+      description: |-
+        * `phone` - Mobile number
+        * `email` - Email address
+    Check:
+      type: object
+      properties:
+        text:
+          type: string
+          maxLength: 2000
+        language:
+          $ref: '#/components/schemas/LanguageE8aEnum'
+      required:
+      - text
+    Confirm:
+      type: object
+      properties:
+        pending: {}
+        language:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/LanguageE8aEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - pending
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 64
+        name_local:
+          type: string
+          description: Name in the user's own script, for ASR matching
+          maxLength: 64
+        vpa:
+          type: string
+          description: Simulated UPI VPA, e.g. ramesh@sandbox
+          maxLength: 64
+      required:
+      - id
+      - name
+      - vpa
+    DirectionEnum:
+      enum:
+      - debit
+      - credit
+      type: string
+      description: |-
+        * `debit` - Money out
+        * `credit` - Money in
+    GenderEnum:
+      enum:
+      - F
+      - M
+      - O
+      type: string
+      description: |-
+        * `F` - Female
+        * `M` - Male
+        * `O` - Other
+    Item:
+      type: object
+      properties:
+        pending:
+          $ref: '#/components/schemas/Pending'
+        language:
+          $ref: '#/components/schemas/LanguageE8aEnum'
+        queued_at:
+          type: integer
+      required:
+      - pending
+    KindEnum:
+      enum:
+      - money_lost
+      - shared_details
+      - message_only
+      type: string
+      description: |-
+        * `money_lost` - Money was taken
+        * `shared_details` - I shared my OTP / PIN / card
+        * `message_only` - I received a fraud message
+    LanguageE8aEnum:
+      enum:
+      - hi
+      - en
+      - ta
+      - te
+      type: string
+      description: |-
+        * `hi` - hi
+        * `en` - en
+        * `ta` - ta
+        * `te` - te
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    NullEnum:
+      enum:
+      - null
+    OccupationEnum:
+      enum:
+      - farmer
+      - labourer
+      - self_employed
+      - homemaker
+      - student
+      - other
+      type: string
+      description: |-
+        * `farmer` - Farmer
+        * `labourer` - Daily wage labourer
+        * `self_employed` - Small business / self-employed
+        * `homemaker` - Homemaker
+        * `student` - Student
+        * `other` - Other
+    OtpRequest:
+      type: object
+      description: Ask for a code. One of phone / email, chosen by ``channel``.
+      properties:
+        channel:
+          $ref: '#/components/schemas/ChannelEnum'
+        destination:
+          type: string
+          maxLength: 254
+      required:
+      - channel
+      - destination
+    OtpVerify:
+      type: object
+      properties:
+        challenge_id:
+          type: string
+        code:
+          type: string
+          maxLength: 16
+      required:
+      - challenge_id
+      - code
+    PatchedUserProfile:
+      type: object
+      properties:
+        language:
+          $ref: '#/components/schemas/UserProfileLanguageEnum'
+        literacy_level:
+          $ref: '#/components/schemas/UserProfileLiteracyLevelEnum'
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        gender:
+          oneOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        state:
+          type: string
+          maxLength: 64
+        district:
+          type: string
+          maxLength: 64
+        occupation:
+          oneOf:
+          - $ref: '#/components/schemas/OccupationEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        annual_income:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+          description: Household annual income in INR
+        land_holding_acres:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          nullable: true
+        has_bank_account:
+          type: boolean
+        is_bpl:
+          type: boolean
+          description: Below Poverty Line card holder
+        household_size:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+    Pending:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+        amount:
+          type: string
+          maxLength: 16
+        payee_vpa:
+          type: string
+          maxLength: 64
+        payee_name:
+          type: string
+          maxLength: 64
+        idempotency_key:
+          type: string
+          maxLength: 64
+      required:
+      - action
+      - amount
+      - idempotency_key
+      - payee_vpa
+    Quiz:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: integer
+            minimum: 0
+          maxItems: 20
+        language:
+          $ref: '#/components/schemas/LanguageE8aEnum'
+      required:
+      - answers
+    Register:
+      type: object
+      description: |-
+        Create an account against a destination that has already been verified.
+
+        Phone and email are deliberately *not* accepted here. They come out of the
+        signed verification token, so a client cannot verify one number and register
+        a different one.
+      properties:
+        verification_token:
+          type: string
+        display_name:
+          type: string
+          maxLength: 64
+        password:
+          type: string
+          writeOnly: true
+          minLength: 4
+        username:
+          type: string
+          maxLength: 64
+        language:
+          allOf:
+          - $ref: '#/components/schemas/LanguageE8aEnum'
+          default: hi
+        literacy_level:
+          allOf:
+          - $ref: '#/components/schemas/RegisterLiteracyLevelEnum'
+          default: none
+      required:
+      - display_name
+      - password
+      - verification_token
+    RegisterLiteracyLevelEnum:
+      enum:
+      - none
+      - basic
+      - full
+      type: string
+      description: |-
+        * `none` - none
+        * `basic` - basic
+        * `full` - full
+    Replay:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+      required:
+      - items
+    Report:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/KindEnum'
+        description:
+          type: string
+          maxLength: 2000
+        message_text:
+          type: string
+          maxLength: 2000
+        amount_lost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        language:
+          $ref: '#/components/schemas/LanguageE8aEnum'
+      required:
+      - kind
+    StatusEnum:
+      enum:
+      - pending
+      - success
+      - failed
+      type: string
+      description: |-
+        * `pending` - Pending
+        * `success` - Success
+        * `failed` - Failed
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        direction:
+          $ref: '#/components/schemas/DirectionEnum'
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        counterparty_vpa:
+          type: string
+          maxLength: 64
+        counterparty_name:
+          type: string
+          maxLength: 64
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        failure_reason:
+          type: string
+          maxLength: 128
+        note:
+          type: string
+          maxLength: 140
+        balance_after:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        initiated_by_voice:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - amount
+      - created_at
+      - direction
+      - id
+    Transfer:
+      type: object
+      properties:
+        to_vpa:
+          type: string
+          maxLength: 64
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        idempotency_key:
+          type: string
+          maxLength: 64
+        note:
+          type: string
+          maxLength: 140
+        by_voice:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - idempotency_key
+      - to_vpa
+    UserProfile:
+      type: object
+      properties:
+        language:
+          $ref: '#/components/schemas/UserProfileLanguageEnum'
+        literacy_level:
+          $ref: '#/components/schemas/UserProfileLiteracyLevelEnum'
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        gender:
+          oneOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        state:
+          type: string
+          maxLength: 64
+        district:
+          type: string
+          maxLength: 64
+        occupation:
+          oneOf:
+          - $ref: '#/components/schemas/OccupationEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        annual_income:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+          description: Household annual income in INR
+        land_holding_acres:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          nullable: true
+        has_bank_account:
+          type: boolean
+        is_bpl:
+          type: boolean
+          description: Below Poverty Line card holder
+        household_size:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+    UserProfileLanguageEnum:
+      enum:
+      - hi
+      - en
+      - ta
+      - te
+      type: string
+      description: |-
+        * `hi` - हिन्दी
+        * `en` - English
+        * `ta` - தமிழ்
+        * `te` - తెలుగు
+    UserProfileLiteracyLevelEnum:
+      enum:
+      - none
+      - basic
+      - full
+      type: string
+      description: |-
+        * `none` - Cannot read
+        * `basic` - Can read simple words
+        * `full` - Reads comfortably
+    VoiceQuery:
+      type: object
+      properties:
+        audio:
+          type: string
+          format: uri
+        language:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/LanguageE8aEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        pending:
+          type: string
+      required:
+      - audio
+    VoiceText:
+      type: object
+      properties:
+        text:
+          type: string
+          maxLength: 500
+        language:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/LanguageE8aEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        pending:
+          nullable: true
+      required:
+      - text
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

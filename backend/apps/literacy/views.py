@@ -8,6 +8,7 @@ client is built, and the explanation for each answer comes from one place.
 from __future__ import annotations
 
 from django.conf import settings
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import serializers, status
 from rest_framework.permissions import IsAuthenticated
@@ -37,7 +38,7 @@ def _progress_dict(p: LessonProgress | None) -> dict:
             "completed": p.completed}
 
 
-@extend_schema(tags=["literacy"], parameters=[OpenApiParameter("lang", str)])
+@extend_schema(tags=["literacy"], parameters=[OpenApiParameter("lang", str)], responses=OpenApiTypes.OBJECT)
 class LessonListView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -56,7 +57,7 @@ class QuizSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=["hi", "en", "ta", "te"], required=False)
 
 
-@extend_schema(tags=["literacy"], request=QuizSerializer)
+@extend_schema(tags=["literacy"], request=QuizSerializer, responses=OpenApiTypes.OBJECT)
 class QuizView(APIView):
     """Grade a quiz. Returns per-question correctness and the explanation for each."""
 

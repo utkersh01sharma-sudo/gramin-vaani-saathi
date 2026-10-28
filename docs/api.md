@@ -216,35 +216,51 @@ a recorded ledger event, not an HTTP error.
 
 ## schemes
 
+Every response is already in the requested language (`?lang=hi|en|ta|te`,
+default: the profile's language) and already explained.
+
 ### `GET /api/schemes/`
-→ `200 {"results": [{"code": "pm_kisan", "name": {"hi": "...", "en": "..."}, "category": "...", "benefit_summary": {...}}]}`
-
-### `GET /api/schemes/recommend/`
-Runs the eligibility rules against the caller's profile.
-→ `200 {"results": [{"scheme": {...}, "verdict": "eligible|maybe|not_eligible", "reasons": [{"rule": "age >= 18", "passed": true, "explanation": {"hi": "...", "en": "..."}}], "score": 0.92}]}`
-
-### `POST /api/schemes/search/`
-Semantic search, so a natural sentence finds the right scheme.
+All 20 schemes, each with this user's verdict, best first.
+→
 ```json
-{"query": "मुझे खेती के लिए पैसा चाहिए", "language": "hi", "top_k": 5}
+{"language": "en",
+ "summary": {"eligible": 11, "maybe": 0, "total": 20, "ask_next": ["age"]},
+ "results": [{"scheme_id": "pm-kisan", "name": "PM-KISAN", "summary": "...", "benefit": "...",
+              "category": "farming", "icon": "sprout", "tone": "var(--tone-scheme)",
+              "verdict": "eligible|maybe|not_eligible",
+              "reasons_met": ["..."], "reasons_unmet": ["..."], "reasons_unknown": ["..."],
+              "missing_fields": ["land_holding_acres"]}]}
 ```
-→ `200 {"results": [{"scheme": {...}, "similarity": 0.71, "verdict": "eligible"}]}`
+
+### `GET /api/schemes/search/?q=<what the user said>&lang=hi&k=3`
+Multilingual semantic search (multilingual-e5-small + fixture keywords).
+→ `200 {"query": "...", "backend": "embedding+keyword|keyword", "results": [<as above> + "score"]}`
+
+### `POST /api/schemes/check/`
+What-if check without saving the profile.
+```json
+{"scheme_id": "nsap-old-age", "facts": {"age": 65}, "lang": "en"}
+```
+→ `200 {"result": {...}}`, or all schemes when `scheme_id` is omitted.
 
 ---
 
 ## literacy
 
-### `GET /api/literacy/lessons/?language=hi`
-→ `200 {"results": [{"code": "what_is_upi", "title": "...", "body": "...", "audio_url": "...", "duration_s": 48, "completed": false}]}`
+### `GET /api/literacy/lessons/?lang=hi`
+→ `200 {"completed": 1, "total": 8, "results": [{"id": "upi", "title": "...", "steps": ["...", "...", "..."],
+"quiz": [{"q": "...", "options": ["...", "..."]}], "minutes": 1, "icon": "upi",
+"progress": {"attempts": 1, "best_score": 3, "total": 3, "completed": true}}]}`
 
-### `GET /api/literacy/lessons/<code>/quiz/`
-→ `200 {"questions": [{"id": 1, "prompt": "...", "options": [{"id": "a", "text": "...", "icon": "..."}]}]}`
+Answers are **not** included; they are graded server-side.
 
-### `POST /api/literacy/lessons/<code>/quiz/`
+### `POST /api/literacy/lessons/<id>/quiz/`
 ```json
-{"answers": {"1": "a", "2": "c", "3": "b"}}
+{"answers": [1, 0, 0], "language": "hi"}
 ```
-→ `200 {"score": 2, "total": 3, "passed": true, "feedback": [...]}`
+→ `200 {"score": 3, "total": 3, "passed": true, "results": [{"correct": true, "answer": 1, "explain": "..."}], "progress": {...}}`
+
+Passing is two thirds right; progress keeps the best score.
 
 ---
 
@@ -252,79 +268,84 @@ Semantic search, so a natural sentence finds the right scheme.
 
 ### `POST /api/fraud/check/`
 ```json
-{"text": "Dear customer your KYC is expired click http://bit.ly/xy to update",
- "language": "en", "source": "sms"}
+{"text": "Dear customer your KYC is expired, update at bit.ly/xy", "language": "en"}
 ```
 →
 ```json
-{
-  "label": "scam",
-  "score": 0.96,
-  "model_score": 0.97,
-  "rule_score": 0.93,
-  "reasons": [
-    {"code": "asks_for_link", "text": {"hi": "यह संदेश एक अनजान लिंक खोलने को कहता है।", "en": "This message asks you to open an unknown link."}},
-    {"code": "url_shortener", "text": {"hi": "लिंक छोटा किया गया है ताकि असली पता छिपे।", "en": "The link is shortened to hide its real address."}}
-  ],
-  "advice": {"hi": "इस लिंक को न खोलें...", "en": "Do not open this link..."},
-  "reply_audio_url": "/media/tts/....mp3"
-}
+{"label": "safe|suspicious|scam", "score": 0.98,
+ "headline": "This is a scam",
+ "reasons": ["It threatens that your account will be blocked...", "The link is shortened..."],
+ "advice": "Do not reply, do not open the link, do not pay anything. Report fraud on 1930.",
+ "model_score": 0.99, "rule_score": 0.93, "backend": "scamnet_blend", "language": "en"}
 ```
+`reasons` is never empty for a non-`safe` verdict. Every check is logged.
 
-`reasons` is mandatory, never empty for a non-`safe` verdict: a non-literate user
-cannot audit a score, so the verdict has to be explainable in one spoken sentence.
+### `GET /api/fraud/history/` → the caller's last 20 checks.
 
 ### `POST /api/fraud/report/`
 ```json
-{"description": "...", "amount_lost": "5000.00", "channel": "call"}
+{"kind": "money_lost|shared_details|message_only", "amount_lost": "5000.00", "language": "hi"}
 ```
-→ `201 {"report_id": "...", "next_steps": [...], "helpline": "1930"}`
+→ `201 {"id": 1, "helpline": "1930", "portal": "https://cybercrime.gov.in", "next_steps": ["...", "...", "..."]}`
+
+The app does not file a complaint and never says it has.
 
 ---
 
 ## vision
 
-### `POST /api/vision/qr/` (multipart: `image`)
+The uploaded image is deleted before the response is sent.
+
+### `POST /api/vision/qr/` (multipart: `image`, `language`)
 →
 ```json
-{
-  "decoded": true,
-  "payee_vpa": "ramkirana@sandbox",
-  "payee_name": "Ram Kirana Store",
-  "amount": 250.0,
-  "is_valid_upi": true,
-  "is_known_payee": true,
-  "tamper_score": 0.08,
-  "warnings": [],
-  "reply_text": "यह QR राम किराना स्टोर का है, 250 रुपये।",
-  "reply_audio_url": "/media/tts/....mp3"
-}
+{"level": "ok|caution|danger",
+ "payee_vpa": "ramkirana@sandbox",
+ "payee_name_in_code": "Ram Kirana Store",
+ "payee_name_registered": "Ram Kirana Store",
+ "amount": null, "is_valid_upi": true, "tamper_score": 0.0,
+ "warnings": ["possible_sticker", "unknown_payee", "amount_prefilled", "embedded_url",
+              "multiple_qr", "name_mismatch", "malformed_upi", "not_upi", "no_qr_found"],
+ "reply_text": "This code belongs to Ram Kirana Store.",
+ "can_pay": true}
 ```
-`tamper_score > 0.5` adds a `qr_possibly_overlaid` warning — the sticker-over-sticker
-scam seen at rural shop counters.
+A name inside a QR is whatever its printer chose; when the VPA is not in the
+registry, `reply_text` reports it as a claim ("This code says it is for …").
 
-### `POST /api/vision/note/` (multipart: `image`)
-→ `200 {"is_note": true, "denomination": 500, "confidence": 0.97, "reply_text": "यह पांच सौ रुपये का नोट है।", "reply_audio_url": "..."}`
+### `POST /api/vision/note/` (multipart: `image`, `language`)
+→ `200 {"denomination": 500, "confidence": 0.55, "is_note": true, "confident": false,
+"backend": "notenet|colour_heuristic", "reply_text": "..."}`
 
-Below the confidence floor: `{"is_note": false, "denomination": null, "reply_text": "मुझे नोट साफ नहीं दिखा, फिर से दिखाइए।"}`. Guessing a
-denomination for someone who cannot read one is worse than admitting uncertainty.
+Below 0.75 confidence the reply tells the user to check the note themselves.
 
 ---
 
 ## sync — offline queue
 
 ### `POST /api/sync/replay/`
-Batch replay of everything queued while offline. Idempotency keys make it safe to
-send the same batch more than once.
+Everything confirmed while offline, in one request. The same batch may be sent
+any number of times.
 ```json
-{"actions": [
-  {"kind": "transfer", "idempotency_key": "c1f2...", "payload": {"to_vpa": "...", "amount": "500.00"}},
-  {"kind": "quiz_submit", "idempotency_key": "a7b1...", "payload": {...}}
-]}
+{"items": [{"pending": {"action": "send_money", "amount": "500", "payee_vpa": "ramesh@sandbox",
+            "payee_name": "Ramesh", "idempotency_key": "tap-…"},
+            "language": "hi", "queued_at": 1767225600000}]}
 ```
-→ `200 {"results": [{"idempotency_key": "c1f2...", "status": "applied|replayed|failed", "detail": {...}}]}`
+→ `200 {"executed": 1, "replayed": 0, "failed": 0,
+"results": [{"idempotency_key": "tap-…", "status": "executed|replayed|failed", "detail": "...", "reply_text": "...", "transaction_id": "..."}]}`
 
-### `GET /api/sync/snapshot/`
-One call that fills the offline cache: profile, balance, recent transactions,
-schemes, and lessons.
-→ `200 {"generated_at": "...", "profile": {...}, "account": {...}, "transactions": [...], "schemes": [...], "lessons": [...]}`
+---
+
+## Changes from the Day 1 contract
+
+Recorded rather than silently edited, because the frontend was built against both.
+
+| Was | Now | Why |
+|---|---|---|
+| `GET /schemes/recommend/` + `GET /schemes/` | one `GET /schemes/` with verdicts | Every scheme screen needs the verdict; two calls bought nothing |
+| `POST /schemes/search/` | `GET /schemes/search/?q=` | A search is a read; GET is cacheable offline |
+| Scheme names as `{"hi": …, "en": …}` | one language per response | The client never needs the other three; it re-fetches on a language change |
+| `GET /literacy/.../quiz/` | questions inside the lesson list | One request for the whole screen |
+| Reasons as `{code, text: {lang: …}}` | plain strings in the request language | Same reason as above |
+| `reply_audio_url` on fraud/vision | not returned | Spoken in the browser; server TTS is used by the voice endpoints only |
+| `sync/replay` with generic `actions` | `items` of confirmed `pending` objects | Only transfers are ever queued; quiz answers need the network anyway |
+| `GET /sync/snapshot/` | not built | The client caches `me`, `transactions`, `schemes` and `lessons` per language from the normal endpoints |

@@ -11,6 +11,7 @@ import os
 import tempfile
 
 from django.conf import settings
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -94,6 +95,11 @@ NOTE_NONE = {
 NOTE_CONFIDENT = 0.75
 
 
+IMAGE_UPLOAD = {"multipart/form-data": {"type": "object", "properties": {
+    "image": {"type": "string", "format": "binary"},
+    "language": {"type": "string", "enum": ["hi", "en", "ta", "te"]}}, "required": ["image"]}}
+
+
 def _lang(request) -> str:
     lang = request.data.get("language") or request.query_params.get("lang")
     if lang in settings.SUPPORTED_LANGUAGES:
@@ -121,7 +127,7 @@ def _name_matches(written: str, registered: str) -> bool:
     return not a or a in b or b in a
 
 
-@extend_schema(tags=["vision"])
+@extend_schema(tags=["vision"], request=IMAGE_UPLOAD, responses=OpenApiTypes.OBJECT)
 class QRView(APIView):
     """Decode a UPI QR from a photo, check it, and say who it pays."""
 
@@ -181,7 +187,7 @@ class QRView(APIView):
         })
 
 
-@extend_schema(tags=["vision"])
+@extend_schema(tags=["vision"], request=IMAGE_UPLOAD, responses=OpenApiTypes.OBJECT)
 class NoteView(APIView):
     """Recognise a banknote's denomination from a photo."""
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 from decimal import Decimal
 
 from django.conf import settings
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, status
 from rest_framework.permissions import IsAuthenticated
@@ -93,7 +94,7 @@ class CheckSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=["hi", "en", "ta", "te"], required=False)
 
 
-@extend_schema(tags=["fraud"], request=CheckSerializer)
+@extend_schema(tags=["fraud"], request=CheckSerializer, responses=OpenApiTypes.OBJECT)
 class ScamCheckView(APIView):
     """Is this message a scam? Returns a verdict, the reasons, and what to do."""
 
@@ -105,7 +106,7 @@ class ScamCheckView(APIView):
         return Response(check_text(request.user, s.validated_data["text"].strip(), _lang(request)))
 
 
-@extend_schema(tags=["fraud"])
+@extend_schema(tags=["fraud"], responses=OpenApiTypes.OBJECT)
 class ScamHistoryView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -126,7 +127,7 @@ class ReportSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=["hi", "en", "ta", "te"], required=False)
 
 
-@extend_schema(tags=["fraud"], request=ReportSerializer)
+@extend_schema(tags=["fraud"], request=ReportSerializer, responses=OpenApiTypes.OBJECT)
 class ScamReportView(APIView):
     """Record what happened and return the steps to take, in order.
 

@@ -14,6 +14,7 @@ happened to each thing they asked for.
 """
 from __future__ import annotations
 
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
@@ -43,7 +44,7 @@ class ReplaySerializer(serializers.Serializer):
     items = ItemSerializer(many=True, max_length=MAX_ITEMS)
 
 
-@extend_schema(tags=["sync"], request=ReplaySerializer)
+@extend_schema(tags=["sync"], request=ReplaySerializer, responses=OpenApiTypes.OBJECT)
 class ReplayView(APIView):
     permission_classes = [IsAuthenticated]
 

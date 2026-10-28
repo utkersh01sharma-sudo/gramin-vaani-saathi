@@ -5,6 +5,7 @@ django-cors-headers==4.4.0
 drf-spectacular==0.27.2
 python-dotenv==1.0.1
 dj-database-url==2.2.0
+psycopg[binary]==3.2.3     # Postgres driver for prod.py / docker compose
 gunicorn==23.0.0
 whitenoise==6.7.0
 

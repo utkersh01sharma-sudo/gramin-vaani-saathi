@@ -128,6 +128,9 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # "remote" -> the same adapter interface talks HTTP to a model server (scale-out)
 AI_BACKEND = os.getenv("AI_BACKEND", "local")
 AI_REMOTE_URL = os.getenv("AI_REMOTE_URL", "http://localhost:9000")
+# Shared secret sent as X-Model-Key; must match the model server's AI_REMOTE_KEY.
+AI_REMOTE_KEY = os.getenv("AI_REMOTE_KEY", "")
+AI_REMOTE_TIMEOUT = float(os.getenv("AI_REMOTE_TIMEOUT", "10"))
 
 ML_ARTIFACTS_DIR = Path(os.getenv("ML_ARTIFACTS_DIR", PROJECT_ROOT / "ml" / "artifacts"))
 

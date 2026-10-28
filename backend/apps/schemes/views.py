@@ -9,6 +9,7 @@ and means the voice path and the screen say the same thing.
 from __future__ import annotations
 
 from django.conf import settings
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -67,7 +68,7 @@ def _ask_next(results: list[dict]) -> list[str]:
     return sorted(counts, key=lambda f: -counts[f])
 
 
-@extend_schema(tags=["schemes"], parameters=[LANG_PARAM])
+@extend_schema(tags=["schemes"], parameters=[LANG_PARAM], responses=OpenApiTypes.OBJECT)
 class SchemeListView(APIView):
     """Every scheme, with this user's verdict and the reasons for it."""
 
@@ -82,6 +83,7 @@ class SchemeListView(APIView):
 @extend_schema(
     tags=["schemes"],
     parameters=[LANG_PARAM, OpenApiParameter("q", str, description="What the user said")],
+    responses=OpenApiTypes.OBJECT,
 )
 class SchemeSearchView(APIView):
     """Natural-language search, in any of the four languages."""
@@ -100,7 +102,7 @@ class SchemeSearchView(APIView):
         return Response({"query": query, "language": lang, "backend": backend, "results": results})
 
 
-@extend_schema(tags=["schemes"], parameters=[LANG_PARAM])
+@extend_schema(request=OpenApiTypes.OBJECT, tags=["schemes"], parameters=[LANG_PARAM], responses=OpenApiTypes.OBJECT)
 class SchemeCheckView(APIView):
     """Check one scheme, or all, against the profile plus optional overrides.
 

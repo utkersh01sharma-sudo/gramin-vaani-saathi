@@ -51,6 +51,11 @@ def load(name: str) -> dict:
 
 BASELINE = load("baseline_intent_metrics.json")
 VOICE = load("voice_latency.json")
+INTENT = load("intent_metrics.json")
+GATE = load("intent_gate.json")
+SCAM = load("scam_metrics.json")
+SEARCH = load("scheme_search.json")
+QR = load("qr_tamper.json")
 
 
 def rows_in(rel: str) -> int:
@@ -70,6 +75,16 @@ P50 = f"{WARM['p50_ms']} ms" if WARM else "not yet measured"
 P95 = f"{WARM['p95_ms']} ms" if WARM else "—"
 ACC = f"{BASELINE['accuracy'] * 100:.1f}%" if BASELINE else "not yet measured"
 F1 = f"{BASELINE['macro_f1']:.3f}" if BASELINE else "—"
+
+
+def pct(x) -> str:
+    return "—" if x is None else f"{x * 100:.1f}%"
+
+
+INTENT_ACC = pct(INTENT.get("accuracy")) if INTENT else "not yet measured"
+SCAM_SYS = SCAM.get("systems", {})
+SCAM_BLEND = next((v for k, v in SCAM_SYS.items() if k.startswith("blended")), {})
+HYBRID = SEARCH.get("results", {}).get("hybrid", {})
 
 
 def new_slide(prs, dark=False):
@@ -273,7 +288,7 @@ def slide_architecture(prs):
          "ASR, NLU, scam and vision behind one interface. AI_BACKEND=remote "
          "sends identical calls to a model server — scaling costs one variable."),
     ]
-    cw, gx = Inches(2.94), Inches(0.19)
+    cw, gx = Inches(2.89), Inches(0.19)
     for i, (name, tone, head, body) in enumerate(layers):
         x = Inches(0.6) + (cw + gx) * i
         T.card(s, x, Inches(2.0), cw, Inches(2.85))
@@ -301,28 +316,30 @@ def slide_architecture(prs):
     T.page_number(s, 5)
 
 
-# ========================================================== 6. progress
+# ======================================================= 6. what was built
 def slide_progress(prs):
     s = new_slide(prs)
-    T.title(s, "Progress So Far",
-            "Days 1–3 of a seven-day sprint are complete and committed.")
+    T.title(s, "What Was Built",
+            "The full seven-day plan, delivered as working, tested software.")
 
     done = [
-        ("Django backend scaffolded",
-         "Eight apps, split settings, self-documenting API at /api/docs/."),
-        ("Sandbox ledger with idempotent transfers",
-         "A replayed queued request cannot double-spend — the offline story "
-         "depends on this being true."),
-        ("Intent dataset built",
-         f"{TRAIN_ROWS:,} generated training rows across four languages, plus "
-         f"{TEST_ROWS} hand-written test rows so accuracy is reported honestly."),
-        ("Voice pipeline running end to end",
-         "Audio upload → faster-whisper → intent → ledger action → spoken reply."),
-        ("PWA shipped and redesigned",
-         "Icon-first shell, four languages, OTP signup, a stroked icon set "
-         "replacing every emoji."),
+        ("Voice dialog in four languages",
+         "Speech or typing → IntentNet → action → spoken reply. Money never moves "
+         "on the first sentence."),
+        ("Sandbox banking with exactly-once replay",
+         "Idempotent transfers; the offline queue lives in IndexedDB and replays "
+         "through one endpoint."),
+        ("Schemes, lessons, scam checks, QR checks",
+         "20 rule-based schemes with reasons, 8 graded lessons, ScamNet, OpenCV "
+         "QR verification with sticker detection."),
+        ("A rebuilt interface",
+         "Sidebar naming every function; every view fits one laptop screen; "
+         "a phone layout with a drawer."),
+        ("Evidence and deployment",
+         "27 tests, a generated results report, Docker Compose with a separate "
+         "model server."),
     ]
-    T.eyebrow(s, Inches(0.6), Inches(2.0), Inches(6.3), "Working now", T.OK)
+    T.eyebrow(s, Inches(0.6), Inches(2.0), Inches(6.3), "Delivered", T.OK)
     y = Inches(2.3)
     for head, body in done:
         T.icon(s, "check", Inches(0.62), y + Inches(0.03), Inches(0.24), T.OK, 1.5)
@@ -332,25 +349,29 @@ def slide_progress(prs):
                size=10.5, color=T.INK_2, line=1.4)
         y += Inches(0.87)
 
-    T.eyebrow(s, Inches(7.35), Inches(2.0), Inches(5.4), "Next, in order", T.ACCENT)
-    nxt = [
-        ("Day 3–4", "Finish training the MuRIL intent classifier; the keyword "
-                          "baseline is answering in the meantime."),
-        ("Day 4", "ScamNet: transformer plus an explainable rule layer, with an "
-                  "ablation table. Twenty schemes, ten literacy lessons."),
-        ("Day 5", "OpenCV QR verification with tamper heuristics; MobileNetV3 "
-                  "currency-note classifier."),
-        ("Day 6", "IndexedDB offline queue and camera capture."),
-        ("Day 7", "Evaluation report, tests, Docker, deploy, demo rehearsal."),
+    T.eyebrow(s, Inches(7.35), Inches(2.0), Inches(5.4), "Models trained and measured", T.ACCENT)
+    models = [
+        ("IntentNet", INTENT_ACC,
+         f"accuracy on 183 hand-written utterances (keyword baseline {ACC})", T.T_MONEY),
+        ("ScamNet", pct(SCAM_BLEND.get("accuracy")),
+         f"accuracy on {SCAM.get('n_test', '—')} hand-written messages, "
+         f"{SCAM_BLEND.get('missed_scams', '—')} scams missed", T.T_SAFETY),
+        ("Scheme search", f"{HYBRID['hit_at_1']:.3f}" if HYBRID else "—",
+         "hit@1 on 48 queries that never name the scheme", T.T_SCHEME),
+        ("QR sticker check", f"AUC {QR['tamper_auc']:.2f}" if QR else "—",
+         f"{pct(QR.get('false_alarm_rate'))} false alarms on synthetic posters", T.T_SCAN),
     ]
     y = Inches(2.3)
-    for label, body in nxt:
-        T.card(s, Inches(7.35), y, Inches(5.38), Inches(0.78), radius=0.12)
-        T.text(s, Inches(7.6), y, Inches(0.9), Inches(0.78), label,
-               size=11, bold=True, color=T.ACCENT, anchor=MSO_ANCHOR.MIDDLE)
-        T.text(s, Inches(8.5), y, Inches(4.05), Inches(0.78), body,
-               size=10.5, color=T.INK_2, line=1.35, anchor=MSO_ANCHOR.MIDDLE)
-        y += Inches(0.87)
+    for name, value, body, tone in models:
+        T.card(s, Inches(7.35), y, Inches(5.38), Inches(0.96), radius=0.12)
+        T.bar(s, Inches(7.35), y, Inches(0.035), Inches(0.96), tone)
+        T.text(s, Inches(7.6), y + Inches(0.1), Inches(1.9), Inches(0.3), name,
+               size=11, bold=True, color=T.INK)
+        T.text(s, Inches(7.6), y + Inches(0.38), Inches(1.9), Inches(0.5), value,
+               size=19, bold=True, color=tone)
+        T.text(s, Inches(9.6), y, Inches(2.95), Inches(0.96), body,
+               size=10, color=T.INK_2, line=1.35, anchor=MSO_ANCHOR.MIDDLE)
+        y += Inches(1.08)
 
     T.page_number(s, 6)
 
@@ -359,80 +380,80 @@ def slide_progress(prs):
 def slide_results(prs):
     s = new_slide(prs)
     T.title(s, "Measured Results",
-            "Every figure below is read from a report file the build regenerates.")
+            "Hand-written test data only. Every figure is read from a report file.")
 
-    # headline latency
     T.card(s, Inches(0.6), Inches(2.0), Inches(3.9), Inches(2.15))
-    T.eyebrow(s, Inches(0.95), Inches(2.3), Inches(3.3), "Voice round trip, warm")
-    T.text(s, Inches(0.95), Inches(2.6), Inches(3.3), Inches(0.8), P50,
+    T.eyebrow(s, Inches(0.95), Inches(2.3), Inches(3.3), "IntentNet accuracy")
+    T.text(s, Inches(0.95), Inches(2.6), Inches(3.3), Inches(0.8), INTENT_ACC,
            size=38, bold=True, color=T.PRIMARY)
+    gate = GATE.get("recommended", {})
     T.text(s, Inches(0.95), Inches(3.42), Inches(3.3), Inches(0.6),
-           f"median, p95 {P95}, against a 4,000 ms budget",
-           size=11, color=T.INK_2, line=1.4)
+           f"vs {ACC} keyword baseline. Gate at {gate.get('threshold', '—')}: acts on "
+           f"{pct(gate.get('coverage'))}, wrong-and-acted {pct(gate.get('silent_error'))}.",
+           size=10.5, color=T.INK_2, line=1.4)
 
     stages = [
-        ("Speech recognition", f"{WARM.get('mean_asr_ms', '—')} ms",
-         "faster-whisper small, forced language, on the laptop GPU."),
-        ("Intent + ledger", f"{WARM.get('mean_nlu_ms', '—')} ms",
-         "Classification, slot filling and the sandbox write."),
-        ("Speech synthesis", f"{WARM.get('mean_tts_ms', '—')} ms",
-         "On a cache miss. Repeated replies are served from disk."),
+        ("Voice round trip, warm", f"{P50} / {P95}", "p50 / p95 against a 4,000 ms budget, RTX 4070"),
+        ("Speech recognition", f"{WARM.get('mean_asr_ms', '—')} ms", "faster-whisper small, forced language"),
+        ("Intent + dialog + ledger", f"{WARM.get('mean_nlu_ms', '—')} ms", "MuRIL, slots, sandbox write"),
     ]
     y = Inches(4.35)
     for label, value, note in stages:
-        T.text(s, Inches(0.6), y, Inches(2.6), Inches(0.3), label,
-               size=11.5, bold=True, color=T.INK)
-        T.text(s, Inches(3.25), y, Inches(1.25), Inches(0.3), value,
-               size=11.5, bold=True, color=T.PRIMARY, align=PP_ALIGN.RIGHT)
+        T.text(s, Inches(0.6), y, Inches(2.4), Inches(0.3), label, size=11.5, bold=True, color=T.INK)
+        T.text(s, Inches(2.9), y, Inches(1.6), Inches(0.3), value, size=11.5, bold=True,
+               color=T.PRIMARY, align=PP_ALIGN.RIGHT)
         T.text(s, Inches(0.6), y + Inches(0.26), Inches(3.9), Inches(0.3), note,
                size=10, color=T.INK_3, line=1.35)
         T.rule(s, Inches(0.6), y + Inches(0.62), Inches(3.9))
         y += Inches(0.78)
 
-    # intent accuracy
-    T.card(s, Inches(4.75), Inches(2.0), Inches(3.9), Inches(2.15))
-    T.eyebrow(s, Inches(5.1), Inches(2.3), Inches(3.3), "Intent accuracy today")
-    T.text(s, Inches(5.1), Inches(2.6), Inches(3.3), Inches(0.8), ACC,
-           size=38, bold=True, color=T.ACCENT)
-    T.text(s, Inches(5.1), Inches(3.42), Inches(3.3), Inches(0.6),
-           f"keyword baseline, macro F1 {F1}, on {TEST_ROWS} hand-written rows",
-           size=11, color=T.INK_2, line=1.4)
+    T.card(s, Inches(4.75), Inches(2.0), Inches(3.9), Inches(4.55))
+    T.eyebrow(s, Inches(5.1), Inches(2.3), Inches(3.3), "ScamNet ablation")
+    for i, hdr in enumerate(("Macro F1", "Scam P", "Missed")):
+        T.text(s, Inches(6.45) + Inches(0.72) * i, Inches(2.62), Inches(0.72), Inches(0.3), hdr,
+               size=9, bold=True, color=T.INK_3, align=PP_ALIGN.RIGHT)
+    rows = [("Rules only", SCAM_SYS.get("rules_only", {})),
+            ("MuRIL only", SCAM_SYS.get("transformer_only", {})),
+            ("Blend 0.7 (deployed)", SCAM_BLEND)]
+    y = Inches(2.95)
+    for label, m in rows:
+        T.text(s, Inches(5.1), y, Inches(1.4), Inches(0.5), label, size=10.5, bold=True,
+               color=T.INK, line=1.2)
+        vals = (f"{m.get('macro_f1', 0):.3f}", f"{m.get('scam_precision', 0):.2f}",
+                str(m.get("missed_scams", "—")))
+        for i, v in enumerate(vals):
+            T.text(s, Inches(6.45) + Inches(0.72) * i, y, Inches(0.72), Inches(0.3), v,
+                   size=11, bold=True, color=T.ACCENT if label.startswith("Blend") else T.INK_2,
+                   align=PP_ALIGN.RIGHT)
+        T.rule(s, Inches(5.1), y + Inches(0.5), Inches(3.3))
+        y += Inches(0.62)
+    T.text(s, Inches(5.1), Inches(4.95), Inches(3.3), Inches(1.5),
+           [("Rules are precise but blind to new scams; the transformer catches every "
+             "scam but raises more false alarms.",
+             {"size": 10, "color": T.INK_2, "line": 1.4, "space_after": 5}),
+            ("Here the blend equals the transformer: the rules supply the spoken "
+             "reasons, not the verdict.",
+             {"size": 10, "bold": True, "color": T.INK, "line": 1.4})])
 
-    T.text(s, Inches(4.75), Inches(4.35), Inches(3.9), Inches(1.9),
-           [("This is the floor, not the result.", {"size": 12, "bold": True,
-                                                    "color": T.INK, "space_after": 6}),
-            ("The trained MuRIL classifier is the target and is not finished, so "
-             "the app is answering with the keyword baseline it ships as a "
-             "fallback. Every response names the backend that answered it, which "
-             "is why a baseline number cannot be mistaken for a model number on "
-             "demo day.", {"size": 10.5, "color": T.INK_2, "line": 1.45,
-                           "space_after": 6}),
-            ("Target: ≥ 90% on the same hand-written set.",
-             {"size": 10.5, "bold": True, "color": T.ACCENT})],
-           )
-
-    # honest findings
-    T.card(s, Inches(8.9), Inches(2.0), Inches(3.83), Inches(4.55),
-           fill=T.SURFACE, outline=T.LINE)
+    T.card(s, Inches(8.9), Inches(2.0), Inches(3.83), Inches(4.55), fill=T.SURFACE, outline=T.LINE)
     T.bar(s, Inches(8.9), Inches(2.0), Inches(0.035), Inches(4.55), T.GOLD)
-    T.eyebrow(s, Inches(9.2), Inches(2.3), Inches(3.3), "What is not working yet", T.GOLD)
+    T.eyebrow(s, Inches(9.2), Inches(2.3), Inches(3.3), "What does not work yet", T.GOLD)
     findings = [
-        ("Telugu comes back in the wrong script.",
-         "whisper-small transcribed a Telugu clip into Devanagari. Fix is the "
-         "medium model for ta/te, with the latency cost reported."),
-        ("Hindi transcription is lossy.",
-         "बैलेंस came back as बेलेस, "
-         "which a keyword matcher then misses. A trained classifier is far more "
-         "tolerant of this than substring cues."),
-        ("Four of seven test clips resolved correctly.",
-         "Clean synthetic speech, keyword backend. Both halves of that sentence "
-         "are why the number is what it is."),
+        ("Telugu ASR writes the wrong script.",
+         "Whisper small wrote a Telugu clip in Devanagari; 6 of 7 clips resolved. "
+         "Typing is the fallback; the medium model is next."),
+        ("ScamNet is phrasing-sensitive.",
+         "A shortened version of the new-number scam scored safe. It needs more "
+         "varied training data."),
+        ("NoteNet needs real photographs.",
+         "60–100 per note, taken by hand. Until then a colour heuristic answers, "
+         "says so, and caps its confidence."),
     ]
     y = Inches(2.65)
     for head, body in findings:
-        T.text(s, Inches(9.2), y, Inches(3.25), Inches(0.5), head,
-               size=11, bold=True, color=T.INK, line=1.3)
-        T.text(s, Inches(9.2), y + Inches(0.42), Inches(3.25), Inches(0.85), body,
+        T.text(s, Inches(9.2), y, Inches(3.25), Inches(0.5), head, size=11, bold=True,
+               color=T.INK, line=1.3)
+        T.text(s, Inches(9.2), y + Inches(0.44), Inches(3.25), Inches(0.85), body,
                size=10, color=T.INK_2, line=1.4)
         y += Inches(1.32)
 
@@ -442,22 +463,19 @@ def slide_results(prs):
 # ========================================================== 8. interface
 def slide_interface(prs):
     s = new_slide(prs)
-    T.title(s, "The Interface, Rebuilt",
-            "Accessibility constraints first; the styling had to fit around them.")
+    T.title(s, "One Screen, Every Function",
+            "Rebuilt around a sidebar so nobody has to guess where anything is.")
 
     left = [
-        ("scan", T.T_SCAN, "Emoji replaced with a drawn icon set",
-         "Emoji render in whatever font the device ships, at that vendor's weight "
-         "and colour — so the same screen looked different on every phone. "
-         "Thirty-five stroked icons on a 24px grid now inherit their colour from "
-         "the thing they label."),
-        ("wallet", T.T_MONEY, "Colour carries meaning, never decoration",
-         "Six category tones, each tinting its icon chip at 8%. Six saturated "
-         "blocks on one screen would compete; six faint ones stay separable."),
-        ("globe", T.T_SCHEME, "Typography that survives four scripts",
-         "Uppercase tracked labels are scoped to English only — Devanagari, "
-         "Tamil and Telugu have no letter case, and tracking pushes matras off "
-         "their consonants."),
+        ("layers", T.T_SCHEME, "Every function named twice",
+         "The sidebar gives each section a label and a sentence saying what it does: "
+         "find schemes you qualify for, not just schemes. In all four languages."),
+        ("mic", T.T_MONEY, "Always a command line",
+         "The top bar takes speech or typing on every screen, and its answer is shown "
+         "and spoken wherever the user is."),
+        ("check", T.T_SEND, "Nothing scrolls the page",
+         "From 1366×768 up, every view fits the screen and lists scroll inside their own "
+         "card. On a phone the sidebar becomes a drawer and the views stack."),
     ]
     y = Inches(2.0)
     for name, tone, head, body in left:
@@ -469,75 +487,65 @@ def slide_interface(prs):
         y += Inches(1.62)
 
     T.card(s, Inches(8.15), Inches(2.0), Inches(4.58), Inches(4.55))
-    T.eyebrow(s, Inches(8.5), Inches(2.3), Inches(3.9), "The four constraints", T.PRIMARY)
-    T.text(s, Inches(8.5), Inches(2.6), Inches(3.9), Inches(0.5),
-           "Stated at the top of the stylesheet so a later edit cannot quietly "
-           "trade one away.", size=10.5, color=T.INK_3, line=1.4)
-
+    T.eyebrow(s, Inches(8.5), Inches(2.3), Inches(3.9), "Rules the design keeps", T.PRIMARY)
     rules = [
-        ("Light ground", "Readable in direct daylight, which is where this phone "
-                         "is actually held."),
-        ("≥ 88px tap targets", "Every control on the primary path, sized for "
-                                    "an unsteady hand."),
-        ("Fourfold redundancy", "Colour and icon and text and audio — never "
-                                "colour alone."),
-        ("17px base type", "No optional small print anywhere on the money path."),
+        ("Confirm before money moves", "A dialog that is also read aloud; Yes is the "
+                                        "only path to the ledger."),
+        ("Never colour alone", "Every control carries an icon, a word, and an audio "
+                               "button."),
+        ("Claims are labelled as claims", "A QR code's printed payee name is never "
+                                          "shown as verified."),
+        ("Stale is stamped", "A cached balance always shows the time it was read."),
     ]
-    y = Inches(3.3)
+    y = Inches(2.75)
     for label, body in rules:
         T.icon(s, "check", Inches(8.5), y + Inches(0.02), Inches(0.22), T.PRIMARY, 1.5)
-        T.text(s, Inches(8.85), y, Inches(3.55), Inches(0.28), label,
-               size=11.5, bold=True, color=T.INK)
-        T.text(s, Inches(8.85), y + Inches(0.26), Inches(3.55), Inches(0.5), body,
+        T.text(s, Inches(8.85), y, Inches(3.55), Inches(0.28), label, size=11.5, bold=True,
+               color=T.INK)
+        T.text(s, Inches(8.85), y + Inches(0.26), Inches(3.55), Inches(0.55), body,
                size=10, color=T.INK_2, line=1.4)
-        y += Inches(0.8)
+        y += Inches(0.92)
 
     T.page_number(s, 8)
 
 
-# =========================================================== 9. roadmap
+# =========================================================== 9. next steps
 def slide_roadmap(prs):
     s = new_slide(prs)
-    T.title(s, "What Ships Next", "The remaining four days of the sprint.")
+    T.title(s, "Limitations & Next Steps", "What a field deployment would need first.")
 
     steps = [
-        ("Day 4", "ScamNet",
-         "Transformer plus rule features, blended, with an ablation table. "
-         "Precision on the scam class matters most — false alarms destroy trust.",
-         T.T_SAFETY, "shield"),
-        ("Day 5", "Vision",
-         "OpenCV QR verification with sticker-tamper heuristics, and a "
-         "MobileNetV3 currency-note classifier tested on separately photographed "
-         "notes.", T.T_SCAN, "scan"),
-        ("Day 6", "Offline for real",
-         "IndexedDB queue with client-generated idempotency keys, background "
-         "sync, and camera capture wired to the vision endpoints.",
-         T.T_SCHEME, "offline"),
-        ("Day 7", "Evidence",
-         "One script regenerates every metric into RESULTS.md. Tests prove the "
-         "replay cannot double-spend. Docker Compose from a clean clone.",
-         T.T_LEARN, "growth"),
+        ("Data", "Photograph real notes",
+         "NoteNet's training script is ready; it needs 60–100 photos per denomination "
+         "and a test set shot in a separate session.", T.T_SCAN, "note"),
+        ("Speech", "Better Telugu ASR",
+         "Measure Whisper medium on phone recordings of real speakers, and report WER "
+         "with the latency cost.", T.T_SCHEME, "mic"),
+        ("Fraud", "Broader scam data",
+         "Real reported messages in all four languages, so ScamNet stops depending "
+         "on the exact wording of a scam.", T.T_SAFETY, "shield"),
+        ("People", "A field usability study",
+         "Every number here is on hand-written test data. Rural users on cheap phones "
+         "are the test that matters.", T.T_LEARN, "user"),
     ]
-    cw, gx = Inches(2.94), Inches(0.19)
-    for i, (day, head, body, tone, name) in enumerate(steps):
+    cw, gx = Inches(2.89), Inches(0.19)
+    for i, (tag, head, body, tone, name) in enumerate(steps):
         x = Inches(0.6) + (cw + gx) * i
         T.card(s, x, Inches(2.1), cw, Inches(3.5))
         T.bar(s, x, Inches(2.1), cw, Inches(0.035), tone)
         T.icon_chip(s, name, x + Inches(0.28), Inches(2.48), Inches(0.62), tone=tone)
-        T.eyebrow(s, x + Inches(0.28), Inches(3.32), cw - Inches(0.56), day, tone)
-        T.text(s, x + Inches(0.28), Inches(3.6), cw - Inches(0.56), Inches(0.4),
-               head, size=15, bold=True, color=T.INK)
-        T.text(s, x + Inches(0.28), Inches(4.1), cw - Inches(0.56), Inches(1.3),
-               body, size=10.5, color=T.INK_2, line=1.45)
+        T.eyebrow(s, x + Inches(0.28), Inches(3.32), cw - Inches(0.56), tag, tone)
+        T.text(s, x + Inches(0.28), Inches(3.6), cw - Inches(0.56), Inches(0.4), head,
+               size=14, bold=True, color=T.INK)
+        T.text(s, x + Inches(0.28), Inches(4.1), cw - Inches(0.56), Inches(1.3), body,
+               size=10.5, color=T.INK_2, line=1.45)
 
-    T.card(s, Inches(0.6), Inches(5.9), Inches(12.13), Inches(0.85),
-           fill=T.SURFACE, outline=T.LINE)
+    T.card(s, Inches(0.6), Inches(5.9), Inches(12.13), Inches(0.85), fill=T.SURFACE, outline=T.LINE)
     T.icon(s, "flag", Inches(0.95), Inches(6.15), Inches(0.3), T.ACCENT, 1.5)
     T.text(s, Inches(1.42), Inches(6.13), Inches(11.0), Inches(0.45),
-           "Verification bar: a stranger clones the repository, runs one command, "
-           "speaks Hindi into it, gets the right answer back in under four "
-           "seconds, and can replay a queued transfer twice without it settling "
-           "twice.", size=11.5, color=T.INK_2, line=1.4)
+           "Still simulated by design: no real bank, PSP or SMS gateway is connected. "
+           "The architecture is ready for one; the safety case for connecting it is not "
+           "made by a student project.", size=11.5, color=T.INK_2, line=1.4)
 
     T.page_number(s, 9)
 
@@ -546,23 +554,23 @@ def slide_roadmap(prs):
 def slide_sdg(prs):
     s = new_slide(prs)
     T.title(s, "Impact & SDG Alignment",
-            "Four goals, each tied to a feature that already exists or is dated.")
+            "Each goal tied to a working feature and a specific target — see SDG_MAPPING.md.")
 
     goals = [
-        ("1", "No Poverty", T.T_MONEY, "wallet",
+        ("1", "No Poverty · 1.3, 1.4", T.T_MONEY, "wallet",
          "Opens formal savings, transfers and welfare entitlements to households "
          "currently served only by informal lenders."),
-        ("8", "Decent Work & Growth", T.T_SEND, "growth",
+        ("8", "Decent Work · 8.3, 8.10", T.T_SEND, "growth",
          "Gives farmers and micro-entrepreneurs scheme discovery and credit "
          "guidance in the language they negotiate in."),
-        ("10", "Reduced Inequalities", T.T_SCHEME, "user",
+        ("10", "Reduced Inequalities · 10.2", T.T_SCHEME, "user",
          "Removes reading as a precondition for banking, so non-literate and "
          "elderly users operate the same account on equal terms."),
-        ("16", "Peace, Justice & Institutions", T.T_SAFETY, "shield",
+        ("16", "Justice & Institutions · 16.3, 16.4", T.T_SAFETY, "shield",
          "Explains why a message is a scam rather than only scoring it, and logs "
          "every money action against an auditable sandbox ledger."),
     ]
-    cw, gx = Inches(2.94), Inches(0.19)
+    cw, gx = Inches(2.89), Inches(0.19)
     for i, (num, name, tone, icon_name, body) in enumerate(goals):
         x = Inches(0.6) + (cw + gx) * i
         T.card(s, x, Inches(2.05), cw, Inches(3.35))

@@ -2,16 +2,22 @@
   "device": "cuda (NVIDIA GeForce RTX 4070 Laptop GPU)",
   "asr_model": "small",
   "clips": 7,
-  "cold_start_ms": 4863,
-  "warm": {
-    "p50_ms": 1277,
-    "p95_ms": 1681,
-    "mean_ms": 1198,
-    "mean_asr_ms": 505,
-    "mean_nlu_ms": 2,
-    "mean_tts_ms": 689
+  "model_load_ms": {
+    "intent": 4108,
+    "scam": 617,
+    "embedder+scheme_index": 6575,
+    "asr": 1518
   },
-  "intent_correct": 4,
+  "cold_start_ms": 965,
+  "warm": {
+    "p50_ms": 551,
+    "p95_ms": 596,
+    "mean_ms": 522,
+    "mean_asr_ms": 477,
+    "mean_nlu_ms": 44,
+    "mean_tts_ms": 0
+  },
+  "intent_correct": 6,
   "budget_ms": 4000,
   "note": "Clips are gTTS-rendered, i.e. clean studio speech. These numbers are a latency floor and a wiring check, not an accuracy result. Word error rate must be measured on phone recordings of real speakers.",
   "runs": [
@@ -21,18 +27,18 @@
       "expected_intent": "check_balance",
       "reference_text": "मेरा बैलेंस कितना है",
       "transcript": "मेरा बेलेस कितना है",
-      "intent": "unknown",
-      "intent_correct": false,
+      "intent": "check_balance",
+      "intent_correct": true,
       "asr_confidence": 0.6625,
       "audio_seconds": 1.97,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 4860,
-        "nlu_ms": 2,
-        "tts_ms": 0,
-        "total_ms": 4863
+        "asr_ms": 954,
+        "nlu_ms": 9,
+        "tts_ms": 1,
+        "total_ms": 965
       },
-      "wall_ms": 4875
+      "wall_ms": 981
     },
     {
       "file": "hi_send.mp3",
@@ -40,18 +46,18 @@
       "expected_intent": "send_money",
       "reference_text": "रमेश को पांच सौ रुपये भेज दो",
       "transcript": "रमेश को पाथ सो रुप्ये बहीज दो",
-      "intent": "unknown",
-      "intent_correct": false,
+      "intent": "send_money",
+      "intent_correct": true,
       "asr_confidence": 0.6731,
       "audio_seconds": 2.76,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 562,
-        "nlu_ms": 1,
+        "asr_ms": 539,
+        "nlu_ms": 11,
         "tts_ms": 0,
-        "total_ms": 563
+        "total_ms": 551
       },
-      "wall_ms": 564
+      "wall_ms": 553
     },
     {
       "file": "hi_scheme.mp3",
@@ -63,14 +69,14 @@
       "intent_correct": true,
       "asr_confidence": 0.7241,
       "audio_seconds": 3.46,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 688,
-        "nlu_ms": 0,
-        "tts_ms": 992,
-        "total_ms": 1681
+        "asr_ms": 561,
+        "nlu_ms": 34,
+        "tts_ms": 0,
+        "total_ms": 596
       },
-      "wall_ms": 1681
+      "wall_ms": 596
     },
     {
       "file": "en_balance.mp3",
@@ -82,14 +88,14 @@
       "intent_correct": true,
       "asr_confidence": 0.7374,
       "audio_seconds": 3.02,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 373,
-        "nlu_ms": 2,
-        "tts_ms": 621,
-        "total_ms": 997
+        "asr_ms": 342,
+        "nlu_ms": 9,
+        "tts_ms": 0,
+        "total_ms": 352
       },
-      "wall_ms": 997
+      "wall_ms": 352
     },
     {
       "file": "en_scam.mp3",
@@ -101,14 +107,14 @@
       "intent_correct": true,
       "asr_confidence": 0.6509,
       "audio_seconds": 3.65,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 382,
-        "nlu_ms": 1,
-        "tts_ms": 1010,
-        "total_ms": 1393
+        "asr_ms": 373,
+        "nlu_ms": 192,
+        "tts_ms": 0,
+        "total_ms": 566
       },
-      "wall_ms": 1394
+      "wall_ms": 566
     },
     {
       "file": "ta_balance.mp3",
@@ -120,14 +126,14 @@
       "intent_correct": true,
       "asr_confidence": 0.8207,
       "audio_seconds": 3.12,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 536,
-        "nlu_ms": 1,
-        "tts_ms": 631,
-        "total_ms": 1169
+        "asr_ms": 505,
+        "nlu_ms": 11,
+        "tts_ms": 0,
+        "total_ms": 517
       },
-      "wall_ms": 1170
+      "wall_ms": 518
     },
     {
       "file": "te_balance.mp3",
@@ -135,18 +141,18 @@
       "expected_intent": "check_balance",
       "reference_text": "నా ఖాతాలో ఎంత డబ్బు ఉంది",
       "transcript": "ना काता लो येंता ड़ब वूंदी",
-      "intent": "unknown",
+      "intent": "report_scam",
       "intent_correct": false,
       "asr_confidence": 0.5416,
       "audio_seconds": 2.71,
-      "nlu_backend": "keyword_baseline",
+      "nlu_backend": "muril_intent",
       "timings": {
-        "asr_ms": 491,
+        "asr_ms": 542,
         "nlu_ms": 9,
-        "tts_ms": 885,
-        "total_ms": 1386
+        "tts_ms": 0,
+        "total_ms": 552
       },
-      "wall_ms": 1387
+      "wall_ms": 552
     }
   ]
 }

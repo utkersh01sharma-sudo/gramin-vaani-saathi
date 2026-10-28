@@ -6,6 +6,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import transaction
 from django.utils import timezone
+from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -260,7 +261,7 @@ class LoginView(APIView):
         )
 
 
-@extend_schema(tags=["accounts"])
+@extend_schema(tags=["accounts"], responses=OpenApiTypes.OBJECT)
 class MeView(APIView):
     permission_classes = [IsAuthenticated]
 

@@ -1,0 +1,101 @@
+# docker compose up --build        then open http://localhost:8000
+#
+# Five services, the same split as the architecture diagram:
+#
+#   web     Django + DRF behind gunicorn; serves the PWA and the API. CPU only.
+#   worker  Celery, for voice queries and other slow work.             CPU only.
+#   models  backend/ai/server.py: IntentNet, ScamNet, the scheme encoder.
+#           web and worker reach it over HTTP (AI_BACKEND=remote), so GPU
+#           memory is paid once here instead of once per web process.
+#   db      Postgres 16.
+#   redis   Celery broker and result store.
+#
+# Model weights are not in git (ml/artifacts/ is gitignored; each is ~900 MB).
+# Train them (python ml/train_intent.py, python ml/train_scam.py) or unpack the
+# release archive into ml/artifacts/ before starting. Without them the model
+# server still starts and answers from its fallbacks: keyword intents and
+# rule-only scam checks.
+#
+# For a GPU model server: docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build
+
+x-app-env: &app-env
+  DJANGO_SETTINGS_MODULE: config.settings.prod
+  DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-compose-demo-only-change-me}
+  DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1,web
+  DATABASE_URL: postgres://vaani:vaani@db:5432/vaani
+  CELERY_BROKER_URL: redis://redis:6379/0
+  CELERY_RESULT_BACKEND: redis://redis:6379/1
+  CELERY_TASK_ALWAYS_EAGER: "false"
+  AI_BACKEND: remote
+  AI_REMOTE_URL: http://models:9000
+  AI_REMOTE_KEY: ${AI_REMOTE_KEY:-compose-demo-key}
+  ASR_MODEL_SIZE: small
+  ASR_DEVICE: cpu
+  ASR_COMPUTE_TYPE: int8
+  OTP_DELIVERY: console
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vaani
+      POSTGRES_PASSWORD: vaani
+      POSTGRES_DB: vaani
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vaani"]
+      interval: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      retries: 20
+
+  models:
+    build: .
+    command: python backend/ai/server.py --host 0.0.0.0 --port 9000
+    environment:
+      <<: *app-env
+      AI_BACKEND: local
+      DATABASE_URL: sqlite:////tmp/unused.sqlite3
+    volumes:
+      - ./ml/artifacts:/app/ml/artifacts:ro
+      - hfcache:/hf-cache
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/health')"]
+      interval: 10s
+      start_period: 120s
+      retries: 30
+
+  web:
+    build: .
+    command: >
+      sh -c "python backend/manage.py migrate --noinput &&
+             python backend/manage.py seed_demo &&
+             python backend/manage.py collectstatic --noinput &&
+             gunicorn --chdir backend config.wsgi:application -b 0.0.0.0:8000 -w 2 --timeout 60"
+    environment: *app-env
+    ports: ["8000:8000"]
+    volumes: [hfcache:/hf-cache]
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      models: {condition: service_started}
+
+  worker:
+    build: .
+    command: celery --workdir backend -A config worker -l info --concurrency 2
+    environment:
+      <<: *app-env
+      AI_WARMUP: "0"     # models live in the model server, not here
+    volumes: [hfcache:/hf-cache]
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_healthy}
+
+volumes:
+  pgdata:
+  hfcache:

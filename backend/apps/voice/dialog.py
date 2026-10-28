@@ -419,11 +419,45 @@ def _handle_scheme(user, lang: str, result: DialogResult) -> DialogResult:
 SCAM_MIN_WORDS = 8
 
 
+_QUESTION_START = (
+    "what", "how", "why", "where", "when", "should", "can", "is ", "do ", "does", "will", "who",
+    "क्या", "कैसे", "क्यों", "कहाँ", "कहां", "कब", "किसे",
+    "என்ன", "எப்படி", "ஏன்", "எங்கே", "எப்போது",
+    "ఏమి", "ఎలా", "ఎందుకు", "ఎక్కడ", "ఎప్పుడు",
+)
+_QUESTION_END = ("?", "क्या", "कलामा", "லாமா", "ா?", "ఆ?", "నా?")
+
+
+def _looks_like_question(text: str) -> bool:
+    t = text.strip().lower()
+    # Start or end only: a long scam message with a "?" in its middle is still a
+    # message to score, not a question to answer.
+    return t.startswith(_QUESTION_START) or t.endswith(_QUESTION_END)
+
+
 def _handle_check_scam(user, lang: str, result: DialogResult) -> DialogResult:
-    if len(result.transcript.split()) < SCAM_MIN_WORDS:
-        result.reply_text = say("safety", lang)
-        result.action_taken = "navigate:safety"
-        return result
+    """A question about fraud gets a reviewed answer; a message gets a verdict.
+
+    "Should I tell my OTP to the bank?" and "Your account will be blocked, update
+    KYC at bit.ly/x" both classify as check_scam, but they need different
+    things. Short or question-shaped utterances go to the knowledge base first;
+    long ones are treated as a message being read out and scored by ScamNet.
+    """
+    words = len(result.transcript.split())
+    if words < SCAM_MIN_WORDS or _looks_like_question(result.transcript):
+        from ai.registry import get_embedder
+        from apps.fraud import knowledge
+
+        answer = knowledge.ask(result.transcript, get_embedder(), lang)
+        if answer["answered"]:
+            result.reply_text = answer["best"]["answer"]
+            result.action_taken = "fraud_answer"
+            result.slots["ask"] = answer
+            return result
+        if words < SCAM_MIN_WORDS:
+            result.reply_text = say("safety", lang)
+            result.action_taken = "navigate:safety"
+            return result
     from apps.fraud.views import check_text
 
     verdict = check_text(user, result.transcript, lang)

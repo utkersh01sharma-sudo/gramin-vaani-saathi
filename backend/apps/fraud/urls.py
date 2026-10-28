@@ -6,4 +6,6 @@ urlpatterns = [
     path("check/", views.ScamCheckView.as_view(), name="fraud-check"),
     path("history/", views.ScamHistoryView.as_view(), name="fraud-history"),
     path("report/", views.ScamReportView.as_view(), name="fraud-report"),
+    path("ask/", views.AskView.as_view(), name="fraud-ask"),
+    path("questions/", views.QuestionListView.as_view(), name="fraud-questions"),
 ]

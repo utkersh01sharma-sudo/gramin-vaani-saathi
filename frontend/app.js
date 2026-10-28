@@ -63,6 +63,9 @@ const state = {
   checks: [],
   reportKind: null,
   reportSteps: null,
+  askResult: null,                       // { answered, best, related } from /api/fraud/ask/
+  askShown: null,                        // the entry shown as the answer (best, or a related one picked)
+  suggestions: [],
 };
 
 let t = makeT(state.lang || 'hi');
@@ -223,6 +226,12 @@ function handleDialogResult(said, result) {
   }
   if (slots.lesson_id) { state.lessonSelected = slots.lesson_id; state.quiz = null; }
   if (slots.scam) { state.scamVerdict = slots.scam; $('#scam-input').value = said; loadChecks(); }
+  if (slots.ask) {
+    state.askResult = slots.ask;
+    state.askShown = slots.ask.best;
+    state.scamVerdict = null;
+    $('#scam-input').value = said;
+  }
   if (slots.open === 'report') state.reportKind = null;
   if (slots.payee && result.action_taken === 'ask_amount') {
     const c = state.contacts.find((x) => x.vpa === slots.payee.vpa);
@@ -354,7 +363,7 @@ async function enterApp() {
   renderNav();
   const fromHash = location.hash.replace('#/', '');
   go(VIEWS.includes(fromHash) ? fromHash : 'overview', { replace: true });
-  await Promise.all([refreshAccount(), loadSchemes(), loadLessons()]);
+  await Promise.all([refreshAccount(), loadSchemes(), loadLessons(), loadSuggestions()]);
   await refreshQueueCount();
   drainQueue();
 }
@@ -665,11 +674,14 @@ function setLanguage(lang, { silent = false } = {}) {
     state.scanResult = null;
     state.reportSteps = null;
     state.reportKind = null;
+    state.askResult = null;
+    state.askShown = null;
     hideReply();
     state.schemes = store.get(`schemes.${lang}`, null);
     state.lessons = store.get(`lessons.${lang}`, null);
     loadSchemes();
     loadLessons();
+    loadSuggestions();
     api('/api/accounts/profile/', { method: 'PATCH', body: { language: lang } }).catch(() => {});
   }
   if (!$('#app-shell').hidden) { renderNav(); renderTitle(); renderShellUser(); renderView(); }
@@ -1359,14 +1371,116 @@ async function checkScam(text, { mini = false } = {}) {
   btn.disabled = true;
   try {
     state.scamVerdict = await api('/api/fraud/check/', { method: 'POST', body: { text, language: state.lang } });
+    state.askResult = null;
     const v = state.scamVerdict;
     speak(`${v.headline}. ${v.reasons.join(' ')} ${v.advice}`);
     loadChecks();
   } catch { toast(t('networkError'), true); } finally { btn.disabled = false; }
   renderView();
+  if (!mini) $('#scam-result').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+// ── fraud questions: a search over reviewed answers, not a chatbot
+const QUESTION_START = ['what', 'how', 'why', 'where', 'when', 'should', 'can ', 'is ', 'do ', 'does', 'will', 'who',
+  'क्या', 'कैसे', 'क्यों', 'कहाँ', 'कहां', 'कब', 'என்ன', 'எப்படி', 'ஏன்', 'எங்கே', 'ఏమి', 'ఎలా', 'ఎందుకు', 'ఎక్కడ'];
+const QUESTION_END = ['?', 'क्या', 'லாமா', 'ఆ', 'నా'];
+
+// Same rule as the voice dialog: start or end decides. A pasted scam message
+// with a "?" in the middle is a message to check, not a question to answer.
+function looksLikeQuestion(text) {
+  const x = text.trim().toLowerCase();
+  return QUESTION_START.some((w) => x.startsWith(w)) || QUESTION_END.some((w) => x.endsWith(w));
+}
+
+async function loadSuggestions() {
+  const key = `questions.${state.lang}`;
+  try {
+    state.suggestions = (await api(`/api/fraud/questions/?lang=${state.lang}`)).results || [];
+    store.set(key, state.suggestions);
+  } catch { state.suggestions = store.get(key, []); }
+  if (state.view === 'safety') renderSafety();
+}
+
+async function askQuestion(text) {
+  if (!text) return;
+  const btn = $('#btn-ask');
+  btn.disabled = true;
+  try {
+    state.askResult = await api('/api/fraud/ask/', { method: 'POST', body: { text, language: state.lang } });
+    state.askShown = state.askResult.best;
+    state.scamVerdict = null;
+    speak(state.askShown ? state.askShown.answer : t('noAnswer'));
+  } catch { toast(t('networkError'), true); } finally { btn.disabled = false; }
+  renderSafety();
+  // The answer lands below the input; bring it into view so it is not missed.
+  $('#ask-result').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function renderAsk() {
+  const chips = $('#ask-suggest');
+  chips.innerHTML = '';
+  // Four, not all: each is a full sentence, and a wall of them reads as homework.
+  state.suggestions.slice(0, 4).forEach((sug) => {
+    const c = el('button', 'chip q', sug.question);
+    c.addEventListener('click', () => { $('#scam-input').value = sug.question; askQuestion(sug.question); });
+    chips.append(c);
+  });
+
+  const box = $('#ask-result');
+  const r = state.askResult;
+  box.hidden = !r;
+  if (!r) return;
+  box.innerHTML = '';
+  const shown = state.askShown;
+
+  if (shown) {
+    const head = el('div', 'card-head');
+    const ic = el('span', 'card-icon');
+    ic.innerHTML = iconSvg(shown.icon) || iconSvg('shield');
+    const sp = el('button', 'icon-btn');
+    sp.innerHTML = iconSvg('speaker');
+    sp.setAttribute('aria-label', t('listen'));
+    sp.addEventListener('click', () => speak(`${shown.question} ${shown.answer}`));
+    head.append(ic, el('h3', 'answer-q', shown.question), sp);
+    box.append(el('div', 'eyebrow', t('bestAnswer')), head, el('p', 'answer-text', shown.answer));
+    if (shown.links?.length) {
+      const links = el('div', 'btn-row');
+      shown.links.forEach((l) => {
+        const a = el('a', l.href.startsWith('tel:') ? 'btn btn-danger btn-sm' : 'btn btn-ghost btn-sm');
+        a.href = l.href;
+        if (!l.href.startsWith('tel:')) { a.target = '_blank'; a.rel = 'noopener'; }
+        a.append(iconSpan(l.href.startsWith('tel:') ? 'phoneCall' : 'globe'), el('span', '', l.label));
+        links.append(a);
+      });
+      box.append(el('div', 'eyebrow', t('officialHelp')), links);
+    }
+  } else {
+    // No reliable answer: say so, and put the one action that always helps first.
+    box.append(el('div', 'no-answer', t('noAnswer')));
+    const call = el('a', 'btn btn-danger btn-sm');
+    call.href = 'tel:1930';
+    call.append(iconSpan('phoneCall'), el('span', '', t('call1930')));
+    call.style.alignSelf = 'flex-start';
+    box.append(call);
+  }
+
+  const others = [...(r.best && shown?.id !== r.best.id ? [r.best] : []), ...r.related]
+    .filter((x) => x.id !== shown?.id);
+  if (others.length) {
+    box.append(el('div', 'eyebrow', t(shown ? 'relatedQuestions' : 'maybeMeant')));
+    const list = el('div', 'related');
+    others.forEach((x) => {
+      const b = el('button');
+      b.append(el('span', '', x.question), iconSpan('chevron'));
+      b.addEventListener('click', () => { state.askShown = x; speak(x.answer); renderSafety(); });
+      list.append(b);
+    });
+    box.append(list);
+  }
 }
 
 function renderSafety() {
+  renderAsk();
   const box = $('#scam-result');
   const v = state.scamVerdict;
   box.hidden = !v;
@@ -1607,7 +1721,14 @@ function wire() {
   });
 
   // overview
-  $('#ov-scam-btn').addEventListener('click', () => checkScam($('#ov-scam-input').value.trim(), { mini: true }));
+  $('#ov-scam-btn').addEventListener('click', () => {
+    const text = $('#ov-scam-input').value.trim();
+    if (!text) return;
+    // A question typed into the overview box opens its answer on the safety
+    // screen; anything else is checked as a message, in place.
+    if (looksLikeQuestion(text)) { $('#scam-input').value = text; go('safety'); askQuestion(text); }
+    else checkScam(text, { mini: true });
+  });
   $$('[data-scan-go]').forEach((b) => b.addEventListener('click', () => { state.scanMode = b.dataset.scanGo; state.scanResult = null; go('scan'); }));
 
   // balance
@@ -1635,6 +1756,7 @@ function wire() {
 
   // safety
   $('#btn-scam-check').addEventListener('click', () => checkScam($('#scam-input').value.trim()));
+  $('#btn-ask').addEventListener('click', () => askQuestion($('#scam-input').value.trim()));
   $$('#report-kind button').forEach((b) => b.addEventListener('click', () => submitReport(b.dataset.kind)));
 
   // profile

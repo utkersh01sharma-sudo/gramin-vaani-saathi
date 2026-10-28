@@ -1,0 +1,48 @@
+{"lang": "hi", "text": "बैंक मैनेजर बोलकर किसी ने कोड माँगा है, दूँ?", "relevant": ["share-otp"]}
+{"lang": "hi", "text": "पैसे लेने के लिए पिन क्यों माँग रहा है वो", "relevant": ["pin-to-receive", "qr-to-receive"]}
+{"lang": "hi", "text": "अनजान आदमी ने पैसे की रिक्वेस्ट भेजी है", "relevant": ["collect-request"]}
+{"lang": "hi", "text": "मेरा पैसा धोखे से कट गया अब क्या होगा", "relevant": ["money-lost", "refund-rules"]}
+{"lang": "hi", "text": "पुलिस वाला वीडियो कॉल पर डरा रहा है", "relevant": ["digital-arrest"]}
+{"lang": "hi", "text": "पैसा डबल करने वाली स्कीम में लगाऊँ क्या", "relevant": ["investment-double"]}
+{"lang": "hi", "text": "बेटे के नाम से नए नंबर से पैसे माँगे जा रहे हैं", "relevant": ["new-number"]}
+{"lang": "hi", "text": "लोन ऐप वाले गाली दे रहे हैं और धमका रहे हैं", "relevant": ["loan-app"]}
+{"lang": "hi", "text": "बैंक मेरी बात नहीं सुन रहा, ऊपर शिकायत कहाँ होगी", "relevant": ["bank-not-helping"]}
+{"lang": "hi", "text": "सिम में अचानक सिग्नल गायब है", "relevant": ["sim-swap"]}
+{"lang": "en", "text": "a caller from the bank wants the code I just got", "relevant": ["share-otp"]}
+{"lang": "en", "text": "why would I enter a pin to get paid", "relevant": ["pin-to-receive", "qr-to-receive"]}
+{"lang": "en", "text": "the buyer of my old bike sent a QR code to pay me", "relevant": ["qr-to-receive"]}
+{"lang": "en", "text": "I got scammed, what are the first things to do", "relevant": ["money-lost"]}
+{"lang": "en", "text": "will the bank return money stolen from my account", "relevant": ["refund-rules"]}
+{"lang": "en", "text": "I searched google for customer care and called that number", "relevant": ["customer-care"]}
+{"lang": "en", "text": "they asked me to install a screen sharing app", "relevant": ["remote-app"]}
+{"lang": "en", "text": "someone took money using my fingerprint", "relevant": ["aadhaar-lock"]}
+{"lang": "en", "text": "is a part time job that asks for money genuine", "relevant": ["job-task"]}
+{"lang": "en", "text": "how do I report a spam number that keeps calling", "relevant": ["report-number"]}
+{"lang": "ta", "text": "வங்கி அதிகாரி என்று சொல்லி குறியீடு கேட்கிறார்", "relevant": ["share-otp"]}
+{"lang": "ta", "text": "பணம் போய்விட்டது, முதலில் என்ன செய்ய வேண்டும்", "relevant": ["money-lost"]}
+{"lang": "ta", "text": "காவல்துறை வீடியோ அழைப்பில் பணம் கேட்கிறது", "relevant": ["digital-arrest"]}
+{"lang": "ta", "text": "லாட்டரி பரிசுக்கு வரி கட்டச் சொல்கிறார்கள்", "relevant": ["lottery"]}
+{"lang": "ta", "text": "வங்கி குறுஞ்செய்தி உண்மையானதா என்று எப்படி அறிவது", "relevant": ["real-bank-sms", "kyc-sms"]}
+{"lang": "ta", "text": "ஏடிஎம்மில் ஒருவர் உதவ வந்தார்", "relevant": ["atm-help"]}
+{"lang": "ta", "text": "வாட்ஸ்அப்பில் வந்த apk கோப்பைத் திறக்கலாமா", "relevant": ["apk-file"]}
+{"lang": "ta", "text": "என் சிம் நெட்வொர்க் திடீரென்று போய்விட்டது", "relevant": ["sim-swap"]}
+{"lang": "ta", "text": "மின் கட்டணம் கட்டவில்லை என்று மிரட்டல் செய்தி", "relevant": ["electricity"]}
+{"lang": "ta", "text": "திட்டத்தில் சேர முகவர் பணம் கேட்கிறார்", "relevant": ["scheme-agent-fee"]}
+{"lang": "te", "text": "బ్యాంకు నుండి అని చెప్పి కోడ్ అడుగుతున్నారు", "relevant": ["share-otp"]}
+{"lang": "te", "text": "డబ్బు పోయింది, ఇప్పుడు ఏం చేయాలి", "relevant": ["money-lost"]}
+{"lang": "te", "text": "పోలీసులం అని వీడియో కాల్ చేసి బెదిరిస్తున్నారు", "relevant": ["digital-arrest"]}
+{"lang": "te", "text": "పార్సెల్‌లో డ్రగ్స్ ఉన్నాయని ఫోన్ వచ్చింది", "relevant": ["parcel"]}
+{"lang": "te", "text": "ఉద్యోగం కోసం ముందు డబ్బు కట్టమంటున్నారు", "relevant": ["job-task"]}
+{"lang": "te", "text": "లింక్ నిజమైనదో కాదో ఎలా చూడాలి", "relevant": ["check-link"]}
+{"lang": "te", "text": "OTP పొరపాటున చెప్పేశాను", "relevant": ["shared-already"]}
+{"lang": "te", "text": "KYC అప్‌డేట్ చేయమని మెసేజ్ వచ్చింది", "relevant": ["kyc-sms"]}
+{"lang": "te", "text": "ఎవరో UPIలో డబ్బు రిక్వెస్ట్ పంపారు", "relevant": ["collect-request"]}
+{"lang": "te", "text": "మోసపు కాల్‌ని ఎలా గుర్తించాలి", "relevant": ["spot-scam"]}
+{"lang": "hi", "text": "आज क्रिकेट मैच का स्कोर क्या है", "relevant": []}
+{"lang": "hi", "text": "गेहूँ की बुवाई कब करें", "relevant": []}
+{"lang": "en", "text": "what is the weather tomorrow", "relevant": []}
+{"lang": "en", "text": "recipe for making rotis", "relevant": []}
+{"lang": "ta", "text": "நாளை மழை பெய்யுமா", "relevant": []}
+{"lang": "ta", "text": "சிறந்த திரைப்படம் எது", "relevant": []}
+{"lang": "te", "text": "ఈ రోజు సినిమా ఏది చూడాలి", "relevant": []}
+{"lang": "te", "text": "బియ్యం ధర ఎంత", "relevant": []}

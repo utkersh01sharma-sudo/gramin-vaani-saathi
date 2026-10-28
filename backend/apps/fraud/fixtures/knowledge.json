@@ -1,0 +1,940 @@
+{
+  "_comment": "Fraud-safety answers for the 'ask a question' search on the safety screen. Every answer is fixed, reviewed text -- nothing is generated -- because a confident wrong answer about money safety does more harm than no answer. Answers are general safety guidance, not legal or financial advice. Links point only to official Government of India / RBI resources.",
+  "entries": [
+    {
+      "id": "share-otp",
+      "topic": "secrets",
+      "icon": "lock",
+      "featured": true,
+      "keywords": [
+        "otp",
+        "ओटीपी",
+        "ஓடிபி",
+        "ఓటీపీ",
+        "code",
+        "कोड",
+        "share",
+        "bata",
+        "बताना",
+        "bank call"
+      ],
+      "links": [],
+      "q": {
+        "hi": "क्या बैंक वाले को फ़ोन पर OTP बताना चाहिए?",
+        "en": "Should I tell my OTP to someone who says they are from the bank?",
+        "ta": "வங்கியிலிருந்து பேசுவதாகச் சொல்பவருக்கு OTP சொல்லலாமா?",
+        "te": "బ్యాంకు నుండి అని చెప్పేవారికి OTP చెప్పవచ్చా?"
+      },
+      "a": {
+        "hi": "नहीं, कभी नहीं। कोई भी बैंक, पुलिस या सरकारी दफ़्तर OTP नहीं माँगता। OTP से आपके खाते का पैसा निकल सकता है, इसलिए माँगने वाला ठग है — फ़ोन काट दीजिए।",
+        "en": "No, never. No bank, police officer or government office ever asks for an OTP. An OTP can be used to take money from your account, so whoever asks for it is a fraudster — hang up.",
+        "ta": "இல்லை, ஒருபோதும் இல்லை. எந்த வங்கியும், காவல்துறையும், அரசு அலுவலகமும் OTP கேட்காது. OTP மூலம் உங்கள் கணக்கிலிருந்து பணம் எடுக்க முடியும்; கேட்பவர் மோசடிக்காரர் — அழைப்பைத் துண்டியுங்கள்.",
+        "te": "లేదు, ఎప్పుడూ కాదు. ఏ బ్యాంకూ, పోలీసులూ, ప్రభుత్వ కార్యాలయమూ OTP అడగదు. OTPతో మీ ఖాతా నుండి డబ్బు తీయవచ్చు, కాబట్టి అడిగేవారు మోసగాళ్లు — ఫోన్ పెట్టేయండి."
+      }
+    },
+    {
+      "id": "pin-to-receive",
+      "topic": "upi",
+      "icon": "upi",
+      "featured": true,
+      "keywords": [
+        "pin",
+        "पिन",
+        "பின்",
+        "పిన్",
+        "receive",
+        "पाने",
+        "लेने",
+        "upi pin"
+      ],
+      "links": [],
+      "q": {
+        "hi": "पैसे पाने के लिए UPI पिन डालना पड़ता है क्या?",
+        "en": "Do I need to enter my UPI PIN to receive money?",
+        "ta": "பணம் பெற UPI பின் போட வேண்டுமா?",
+        "te": "డబ్బు అందుకోవడానికి UPI పిన్ వేయాలా?"
+      },
+      "a": {
+        "hi": "नहीं। UPI पिन सिर्फ़ पैसे भेजने के लिए होता है। अगर कोई कहे कि पैसे पाने के लिए पिन डालो, तो आप असल में उसे पैसे भेज रहे होंगे — यह ठगी है।",
+        "en": "No. A UPI PIN is only for sending money. If someone tells you to enter your PIN to receive money, you would actually be paying them — it is a scam.",
+        "ta": "இல்லை. UPI பின் பணம் அனுப்ப மட்டுமே. பணம் பெற பின் போடச் சொன்னால், உண்மையில் நீங்கள் அவருக்குப் பணம் அனுப்புவீர்கள் — இது மோசடி.",
+        "te": "లేదు. UPI పిన్ డబ్బు పంపడానికి మాత్రమే. డబ్బు అందుకోవడానికి పిన్ వేయమంటే, నిజానికి మీరే వారికి డబ్బు పంపుతారు — ఇది మోసం."
+      }
+    },
+    {
+      "id": "collect-request",
+      "topic": "upi",
+      "icon": "send",
+      "featured": false,
+      "keywords": [
+        "request",
+        "collect",
+        "रिक्वेस्ट",
+        "मांग",
+        "approve",
+        "अप्रूव",
+        "கோரிக்கை",
+        "రిక్వెస్ట్"
+      ],
+      "links": [],
+      "q": {
+        "hi": "किसी ने UPI पर पैसे की रिक्वेस्ट भेजी है, क्या करूँ?",
+        "en": "Someone sent me a UPI payment request. What should I do?",
+        "ta": "யாரோ UPI-ல் பணக் கோரிக்கை அனுப்பியுள்ளார், என்ன செய்வது?",
+        "te": "ఎవరో UPIలో డబ్బు రిక్వెస్ట్ పంపారు, ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "रिक्वेस्ट को मंज़ूर करने और पिन डालने से पैसा आपके खाते से जाता है, आता नहीं। अगर आप उस व्यक्ति को जानते नहीं या पैसे देने नहीं हैं, तो रिक्वेस्ट को मना कर दीजिए।",
+        "en": "Approving a request and entering your PIN sends money out of your account — it never brings money in. If you do not know the person or do not owe them money, decline the request.",
+        "ta": "கோரிக்கையை ஏற்று பின் போட்டால் பணம் உங்கள் கணக்கிலிருந்து போகும், வராது. அவரைத் தெரியாவிட்டால் அல்லது பணம் தர வேண்டியதில்லை என்றால் கோரிக்கையை மறுங்கள்.",
+        "te": "రిక్వెస్ట్ ఒప్పుకుని పిన్ వేస్తే డబ్బు మీ ఖాతా నుండి వెళ్తుంది, రాదు. ఆ వ్యక్తి తెలియకపోతే లేదా డబ్బు ఇవ్వాల్సిన అవసరం లేకపోతే రిక్వెస్ట్‌ను తిరస్కరించండి."
+      }
+    },
+    {
+      "id": "qr-to-receive",
+      "topic": "upi",
+      "icon": "qr",
+      "featured": false,
+      "keywords": [
+        "qr",
+        "scan",
+        "स्कैन",
+        "क्यूआर",
+        "ஸ்கேன்",
+        "స్కాన్",
+        "receive",
+        "olx",
+        "buyer",
+        "army"
+      ],
+      "links": [],
+      "q": {
+        "hi": "खरीदार कहता है QR स्कैन करो तो पैसे मिलेंगे, सही है?",
+        "en": "A buyer says I will get paid if I scan his QR code. Is that true?",
+        "ta": "QR ஸ்கேன் செய்தால் பணம் கிடைக்கும் என்று வாங்குபவர் சொல்கிறார், உண்மையா?",
+        "te": "QR స్కాన్ చేస్తే డబ్బు వస్తుందని కొనేవారు చెబుతున్నారు, నిజమా?"
+      },
+      "a": {
+        "hi": "नहीं। QR कोड स्कैन करके पिन डालने से हमेशा पैसा जाता है। पैसा पाने के लिए आपको सिर्फ़ अपना UPI पता या अपना QR देना होता है। 'आर्मी वाला खरीदार' यही ठगी करता है।",
+        "en": "No. Scanning a QR code and entering your PIN always sends money. To receive money you only give your own UPI ID or your own QR. This is the classic 'army officer buyer' scam.",
+        "ta": "இல்லை. QR ஸ்கேன் செய்து பின் போட்டால் எப்போதும் பணம் போகும். பணம் பெற உங்கள் UPI முகவரியையோ உங்கள் QR-ஐயோ கொடுத்தால் போதும். 'ராணுவ அதிகாரி வாங்குபவர்' மோசடி இதுதான்.",
+        "te": "లేదు. QR స్కాన్ చేసి పిన్ వేస్తే ఎప్పుడూ డబ్బు వెళ్తుంది. డబ్బు పొందడానికి మీ UPI చిరునామా లేదా మీ QR ఇస్తే చాలు. 'ఆర్మీ ఆఫీసర్ కొనుగోలుదారు' మోసం ఇదే."
+      }
+    },
+    {
+      "id": "wrong-transfer",
+      "topic": "upi",
+      "icon": "arrowIn",
+      "featured": false,
+      "keywords": [
+        "mistake",
+        "galti",
+        "गलती",
+        "wrong",
+        "return",
+        "वापस",
+        "தவறுதலாக",
+        "పొరపాటున",
+        "refund"
+      ],
+      "links": [],
+      "q": {
+        "hi": "किसी ने कहा गलती से आपके खाते में पैसे भेज दिए, वापस कर दो। क्या करूँ?",
+        "en": "Someone says they sent money to my account by mistake and asks me to return it. What do I do?",
+        "ta": "தவறுதலாக உங்கள் கணக்கிற்குப் பணம் அனுப்பிவிட்டேன், திருப்பிக் கொடுங்கள் என்கிறார். என்ன செய்வது?",
+        "te": "పొరపాటున మీ ఖాతాకు డబ్బు పంపాను, తిరిగి ఇవ్వండి అంటున్నారు. ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "पहले अपनी बैंक ऐप या पासबुक में खुद देखिए कि सच में पैसा आया है या नहीं — अक्सर सिर्फ़ नकली SMS होता है। पैसा सच में आया हो तो भी उसकी भेजी लिंक या रिक्वेस्ट से नहीं, अपने बैंक से बात करके ही लौटाइए।",
+        "en": "First check your own bank app or passbook to see whether money really arrived — often it is only a fake SMS. Even if it did, return it through your bank, never through a link or request the person sends you.",
+        "ta": "முதலில் உங்கள் வங்கிச் செயலியிலோ பாஸ்புக்கிலோ உண்மையில் பணம் வந்ததா என்று பாருங்கள் — பெரும்பாலும் அது போலி SMS தான். வந்திருந்தாலும் அவர் அனுப்பும் இணைப்பு மூலம் அல்ல, உங்கள் வங்கி மூலமே திருப்புங்கள்.",
+        "te": "ముందు మీ బ్యాంకు యాప్ లేదా పాస్‌బుక్‌లో నిజంగా డబ్బు వచ్చిందో చూడండి — చాలాసార్లు అది నకిలీ SMS మాత్రమే. వచ్చినా, వారు పంపే లింక్ ద్వారా కాదు, మీ బ్యాంకు ద్వారానే తిరిగి ఇవ్వండి."
+      }
+    },
+    {
+      "id": "kyc-sms",
+      "topic": "messages",
+      "icon": "warning",
+      "featured": true,
+      "keywords": [
+        "kyc",
+        "केवाईसी",
+        "கேஒய்சி",
+        "కేవైసీ",
+        "block",
+        "बंद",
+        "update",
+        "pan",
+        "aadhaar link"
+      ],
+      "links": [],
+      "q": {
+        "hi": "SMS आया है कि KYC अपडेट नहीं किया तो खाता बंद हो जाएगा, क्या यह सच है?",
+        "en": "I got an SMS saying my account will be blocked if I do not update KYC. Is it real?",
+        "ta": "KYC புதுப்பிக்காவிட்டால் கணக்கு முடக்கப்படும் என்று SMS வந்தது, உண்மையா?",
+        "te": "KYC అప్‌డేట్ చేయకపోతే ఖాతా బ్లాక్ అవుతుందని SMS వచ్చింది, నిజమా?"
+      },
+      "a": {
+        "hi": "ऐसे संदेश लगभग हमेशा ठगी होते हैं। बैंक KYC के लिए कभी लिंक भेजकर कार्ड नंबर, पिन या OTP नहीं माँगता। KYC के लिए सीधे अपनी बैंक शाखा जाइए।",
+        "en": "Messages like this are almost always fraud. A bank never sends a link asking for your card number, PIN or OTP to update KYC. For KYC, go to your bank branch directly.",
+        "ta": "இத்தகைய செய்திகள் கிட்டத்தட்ட எப்போதும் மோசடிதான். KYC-க்காக வங்கி இணைப்பு அனுப்பி கார்டு எண், பின், OTP கேட்காது. KYC-க்கு நேரடியாக உங்கள் வங்கிக் கிளைக்குச் செல்லுங்கள்.",
+        "te": "ఇలాంటి సందేశాలు దాదాపు ఎప్పుడూ మోసమే. KYC కోసం బ్యాంకు లింక్ పంపి కార్డు నంబర్, పిన్, OTP అడగదు. KYC కోసం నేరుగా మీ బ్యాంకు శాఖకు వెళ్లండి."
+      }
+    },
+    {
+      "id": "electricity",
+      "topic": "messages",
+      "icon": "warning",
+      "featured": false,
+      "keywords": [
+        "electricity",
+        "bijli",
+        "बिजली",
+        "मின்",
+        "కరెంట్",
+        "disconnect",
+        "कट",
+        "bill"
+      ],
+      "links": [],
+      "q": {
+        "hi": "संदेश आया कि आज रात बिजली कट जाएगी, इस नंबर पर फ़ोन करो। क्या करूँ?",
+        "en": "A message says my electricity will be cut tonight unless I call a number. What should I do?",
+        "ta": "இன்றிரவு மின்சாரம் துண்டிக்கப்படும், இந்த எண்ணை அழையுங்கள் என்று செய்தி வந்தது. என்ன செய்வது?",
+        "te": "ఈ రాత్రి కరెంట్ కట్ అవుతుంది, ఈ నంబర్‌కు ఫోన్ చేయండి అని సందేశం వచ్చింది. ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "उस नंबर पर फ़ोन मत कीजिए। बिजली विभाग किसी निजी मोबाइल नंबर से ऐसे संदेश नहीं भेजता। बिल देखना हो तो अपने बिल पर छपे आधिकारिक नंबर या दफ़्तर से पूछिए।",
+        "en": "Do not call that number. Electricity boards do not send such messages from personal mobile numbers. To check your bill, use the official number printed on your bill or visit the office.",
+        "ta": "அந்த எண்ணை அழைக்காதீர்கள். மின்வாரியம் தனிப்பட்ட கைபேசி எண்ணிலிருந்து இப்படிச் செய்தி அனுப்பாது. கட்டணம் பார்க்க உங்கள் பில்லில் உள்ள அதிகாரப்பூர்வ எண்ணையோ அலுவலகத்தையோ பயன்படுத்துங்கள்.",
+        "te": "ఆ నంబర్‌కు ఫోన్ చేయకండి. విద్యుత్ శాఖ వ్యక్తిగత మొబైల్ నంబర్ నుండి ఇలాంటి సందేశాలు పంపదు. బిల్లు చూడాలంటే మీ బిల్లుపై ఉన్న అధికారిక నంబర్ లేదా కార్యాలయాన్ని సంప్రదించండి."
+      }
+    },
+    {
+      "id": "lottery",
+      "topic": "messages",
+      "icon": "gift",
+      "featured": false,
+      "keywords": [
+        "lottery",
+        "लॉटरी",
+        "kbc",
+        "केबीसी",
+        "prize",
+        "इनाम",
+        "லாட்டரி",
+        "లాటరీ",
+        "won",
+        "जीत"
+      ],
+      "links": [],
+      "q": {
+        "hi": "मुझे लॉटरी या KBC का इनाम मिला है, पर पहले फीस माँग रहे हैं। क्या दूँ?",
+        "en": "I have won a lottery or KBC prize, but they want a fee first. Should I pay?",
+        "ta": "எனக்கு லாட்டரி பரிசு விழுந்தது, ஆனால் முதலில் கட்டணம் கேட்கிறார்கள். கட்டலாமா?",
+        "te": "నాకు లాటరీ బహుమతి వచ్చింది, కానీ ముందు ఫీజు అడుగుతున్నారు. కట్టాలా?"
+      },
+      "a": {
+        "hi": "मत दीजिए। जिस लॉटरी में आपने हिस्सा ही नहीं लिया, उसका इनाम नहीं होता। इनाम देने के लिए फीस, टैक्स या शुल्क माँगना ठगी की पक्की निशानी है।",
+        "en": "Do not pay. There is no prize from a lottery you never entered. Asking for a fee, tax or charge before releasing a prize is a sure sign of fraud.",
+        "ta": "கட்டாதீர்கள். நீங்கள் பங்கேற்காத லாட்டரிக்குப் பரிசு இல்லை. பரிசு தருவதற்கு முன் கட்டணம், வரி கேட்பது மோசடியின் உறுதியான அடையாளம்.",
+        "te": "కట్టకండి. మీరు పాల్గొనని లాటరీకి బహుమతి ఉండదు. బహుమతికి ముందు ఫీజు, పన్ను అడగడం మోసానికి ఖచ్చితమైన సంకేతం."
+      }
+    },
+    {
+      "id": "customer-care",
+      "topic": "calls",
+      "icon": "phoneCall",
+      "featured": true,
+      "keywords": [
+        "customer care",
+        "helpline",
+        "कस्टमर केयर",
+        "google",
+        "number",
+        "नंबर",
+        "வாடிக்கையாளர் சேவை",
+        "కస్టమర్ కేర్"
+      ],
+      "links": [],
+      "q": {
+        "hi": "बैंक या ऐप का कस्टमर केयर नंबर कहाँ से लूँ?",
+        "en": "Where should I find the real customer care number of my bank or app?",
+        "ta": "வங்கி அல்லது செயலியின் உண்மையான வாடிக்கையாளர் சேவை எண் எங்கே கிடைக்கும்?",
+        "te": "బ్యాంకు లేదా యాప్ అసలు కస్టమర్ కేర్ నంబర్ ఎక్కడ దొరుకుతుంది?"
+      },
+      "a": {
+        "hi": "सिर्फ़ अपने कार्ड के पीछे, पासबुक में, या बैंक की आधिकारिक वेबसाइट और ऐप से। इंटरनेट पर खोजकर मिले नंबर अक्सर ठगों के होते हैं। असली कस्टमर केयर कभी PIN, OTP या कोई ऐप डाउनलोड करने को नहीं कहता।",
+        "en": "Only from the back of your card, your passbook, or the bank's official website or app. Numbers found by searching the internet are often fraudsters'. Real customer care never asks for your PIN or OTP, or asks you to download an app.",
+        "ta": "உங்கள் கார்டின் பின்புறம், பாஸ்புக், அல்லது வங்கியின் அதிகாரப்பூர்வ இணையதளம், செயலியிலிருந்து மட்டும். இணையத்தில் தேடிக் கிடைக்கும் எண்கள் பெரும்பாலும் மோசடிக்காரர்களுடையவை. உண்மையான சேவை மையம் பின், OTP கேட்காது, செயலி பதிவிறக்கச் சொல்லாது.",
+        "te": "మీ కార్డు వెనుక, పాస్‌బుక్‌లో, లేదా బ్యాంకు అధికారిక వెబ్‌సైట్, యాప్ నుండి మాత్రమే. ఇంటర్నెట్‌లో వెతికి దొరికే నంబర్లు చాలాసార్లు మోసగాళ్లవి. అసలు కస్టమర్ కేర్ పిన్, OTP అడగదు, యాప్ వేయమనదు."
+      }
+    },
+    {
+      "id": "remote-app",
+      "topic": "calls",
+      "icon": "phone",
+      "featured": false,
+      "keywords": [
+        "anydesk",
+        "teamviewer",
+        "quicksupport",
+        "app",
+        "screen share",
+        "स्क्रीन",
+        "ऐप",
+        "செயலி",
+        "యాప్"
+      ],
+      "links": [],
+      "q": {
+        "hi": "फ़ोन करने वाला कहता है AnyDesk या कोई ऐप डाउनलोड करो, करूँ क्या?",
+        "en": "The caller wants me to download AnyDesk or another app. Should I?",
+        "ta": "அழைப்பவர் AnyDesk அல்லது ஏதாவது செயலியைப் பதிவிறக்கச் சொல்கிறார், செய்யலாமா?",
+        "te": "ఫోన్ చేసినవారు AnyDesk లేదా ఏదైనా యాప్ వేయమంటున్నారు, వేయాలా?"
+      },
+      "a": {
+        "hi": "बिल्कुल नहीं। ऐसे ऐप से वह आपका फ़ोन और स्क्रीन देख सकता है और आपका OTP पढ़कर पैसे निकाल सकता है। ऐप डाल दिया हो तो तुरंत हटाइए और बैंक को फ़ोन कीजिए।",
+        "en": "Absolutely not. With such an app they can see and control your phone, read your OTPs and take your money. If you already installed it, uninstall it now and call your bank.",
+        "ta": "கூடவே கூடாது. அத்தகைய செயலி மூலம் உங்கள் போனையும் திரையையும் பார்த்து OTP படித்துப் பணம் எடுக்கலாம். ஏற்கனவே நிறுவியிருந்தால் உடனே நீக்கி வங்கியை அழையுங்கள்.",
+        "te": "అస్సలు వేయకండి. అలాంటి యాప్‌తో వారు మీ ఫోన్, స్క్రీన్ చూసి OTP చదివి డబ్బు తీయగలరు. ఇప్పటికే వేసి ఉంటే వెంటనే తీసేసి బ్యాంకుకు ఫోన్ చేయండి."
+      }
+    },
+    {
+      "id": "digital-arrest",
+      "topic": "calls",
+      "icon": "alert",
+      "featured": true,
+      "keywords": [
+        "police",
+        "पुलिस",
+        "cbi",
+        "arrest",
+        "गिरफ्तार",
+        "video call",
+        "वीडियो कॉल",
+        "காவல்",
+        "పోలీసు",
+        "digital arrest",
+        "court"
+      ],
+      "links": [
+        {
+          "label": "1930",
+          "href": "tel:1930"
+        }
+      ],
+      "q": {
+        "hi": "पुलिस या CBI वाला वीडियो कॉल पर कहता है आप गिरफ्तार हैं, पैसे भेजो। क्या करूँ?",
+        "en": "Someone on a video call says they are police or CBI, that I am under arrest, and I must pay. What do I do?",
+        "ta": "காவல்துறை அல்லது CBI என்று சொல்லி வீடியோ அழைப்பில் கைது செய்வதாகவும் பணம் அனுப்பவும் சொல்கிறார். என்ன செய்வது?",
+        "te": "పోలీసు లేదా CBI అని చెప్పి వీడియో కాల్‌లో అరెస్ట్ చేశామని, డబ్బు పంపమని అంటున్నారు. ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "यह 'डिजिटल अरेस्ट' ठगी है। पुलिस या कोई जाँच एजेंसी कभी वीडियो कॉल पर गिरफ्तार नहीं करती और केस खत्म करने के लिए पैसे नहीं माँगती। कॉल काटिए, किसी को पैसे मत भेजिए और 1930 पर बताइए।",
+        "en": "This is the 'digital arrest' scam. Police and investigating agencies never arrest anyone on a video call and never ask for money to close a case. Hang up, send nothing, and report it on 1930.",
+        "ta": "இது 'டிஜிட்டல் கைது' மோசடி. காவல்துறையும் விசாரணை அமைப்புகளும் வீடியோ அழைப்பில் யாரையும் கைது செய்வதில்லை, வழக்கை முடிக்கப் பணம் கேட்பதில்லை. அழைப்பைத் துண்டித்து, பணம் அனுப்பாமல், 1930-ல் தெரிவியுங்கள்.",
+        "te": "ఇది 'డిజిటల్ అరెస్ట్' మోసం. పోలీసులు, దర్యాప్తు సంస్థలు వీడియో కాల్‌లో ఎవరినీ అరెస్ట్ చేయవు, కేసు మూసేయడానికి డబ్బు అడగవు. ఫోన్ పెట్టేసి, డబ్బు పంపకుండా, 1930కి తెలియజేయండి."
+      }
+    },
+    {
+      "id": "parcel",
+      "topic": "calls",
+      "icon": "alert",
+      "featured": false,
+      "keywords": [
+        "parcel",
+        "पार्सल",
+        "courier",
+        "कूरियर",
+        "drugs",
+        "customs",
+        "பார்சல்",
+        "పార్సెల్",
+        "fedex"
+      ],
+      "links": [],
+      "q": {
+        "hi": "कहते हैं मेरे नाम के पार्सल में गैरकानूनी सामान मिला है, पैसे भेजो वरना केस होगा।",
+        "en": "They say a parcel in my name had illegal items and I must pay or face a case.",
+        "ta": "என் பெயரில் வந்த பார்சலில் சட்டவிரோதப் பொருள் இருக்கிறது, பணம் அனுப்பாவிட்டால் வழக்கு என்கிறார்கள்.",
+        "te": "నా పేరు మీద వచ్చిన పార్సెల్‌లో చట్టవిరుద్ధ వస్తువులు ఉన్నాయి, డబ్బు పంపకపోతే కేసు అంటున్నారు."
+      },
+      "a": {
+        "hi": "यह जानी-पहचानी ठगी है। कूरियर कंपनी या पुलिस फ़ोन पर डराकर पैसे नहीं माँगती। डरिए मत, कॉल काटिए, और शक हो तो खुद पास के थाने में जाकर पूछिए।",
+        "en": "This is a well-known scam. Courier companies and the police do not frighten people on the phone into paying. Do not panic: hang up, and if you are worried, ask at your nearest police station yourself.",
+        "ta": "இது நன்கு அறியப்பட்ட மோசடி. கூரியர் நிறுவனமோ காவல்துறையோ போனில் பயமுறுத்திப் பணம் கேட்பதில்லை. பதறாதீர்கள்; அழைப்பைத் துண்டியுங்கள், சந்தேகம் இருந்தால் நீங்களே அருகிலுள்ள காவல் நிலையத்தில் கேளுங்கள்.",
+        "te": "ఇది బాగా తెలిసిన మోసం. కూరియర్ సంస్థ గానీ పోలీసులు గానీ ఫోన్‌లో భయపెట్టి డబ్బు అడగరు. భయపడకండి; ఫోన్ పెట్టేయండి, అనుమానం ఉంటే మీరే దగ్గరి పోలీస్ స్టేషన్‌లో అడగండి."
+      }
+    },
+    {
+      "id": "new-number",
+      "topic": "messages",
+      "icon": "chat",
+      "featured": false,
+      "keywords": [
+        "new number",
+        "नया नंबर",
+        "relative",
+        "रिश्तेदार",
+        "बेटा",
+        "mummy",
+        "புது நம்பர்",
+        "కొత్త నంబర్",
+        "whatsapp",
+        "urgent"
+      ],
+      "links": [],
+      "q": {
+        "hi": "रिश्तेदार नए नंबर से पैसे माँग रहा है, कहता है पुराना फ़ोन खराब हो गया।",
+        "en": "A relative is asking for money from a new number, saying their old phone broke.",
+        "ta": "உறவினர் புது எண்ணிலிருந்து பணம் கேட்கிறார், பழைய போன் உடைந்துவிட்டது என்கிறார்.",
+        "te": "బంధువు కొత్త నంబర్ నుండి డబ్బు అడుగుతున్నారు, పాత ఫోన్ పాడైందని అంటున్నారు."
+      },
+      "a": {
+        "hi": "पैसे भेजने से पहले उनके पुराने नंबर पर फ़ोन करके या घर के किसी और से पक्का कीजिए। ठग जल्दबाज़ी करवाते हैं ताकि आप जाँच न करें। आवाज़ सुने बिना कभी पैसे मत भेजिए।",
+        "en": "Before sending anything, call their old number or check with someone else in the family. Fraudsters create urgency so you do not check. Never send money without hearing their voice.",
+        "ta": "அனுப்பும் முன் அவர்களின் பழைய எண்ணை அழைத்தோ குடும்பத்தில் வேறொருவரிடம் கேட்டோ உறுதி செய்யுங்கள். நீங்கள் சரிபார்க்காமல் இருக்க மோசடிக்காரர்கள் அவசரப்படுத்துவார்கள். குரல் கேட்காமல் பணம் அனுப்பாதீர்கள்.",
+        "te": "పంపే ముందు వారి పాత నంబర్‌కు ఫోన్ చేసి లేదా ఇంట్లో వేరొకరిని అడిగి నిర్ధారించుకోండి. మీరు తనిఖీ చేయకుండా మోసగాళ్లు తొందరపెడతారు. గొంతు వినకుండా డబ్బు పంపకండి."
+      }
+    },
+    {
+      "id": "loan-app",
+      "topic": "loans",
+      "icon": "bank",
+      "featured": false,
+      "keywords": [
+        "loan",
+        "लोन",
+        "कर्ज़",
+        "app",
+        "processing fee",
+        "फीस",
+        "கடன்",
+        "రుణం",
+        "లోన్",
+        "harass",
+        "धमकी"
+      ],
+      "links": [
+        {
+          "label": "sachet.rbi.org.in",
+          "href": "https://sachet.rbi.org.in"
+        }
+      ],
+      "q": {
+        "hi": "लोन ऐप पहले प्रोसेसिंग फीस माँग रहा है या धमकी दे रहा है। क्या करूँ?",
+        "en": "A loan app wants a processing fee first, or is threatening me. What should I do?",
+        "ta": "கடன் செயலி முதலில் கட்டணம் கேட்கிறது அல்லது மிரட்டுகிறது. என்ன செய்வது?",
+        "te": "లోన్ యాప్ ముందు ఫీజు అడుగుతోంది లేదా బెదిరిస్తోంది. ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "पहले फीस लेकर लोन न देना और धमकी देना, दोनों ठगी के लक्षण हैं। सिर्फ़ बैंक या RBI से पंजीकृत कंपनियों से लोन लीजिए। धमकी मिले तो 1930 पर या cybercrime.gov.in पर शिकायत कीजिए।",
+        "en": "Taking a fee before the loan and making threats are both signs of fraud. Borrow only from banks or companies registered with RBI. If you are threatened, complain on 1930 or at cybercrime.gov.in.",
+        "ta": "கடனுக்கு முன் கட்டணம் வாங்குவதும் மிரட்டுவதும் மோசடியின் அடையாளங்கள். வங்கிகள் அல்லது RBI-யில் பதிவு செய்த நிறுவனங்களிடம் மட்டும் கடன் வாங்குங்கள். மிரட்டல் வந்தால் 1930-ல் அல்லது cybercrime.gov.in-ல் புகார் செய்யுங்கள்.",
+        "te": "రుణానికి ముందు ఫీజు తీసుకోవడం, బెదిరించడం రెండూ మోసపు సంకేతాలు. బ్యాంకులు లేదా RBIలో నమోదైన సంస్థల నుండే రుణం తీసుకోండి. బెదిరిస్తే 1930కి లేదా cybercrime.gov.in లో ఫిర్యాదు చేయండి."
+      }
+    },
+    {
+      "id": "job-task",
+      "topic": "work",
+      "icon": "growth",
+      "featured": false,
+      "keywords": [
+        "job",
+        "नौकरी",
+        "work from home",
+        "घर बैठे",
+        "task",
+        "like",
+        "earn",
+        "कमाई",
+        "வேலை",
+        "ఉద్యోగం",
+        "joining fee"
+      ],
+      "links": [],
+      "q": {
+        "hi": "घर बैठे वीडियो लाइक करके कमाई वाली नौकरी है, पहले जॉइनिंग फीस माँग रहे हैं।",
+        "en": "There is a work-from-home job liking videos, but they want a joining fee first.",
+        "ta": "வீட்டிலிருந்தே வீடியோ லைக் செய்து சம்பாதிக்கும் வேலை, முதலில் சேர்க்கைக் கட்டணம் கேட்கிறார்கள்.",
+        "te": "ఇంటి నుండే వీడియోలు లైక్ చేసి సంపాదించే ఉద్యోగం, ముందు జాయినింగ్ ఫీజు అడుగుతున్నారు."
+      },
+      "a": {
+        "hi": "असली नौकरी में काम पाने के लिए पैसे नहीं देने पड़ते। ये 'टास्क' वाली ठगी शुरू में थोड़े पैसे देकर भरोसा जीतती है, फिर बड़ी रकम लेकर गायब हो जाती है।",
+        "en": "A real job never asks you to pay to get work. These 'task' scams pay a little at first to win your trust, then take a large amount and disappear.",
+        "ta": "உண்மையான வேலைக்குப் பணம் கட்டத் தேவையில்லை. இந்த 'டாஸ்க்' மோசடிகள் முதலில் கொஞ்சம் பணம் கொடுத்து நம்பிக்கை பெற்று, பிறகு பெரிய தொகையுடன் மறைந்துவிடும்.",
+        "te": "నిజమైన ఉద్యోగానికి డబ్బు కట్టనక్కర్లేదు. ఈ 'టాస్క్' మోసాలు ముందు కొంచెం డబ్బు ఇచ్చి నమ్మకం పొంది, తర్వాత పెద్ద మొత్తం తీసుకుని మాయమవుతాయి."
+      }
+    },
+    {
+      "id": "investment-double",
+      "topic": "work",
+      "icon": "coins",
+      "featured": false,
+      "keywords": [
+        "double",
+        "दोगुना",
+        "invest",
+        "निवेश",
+        "crypto",
+        "bitcoin",
+        "share market",
+        "tips",
+        "இரட்டிப்பு",
+        "రెట్టింపు",
+        "chit",
+        "scheme"
+      ],
+      "links": [
+        {
+          "label": "sachet.rbi.org.in",
+          "href": "https://sachet.rbi.org.in"
+        }
+      ],
+      "q": {
+        "hi": "कोई कह रहा है पैसा लगाओ, एक महीने में दोगुना हो जाएगा। सही है?",
+        "en": "Someone says if I invest, my money will double in a month. Is that possible?",
+        "ta": "முதலீடு செய்தால் ஒரு மாதத்தில் பணம் இரட்டிப்பாகும் என்கிறார்கள். உண்மையா?",
+        "te": "పెట్టుబడి పెడితే నెలలో డబ్బు రెట్టింపు అవుతుందని అంటున్నారు. నిజమా?"
+      },
+      "a": {
+        "hi": "नहीं। कोई भी सच्चा निवेश इतनी जल्दी, इतना ज़्यादा और 'गारंटी' के साथ नहीं देता। ऐसी स्कीम में पैसा लगभग हमेशा डूबता है। शक हो तो RBI की sachet.rbi.org.in पर शिकायत कर सकते हैं।",
+        "en": "No. No genuine investment gives that much, that fast, with a 'guarantee'. Money put into such schemes is almost always lost. You can report a suspicious scheme on RBI's sachet.rbi.org.in.",
+        "ta": "இல்லை. எந்த உண்மையான முதலீடும் இவ்வளவு விரைவாக, இவ்வளவு அதிகமாக 'உத்தரவாதத்துடன்' தராது. அத்தகைய திட்டங்களில் பணம் கிட்டத்தட்ட எப்போதும் போய்விடும். சந்தேகமான திட்டத்தை RBI-யின் sachet.rbi.org.in-ல் தெரிவிக்கலாம்.",
+        "te": "లేదు. ఏ నిజమైన పెట్టుబడీ ఇంత త్వరగా, ఇంత ఎక్కువ 'గ్యారంటీ'తో ఇవ్వదు. అలాంటి పథకాల్లో డబ్బు దాదాపు ఎప్పుడూ పోతుంది. అనుమానాస్పద పథకాన్ని RBI sachet.rbi.org.in లో తెలియజేయవచ్చు."
+      }
+    },
+    {
+      "id": "money-lost",
+      "topic": "help",
+      "icon": "phoneCall",
+      "featured": true,
+      "keywords": [
+        "lost",
+        "कट ग",
+        "stolen",
+        "चोरी",
+        "fraud ho gaya",
+        "ठगी हो गई",
+        "போனது",
+        "పోయింది",
+        "what now",
+        "अब क्या",
+        "पैसे कट",
+        "पैसा कट",
+        "पैसे निकल",
+        "money taken",
+        "money gone"
+      ],
+      "links": [
+        {
+          "label": "1930",
+          "href": "tel:1930"
+        },
+        {
+          "label": "cybercrime.gov.in",
+          "href": "https://cybercrime.gov.in"
+        }
+      ],
+      "q": {
+        "hi": "मेरे साथ ठगी हो गई, पैसा कट गया। अब क्या करूँ?",
+        "en": "I have been cheated and money was taken. What do I do now?",
+        "ta": "நான் ஏமாற்றப்பட்டேன், பணம் போய்விட்டது. இப்போது என்ன செய்வது?",
+        "te": "నేను మోసపోయాను, డబ్బు పోయింది. ఇప్పుడు ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "तुरंत 1930 पर फ़ोन कीजिए — जितनी जल्दी बताएँगे, पैसा रोके जाने की उतनी उम्मीद। फिर बैंक को फ़ोन करके कार्ड और UPI बंद करवाइए, और cybercrime.gov.in पर शिकायत दर्ज कीजिए। लेनदेन का स्क्रीनशॉट और ठग का नंबर सँभालकर रखिए।",
+        "en": "Call 1930 immediately — the sooner you report, the better the chance the money is held. Then call your bank to block your card and UPI, and file a complaint at cybercrime.gov.in. Keep screenshots of the transaction and the fraudster's number.",
+        "ta": "உடனே 1930-ஐ அழையுங்கள் — எவ்வளவு விரைவாகச் சொல்கிறீர்களோ, பணம் நிறுத்தப்பட அவ்வளவு வாய்ப்பு. பிறகு வங்கியை அழைத்து கார்டு, UPI-ஐ முடக்குங்கள்; cybercrime.gov.in-ல் புகார் பதிவு செய்யுங்கள். பரிவர்த்தனையின் ஸ்கிரீன்ஷாட்டையும் மோசடிக்காரர் எண்ணையும் வைத்திருங்கள்.",
+        "te": "వెంటనే 1930కి ఫోన్ చేయండి — ఎంత త్వరగా చెబితే డబ్బు ఆగే అవకాశం అంత ఎక్కువ. తర్వాత బ్యాంకుకు ఫోన్ చేసి కార్డు, UPI బ్లాక్ చేయించండి; cybercrime.gov.in లో ఫిర్యాదు నమోదు చేయండి. లావాదేవీ స్క్రీన్‌షాట్, మోసగాని నంబర్ దాచి ఉంచండి."
+      }
+    },
+    {
+      "id": "shared-already",
+      "topic": "help",
+      "icon": "lock",
+      "featured": false,
+      "keywords": [
+        "already shared",
+        "बता दिया",
+        "दे दिया",
+        "gave",
+        "told",
+        "சொல்லிவிட்டேன்",
+        "చెప్పేశాను",
+        "otp",
+        "pin",
+        "card number"
+      ],
+      "links": [
+        {
+          "label": "1930",
+          "href": "tel:1930"
+        }
+      ],
+      "q": {
+        "hi": "मैंने गलती से OTP या पिन बता दिया, अब क्या करूँ?",
+        "en": "I accidentally shared my OTP or PIN. What should I do now?",
+        "ta": "தவறுதலாக OTP அல்லது பின்னைச் சொல்லிவிட்டேன், இப்போது என்ன செய்வது?",
+        "te": "పొరపాటున OTP లేదా పిన్ చెప్పేశాను, ఇప్పుడు ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "देर मत कीजिए। अभी बैंक को फ़ोन करके कार्ड, नेटबैंकिंग और UPI बंद करवाइए, फिर UPI पिन और पासवर्ड बदलिए। अगर पैसा कट चुका है तो तुरंत 1930 पर भी फ़ोन कीजिए।",
+        "en": "Do not wait. Call your bank now to block your card, net banking and UPI, then change your UPI PIN and passwords. If money has already been taken, also call 1930 immediately.",
+        "ta": "தாமதிக்காதீர்கள். இப்போதே வங்கியை அழைத்து கார்டு, நெட்பேங்கிங், UPI-ஐ முடக்குங்கள்; பிறகு UPI பின், கடவுச்சொல்லை மாற்றுங்கள். பணம் ஏற்கனவே போயிருந்தால் உடனே 1930-ஐயும் அழையுங்கள்.",
+        "te": "ఆలస్యం చేయకండి. ఇప్పుడే బ్యాంకుకు ఫోన్ చేసి కార్డు, నెట్‌బ్యాంకింగ్, UPI బ్లాక్ చేయించండి; తర్వాత UPI పిన్, పాస్‌వర్డ్‌లు మార్చండి. డబ్బు ఇప్పటికే పోయి ఉంటే వెంటనే 1930కి కూడా ఫోన్ చేయండి."
+      }
+    },
+    {
+      "id": "refund-rules",
+      "topic": "help",
+      "icon": "shield",
+      "featured": false,
+      "keywords": [
+        "refund",
+        "वापस",
+        "money back",
+        "liability",
+        "3 days",
+        "तीन दिन",
+        "திரும்ப",
+        "తిరిగి",
+        "rbi rule",
+        "get back"
+      ],
+      "links": [],
+      "q": {
+        "hi": "ठगी में गया पैसा वापस मिल सकता है क्या?",
+        "en": "Can I get back money lost to fraud?",
+        "ta": "மோசடியில் போன பணம் திரும்பக் கிடைக்குமா?",
+        "te": "మోసంలో పోయిన డబ్బు తిరిగి వస్తుందా?"
+      },
+      "a": {
+        "hi": "कई बार हाँ, अगर आप जल्दी बताएँ। RBI के नियम के अनुसार अगर गलती आपकी नहीं थी और आपने 3 कामकाजी दिनों के अंदर बैंक को बताया, तो नुकसान आपका नहीं होना चाहिए। देर से बताने पर, या OTP खुद बताने पर, वापसी मुश्किल हो जाती है।",
+        "en": "Often yes, if you report quickly. Under RBI rules, if the fraud was not your fault and you tell your bank within 3 working days, you should not bear the loss. Reporting late, or having shared your OTP yourself, makes recovery much harder.",
+        "ta": "விரைவாகத் தெரிவித்தால் பல சமயம் ஆம். RBI விதிப்படி, தவறு உங்களுடையது அல்லாமல் 3 வேலை நாட்களுக்குள் வங்கிக்குத் தெரிவித்தால், இழப்பை நீங்கள் ஏற்க வேண்டியதில்லை. தாமதமாகச் சொன்னால் அல்லது நீங்களே OTP சொல்லியிருந்தால் திரும்பப் பெறுவது கடினம்.",
+        "te": "త్వరగా చెబితే చాలాసార్లు అవును. RBI నియమం ప్రకారం, తప్పు మీది కాకుండా 3 పని దినాల్లో బ్యాంకుకు తెలిపితే, నష్టం మీరు భరించనక్కర్లేదు. ఆలస్యంగా చెప్పినా, మీరే OTP చెప్పినా తిరిగి పొందడం కష్టం."
+      }
+    },
+    {
+      "id": "bank-not-helping",
+      "topic": "help",
+      "icon": "bank",
+      "featured": false,
+      "keywords": [
+        "bank not helping",
+        "बैंक नहीं सुन रहा",
+        "complaint",
+        "शिकायत",
+        "ombudsman",
+        "लोकपाल",
+        "புகார்",
+        "ఫిర్యాదు",
+        "rbi"
+      ],
+      "links": [
+        {
+          "label": "cms.rbi.org.in",
+          "href": "https://cms.rbi.org.in"
+        }
+      ],
+      "q": {
+        "hi": "बैंक मेरी शिकायत नहीं सुन रहा, कहाँ जाऊँ?",
+        "en": "My bank is not resolving my complaint. Where can I go?",
+        "ta": "என் வங்கி புகாரைத் தீர்க்கவில்லை, எங்கே போவது?",
+        "te": "నా బ్యాంకు ఫిర్యాదు పరిష్కరించడం లేదు, ఎక్కడికి వెళ్లాలి?"
+      },
+      "a": {
+        "hi": "पहले बैंक में लिखित शिकायत दीजिए और उसकी रसीद या नंबर रखिए। 30 दिन में जवाब न मिले या आप संतुष्ट न हों, तो RBI लोकपाल के पास cms.rbi.org.in पर मुफ़्त शिकायत कर सकते हैं।",
+        "en": "First give the bank a written complaint and keep its receipt or number. If there is no reply within 30 days, or you are not satisfied, you can complain to the RBI Ombudsman for free at cms.rbi.org.in.",
+        "ta": "முதலில் வங்கியில் எழுத்துப்பூர்வப் புகார் கொடுத்து அதன் எண்ணை வைத்திருங்கள். 30 நாளில் பதில் இல்லையென்றால் அல்லது திருப்தி இல்லையென்றால் cms.rbi.org.in-ல் RBI குறைதீர்ப்பாளரிடம் இலவசமாகப் புகார் செய்யலாம்.",
+        "te": "ముందు బ్యాంకులో రాతపూర్వక ఫిర్యాదు ఇచ్చి దాని నంబర్ దాచుకోండి. 30 రోజుల్లో జవాబు రాకపోతే లేదా సంతృప్తి లేకపోతే cms.rbi.org.in లో RBI అంబుడ్స్‌మన్‌కు ఉచితంగా ఫిర్యాదు చేయవచ్చు."
+      }
+    },
+    {
+      "id": "report-number",
+      "topic": "help",
+      "icon": "phone",
+      "featured": false,
+      "keywords": [
+        "report number",
+        "नंबर की शिकायत",
+        "chakshu",
+        "चक्षु",
+        "sanchar saathi",
+        "block number",
+        "spam call",
+        "எண்ணைப் புகார்",
+        "నంబర్ ఫిర్యాదు"
+      ],
+      "links": [
+        {
+          "label": "sancharsaathi.gov.in",
+          "href": "https://sancharsaathi.gov.in"
+        }
+      ],
+      "q": {
+        "hi": "ठगी वाले नंबर या संदेश की शिकायत कहाँ करूँ, जब पैसा नहीं गया?",
+        "en": "Where do I report a fraud number or message when no money was lost?",
+        "ta": "பணம் போகாத நிலையில் மோசடி எண் அல்லது செய்தியை எங்கே புகார் செய்வது?",
+        "te": "డబ్బు పోకపోయినా మోసపు నంబర్ లేదా సందేశాన్ని ఎక్కడ ఫిర్యాదు చేయాలి?"
+      },
+      "a": {
+        "hi": "सरकार की sancharsaathi.gov.in वेबसाइट पर 'चक्षु' में ठगी वाले कॉल, SMS या WhatsApp की शिकायत कर सकते हैं। इससे ऐसे नंबर बंद होने में मदद मिलती है। फिर उस नंबर को अपने फ़ोन में ब्लॉक कर दीजिए।",
+        "en": "You can report fraud calls, SMS or WhatsApp messages under 'Chakshu' on the government's sancharsaathi.gov.in. It helps get such numbers shut down. Then block the number on your phone.",
+        "ta": "அரசின் sancharsaathi.gov.in-ல் 'சக்ஷு' பகுதியில் மோசடி அழைப்பு, SMS, WhatsApp-ஐப் புகார் செய்யலாம். இது அத்தகைய எண்களை முடக்க உதவும். பிறகு அந்த எண்ணை உங்கள் போனில் தடுங்கள்.",
+        "te": "ప్రభుత్వ sancharsaathi.gov.in లో 'చక్షు'లో మోసపు కాల్, SMS, WhatsApp ఫిర్యాదు చేయవచ్చు. దీంతో అలాంటి నంబర్లు మూతపడడానికి సహాయమవుతుంది. తర్వాత ఆ నంబర్‌ను మీ ఫోన్‌లో బ్లాక్ చేయండి."
+      }
+    },
+    {
+      "id": "sim-swap",
+      "topic": "phone",
+      "icon": "phone",
+      "featured": false,
+      "keywords": [
+        "sim",
+        "सिम",
+        "no network",
+        "नेटवर्क नहीं",
+        "சிம்",
+        "సిమ్",
+        "signal",
+        "swap",
+        "esim"
+      ],
+      "links": [],
+      "q": {
+        "hi": "मेरे फ़ोन में अचानक नेटवर्क चला गया और बहुत देर से नहीं आया, क्या खतरा है?",
+        "en": "My phone suddenly lost network for a long time. Could that be fraud?",
+        "ta": "என் போனில் திடீரென நீண்ட நேரம் நெட்வொர்க் இல்லை. இது மோசடியாக இருக்குமா?",
+        "te": "నా ఫోన్‌లో అకస్మాత్తుగా చాలాసేపు నెట్‌వర్క్ పోయింది. ఇది మోసం కావచ్చా?"
+      },
+      "a": {
+        "hi": "हो सकता है। ठग कभी-कभी आपके नाम पर नया सिम निकलवाकर आपके OTP ले लेते हैं। बिना वजह लंबे समय तक नेटवर्क न आए तो तुरंत मोबाइल कंपनी और बैंक दोनों को फ़ोन कीजिए।",
+        "en": "It could be. Fraudsters sometimes get a duplicate SIM issued in your name to receive your OTPs. If your network is gone for a long time without reason, call your mobile operator and your bank straight away.",
+        "ta": "இருக்கலாம். சில நேரம் மோசடிக்காரர்கள் உங்கள் பெயரில் நகல் சிம் பெற்று உங்கள் OTP-களைப் பெறுவார்கள். காரணமின்றி நீண்ட நேரம் நெட்வொர்க் இல்லையென்றால் உடனே மொபைல் நிறுவனத்தையும் வங்கியையும் அழையுங்கள்.",
+        "te": "కావచ్చు. మోసగాళ్లు కొన్నిసార్లు మీ పేరుతో నకిలీ సిమ్ తీసుకుని మీ OTPలు పొందుతారు. కారణం లేకుండా చాలాసేపు నెట్‌వర్క్ రాకపోతే వెంటనే మొబైల్ సంస్థకు, బ్యాంకుకు ఫోన్ చేయండి."
+      }
+    },
+    {
+      "id": "aadhaar-lock",
+      "topic": "phone",
+      "icon": "user",
+      "featured": false,
+      "keywords": [
+        "aadhaar",
+        "आधार",
+        "ஆதார்",
+        "ఆధార్",
+        "fingerprint",
+        "अंगूठा",
+        "biometric",
+        "aeps",
+        "lock"
+      ],
+      "links": [
+        {
+          "label": "uidai.gov.in",
+          "href": "https://uidai.gov.in"
+        }
+      ],
+      "q": {
+        "hi": "मेरे आधार और अंगूठे से बिना बताए पैसे निकल गए, कैसे रोकूँ?",
+        "en": "Money was withdrawn using my Aadhaar and fingerprint without my knowledge. How do I stop it?",
+        "ta": "என் ஆதார், கைரேகை மூலம் எனக்குத் தெரியாமல் பணம் எடுக்கப்பட்டது. எப்படித் தடுப்பது?",
+        "te": "నా ఆధార్, వేలిముద్రతో నాకు తెలియకుండా డబ్బు తీశారు. ఎలా ఆపాలి?"
+      },
+      "a": {
+        "hi": "uidai.gov.in या mAadhaar ऐप से अपने आधार के बायोमेट्रिक (अंगूठे का निशान) को लॉक कर सकते हैं, फिर उससे पैसे नहीं निकल सकते। ज़रूरत हो तब खोलिए। जो पैसा गया है, उसके लिए 1930 और बैंक को तुरंत बताइए।",
+        "en": "You can lock your Aadhaar biometrics (fingerprint) on uidai.gov.in or the mAadhaar app, so they cannot be used to withdraw money. Unlock only when you need them. For money already taken, tell 1930 and your bank immediately.",
+        "ta": "uidai.gov.in அல்லது mAadhaar செயலியில் உங்கள் ஆதார் பயோமெட்ரிக்கை (கைரேகை) பூட்டலாம்; அப்போது அதைக் கொண்டு பணம் எடுக்க முடியாது. தேவைப்படும்போது மட்டும் திறங்கள். போன பணத்துக்கு உடனே 1930-க்கும் வங்கிக்கும் தெரிவியுங்கள்.",
+        "te": "uidai.gov.in లేదా mAadhaar యాప్‌లో మీ ఆధార్ బయోమెట్రిక్ (వేలిముద్ర) లాక్ చేయవచ్చు; అప్పుడు దానితో డబ్బు తీయలేరు. అవసరమైనప్పుడు మాత్రమే తెరవండి. పోయిన డబ్బు కోసం వెంటనే 1930కి, బ్యాంకుకు తెలియజేయండి."
+      }
+    },
+    {
+      "id": "atm-help",
+      "topic": "phone",
+      "icon": "wallet",
+      "featured": false,
+      "keywords": [
+        "atm",
+        "एटीएम",
+        "ஏடிஎம்",
+        "ఏటీఎం",
+        "card stuck",
+        "helper",
+        "मदद",
+        "skimmer",
+        "card"
+      ],
+      "links": [],
+      "q": {
+        "hi": "ATM पर कोई अनजान आदमी मदद करने को कहे तो क्या करूँ?",
+        "en": "What should I do if a stranger offers to help me at the ATM?",
+        "ta": "ATM-ல் தெரியாதவர் உதவுவதாகச் சொன்னால் என்ன செய்வது?",
+        "te": "ATMలో తెలియని వ్యక్తి సహాయం చేస్తానంటే ఏం చేయాలి?"
+      },
+      "a": {
+        "hi": "मना कर दीजिए। अपना कार्ड किसी को मत दीजिए और पिन डालते समय हाथ से ढकिए। ठग मदद के बहाने कार्ड बदल देते हैं या पिन देख लेते हैं। कार्ड अटक जाए तो सिर्फ़ बैंक के आधिकारिक नंबर पर फ़ोन कीजिए।",
+        "en": "Say no. Never hand your card to anyone, and cover the keypad while typing your PIN. Fraudsters swap cards or watch your PIN while 'helping'. If your card gets stuck, call only your bank's official number.",
+        "ta": "மறுத்துவிடுங்கள். உங்கள் கார்டை யாரிடமும் கொடுக்காதீர்கள்; பின் போடும்போது கையால் மறையுங்கள். உதவுவதாகச் சொல்லி மோசடிக்காரர்கள் கார்டை மாற்றுவார்கள் அல்லது பின்னைப் பார்ப்பார்கள். கார்டு சிக்கினால் வங்கியின் அதிகாரப்பூர்வ எண்ணை மட்டும் அழையுங்கள்.",
+        "te": "వద్దనండి. మీ కార్డు ఎవరికీ ఇవ్వకండి; పిన్ వేసేటప్పుడు చేత్తో కప్పండి. సహాయం పేరుతో మోసగాళ్లు కార్డు మార్చేస్తారు లేదా పిన్ చూస్తారు. కార్డు ఇరుక్కుపోతే బ్యాంకు అధికారిక నంబర్‌కే ఫోన్ చేయండి."
+      }
+    },
+    {
+      "id": "apk-file",
+      "topic": "phone",
+      "icon": "warning",
+      "featured": false,
+      "keywords": [
+        "apk",
+        "file",
+        "फ़ाइल",
+        "whatsapp",
+        "download",
+        "डाउनलोड",
+        "app link",
+        "கோப்பு",
+        "ఫైల్",
+        "rewards app"
+      ],
+      "links": [],
+      "q": {
+        "hi": "WhatsApp पर बैंक या सरकारी योजना की ऐप वाली फ़ाइल आई है, खोलूँ?",
+        "en": "I received a bank or government scheme 'app' file on WhatsApp. Should I open it?",
+        "ta": "WhatsApp-ல் வங்கி அல்லது அரசுத் திட்டச் 'செயலி' கோப்பு வந்தது, திறக்கலாமா?",
+        "te": "WhatsAppలో బ్యాంకు లేదా ప్రభుత్వ పథకం 'యాప్' ఫైల్ వచ్చింది, తెరవాలా?"
+      },
+      "a": {
+        "hi": "नहीं। ऐप सिर्फ़ Play Store या App Store से डाउनलोड कीजिए। WhatsApp या SMS से आई '.apk' फ़ाइल आपके फ़ोन के संदेश और OTP चुरा सकती है।",
+        "en": "No. Install apps only from the Play Store or App Store. An '.apk' file sent on WhatsApp or SMS can read your messages and steal your OTPs.",
+        "ta": "இல்லை. செயலிகளை Play Store அல்லது App Store-லிருந்து மட்டும் நிறுவுங்கள். WhatsApp அல்லது SMS-ல் வரும் '.apk' கோப்பு உங்கள் செய்திகளையும் OTP-களையும் திருடலாம்.",
+        "te": "లేదు. యాప్‌లను Play Store లేదా App Store నుండి మాత్రమే వేయండి. WhatsApp లేదా SMSలో వచ్చే '.apk' ఫైల్ మీ సందేశాలు, OTPలు దొంగిలించగలదు."
+      }
+    },
+    {
+      "id": "check-link",
+      "topic": "messages",
+      "icon": "search",
+      "featured": false,
+      "keywords": [
+        "link",
+        "लिंक",
+        "website",
+        "वेबसाइट",
+        "url",
+        "இணைப்பு",
+        "లింక్",
+        "bit.ly",
+        "safe link",
+        "real website"
+      ],
+      "links": [],
+      "q": {
+        "hi": "कैसे पता करूँ कि कोई लिंक असली है या नकली?",
+        "en": "How can I tell whether a link is real or fake?",
+        "ta": "ஒரு இணைப்பு உண்மையா போலியா என்று எப்படித் தெரிந்துகொள்வது?",
+        "te": "ఒక లింక్ నిజమైనదా నకిలీదా ఎలా తెలుసుకోవాలి?"
+      },
+      "a": {
+        "hi": "सबसे सुरक्षित तरीका है लिंक न खोलना, और बैंक की ऐप या वेबसाइट खुद खोलना। छोटे किए लिंक (bit.ly जैसे), अजीब पते (.xyz, .top) और बैंक के नाम की गलत स्पेलिंग ठगी के निशान हैं। सरकारी साइटें आमतौर पर .gov.in पर खत्म होती हैं।",
+        "en": "The safest way is not to open the link at all, and to open your bank's app or website yourself. Shortened links (like bit.ly), odd endings (.xyz, .top) and misspelled bank names are warning signs. Government sites usually end in .gov.in.",
+        "ta": "இணைப்பைத் திறக்காமல், வங்கியின் செயலியையோ இணையதளத்தையோ நீங்களே திறப்பதுதான் பாதுகாப்பானது. சுருக்கிய இணைப்புகள் (bit.ly போல), விசித்திர முகவரிகள் (.xyz, .top), வங்கிப் பெயரில் எழுத்துப்பிழை — இவை எச்சரிக்கை அறிகுறிகள். அரசு தளங்கள் பொதுவாக .gov.in-ல் முடியும்.",
+        "te": "లింక్ తెరవకుండా, మీ బ్యాంకు యాప్ లేదా వెబ్‌సైట్ మీరే తెరవడం సురక్షితం. కుదించిన లింకులు (bit.ly లాంటివి), వింత చిరునామాలు (.xyz, .top), బ్యాంకు పేరులో తప్పు అక్షరాలు — ఇవి హెచ్చరిక సంకేతాలు. ప్రభుత్వ సైట్లు సాధారణంగా .gov.in తో ముగుస్తాయి."
+      }
+    },
+    {
+      "id": "real-bank-sms",
+      "topic": "messages",
+      "icon": "bank",
+      "featured": false,
+      "keywords": [
+        "real sms",
+        "असली संदेश",
+        "sender",
+        "bank message",
+        "VM-",
+        "genuine",
+        "உண்மையான செய்தி",
+        "నిజమైన సందేశం",
+        "debit message"
+      ],
+      "links": [],
+      "q": {
+        "hi": "कैसे पहचानूँ कि बैंक का SMS असली है?",
+        "en": "How do I know an SMS really came from my bank?",
+        "ta": "வங்கியின் SMS உண்மையானது என்று எப்படி அறிவது?",
+        "te": "బ్యాంకు SMS నిజమైనదని ఎలా తెలుసుకోవాలి?"
+      },
+      "a": {
+        "hi": "असली बैंक संदेश आमतौर पर 'VM-SBIINB' जैसे भेजने वाले नाम से आते हैं, किसी 10 अंकों के मोबाइल नंबर से नहीं। वे लेनदेन की जानकारी देते हैं और कहते हैं 'OTP किसी को न बताएँ' — वे कभी लिंक खोलकर जानकारी भरने को नहीं कहते।",
+        "en": "Real bank messages usually come from a sender name like 'VM-SBIINB', not a 10-digit mobile number. They report a transaction and tell you not to share your OTP — they never ask you to open a link and fill in details.",
+        "ta": "உண்மையான வங்கிச் செய்திகள் பொதுவாக 'VM-SBIINB' போன்ற அனுப்புநர் பெயரிலிருந்து வரும், 10 இலக்கக் கைபேசி எண்ணிலிருந்து அல்ல. அவை பரிவர்த்தனையைத் தெரிவித்து 'OTP-ஐப் பகிர வேண்டாம்' என்று சொல்லும் — இணைப்பைத் திறந்து விவரம் நிரப்பச் சொல்லாது.",
+        "te": "నిజమైన బ్యాంకు సందేశాలు సాధారణంగా 'VM-SBIINB' లాంటి పంపినవారి పేరుతో వస్తాయి, 10 అంకెల మొబైల్ నంబర్ నుండి కాదు. అవి లావాదేవీ తెలిపి 'OTP ఎవరికీ చెప్పవద్దు' అంటాయి — లింక్ తెరిచి వివరాలు నింపమని ఎప్పుడూ అడగవు."
+      }
+    },
+    {
+      "id": "scheme-agent-fee",
+      "topic": "messages",
+      "icon": "scheme",
+      "featured": false,
+      "keywords": [
+        "scheme",
+        "योजना",
+        "registration fee",
+        "पंजीकरण",
+        "pm kisan",
+        "agent",
+        "दलाल",
+        "திட்டம்",
+        "పథకం",
+        "subsidy",
+        "सब्सिडी"
+      ],
+      "links": [],
+      "q": {
+        "hi": "कोई एजेंट सरकारी योजना में नाम लिखवाने के लिए पैसे माँग रहा है।",
+        "en": "An agent is asking for money to register me for a government scheme.",
+        "ta": "அரசுத் திட்டத்தில் பெயர் சேர்க்க ஒரு முகவர் பணம் கேட்கிறார்.",
+        "te": "ప్రభుత్వ పథకంలో పేరు నమోదు చేయడానికి ఒక ఏజెంట్ డబ్బు అడుగుతున్నాడు."
+      },
+      "a": {
+        "hi": "PM-KISAN, जन धन जैसी ज़्यादातर योजनाओं में पंजीकरण मुफ़्त है। फ़ोन पर फीस माँगने वाले 'एजेंट' से बचिए। सही जानकारी के लिए अपनी बैंक शाखा, पंचायत या जन सेवा केंद्र (CSC) जाइए।",
+        "en": "Registration for most schemes, such as PM-KISAN or Jan Dhan, is free. Avoid 'agents' who ask for fees on the phone. For correct information, go to your bank branch, panchayat or Common Service Centre (CSC).",
+        "ta": "PM-KISAN, ஜன் தன் போன்ற பெரும்பாலான திட்டங்களில் பதிவு இலவசம். போனில் கட்டணம் கேட்கும் 'முகவர்களைத்' தவிருங்கள். சரியான தகவலுக்கு வங்கிக் கிளை, பஞ்சாயத்து அல்லது பொதுச் சேவை மையத்துக்கு (CSC) செல்லுங்கள்.",
+        "te": "PM-KISAN, జన్ ధన్ లాంటి చాలా పథకాల్లో నమోదు ఉచితం. ఫోన్‌లో ఫీజు అడిగే 'ఏజెంట్ల'కు దూరంగా ఉండండి. సరైన సమాచారం కోసం బ్యాంకు శాఖ, పంచాయతీ లేదా కామన్ సర్వీస్ సెంటర్ (CSC)కు వెళ్లండి."
+      }
+    },
+    {
+      "id": "spot-scam",
+      "topic": "secrets",
+      "icon": "shield",
+      "featured": true,
+      "keywords": [
+        "how to know",
+        "कैसे पहचानें",
+        "signs",
+        "निशानी",
+        "fraud signs",
+        "அடையாளம்",
+        "సంకేతాలు",
+        "scam call",
+        "fake call"
+      ],
+      "links": [],
+      "q": {
+        "hi": "ठगी वाला फ़ोन या संदेश कैसे पहचानें?",
+        "en": "How can I recognise a scam call or message?",
+        "ta": "மோசடி அழைப்பையோ செய்தியையோ எப்படி அடையாளம் காண்பது?",
+        "te": "మోసపు కాల్ లేదా సందేశాన్ని ఎలా గుర్తించాలి?"
+      },
+      "a": {
+        "hi": "चार निशानियाँ याद रखिए: जल्दबाज़ी ('अभी करो वरना…'), डर (खाता बंद, गिरफ़्तारी), लालच (इनाम, दोगुना पैसा), और गुप्त जानकारी की माँग (OTP, पिन, कार्ड नंबर)। इनमें से एक भी हो तो रुकिए और किसी भरोसेमंद व्यक्ति से पूछिए।",
+        "en": "Remember four signs: hurry ('do it now or else…'), fear (blocked account, arrest), greed (prizes, doubled money), and a request for secrets (OTP, PIN, card number). If you see even one, stop and ask someone you trust.",
+        "ta": "நான்கு அடையாளங்களை நினைவில் வையுங்கள்: அவசரம் ('இப்போதே செய், இல்லையெனில்…'), பயம் (கணக்கு முடக்கம், கைது), ஆசை (பரிசு, இரட்டிப்புப் பணம்), ரகசியத் தகவல் கேட்பது (OTP, பின், கார்டு எண்). ஒன்று இருந்தாலும் நிறுத்தி நம்பகமானவரிடம் கேளுங்கள்.",
+        "te": "నాలుగు సంకేతాలు గుర్తుంచుకోండి: తొందర ('ఇప్పుడే చేయండి, లేకపోతే…'), భయం (ఖాతా బ్లాక్, అరెస్ట్), ఆశ (బహుమతి, రెట్టింపు డబ్బు), రహస్యాలు అడగడం (OTP, పిన్, కార్డు నంబర్). ఒక్కటి కనిపించినా ఆగి, నమ్మకమైనవారిని అడగండి."
+      }
+    }
+  ]
+}

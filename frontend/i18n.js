@@ -739,6 +739,44 @@ const SHELL = {
 
 for (const lang of LANGS) Object.assign(STRINGS[lang], SHELL[lang]);
 
+// Safety screen: one box that checks a message or answers a question.
+const SAFETY_ASK = {
+  hi: {
+    pasteOrAsk: 'संदेश जाँचिए या सवाल पूछिए',
+    safetyInputPlaceholder: 'कोई संदेश चिपकाइए, या ठगी के बारे में कुछ भी पूछिए — "क्या बैंक वाले को OTP बताना चाहिए?"',
+    askBtn: 'सवाल पूछिए', commonQuestions: 'लोग अक्सर पूछते हैं',
+    bestAnswer: 'जवाब', relatedQuestions: 'इससे जुड़े सवाल', maybeMeant: 'शायद आप यह पूछना चाहते हैं',
+    noAnswer: 'इस सवाल का पक्का जवाब हमारे पास नहीं है। अगर पैसा खतरे में है तो अभी 1930 पर फ़ोन कीजिए।',
+    officialHelp: 'यहाँ मदद मिलेगी',
+  },
+  en: {
+    pasteOrAsk: 'Check a message or ask a question',
+    safetyInputPlaceholder: 'Paste a message, or ask anything about fraud — "Should I tell my OTP to the bank?"',
+    askBtn: 'Ask a question', commonQuestions: 'People often ask',
+    bestAnswer: 'Answer', relatedQuestions: 'Related questions', maybeMeant: 'Did you mean',
+    noAnswer: 'We do not have a reliable answer to that. If money is at risk, call 1930 now.',
+    officialHelp: 'Where to get help',
+  },
+  ta: {
+    pasteOrAsk: 'செய்தியைச் சரிபாருங்கள் அல்லது கேள்வி கேளுங்கள்',
+    safetyInputPlaceholder: 'ஒரு செய்தியை ஒட்டுங்கள், அல்லது மோசடி பற்றி எதையும் கேளுங்கள் — "வங்கிக்கு OTP சொல்லலாமா?"',
+    askBtn: 'கேள்வி கேளுங்கள்', commonQuestions: 'அடிக்கடி கேட்கப்படுபவை',
+    bestAnswer: 'பதில்', relatedQuestions: 'தொடர்புடைய கேள்விகள்', maybeMeant: 'இதைக் கேட்க விரும்பினீர்களா',
+    noAnswer: 'இதற்கு நம்பகமான பதில் எங்களிடம் இல்லை. பணம் ஆபத்தில் இருந்தால் இப்போதே 1930-ஐ அழையுங்கள்.',
+    officialHelp: 'உதவி கிடைக்கும் இடம்',
+  },
+  te: {
+    pasteOrAsk: 'సందేశం తనిఖీ చేయండి లేదా ప్రశ్న అడగండి',
+    safetyInputPlaceholder: 'ఏదైనా సందేశం అతికించండి, లేదా మోసం గురించి ఏదైనా అడగండి — "బ్యాంకుకు OTP చెప్పవచ్చా?"',
+    askBtn: 'ప్రశ్న అడగండి', commonQuestions: 'తరచుగా అడిగేవి',
+    bestAnswer: 'జవాబు', relatedQuestions: 'సంబంధిత ప్రశ్నలు', maybeMeant: 'మీరు ఇది అడగాలనుకున్నారా',
+    noAnswer: 'దీనికి నమ్మదగిన జవాబు మా వద్ద లేదు. డబ్బు ప్రమాదంలో ఉంటే ఇప్పుడే 1930కి ఫోన్ చేయండి.',
+    officialHelp: 'ఇక్కడ సహాయం దొరుకుతుంది',
+  },
+};
+
+for (const lang of LANGS) Object.assign(STRINGS[lang], SAFETY_ASK[lang]);
+
 export function makeT(lang) {
   const table = STRINGS[lang] || STRINGS.hi;
   return (key, vars) => {

@@ -290,6 +290,19 @@ Passing is two thirds right; progress keeps the best score.
 
 The app does not file a complaint and never says it has.
 
+### `POST /api/fraud/ask/`
+Search over reviewed fraud-safety answers (fixtures/knowledge.json). Nothing is generated; questions are not stored.
+```json
+{"text": "क्या बैंक वाले को OTP बताना चाहिए", "language": "hi"}
+```
+→ `200 {"answered": true, "backend": "embedding+keyword",
+"best": {"id": "share-otp", "question": "...", "answer": "...", "icon": "lock", "links": [{"label": "1930", "href": "tel:1930"}], "score": 0.87},
+"related": [<same shape>]}`
+
+Below the no-answer threshold: `"answered": false, "best": null`, and `related` holds the near misses.
+
+### `GET /api/fraud/questions/?lang=hi` → suggested questions to show before anything is typed.
+
 ---
 
 ## vision

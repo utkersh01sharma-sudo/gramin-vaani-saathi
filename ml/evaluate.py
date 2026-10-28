@@ -165,6 +165,31 @@ def scam_section() -> str:
     return "\n".join(s) + "\n"
 
 
+def fraud_qa_section() -> str:
+    m = load("fraud_qa.json")
+    if not m:
+        return ""
+    r = m["results"]
+    c = m["chosen_threshold"]
+    rows = [[k.capitalize() if k != "hybrid" else "**Hybrid (deployed)**", f3(r[k]["hit_at_1"]), f3(r[k]["hit_at_3"])]
+            for k in ("keyword", "embedding", "hybrid")]
+    return "\n".join([
+        "## 2b. Fraud questions — \"should I tell my OTP to the bank?\"",
+        "",
+        f"The safety screen also answers questions, by searching {m['n_entries']} reviewed answers written in all four "
+        "languages — nothing is generated, because a fluent wrong answer about money safety is the worst possible output. "
+        f"Tested on {m['n_in_domain']} hand-written questions phrased differently from the stored ones, plus "
+        f"{m['n_off_topic']} off-topic questions that must get *no* answer.",
+        "",
+        table(["Method", "Hit@1", "Hit@3"], rows),
+        "",
+        f"No-answer threshold **{c['threshold']}**: {pct(c['answered_right'])} of real questions answered correctly, "
+        f"{pct(c['answered_wrong'])} answered with the wrong entry (the right one is usually among the related questions "
+        f"shown beneath), and {pct(c['offtopic_answered'])} of off-topic questions answered. The margin is thin — "
+        "re-run `ml/eval_fraud_qa.py` whenever entries are added.",
+    ]) + "\n"
+
+
 def schemes_section() -> str:
     m = load("scheme_search.json")
     if not m:
@@ -269,7 +294,7 @@ def main() -> None:
         "Every headline number below is on data **written by hand and kept out of training**. "
         "Numbers on generated data are shown only to make the gap visible.",
         "",
-        intent_section(), scam_section(), schemes_section(), vision_section(), voice_section(),
+        intent_section(), scam_section(), fraud_qa_section(), schemes_section(), vision_section(), voice_section(),
         "## Reproducing",
         "",
         "```bash",
@@ -277,6 +302,7 @@ def main() -> None:
         "python ml/calibrate_gate.py                    # confidence threshold",
         "python ml/data/generate_scam_data.py && python ml/train_scam.py",
         "python ml/eval_scheme_search.py",
+        "python ml/eval_fraud_qa.py",
         "python ml/eval_qr_tamper.py",
         "python ml/bench_voice.py",
         "python ml/evaluate.py                          # this document",

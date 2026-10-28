@@ -1,0 +1,182 @@
+{
+  "n_in_domain": 40,
+  "n_off_topic": 8,
+  "n_entries": 29,
+  "embedding_model": "intfloat/multilingual-e5-small",
+  "keyword_weight": 0.01,
+  "results": {
+    "keyword": {
+      "hit_at_1": 0.725,
+      "hit_at_3": 0.75
+    },
+    "embedding": {
+      "hit_at_1": 0.825,
+      "hit_at_3": 0.95
+    },
+    "hybrid": {
+      "hit_at_1": 0.85,
+      "hit_at_3": 0.95
+    }
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.8,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.5
+    },
+    {
+      "threshold": 0.805,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.375
+    },
+    {
+      "threshold": 0.81,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.25
+    },
+    {
+      "threshold": 0.815,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.125
+    },
+    {
+      "threshold": 0.82,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.125
+    },
+    {
+      "threshold": 0.825,
+      "answered_right": 0.85,
+      "answered_wrong": 0.15,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.83,
+      "answered_right": 0.825,
+      "answered_wrong": 0.125,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.835,
+      "answered_right": 0.825,
+      "answered_wrong": 0.125,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.84,
+      "answered_right": 0.825,
+      "answered_wrong": 0.125,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.845,
+      "answered_right": 0.8,
+      "answered_wrong": 0.1,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.85,
+      "answered_right": 0.725,
+      "answered_wrong": 0.1,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.855,
+      "answered_right": 0.7,
+      "answered_wrong": 0.075,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.86,
+      "answered_right": 0.675,
+      "answered_wrong": 0.075,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.865,
+      "answered_right": 0.525,
+      "answered_wrong": 0.05,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.87,
+      "answered_right": 0.375,
+      "answered_wrong": 0.025,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.875,
+      "answered_right": 0.325,
+      "answered_wrong": 0.025,
+      "offtopic_answered": 0.0
+    },
+    {
+      "threshold": 0.88,
+      "answered_right": 0.325,
+      "answered_wrong": 0.0,
+      "offtopic_answered": 0.0
+    }
+  ],
+  "chosen_threshold": {
+    "threshold": 0.825,
+    "answered_right": 0.85,
+    "answered_wrong": 0.15,
+    "offtopic_answered": 0.0
+  },
+  "misses": [
+    {
+      "text": "a caller from the bank wants the code I just got",
+      "expected": [
+        "share-otp"
+      ],
+      "got": "remote-app",
+      "score": 0.8548
+    },
+    {
+      "text": "I got scammed, what are the first things to do",
+      "expected": [
+        "money-lost"
+      ],
+      "got": "new-number",
+      "score": 0.8638
+    },
+    {
+      "text": "will the bank return money stolen from my account",
+      "expected": [
+        "refund-rules"
+      ],
+      "got": "wrong-transfer",
+      "score": 0.879
+    },
+    {
+      "text": "வங்கி அதிகாரி என்று சொல்லி குறியீடு கேட்கிறார்",
+      "expected": [
+        "share-otp"
+      ],
+      "got": "loan-app",
+      "score": 0.8283
+    },
+    {
+      "text": "பணம் போய்விட்டது, முதலில் என்ன செய்ய வேண்டும்",
+      "expected": [
+        "money-lost"
+      ],
+      "got": "job-task",
+      "score": 0.8448
+    },
+    {
+      "text": "வங்கி குறுஞ்செய்தி உண்மையானதா என்று எப்படி அறிவது",
+      "expected": [
+        "real-bank-sms",
+        "kyc-sms"
+      ],
+      "got": "check-link",
+      "score": 0.8672
+    }
+  ]
+}

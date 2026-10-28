@@ -594,6 +594,18 @@ textarea { resize: vertical; min-height: 76px; line-height: 1.45; }
 .check-history li:last-child { border-bottom: 0; }
 .check-history .h-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink-2); }
 
+/* ── fraud questions */
+.suggest { display: flex; flex-direction: column; gap: 8px; }
+.chip.q { height: auto; min-height: 34px; padding: 7px 12px; white-space: normal; text-align: left; line-height: 1.35; font-weight: 600; }
+.answer-card { border-top: 4px solid var(--primary); }
+.answer-q { font-size: 18px; font-weight: 800; line-height: 1.35; flex: 1; }
+.answer-text { font-size: 15.5px; line-height: 1.6; }
+.no-answer { padding: 12px 14px; border-radius: var(--r-sm); background: var(--warn-soft); color: var(--warn); font-weight: 600; font-size: 14.5px; }
+.related { display: flex; flex-direction: column; gap: 6px; }
+.related button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--r-sm); border: 1px solid var(--line); text-align: left; font-weight: 600; font-size: 14px; transition: border-color var(--fast), background var(--fast); }
+.related button:hover { border-color: var(--primary); background: var(--primary-soft); }
+.related button .icon { color: var(--primary); width: 16px; height: 16px; margin-left: auto; }
+
 /* ── help */
 .phrase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; align-content: start; }
 .phrase { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); text-align: left; font-weight: 600; transition: border-color var(--fast), box-shadow var(--fast); }

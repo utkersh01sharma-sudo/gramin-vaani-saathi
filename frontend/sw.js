@@ -5,7 +5,7 @@
 // served as if it were live is worse than no balance at all, so cached reads are
 // handled in app.js where they can be stamped with the time they were taken.
 
-const CACHE = 'gvs-shell-v4';
+const CACHE = 'gvs-shell-v5';
 const SHELL = [
   '/',
   '/index.html',

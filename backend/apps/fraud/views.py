@@ -11,7 +11,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ai.registry import get_scam
+from ai.registry import get_embedder, get_scam
+
+from . import knowledge
 
 from .models import ScamCheck, ScamReport
 
@@ -151,3 +153,35 @@ class ScamReportView(APIView):
             "portal": "https://cybercrime.gov.in",
             "next_steps": NEXT_STEPS[report.kind][lang],
         }, status=status.HTTP_201_CREATED)
+
+
+class AskSerializer(serializers.Serializer):
+    text = serializers.CharField(max_length=500)
+    language = serializers.ChoiceField(choices=["hi", "en", "ta", "te"], required=False)
+
+
+@extend_schema(tags=["fraud"], request=AskSerializer, responses=OpenApiTypes.OBJECT)
+class AskView(APIView):
+    """Search the fraud-safety knowledge base: a question in, a reviewed answer out.
+
+    Questions are not stored. People describe what happened to them in their own
+    words -- names, amounts, numbers -- and there is no reason to keep that.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        s = AskSerializer(data=request.data)
+        s.is_valid(raise_exception=True)
+        return Response(knowledge.ask(s.validated_data["text"].strip(), get_embedder(), _lang(request)))
+
+
+@extend_schema(tags=["fraud"], responses=OpenApiTypes.OBJECT)
+class QuestionListView(APIView):
+    """Suggested questions to show before the user has typed anything."""
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        lang = _lang(request)
+        return Response({"language": lang, "results": knowledge.featured(lang)})

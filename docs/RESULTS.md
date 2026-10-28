@@ -77,6 +77,18 @@ Mistakes, all of them:
 
 Validation accuracy on generated data: 100.0% — again, a measure of the generator.
 
+## 2b. Fraud questions — "should I tell my OTP to the bank?"
+
+The safety screen also answers questions, by searching 29 reviewed answers written in all four languages — nothing is generated, because a fluent wrong answer about money safety is the worst possible output. Tested on 40 hand-written questions phrased differently from the stored ones, plus 8 off-topic questions that must get *no* answer.
+
+| Method | Hit@1 | Hit@3 |
+|---|---|---|
+| Keyword | 0.725 | 0.750 |
+| Embedding | 0.825 | 0.950 |
+| **Hybrid (deployed)** | 0.850 | 0.950 |
+
+No-answer threshold **0.825**: 85.0% of real questions answered correctly, 15.0% answered with the wrong entry (the right one is usually among the related questions shown beneath), and 0.0% of off-topic questions answered. The margin is thin — re-run `ml/eval_fraud_qa.py` whenever entries are added.
+
 ## 3. Scheme search — "I need money for farming" → PM-KISAN
 
 48 hand-written queries (12 per language) that describe a need without naming the scheme. Encoder: `intfloat/multilingual-e5-small` (chosen because its training languages include Tamil and Telugu).
@@ -148,6 +160,7 @@ python ml/train_intent.py --train-embeddings   # IntentNet (deployed configurati
 python ml/calibrate_gate.py                    # confidence threshold
 python ml/data/generate_scam_data.py && python ml/train_scam.py
 python ml/eval_scheme_search.py
+python ml/eval_fraud_qa.py
 python ml/eval_qr_tamper.py
 python ml/bench_voice.py
 python ml/evaluate.py                          # this document

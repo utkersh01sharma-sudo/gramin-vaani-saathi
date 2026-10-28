@@ -397,11 +397,19 @@
         <div class="split split-7-5">
           <div class="stack">
             <article class="card">
-              <div class="card-head"><span class="card-icon" data-icon="shield" style="--tone: var(--tone-safety)"></span><h2 data-i18n="pasteMessage"></h2></div>
-              <textarea id="scam-input" rows="4" data-i18n-ph="checkPlaceholder"></textarea>
-              <button class="btn btn-primary" id="btn-scam-check"><span data-icon="search"></span><span data-i18n="checkMessage"></span></button>
+              <div class="card-head"><span class="card-icon" data-icon="shield" style="--tone: var(--tone-safety)"></span><h2 data-i18n="pasteOrAsk"></h2></div>
+              <textarea id="scam-input" rows="3" data-i18n-ph="safetyInputPlaceholder"></textarea>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="btn-scam-check"><span data-icon="shield"></span><span data-i18n="checkMessage"></span></button>
+                <button class="btn btn-ghost" id="btn-ask"><span data-icon="question"></span><span data-i18n="askBtn"></span></button>
+              </div>
+              <div class="suggest">
+                <div class="eyebrow" data-i18n="commonQuestions"></div>
+                <div class="chip-row" id="ask-suggest"></div>
+              </div>
             </article>
             <article class="card verdict-card" id="scam-result" hidden></article>
+            <article class="card answer-card" id="ask-result" hidden></article>
             <article class="card pane">
               <div class="card-head"><h2 data-i18n="safetyTips"></h2></div>
               <div class="tip-grid pane-scroll" id="tip-list"></div>

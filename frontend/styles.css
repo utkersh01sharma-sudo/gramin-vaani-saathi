@@ -1,20 +1,26 @@
-/* Gramin Vaani Saathi — visual system.
+/* Gramin Vaani Saathi — visual system, deck edition.
 
    This is a financial app for people who have been defrauded before. It has to
    look like an institution, not a toy: if it looks improvised, it does not get
-   trusted with money, and nothing else in the project matters. So the whole
-   system is deliberately quiet — a narrow neutral palette, one brand colour used
-   with discipline, tight radii, hairline rules, and shadows that suggest a sheet
-   of paper rather than a floating bubble.
+   trusted with money, and nothing else in the project matters.
 
-   Three rules were applied throughout, and they are the difference between this
-   and the version before it:
-   · No emoji anywhere. Every glyph is a stroked icon from icons.js, drawn on one
-     24px grid, inheriting currentColor. Emoji render in the vendor's font at the
-     vendor's weight and colour, so they never match the interface around them.
-   · Colour is information, not decoration. Tinted surfaces appear only where a
-     tint means something — a category, a state, a warning.
-   · Motion is short and directional. Nothing bounces, spins, or wobbles.
+   The rebuild takes its grammar from a presentation deck, because a deck solves
+   the same problem this app has — one idea per view, read across a room, by
+   someone who did not choose to be there. Four devices carry it:
+
+   · A headline rail. On a wide screen the title, its accent rule and its lead
+     line sit in a sticky left column and the content runs beside them, exactly
+     as a slide puts its heading left and its evidence right. On a phone the
+     same markup stacks. This is also the fix for the app reading as a lost
+     phone column on the demo laptop.
+   · An accent rule under every title. One 52px bar of brand green. It costs
+     nothing, and it is the single cheapest signal that a layout was designed.
+   · Flat sheets, not floating ones. Cards are a hairline on white with no
+     shadow at rest — paper on a table. Shadow is now reserved for the four
+     things that genuinely float: the mic, the sheet, the toast, the transcript.
+   · Tone as a top edge. Each category card wears a 3px bar of its own tone
+     along the top rather than a tinted body, so six categories can sit on one
+     screen without six coloured blocks competing.
 
    What the restraint is NOT allowed to cost, because these are the graded
    accessibility constraints and they win every conflict:
@@ -23,26 +29,30 @@
    · Meaning never carried by colour alone — always colour + icon + text + an
      audio affordance, because the primary user may not read.
    · Body text starts at 17px and scales with the viewport. Nothing that
-     matters is below 15px.
+     matters is below 15px. Every tile now carries a plain-language second line
+     saying what it does, because a two-word label is only legible to someone
+     who already knows the app.
 */
 
 /* ═══════════════════════════════════════════════════════════════ tokens ══ */
 :root {
   /* Ground and surfaces: a cool near-neutral, not cream. Warm off-whites read as
      friendly-casual; this app wants to read as considered. */
-  --bg:        #F4F5F6;
+  --bg:        #F3F5F5;
   --surface:   #FFFFFF;
-  --surface-2: #EEF0F1;
-  --surface-3: #E2E5E7;
+  --surface-2: #EDF0F0;
+  --surface-3: #DFE4E4;
 
-  /* Ink runs on one hue so greys never fight the brand green. */
+  /* Ink runs on one hue so greys never fight the brand green. --ink-0 is for
+     display figures only: at 2.5rem the body ink looks washed out. */
+  --ink-0: #0A1413;
   --ink:   #16211F;
-  --ink-2: #5A6B68;
-  --ink-3: #8A9996;
+  --ink-2: #566765;
+  --ink-3: #879694;
 
   /* Hairlines are alpha, so they read correctly on white and on tinted cards. */
-  --line:        rgba(22, 33, 31, .10);
-  --line-strong: rgba(22, 33, 31, .18);
+  --line:        rgba(22, 33, 31, .09);
+  --line-strong: rgba(22, 33, 31, .17);
 
   /* Brand: a single deep green. Darker and less saturated than a "fresh" teal —
      it is closer to the colour a bank would choose, which is the point. */
@@ -71,20 +81,27 @@
   --tone-scan:   #14646E;
   --tone-safety: #9E2B24;
 
-  /* Geometry. The radii are roughly half what they were: soft corners read as
-     playful past about 16px, and this interface should not read as playful. */
-  --r-sm: 8px;
-  --r:    12px;
-  --r-lg: 16px;
-  --r-xl: 22px;
+  /* Geometry. Deck-flat: corners soft enough to read as a card, tight enough
+     that nothing reads as a bubble. */
+  --r-sm: 10px;
+  --r:    14px;
+  --r-lg: 18px;
+  --r-xl: 24px;
   --tap:  88px;
 
-  /* Depth. Tight and low-opacity — a card lifted 2px off the page, never a
-     glowing pill. The primary shadow is neutral, not tinted: coloured shadows
-     under coloured buttons are the fastest way to look amateur. */
-  --sh-1: 0 1px 1px rgba(22, 33, 31, .04), 0 1px 3px rgba(22, 33, 31, .05);
-  --sh-2: 0 1px 2px rgba(22, 33, 31, .05), 0 6px 14px -6px rgba(22, 33, 31, .12);
-  --sh-3: 0 2px 4px rgba(22, 33, 31, .06), 0 18px 36px -12px rgba(22, 33, 31, .20);
+  /* Depth. --sh-1 is a seam, not a lift. --sh-float is the only real shadow in
+     the system and it is spent on four elements. Coloured shadows under
+     coloured buttons are the fastest way to look amateur, so all are neutral. */
+  --sh-1:     0 1px 2px rgba(22, 33, 31, .05);
+  --sh-2:     0 1px 2px rgba(22, 33, 31, .05);
+  --sh-3:     0 2px 4px rgba(22, 33, 31, .06), 0 18px 36px -12px rgba(22, 33, 31, .20);
+  --sh-float: 0 1px 2px rgba(22, 33, 31, .06), 0 14px 34px -14px rgba(22, 33, 31, .26);
+
+  /* Layout. --rail is the headline column on a deck-width screen. */
+  --shell:     600px;
+  --shell-wide: 1140px;
+  --rail:      348px;
+  --gutter:    64px;
 
   /* Motion */
   --ease: cubic-bezier(.2, .7, .3, 1);
@@ -207,17 +224,17 @@ body.cursor-on [role="button"] { cursor: none; }
 .topbar {
   position: sticky; top: 0; z-index: 30;
   display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter: saturate(1.4) blur(12px);
-  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  padding: 11px 18px;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--line);
 }
 
-.brand { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.brand-mark { width: 28px; height: 28px; border-radius: 7px; }
+.brand { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0; }
+.brand-mark { width: 30px; height: 30px; border-radius: 8px; }
 #brand-name {
-  font-weight: 600; font-size: .98rem; letter-spacing: -.012em;
+  font-weight: 640; font-size: 1rem; letter-spacing: -.016em;
   color: var(--ink);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -238,11 +255,11 @@ body.cursor-on [role="button"] { cursor: none; }
 .icon-btn.ghost:hover { background: var(--surface-2); color: var(--ink); }
 
 .lang-chip {
-  min-width: 54px; height: 44px; padding: 0 14px;
+  min-width: 54px; height: 44px; padding: 0 15px;
   border-radius: var(--r-sm);
   background: var(--surface);
   color: var(--primary-ink);
-  font-weight: 600; font-size: .95rem;
+  font-weight: 640; font-size: .95rem;
   border: 1px solid var(--line);
   transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
@@ -251,10 +268,10 @@ body.cursor-on [role="button"] { cursor: none; }
 /* ══════════════════════════════════════════════════════════════ banner ══ */
 .banner {
   display: flex; align-items: center; justify-content: center; gap: 9px;
-  padding: 9px 14px;
+  padding: 10px 14px;
   background: var(--gold-soft);
   color: var(--gold);
-  font-size: .9rem; font-weight: 600;
+  font-size: .9rem; font-weight: 640;
   border-bottom: 1px solid color-mix(in srgb, var(--gold) 24%, transparent);
 }
 .banner-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
@@ -264,7 +281,7 @@ body.cursor-on [role="button"] { cursor: none; }
 }
 
 /* ═════════════════════════════════════════════════════════════ screens ══ */
-#app { max-width: 560px; margin: 0 auto; padding: 22px 16px 8px; }
+#app { max-width: var(--shell); margin: 0 auto; padding: 26px 18px 8px; }
 
 /* Children enter staggered rather than the screen sliding as a block. The whole
    sequence finishes inside 250ms on purpose: any longer and a screen change
@@ -277,19 +294,44 @@ body.cursor-on [role="button"] { cursor: none; }
 .screen > *:nth-child(n+5) { animation-delay: .08s; }
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
 
+/* The deck headline. The rule under it is the one piece of pure decoration in
+   the system and it is here because it is what makes a screen read as composed
+   rather than assembled. */
 .screen-title {
-  font-size: clamp(1.44rem, 5vw, 1.66rem);
-  font-weight: 640;
-  line-height: 1.22; letter-spacing: -.028em;
-  margin: 4px 0 6px;
+  font-size: clamp(1.56rem, 5.4vw, 1.84rem);
+  font-weight: 660;
+  line-height: 1.18; letter-spacing: -.032em;
+  color: var(--ink-0);
+  margin: 2px 0 0;
 }
-.screen-sub { color: var(--ink-2); margin: 0 0 22px; font-size: .98rem; }
+.screen-title::after {
+  content: "";
+  display: block;
+  width: 52px; height: 3px;
+  margin: 15px 0 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+}
+.screen-sub {
+  color: var(--ink-2);
+  margin: 16px 0 24px;
+  font-size: 1rem; line-height: 1.5;
+  max-width: 46ch;
+}
 
+/* A section head is a slide's sub-heading: a tone dot, the label, then a rule
+   running to the edge of the column. */
 .section-head {
-  font-size: .86rem; font-weight: 660;
-  color: var(--ink-3);
-  margin: 32px 0 12px;
+  font-size: .88rem; font-weight: 680;
+  color: var(--ink-2);
+  margin: 38px 0 14px;
   display: flex; align-items: center; gap: 12px;
+}
+.section-head::before {
+  content: "";
+  width: 6px; height: 6px; flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--primary);
 }
 .section-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
@@ -299,18 +341,18 @@ body.cursor-on [role="button"] { cursor: none; }
 }
 
 /* ═══════════════════════════════════════════════════ language chooser ══ */
-.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
 .lang-card {
   position: relative;
-  min-height: 112px; padding: 18px 12px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 118px; padding: 18px 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+  transition: border-color var(--med) var(--ease), background-color var(--med) var(--ease),
               transform var(--fast) var(--ease);
 }
-.lang-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.lang-card:hover  { border-color: var(--line-strong); background: color-mix(in srgb, var(--primary) 3%, var(--surface)); }
 .lang-card:active { transform: scale(.985); }
 .lang-card[aria-pressed="true"] {
   border-color: var(--primary);
@@ -324,55 +366,56 @@ body.cursor-on [role="button"] { cursor: none; }
   background: var(--primary); color: #fff;
   font-size: .66rem; font-weight: 800;
 }
-.lang-native { font-size: 1.4rem; font-weight: 640; letter-spacing: -.018em; }
+.lang-native { font-size: 1.42rem; font-weight: 650; letter-spacing: -.02em; }
 .lang-latin  { font-size: .82rem; color: var(--ink-3); letter-spacing: .01em; }
 
 /* ══════════════════════════════════════════════════════════ people grid ══ */
-.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(142px, 1fr)); gap: 10px; }
+.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(146px, 1fr)); gap: 11px; }
 .person-card {
-  min-height: var(--tap); padding: 16px 12px;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  min-height: var(--tap); padding: 17px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 11px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+  transition: border-color var(--med) var(--ease), background-color var(--med) var(--ease),
               transform var(--fast) var(--ease);
 }
-.person-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.person-card:hover  { border-color: var(--line-strong); background: color-mix(in srgb, var(--primary) 3%, var(--surface)); }
 .person-card:active { transform: scale(.985); }
 /* A flat disc with an initial. The previous version had an inset highlight and a
    drop shadow on a 56px circle, which is a lot of effects for one letter. */
 .avatar {
-  width: 50px; height: 50px; border-radius: 50%;
+  width: 52px; height: 52px; border-radius: 50%;
   display: grid; place-items: center;
-  font-size: 1.22rem; font-weight: 600; color: #fff;
+  font-size: 1.26rem; font-weight: 600; color: #fff;
   letter-spacing: -.01em;
 }
-.person-name { font-weight: 600; text-align: center; line-height: 1.3; font-size: .97rem; }
+.person-name { font-weight: 640; text-align: center; line-height: 1.3; font-size: .98rem; }
 .person-sub  { font-size: .8rem; color: var(--ink-3); }
 
 /* ═════════════════════════════════════════════════════════════ balance ══ */
 .greeting {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 18px;
+  gap: 12px; margin-bottom: 20px;
 }
-.greeting-text { font-size: 1.1rem; font-weight: 620; letter-spacing: -.02em; }
+.greeting-text { font-size: 1.14rem; font-weight: 640; letter-spacing: -.022em; color: var(--ink-0); }
 .text-btn {
-  color: var(--ink-2); font-size: .88rem; font-weight: 600;
-  padding: 8px 13px; border-radius: var(--r-sm);
+  color: var(--ink-2); font-size: .88rem; font-weight: 640;
+  padding: 8px 14px; border-radius: var(--r-sm);
   border: 1px solid var(--line);
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .text-btn:hover { background: var(--surface-2); color: var(--ink); }
 
-/* The one saturated surface in the app. It is the number people open the app to
-   see, so it gets to be the loudest thing on the screen — and because it is the
-   only one, it stays loud. */
+/* The one saturated surface in the app, built like a deck's headline statistic:
+   a quiet label, one very large figure, and a hairline-separated footnote. It is
+   the number people open the app to see, so it gets to be the loudest thing on
+   the screen — and because it is the only one, it stays loud. */
 .balance-card {
   position: relative; overflow: hidden;
   width: 100%; text-align: left;
-  padding: 22px; margin-bottom: 20px;
-  display: flex; flex-direction: column; gap: 3px;
+  padding: 24px 24px 22px; margin-bottom: 26px;
+  display: flex; flex-direction: column; gap: 4px;
   color: #fff;
   background: var(--primary);
   border-radius: var(--r-lg);
@@ -388,124 +431,155 @@ body.cursor-on [role="button"] { cursor: none; }
   background: rgba(255, 255, 255, .22);
 }
 .balance-label {
-  font-size: .8rem; font-weight: 600;
-  color: rgba(255, 255, 255, .74);
+  font-size: .82rem; font-weight: 640;
+  color: rgba(255, 255, 255, .76);
 }
 .balance-amount {
   font-family: var(--num);
-  font-size: clamp(2.2rem, 8.5vw, 2.7rem); font-weight: 600; line-height: 1.15;
-  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
+  font-size: clamp(2.5rem, 10vw, 3.1rem); font-weight: 600; line-height: 1.1;
+  letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+  margin-top: 2px;
 }
-.balance-stamp { font-size: .76rem; color: rgba(255, 255, 255, .66); }
+/* The stamp is a footnote under a rule, the way a slide credits its source. */
+.balance-stamp {
+  font-size: .78rem; color: rgba(255, 255, 255, .68);
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+}
 /* The stamp only exists when the figure is cached. Without this the empty span
    still claims a line box and the card sits with a hole under the number. */
 .balance-stamp:empty { display: none; }
-.rupee { margin-right: 3px; font-weight: 500; }
+.rupee { margin-right: 4px; font-weight: 500; opacity: .82; }
 
 .big-amount {
   font-family: var(--num);
-  font-size: clamp(2.6rem, 11vw, 3.1rem); font-weight: 600;
-  letter-spacing: -.04em; font-variant-numeric: tabular-nums;
-  color: var(--ink); margin: 6px 0 2px;
+  font-size: clamp(3rem, 12vw, 3.8rem); font-weight: 600; line-height: 1.05;
+  letter-spacing: -.045em; font-variant-numeric: tabular-nums;
+  color: var(--ink-0); margin: 4px 0 2px;
 }
 
 /* ═══════════════════════════════════════════════════════════════ tiles ══ */
-.tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-@media (max-width: 384px) { .tile-grid { grid-template-columns: repeat(2, 1fr); } }
+.tile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+@media (max-width: 340px) { .tile-grid { grid-template-columns: 1fr; } }
 
+/* A category card: tone bar across the top, chip, label, and one plain line
+   saying what it does. The second line is the accessibility change — a two-word
+   label is only legible to someone who already knows the app. */
 .tile {
-  position: relative;
-  min-height: 122px; padding: 18px 8px 14px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px;
+  position: relative; overflow: hidden;
+  min-height: 132px; padding: 20px 16px 16px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  text-align: left;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+  transition: border-color var(--med) var(--ease), background-color var(--med) var(--ease),
               transform var(--fast) var(--ease);
 }
-.tile:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.tile::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--tone, var(--primary));
+  opacity: .85;
+}
+.tile:hover  { border-color: var(--line-strong); background: color-mix(in srgb, var(--tone, var(--primary)) 3%, var(--surface)); }
 .tile:active { transform: scale(.985); }
 
-/* Each tile carries a --tone. The chip is a 8% wash of it and the icon is the
+/* Each tile carries a --tone. The chip is a 9% wash of it and the icon is the
    tone at full strength: enough colour to tell the six apart at a glance without
    six saturated blocks competing on one screen. */
 .tile-icon {
   width: 46px; height: 46px; border-radius: var(--r-sm);
   display: grid; place-items: center;
-  background: color-mix(in srgb, var(--tone, var(--primary)) 8%, var(--surface));
+  background: color-mix(in srgb, var(--tone, var(--primary)) 9%, var(--surface));
   color: var(--tone, var(--primary));
   transition: background-color var(--med) var(--ease);
 }
 .tile-icon .icon { width: 24px; height: 24px; }
-.tile:hover .tile-icon { background: color-mix(in srgb, var(--tone, var(--primary)) 14%, var(--surface)); }
-.tile-label { font-size: .9rem; font-weight: 600; text-align: center; line-height: 1.28; }
+.tile:hover .tile-icon { background: color-mix(in srgb, var(--tone, var(--primary)) 15%, var(--surface)); }
+.tile-label {
+  font-size: 1.02rem; font-weight: 650; line-height: 1.25;
+  letter-spacing: -.018em; color: var(--ink-0);
+}
+/* Pushed to the bottom so every tile's second line sits on one baseline even
+   when a translated label wraps to two. */
+.tile-sub {
+  font-size: .85rem; line-height: 1.4; color: var(--ink-2);
+  margin-top: -6px;
+}
+.tile-sub:empty { display: none; }
 
 /* The speaker reads the label aloud without navigating. Small, quiet, and in the
    corner: it is a secondary affordance and should not compete with the tile. */
 .tile-speak {
-  position: absolute; top: 6px; right: 6px;
-  width: 28px; height: 28px; border-radius: 50%;
+  position: absolute; top: 11px; right: 8px;
+  width: 30px; height: 30px; border-radius: 50%;
   display: grid; place-items: center;
   color: var(--ink-3);
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
-.tile-speak .icon { width: 15px; height: 15px; }
+.tile-speak .icon { width: 16px; height: 16px; }
 .tile-speak:hover { background: var(--surface-2); color: var(--primary); }
 
 .help-strip {
-  width: 100%; margin-top: 14px; min-height: 66px;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; margin-top: 16px; min-height: 68px;
+  display: flex; align-items: center; justify-content: center; gap: 11px;
   background: var(--surface);
   color: var(--accent-ink);
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
   border-radius: var(--r);
-  font-weight: 600; font-size: 1rem;
+  font-weight: 640; font-size: 1rem;
   transition: background-color var(--med) var(--ease), border-color var(--med) var(--ease);
 }
 .help-strip:hover { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
 .help-strip .icon { width: 22px; height: 22px; color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════════ lists ══ */
-.card-list { display: flex; flex-direction: column; gap: 10px; }
+.card-list { display: flex; flex-direction: column; gap: 11px; }
 .info-card {
-  width: 100%; text-align: left; padding: 15px 16px;
+  width: 100%; text-align: left; padding: 17px 18px;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-left: 3px solid color-mix(in srgb, var(--tone, var(--primary)) 55%, transparent);
   border-radius: var(--r);
-  display: flex; gap: 14px; align-items: flex-start;
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease);
+  display: flex; gap: 15px; align-items: flex-start;
+  transition: border-color var(--med) var(--ease), background-color var(--med) var(--ease);
 }
-.info-card:hover { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.info-card:hover {
+  border-color: var(--line-strong);
+  border-left-color: var(--tone, var(--primary));
+  background: color-mix(in srgb, var(--tone, var(--primary)) 2.5%, var(--surface));
+}
 .info-icon {
-  width: 38px; height: 38px; border-radius: var(--r-sm); flex: 0 0 auto;
+  width: 40px; height: 40px; border-radius: var(--r-sm); flex: 0 0 auto;
   display: grid; place-items: center;
-  background: color-mix(in srgb, var(--tone, var(--primary)) 8%, var(--surface));
+  background: color-mix(in srgb, var(--tone, var(--primary)) 9%, var(--surface));
   color: var(--tone, var(--primary));
 }
 .info-icon .icon { width: 20px; height: 20px; }
 .info-body  { flex: 1; min-width: 0; }
 /* Both are spans, so without display:block the title and the body text reflow
    into one paragraph and the card loses its heading entirely. */
-.info-title { display: block; font-weight: 640; margin-bottom: 3px; letter-spacing: -.014em; }
-.info-text  { display: block; color: var(--ink-2); font-size: .92rem; line-height: 1.5; }
+.info-title { display: block; font-weight: 650; margin-bottom: 4px; letter-spacing: -.016em; color: var(--ink-0); }
+.info-text  { display: block; color: var(--ink-2); font-size: .93rem; line-height: 1.5; }
 .info-text:empty { display: none; }
 .info-speak {
-  flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+  flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%;
   display: grid; place-items: center; color: var(--ink-3);
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .info-speak .icon { width: 18px; height: 18px; }
 .info-speak:hover { background: var(--surface-2); color: var(--primary); }
 
-.txn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.txn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
 .txn {
-  display: flex; align-items: center; gap: 13px; padding: 13px 15px;
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
 }
 .txn-arrow {
-  width: 36px; height: 36px; border-radius: var(--r-sm);
+  width: 38px; height: 38px; border-radius: var(--r-sm);
   display: grid; place-items: center; flex: 0 0 auto;
 }
 .txn-arrow .icon { width: 18px; height: 18px; }
@@ -514,11 +588,12 @@ body.cursor-on [role="button"] { cursor: none; }
 .txn-body { flex: 1; min-width: 0; }
 /* Same reason as .info-title: these are spans, and the payee and the timestamp
    belong on separate lines. */
-.txn-who  { display: block; font-weight: 600; font-size: .97rem; }
+.txn-who  { display: block; font-weight: 640; font-size: .98rem; }
 .txn-when { display: block; font-size: .8rem; color: var(--ink-3); }
 .txn-amt  {
-  font-family: var(--num); font-weight: 600; white-space: nowrap;
-  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+  font-family: var(--num); font-weight: 640; white-space: nowrap;
+  font-variant-numeric: tabular-nums; letter-spacing: -.022em;
+  font-size: 1.04rem; color: var(--ink-0);
 }
 .txn.failed { opacity: .7; }
 .txn.failed .txn-arrow { background: var(--surface-2); color: var(--ink-3); }
@@ -527,27 +602,28 @@ body.cursor-on [role="button"] { cursor: none; }
 /* ═════════════════════════════════════════════════════════ amount entry ══ */
 .amount-display {
   font-family: var(--num);
-  font-size: clamp(2.2rem, 9vw, 2.6rem); font-weight: 600;
-  letter-spacing: -.035em; font-variant-numeric: tabular-nums;
-  text-align: center; padding: 18px; margin: 12px 0 16px;
+  font-size: clamp(2.4rem, 9.5vw, 2.9rem); font-weight: 600;
+  letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+  color: var(--ink-0);
+  text-align: center; padding: 20px; margin: 14px 0 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
 }
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 18px; }
 .chip {
-  min-height: 48px; padding: 0 18px; border-radius: var(--r-sm);
+  min-height: 50px; padding: 0 19px; border-radius: var(--r-sm);
   background: var(--surface); color: var(--primary-ink);
   border: 1px solid var(--line);
-  font-weight: 600; font-family: var(--num); font-size: .96rem;
+  font-weight: 640; font-family: var(--num); font-size: .97rem;
   transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
 .chip:hover  { background: var(--primary-soft); border-color: color-mix(in srgb, var(--primary) 34%, transparent); }
 .chip:active { transform: scale(.97); }
 
-.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 20px; }
 .key {
-  min-height: 64px; font-size: 1.35rem; font-weight: 500;
+  min-height: 66px; font-size: 1.38rem; font-weight: 500;
   font-family: var(--num); font-variant-numeric: tabular-nums;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -558,37 +634,37 @@ body.cursor-on [role="button"] { cursor: none; }
 .key:active { background: var(--surface-3); transform: scale(.97); }
 
 /* ═══════════════════════════════════════════════════════════════ forms ══ */
-.form  { display: flex; flex-direction: column; gap: 18px; margin-top: 16px; }
-.field { display: flex; flex-direction: column; gap: 7px; font-weight: 600; font-size: .88rem; }
+.form  { display: flex; flex-direction: column; gap: 19px; margin-top: 4px; }
+.field { display: flex; flex-direction: column; gap: 8px; font-weight: 640; font-size: .88rem; }
 .field > span:first-child { color: var(--ink-2); letter-spacing: .01em; }
 .field input, .field textarea, .field select {
-  min-height: 56px; padding: 13px 15px;
+  min-height: 58px; padding: 14px 16px;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: var(--r-sm);
   font-weight: 400; font-size: 1.02rem;
   transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
 }
-.field textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+.field textarea { min-height: 104px; resize: vertical; line-height: 1.5; }
 .field input:focus, .field textarea:focus, .field select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
   outline: none;
 }
 .field-hint  { font-weight: 400; font-size: .84rem; color: var(--ink-3); }
-.field-error { font-weight: 600; font-size: .86rem; color: var(--danger); }
+.field-error { font-weight: 640; font-size: .86rem; color: var(--danger); }
 
 .btn {
-  min-height: 56px; padding: 0 22px; border-radius: var(--r-sm);
-  font-weight: 620; font-size: 1rem; letter-spacing: -.008em;
-  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  min-height: 58px; padding: 0 24px; border-radius: var(--r-sm);
+  font-weight: 640; font-size: 1rem; letter-spacing: -.01em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease),
               transform var(--fast) var(--ease), opacity var(--fast) linear;
 }
 .btn .icon { width: 20px; height: 20px; }
 .btn:active   { transform: scale(.985); }
 .btn:disabled { opacity: .42; cursor: not-allowed; transform: none; }
-.btn-lg { min-height: 64px; width: 100%; font-size: 1.06rem; }
+.btn-lg { min-height: 66px; width: 100%; font-size: 1.06rem; }
 .btn-primary { color: #fff; background: var(--primary); }
 .btn-primary:hover:not(:disabled) { background: var(--primary-2); }
 .btn-ghost {
@@ -600,10 +676,10 @@ body.cursor-on [role="button"] { cursor: none; }
 .btn-yes:hover { background: #2E7E48; }
 .btn-no  { background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink); }
 .btn-no:hover { background: var(--surface-2); }
-.speak-btn { margin-top: 16px; }
+.speak-btn { margin-top: 18px; }
 
 .link-btn {
-  color: var(--primary); font-weight: 600; font-size: .93rem;
+  color: var(--primary); font-weight: 640; font-size: .93rem;
   padding: 10px 4px;
   text-decoration: underline; text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
@@ -612,12 +688,12 @@ body.cursor-on [role="button"] { cursor: none; }
 .link-btn:hover    { text-decoration-color: var(--primary); }
 .link-btn:disabled { opacity: .42; cursor: not-allowed; }
 
-.disclosure { margin-top: 22px; }
+.disclosure { margin-top: 24px; }
 .disclosure summary {
-  padding: 15px 16px; border-radius: var(--r-sm);
+  padding: 16px 18px; border-radius: var(--r-sm);
   background: var(--surface);
   border: 1px solid var(--line);
-  font-weight: 600; font-size: .96rem; cursor: pointer;
+  font-weight: 640; font-size: .96rem; cursor: pointer;
   list-style: none;
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -637,21 +713,21 @@ body.cursor-on [role="button"] { cursor: none; }
    textContent, so an icon child would be wiped on every language change. A
    background image on the padding box survives that. */
 .sandbox-note {
-  margin-top: 26px; padding: 14px 16px 14px 46px;
+  margin-top: 28px; padding: 15px 17px 15px 48px;
   background: var(--surface)
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%238A6A12" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 16.5h.01"/></svg>')
-    16px 15px / 18px 18px no-repeat;
+    17px 16px / 18px 18px no-repeat;
   border: 1px solid var(--line);
   border-left: 3px solid var(--gold);
   border-radius: var(--r-sm);
   font-size: .87rem; color: var(--ink-2); line-height: 1.55;
 }
-.sample-note { margin-top: 20px; font-size: .82rem; color: var(--ink-3); }
+.sample-note { margin-top: 22px; font-size: .82rem; color: var(--ink-3); }
 
 /* ═══════════════════════════════════════════════════════ signup + OTP ══ */
 /* Three steps is short enough that someone who cannot read the labels can still
    see how much is left, which is the whole point. */
-.steps { display: flex; align-items: center; gap: 6px; margin: 2px 0 20px; }
+.steps { display: flex; align-items: center; gap: 6px; margin: 2px 0 22px; }
 .step {
   height: 3px; flex: 1; border-radius: 999px;
   background: var(--surface-3);
@@ -666,12 +742,12 @@ body.cursor-on [role="button"] { cursor: none; }
   padding: 4px;
   background: var(--surface-2);
   border-radius: var(--r);
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 .seg-btn {
   min-height: 56px; border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center; gap: 9px;
-  font-weight: 600; font-size: .94rem; color: var(--ink-2);
+  font-weight: 640; font-size: .94rem; color: var(--ink-2);
   transition: background-color var(--med) var(--ease), color var(--med) var(--ease),
               box-shadow var(--med) var(--ease);
 }
@@ -683,9 +759,9 @@ body.cursor-on [role="button"] { cursor: none; }
 
 /* Six separate boxes rather than one field: it shows the expected length
    without anyone having to read a hint, and a wrong digit is obvious. */
-.otp-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 6px 0 16px; }
+.otp-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; margin: 6px 0 18px; }
 .otp-box {
-  width: 100%; min-height: 64px; padding: 0;
+  width: 100%; min-height: 66px; padding: 0;
   text-align: center;
   font-family: var(--num); font-size: 1.5rem; font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -713,17 +789,17 @@ body.cursor-on [role="button"] { cursor: none; }
 
 .otp-meta {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 8px; font-size: .88rem; color: var(--ink-2);
+  gap: 12px; margin-bottom: 10px; font-size: .88rem; color: var(--ink-2);
 }
-.countdown { font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 600; }
+.countdown { font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 640; }
 
 .sent-to {
   display: inline-flex; align-items: center; gap: 9px;
-  padding: 9px 14px; margin: 0 0 18px;
+  padding: 10px 15px; margin: 0 0 20px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  font-weight: 600; font-size: .92rem; color: var(--ink);
+  font-weight: 640; font-size: .92rem; color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 .sent-to .icon { width: 18px; height: 18px; color: var(--ink-3); }
@@ -732,7 +808,7 @@ body.cursor-on [role="button"] { cursor: none; }
    something a real user would ever be shown. */
 .dev-chip {
   display: flex; align-items: center; gap: 11px;
-  margin: 16px 0 4px; padding: 12px 14px;
+  margin: 18px 0 4px; padding: 13px 15px;
   background: var(--gold-soft);
   border: 1px dashed color-mix(in srgb, var(--gold) 50%, transparent);
   border-radius: var(--r-sm);
@@ -744,29 +820,35 @@ body.cursor-on [role="button"] { cursor: none; }
   letter-spacing: .14em; color: var(--ink);
 }
 
-.auth-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.auth-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
 .divider {
   display: flex; align-items: center; gap: 14px;
-  margin: 20px 0 4px; color: var(--ink-3); font-size: .84rem;
+  margin: 22px 0 4px; color: var(--ink-3); font-size: .84rem;
 }
 .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
 /* ════════════════════════════════════════════════════════════════ scan ══ */
 .scan-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .scan-card {
-  min-height: 130px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  position: relative; overflow: hidden;
+  min-height: 140px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  font-weight: 600; font-size: .96rem;
-  transition: border-color var(--med) var(--ease), box-shadow var(--med) var(--ease),
+  font-weight: 640; font-size: .97rem;
+  transition: border-color var(--med) var(--ease), background-color var(--med) var(--ease),
               transform var(--fast) var(--ease);
 }
-.scan-card:hover  { border-color: var(--line-strong); box-shadow: var(--sh-2); }
+.scan-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--tone-scan); opacity: .85;
+}
+.scan-card:hover  { border-color: var(--line-strong); background: color-mix(in srgb, var(--tone-scan) 3%, var(--surface)); }
 .scan-card:active { transform: scale(.985); }
-.scan-card .icon { width: 34px; height: 34px; color: var(--tone-scan); stroke-width: 1.5; }
-.camera-wrap { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+.scan-card .icon { width: 36px; height: 36px; color: var(--tone-scan); stroke-width: 1.5; }
+.camera-wrap { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
 .camera-wrap video {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
   background: #101514; border-radius: var(--r);
@@ -774,7 +856,7 @@ body.cursor-on [role="button"] { cursor: none; }
 
 /* ═════════════════════════════════════════════════════════════ verdict ══ */
 .verdict {
-  margin-top: 18px; padding: 16px;
+  margin-top: 20px; padding: 18px;
   border-radius: var(--r);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -785,8 +867,8 @@ body.cursor-on [role="button"] { cursor: none; }
 .verdict.scam       { border-left-color: var(--danger);  background: var(--danger-soft); }
 .verdict.pending    { border-left-color: var(--ink-3);   background: var(--surface-2); color: var(--ink-2); }
 .verdict-head {
-  font-weight: 660; font-size: 1.02rem; margin-bottom: 8px;
-  display: flex; align-items: center; gap: 9px; letter-spacing: -.014em;
+  font-weight: 680; font-size: 1.04rem; margin-bottom: 9px;
+  display: flex; align-items: center; gap: 9px; letter-spacing: -.016em;
 }
 .verdict-head .icon { width: 20px; height: 20px; }
 .verdict.safe       .verdict-head { color: var(--ok); }
@@ -806,8 +888,8 @@ body.cursor-on [role="button"] { cursor: none; }
 .sheet-inner {
   background: var(--surface);
   border-radius: var(--r-xl) var(--r-xl) 0 0;
-  padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
-  max-width: 560px; width: 100%; margin: 0 auto;
+  padding: 12px 22px calc(26px + env(safe-area-inset-bottom));
+  max-width: var(--shell); width: 100%; margin: 0 auto;
   box-shadow: 0 -8px 32px rgba(16, 24, 23, .18);
   animation: slideUp .26s var(--ease);
 }
@@ -815,34 +897,35 @@ body.cursor-on [role="button"] { cursor: none; }
 /* The grab handle: reads as "this can be dismissed" without needing a label. */
 .sheet-inner::before {
   content: "";
-  display: block; width: 38px; height: 4px; margin: 0 auto 20px;
+  display: block; width: 38px; height: 4px; margin: 0 auto 22px;
   border-radius: 999px; background: var(--surface-3);
 }
 .confirm-text {
-  font-size: clamp(1.16rem, 4.6vw, 1.28rem); font-weight: 600;
-  text-align: center; margin: 0 0 22px; line-height: 1.45;
-  letter-spacing: -.018em;
+  font-size: clamp(1.18rem, 4.6vw, 1.32rem); font-weight: 640;
+  text-align: center; margin: 0 0 24px; line-height: 1.45;
+  letter-spacing: -.02em; color: var(--ink-0);
 }
 .confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* ═════════════════════════════════════════════════════════════ mic bar ══ */
 .micbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-  padding: 12px 16px calc(14px + env(safe-area-inset-bottom));
+  padding: 13px 16px calc(15px + env(safe-area-inset-bottom));
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-top: 1px solid var(--line);
 }
 .micbar-row {
-  max-width: 560px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: center; gap: 30px;
+  max-width: var(--shell); margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 32px;
 }
 .mic {
   position: relative;
   width: 80px; height: 80px; border-radius: 50%;
   display: grid; place-items: center; color: #fff;
   background: var(--accent);
+  box-shadow: var(--sh-float);
   transition: background-color var(--med) var(--ease), transform var(--fast) var(--ease);
 }
 .mic:hover  { background: var(--accent-2); }
@@ -855,29 +938,30 @@ body.cursor-on [role="button"] { cursor: none; }
 }
 .mic.busy { background: var(--ink-2); }
 
-.mic-hint { text-align: center; margin: 10px 0 0; font-size: .85rem; color: var(--ink-3); }
+.mic-hint { text-align: center; margin: 11px 0 0; font-size: .85rem; color: var(--ink-3); }
 .heard {
-  max-width: 560px; margin: 0 auto 10px; padding: 13px 16px;
+  max-width: var(--shell); margin: 0 auto 11px; padding: 14px 17px;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-left: 3px solid var(--primary);
   border-radius: var(--r);
-  box-shadow: var(--sh-1);
+  box-shadow: var(--sh-float);
   font-size: .98rem;
   animation: rise .22s var(--ease);
 }
 .heard .heard-you {
-  color: var(--ink-3); font-size: .78rem; display: block; margin-bottom: 3px;
-  font-weight: 600;
+  color: var(--ink-3); font-size: .78rem; display: block; margin-bottom: 4px;
+  font-weight: 640;
 }
 .heard .heard-reply {
-  display: block; margin-top: 10px; padding-top: 10px;
+  display: block; margin-top: 11px; padding-top: 11px;
   border-top: 1px solid var(--line);
-  font-weight: 600; color: var(--primary-ink);
+  font-weight: 640; color: var(--primary-ink);
 }
 
-.type-form { max-width: 560px; margin: 12px auto 0; display: flex; gap: 10px; }
+.type-form { max-width: var(--shell); margin: 13px auto 0; display: flex; gap: 10px; }
 .type-form input {
-  flex: 1; min-height: 56px; padding: 0 15px;
+  flex: 1; min-height: 58px; padding: 0 16px;
   border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface);
 }
 .type-form input:focus {
@@ -894,7 +978,7 @@ html[lang="en"] .balance-label,
 html[lang="en"] .divider,
 html[lang="en"] .heard .heard-you {
   text-transform: uppercase;
-  letter-spacing: .07em;
+  letter-spacing: .08em;
   font-size: .78rem;
 }
 
@@ -902,20 +986,132 @@ html[lang="en"] .heard .heard-you {
 .toast {
   position: fixed; left: 50%; bottom: 214px; transform: translateX(-50%);
   z-index: 90; max-width: 90vw;
-  padding: 13px 20px; border-radius: var(--r-sm);
-  background: var(--ink);
-  color: #fff; font-weight: 600; font-size: .94rem;
+  padding: 14px 22px; border-radius: var(--r-sm);
+  background: var(--ink-0);
+  color: #fff; font-weight: 640; font-size: .94rem;
   box-shadow: var(--sh-3);
   animation: toastIn .24s var(--ease);
 }
 @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 10px); } }
 .toast.error { background: var(--danger); }
 
-/* ══════════════════════════════════════════════════════════ wide screens ══ */
-/* The app is designed for a phone, and on a laptop it stays phone-width rather
-   than stretching. The demo is given on a laptop, and a 1400px row of tiles
-   would misrepresent what the thing actually is. */
-@media (min-width: 900px) {
-  body { padding-bottom: 230px; }
-  #app { padding-top: 28px; }
+/* ═════════════════════════════════════════════ deck layout, wide screens ══ */
+/* Below this width the app is a phone and stacks. At and above it the screen
+   becomes a slide: the headline, its rule and its lead line hold a sticky left
+   column, and everything else runs in a content column beside them.
+
+   The split is done purely by grid placement, so the markup is identical on
+   both — .screen-title and .screen-sub are told to sit in column 1 and every
+   other child in column 2. Auto-placement then puts the first content child on
+   row 1, which is what lines the content up with the top of the headline. */
+@media (min-width: 1040px) {
+  body { padding-bottom: 240px; }
+
+  #app { max-width: var(--shell-wide); padding: 44px 40px 8px; }
+
+  .screen {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--gutter);
+    align-content: start;
+  }
+  /* Anything not explicitly placed is content. Listed rather than using :not()
+     with a long chain so a new headline element has to be added here on
+     purpose, instead of silently landing in the wrong column. */
+  .screen > * { grid-column: 2; }
+  .screen > .screen-title,
+  .screen > .screen-sub,
+  .screen > .steps { grid-column: 1; }
+
+  /* Home is the one screen with no .screen-title, because its heading is the
+     person's name. Without this the rail would sit empty and the whole screen
+     would hang off the right edge. Greeting and balance together make the
+     left column of the slide -- who you are and what you have -- and the tiles
+     become the evidence grid beside it. */
+  .screen > .greeting,
+  .screen > .balance-card { grid-column: 1; }
+
+  .screen-title {
+    font-size: 2.3rem;
+    position: sticky; top: 92px;
+    margin-top: 0;
+  }
+  .screen-sub { font-size: 1.02rem; margin: 18px 0 0; }
+  .screen > .steps { margin-bottom: 0; max-width: var(--rail); }
+
+  /* The greeting is a headline at this width, so it gets the headline's rule. */
+  .greeting {
+    display: block;
+    font-size: 1.9rem; margin-bottom: 0;
+  }
+  .greeting-text { font-size: inherit; font-weight: 660; letter-spacing: -.03em; }
+  .greeting::after {
+    content: "";
+    display: block; width: 52px; height: 3px; margin: 15px 0 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  }
+  .greeting .text-btn { float: right; font-size: .85rem; margin-top: 6px; }
+  /* Sparse auto-placement puts the balance slab on the same grid row as the
+     tile grid, and a grid item stretches to its row. Without this the card
+     grows to the full height of six tiles and the figure floats in a field
+     of green. */
+  .balance-card { margin-top: 24px; margin-bottom: 0; align-self: start; }
+
+  /* The first content child sits on row 1 next to the headline, so it must not
+     carry the top margin it needs when stacked under one. */
+  .screen > *:first-of-type { margin-top: 0; }
+  .section-head:first-child { margin-top: 2px; }
+
+  /* Home reads as a dashboard at this width: the stat slab and the tiles get
+     the full content column, three tiles across. */
+  .tile-grid   { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .lang-grid   { grid-template-columns: repeat(4, 1fr); }
+  .card-list   { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .txn-list    { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  /* A grid item stretches to fill its column, which turns an inline-sized
+     button into a 700px slab with one word floating in the middle of it.
+     Everything that is inline by design has to opt out explicitly. */
+  .screen > .btn,
+  .screen > .link-btn,
+  .screen > .text-btn,
+  .screen > .sent-to,
+  .screen > .dev-chip  { justify-self: start; }
+  .screen > .btn-lg    { justify-self: stretch; }
+
+  /* Measure. A line of body text past about 75 characters is measurably harder
+     to track back from, and these two run the full content column. */
+  .sandbox-note, .sample-note, .verdict { max-width: 72ch; }
+
+  .scan-choice { max-width: 560px; }
+  .keypad      { max-width: 420px; }
+  .form        { max-width: 560px; }
+  .btn-lg      { max-width: 560px; }
+  .otp-grid    { max-width: 460px; }
+  .amount-display { max-width: 560px; }
+
+  /* The mic bar stops being a wall across the window and becomes an island the
+     width of the content, which is what keeps the app from looking like a phone
+     chrome stretched over a laptop. */
+  .micbar {
+    left: 50%; right: auto; bottom: 22px;
+    transform: translateX(-50%);
+    width: min(var(--shell-wide), calc(100vw - 80px));
+    padding: 16px 24px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    box-shadow: var(--sh-float);
+  }
+  .toast { bottom: 250px; }
+  .sheet-inner { border-radius: var(--r-xl); margin-bottom: 26px; max-width: 560px; }
+  .sheet { align-items: center; justify-items: center; }
+}
+
+/* An intermediate step so the jump from phone to deck is not a single cliff. */
+@media (min-width: 720px) and (max-width: 1039.98px) {
+  #app { max-width: 720px; padding: 32px 28px 8px; }
+  .tile-grid { grid-template-columns: repeat(3, 1fr); }
+  .lang-grid { grid-template-columns: repeat(4, 1fr); }
+  .micbar-row, .heard, .type-form { max-width: 720px; }
 }

@@ -794,20 +794,30 @@ function renderTiles() {
   grid.innerHTML = '';
   for (const tile of TILES) {
     const label = t(tile.key);
+    // The second line says what the tile does in a full sentence. Two words is
+    // enough for someone who already knows the app; the person this is built
+    // for does not, and has no manual to find out from. It is also what gets
+    // spoken, so the audio affordance explains rather than just repeating.
+    // t() falls back to the key name when a string is missing, which would
+    // print "tileScanSub" on the tile. Treat that as no sub-line instead.
+    const subKey = `${tile.key}Sub`;
+    const sub = t(subKey) === subKey ? '' : t(subKey);
     const button = document.createElement('button');
     button.className = 'tile';
     button.style.setProperty('--tone', tile.tone);
     button.innerHTML = `
       <span class="tile-icon">${iconSvg(tile.icon)}</span>
       <span class="tile-label"></span>
+      <span class="tile-sub"></span>
       <span class="tile-speak" role="button" tabindex="0" aria-label="Listen">${iconSvg('speaker')}</span>`;
     $('.tile-label', button).textContent = label;
+    $('.tile-sub', button).textContent = sub;
 
     // The speaker reads the label without navigating: a user who cannot read
     // needs to identify a tile before committing to it.
     $('.tile-speak', button).addEventListener('click', (event) => {
       event.stopPropagation();
-      speak(label);
+      speak(sub ? `${label}. ${sub}` : label);
     });
     button.addEventListener('click', () => { speak(label); go(tile.screen); });
     grid.append(button);

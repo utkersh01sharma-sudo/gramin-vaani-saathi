@@ -73,6 +73,12 @@ export const STRINGS = {
     tileLearn: 'सीखिए',
     tileScan: 'कोड स्कैन',
     tileSafety: 'ठगी जाँचिए',
+    tileBalanceSub: 'खाते में कितने पैसे हैं, देखिए',
+    tileSendSub: 'किसी को पैसे भेजिए',
+    tileSchemesSub: 'आपके लिए कौन सी योजना है',
+    tileLearnSub: 'पैसे की छोटी-छोटी बातें',
+    tileScanSub: 'दुकान का कोड या नोट पहचानिए',
+    tileSafetySub: 'कोई संदेश सच्चा है या ठगी',
 
     // --- signup / OTP ---
     createAccount: 'नया खाता बनाइए',
@@ -173,6 +179,12 @@ export const STRINGS = {
     tileLearn: 'Learn',
     tileScan: 'Scan a code',
     tileSafety: 'Check for fraud',
+    tileBalanceSub: 'See how much money is in your account',
+    tileSendSub: 'Send money to someone',
+    tileSchemesSub: 'Find schemes you qualify for',
+    tileLearnSub: 'Short lessons about money',
+    tileScanSub: 'Check a shop code or a banknote',
+    tileSafetySub: 'Is this message real or a fraud?',
 
     // --- signup / OTP ---
     createAccount: 'Create a new account',
@@ -273,6 +285,12 @@ export const STRINGS = {
     tileLearn: 'கற்க',
     tileScan: 'கோடு ஸ்கேன்',
     tileSafety: 'மோசடி சோதனை',
+    tileBalanceSub: 'கணக்கில் எவ்வளவு பணம் உள்ளது',
+    tileSendSub: 'ஒருவருக்குப் பணம் அனுப்புங்கள்',
+    tileSchemesSub: 'உங்களுக்கு ஏற்ற அரசுத் திட்டங்கள்',
+    tileLearnSub: 'பணம் பற்றிய சிறு பாடங்கள்',
+    tileScanSub: 'கடைக் கோடு அல்லது நோட்டைச் சரிபார்க்க',
+    tileSafetySub: 'இந்தச் செய்தி உண்மையா, மோசடியா?',
 
     // --- signup / OTP ---
     createAccount: 'புதிய கணக்கு தொடங்குங்கள்',
@@ -373,6 +391,12 @@ export const STRINGS = {
     tileLearn: 'నేర్చుకో',
     tileScan: 'కోడ్ స్కాన్',
     tileSafety: 'మోసం తనిఖీ',
+    tileBalanceSub: 'ఖాతాలో ఎంత డబ్బు ఉందో చూడండి',
+    tileSendSub: 'ఎవరికైనా డబ్బు పంపండి',
+    tileSchemesSub: 'మీకు సరిపోయే ప్రభుత్వ పథకాలు',
+    tileLearnSub: 'డబ్బు గురించి చిన్న పాఠాలు',
+    tileScanSub: 'దుకాణం కోడ్ లేదా నోటును తనిఖీ చేయండి',
+    tileSafetySub: 'ఈ సందేశం నిజమా, మోసమా?',
 
     // --- signup / OTP ---
     createAccount: 'కొత్త ఖాతా తెరవండి',

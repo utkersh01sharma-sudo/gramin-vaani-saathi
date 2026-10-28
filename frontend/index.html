@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0A6152" />
+<meta name="theme-color" content="#0B2B27" />
 <title>ग्रामीण वाणी साथी · Gramin Vaani Saathi</title>
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
@@ -11,283 +11,503 @@
 </head>
 <body>
 
-<div id="offline-banner" class="banner" hidden>
-  <span class="banner-dot"></span><span data-i18n="offline">आप ऑफलाइन हैं</span>
-  <span id="queue-count" class="queue-count" hidden></span>
+<!-- ═══════════════════════════════════════════════════════════════ auth shell
+     Language, sign-in and the three-step sign-up live outside the app shell:
+     there is nothing in the sidebar a signed-out person can use. -->
+<div id="auth-shell" class="auth-shell">
+  <aside class="auth-hero">
+    <div class="auth-brand">
+      <img src="/icons/icon.svg" alt="" class="brand-mark" />
+      <span data-i18n="appName">वाणी साथी</span>
+    </div>
+    <h1 class="auth-hero-title" data-i18n="signInTitle"></h1>
+    <p class="auth-hero-sub" data-i18n="signInSub"></p>
+    <ul class="auth-features">
+      <li><span data-icon="mic"></span><span data-i18n="feature1"></span></li>
+      <li><span data-icon="shield"></span><span data-i18n="feature2"></span></li>
+      <li><span data-icon="scheme"></span><span data-i18n="feature3"></span></li>
+    </ul>
+    <p class="auth-hero-foot" data-i18n="sandboxNote"></p>
+  </aside>
+
+  <main class="auth-panel">
+    <!-- language -->
+    <section class="auth-screen" data-screen="language">
+      <h2 class="auth-title" data-i18n="chooseLanguage">अपनी भाषा चुनिए</h2>
+      <p class="auth-sub" data-i18n="chooseLanguageSub">Choose your language</p>
+      <div class="lang-grid">
+        <button class="lang-card" data-lang="hi"><span class="lang-native">हिन्दी</span><span class="lang-latin">Hindi</span></button>
+        <button class="lang-card" data-lang="en"><span class="lang-native">English</span><span class="lang-latin">English</span></button>
+        <button class="lang-card" data-lang="ta"><span class="lang-native">தமிழ்</span><span class="lang-latin">Tamil</span></button>
+        <button class="lang-card" data-lang="te"><span class="lang-native">తెలుగు</span><span class="lang-latin">Telugu</span></button>
+      </div>
+    </section>
+
+    <!-- sign in -->
+    <section class="auth-screen" data-screen="auth" hidden>
+      <div class="auth-top">
+        <h2 class="auth-title" data-i18n="whoAreYou">आप कौन हैं?</h2>
+        <button class="chip-btn" data-goto="language"><span data-icon="globe"></span><span class="lang-current"></span></button>
+      </div>
+      <p class="eyebrow" data-i18n="demoUsers"></p>
+      <div id="demo-users" class="people-grid"></div>
+      <button id="btn-new-account" class="btn btn-primary btn-block">
+        <span data-icon="plus"></span><span data-i18n="createAccount">नया खाता बनाइए</span>
+      </button>
+      <div class="divider"><span data-i18n="orSignIn">या</span></div>
+      <details class="disclosure">
+        <summary data-i18n="otherAccount">दूसरा खाता</summary>
+        <form id="login-form" class="form">
+          <label class="field"><span data-i18n="username">नाम</span>
+            <input name="username" autocomplete="username" required /></label>
+          <label class="field"><span data-i18n="password">पासवर्ड</span>
+            <input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="btn btn-primary" type="submit" data-i18n="signIn">अंदर आइए</button>
+        </form>
+      </details>
+    </section>
+
+    <!-- sign up 1: contact -->
+    <section class="auth-screen" data-screen="signup" hidden>
+      <div class="steps" aria-hidden="true"><span class="step now"></span><span class="step"></span><span class="step"></span></div>
+      <h2 class="auth-title" data-i18n="signupTitle"></h2>
+      <p class="auth-sub" data-i18n="signupSub"></p>
+      <div class="segmented" role="tablist" aria-label="Verification channel">
+        <button class="seg-btn" role="tab" data-channel="phone" aria-selected="true">
+          <span data-icon="phone"></span><span data-i18n="channelPhone"></span></button>
+        <button class="seg-btn" role="tab" data-channel="email" aria-selected="false">
+          <span data-icon="mail"></span><span data-i18n="channelEmail"></span></button>
+      </div>
+      <form id="signup-form" class="form">
+        <label class="field">
+          <span id="dest-label" data-i18n="phoneLabel"></span>
+          <input id="dest-input" name="destination" inputmode="numeric" autocomplete="tel" required />
+          <span id="dest-hint" class="field-hint"></span>
+          <span id="dest-error" class="field-error" hidden></span>
+        </label>
+        <button class="btn btn-primary btn-block" type="submit" data-i18n="sendCode"></button>
+      </form>
+      <button class="text-btn" data-goto="auth"><span data-icon="back"></span><span data-i18n="back"></span></button>
+      <p class="note" data-i18n="otpSandboxNote"></p>
+    </section>
+
+    <!-- sign up 2: code -->
+    <section class="auth-screen" data-screen="otp" hidden>
+      <div class="steps" aria-hidden="true"><span class="step done"></span><span class="step now"></span><span class="step"></span></div>
+      <h2 class="auth-title" data-i18n="otpTitle"></h2>
+      <p class="sent-to"><span id="otp-icon" aria-hidden="true"></span> <span id="otp-destination"></span></p>
+      <div class="otp-grid" id="otp-grid"></div>
+      <p id="otp-error" class="field-error" hidden></p>
+      <div class="otp-meta">
+        <span id="otp-countdown" class="countdown"></span>
+        <button id="btn-resend" class="text-btn" type="button" data-i18n="resendCode"></button>
+      </div>
+      <button class="btn btn-primary btn-block" id="btn-verify" data-i18n="verify"></button>
+      <div id="dev-code" class="dev-chip" hidden>
+        <span data-icon="wrench"></span>
+        <span><span data-i18n="devCodeNote"></span> <code id="dev-code-value"></code></span>
+      </div>
+    </section>
+
+    <!-- sign up 3: name -->
+    <section class="auth-screen" data-screen="details" hidden>
+      <div class="steps" aria-hidden="true"><span class="step done"></span><span class="step done"></span><span class="step now"></span></div>
+      <h2 class="auth-title" data-i18n="detailsTitle"></h2>
+      <p class="auth-sub" data-i18n="detailsSub"></p>
+      <form id="details-form" class="form">
+        <label class="field"><span data-i18n="yourName"></span>
+          <input id="reg-name" name="display_name" autocomplete="name" required maxlength="64" /></label>
+        <label class="field"><span data-i18n="choosePassword"></span>
+          <input id="reg-password" name="password" type="password" autocomplete="new-password" minlength="4" required />
+          <span class="field-hint" data-i18n="passwordHint"></span></label>
+        <p id="details-error" class="field-error" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit" data-i18n="finish"></button>
+      </form>
+    </section>
+  </main>
 </div>
 
-<header class="topbar">
-  <button id="btn-back" class="icon-btn" hidden aria-label="Back" data-icon="back"></button>
-  <div class="brand">
-    <img src="/icons/icon.svg" alt="" class="brand-mark" />
-    <span id="brand-name">वाणी साथी</span>
-  </div>
-  <button id="btn-lang" class="lang-chip" aria-label="Change language">
-    <span id="lang-label">हिं</span>
-  </button>
-</header>
+<!-- ════════════════════════════════════════════════════════════════ app shell -->
+<div id="app-shell" class="app-shell" hidden>
 
-<main id="app">
-
-  <!-- ─────────────────────────────── language ─────────────────────────────── -->
-  <section class="screen" data-screen="language">
-    <h1 class="screen-title" data-i18n="chooseLanguage">अपनी भाषा चुनिए</h1>
-    <p class="screen-sub" data-i18n="chooseLanguageSub">Choose your language</p>
-    <div class="lang-grid">
-      <button class="lang-card" data-lang="hi"><span class="lang-native">हिन्दी</span><span class="lang-latin">Hindi</span></button>
-      <button class="lang-card" data-lang="en"><span class="lang-native">English</span><span class="lang-latin">English</span></button>
-      <button class="lang-card" data-lang="ta"><span class="lang-native">தமிழ்</span><span class="lang-latin">Tamil</span></button>
-      <button class="lang-card" data-lang="te"><span class="lang-native">తెలుగు</span><span class="lang-latin">Telugu</span></button>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────── sign in ────────────────────────────── -->
-  <section class="screen" data-screen="auth" hidden>
-    <h1 class="screen-title" data-i18n="whoAreYou">आप कौन हैं?</h1>
-    <div id="demo-users" class="people-grid"></div>
-
-    <div class="auth-actions">
-      <button id="btn-new-account" class="btn btn-primary btn-lg">
-        <span data-icon="plus"></span>
-        <span data-i18n="createAccount">नया खाता बनाइए</span>
-      </button>
+  <aside class="sidebar" id="sidebar" aria-label="Main">
+    <div class="side-brand">
+      <img src="/icons/icon.svg" alt="" class="brand-mark" />
+      <div>
+        <div class="side-brand-name" data-i18n="appName">वाणी साथी</div>
+        <div class="side-brand-tag" data-i18n="sandboxBadge"></div>
+      </div>
     </div>
 
-    <div class="divider"><span data-i18n="orSignIn">या</span></div>
+    <nav class="side-nav" id="side-nav"></nav>
 
-    <details class="disclosure">
-      <summary data-i18n="otherAccount">दूसरा खाता</summary>
-      <form id="login-form" class="form">
-        <label class="field">
-          <span data-i18n="username">नाम</span>
-          <input name="username" autocomplete="username" required />
-        </label>
-        <label class="field">
-          <span data-i18n="password">पासवर्ड</span>
-          <input name="password" type="password" autocomplete="current-password" required />
-        </label>
-        <button class="btn btn-primary" type="submit" data-i18n="signIn">अंदर आइए</button>
+    <div class="side-foot">
+      <div class="side-lang" role="group" aria-label="Language">
+        <button data-setlang="hi">हिं</button><button data-setlang="en">EN</button>
+        <button data-setlang="ta">தமி</button><button data-setlang="te">తెలు</button>
+      </div>
+      <div class="side-user">
+        <span class="avatar" id="side-avatar"></span>
+        <div class="side-user-text">
+          <div class="side-user-name" id="side-user-name"></div>
+          <div class="side-user-vpa" id="side-user-vpa"></div>
+        </div>
+        <button class="icon-btn on-dark" id="btn-signout" data-icon="logout" aria-label="Sign out"></button>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="btn-menu" data-icon="menu" aria-label="Menu"></button>
+      <div class="topbar-title">
+        <h1 id="view-title"></h1>
+        <p id="view-sub"></p>
+      </div>
+      <form class="ask" id="ask-form" autocomplete="off">
+        <button type="button" class="ask-mic" id="mic" aria-label="Speak"><span data-icon="mic"></span></button>
+        <input id="ask-input" data-i18n-ph="askPlaceholder" aria-label="Ask" />
+        <button type="submit" class="ask-go" aria-label="Send"><span data-icon="send"></span></button>
       </form>
-    </details>
-
-    <p class="sandbox-note" data-i18n="sandboxNote"></p>
-  </section>
-
-  <!-- ──────────── sign up, step 1: which contact do we verify? ───── -->
-  <section class="screen" data-screen="signup" hidden>
-    <div class="steps" aria-hidden="true">
-      <span class="step now"></span><span class="step"></span><span class="step"></span>
-    </div>
-    <h1 class="screen-title" data-i18n="signupTitle">नया खाता बनाइए</h1>
-    <p class="screen-sub" data-i18n="signupSub">हम आपको एक कोड भेजेंगे।</p>
-
-    <div class="segmented" role="tablist" aria-label="Verification channel">
-      <button class="seg-btn" role="tab" data-channel="phone" aria-selected="true">
-        <span data-icon="phone"></span>
-        <span data-i18n="channelPhone">मोबाइल नंबर</span>
+      <button class="status-pill" id="status-pill" type="button">
+        <span class="status-dot"></span><span id="status-text"></span>
       </button>
-      <button class="seg-btn" role="tab" data-channel="email" aria-selected="false">
-        <span data-icon="mail"></span>
-        <span data-i18n="channelEmail">ईमेल</span>
-      </button>
+    </header>
+
+    <div class="reply" id="reply" hidden role="status" aria-live="polite">
+      <span class="reply-icon" id="reply-icon" data-icon="chat"></span>
+      <div class="reply-body">
+        <div class="reply-you" id="reply-you"></div>
+        <div class="reply-text" id="reply-text"></div>
+      </div>
+      <button class="icon-btn" id="reply-speak" data-icon="speaker" aria-label="Listen"></button>
+      <button class="icon-btn" id="reply-close" data-icon="close" aria-label="Close"></button>
     </div>
 
-    <form id="signup-form" class="form">
-      <label class="field">
-        <span id="dest-label" data-i18n="phoneLabel">मोबाइल नंबर</span>
-        <input id="dest-input" name="destination" inputmode="numeric" autocomplete="tel"
-               data-i18n-ph="phonePlaceholder" required />
-        <span id="dest-hint" class="field-hint" data-i18n="phoneHint"></span>
-        <span id="dest-error" class="field-error" hidden></span>
-      </label>
-      <button class="btn btn-primary btn-lg" type="submit" data-i18n="sendCode">कोड भेजिए</button>
-    </form>
+    <main class="content" id="content">
 
-    <p class="sandbox-note" data-i18n="otpSandboxNote"></p>
-  </section>
+      <!-- ───────────────────────────────────────────── overview -->
+      <section class="view" data-view="overview">
+        <div class="bento">
+          <article class="card c-balance" style="--tone: var(--tone-money)">
+            <div class="card-head"><span class="card-icon" data-icon="wallet"></span>
+              <h2 data-i18n="balanceLabel"></h2>
+              <button class="icon-btn" data-speak-balance data-icon="speaker" aria-label="Listen"></button></div>
+            <div class="money-xl"><span class="rupee">₹</span><span class="bal-amount">—</span></div>
+            <div class="muted small bal-vpa"></div>
+            <div class="stamp bal-stamp"></div>
+            <div class="card-actions">
+              <button class="btn btn-primary" data-view-go="send"><span data-icon="send"></span><span data-i18n="navSend"></span></button>
+              <button class="btn btn-ghost" data-view-go="balance"><span data-icon="history"></span><span data-i18n="historyTitle"></span></button>
+            </div>
+          </article>
 
-  <!-- ─────────────── sign up, step 2: the code ──────────── -->
-  <section class="screen" data-screen="otp" hidden>
-    <div class="steps" aria-hidden="true">
-      <span class="step done"></span><span class="step now"></span><span class="step"></span>
-    </div>
-    <h1 class="screen-title" data-i18n="otpTitle">कोड डालिए</h1>
-    <p class="sent-to"><span id="otp-icon" aria-hidden="true"></span> <span id="otp-destination"></span></p>
+          <article class="card c-send" style="--tone: var(--tone-send)">
+            <div class="card-head"><span class="card-icon" data-icon="send"></span>
+              <h2 data-i18n="quickSend"></h2>
+              <button class="link" data-view-go="send" data-i18n="seeAll"></button></div>
+            <div class="avatar-row" id="ov-contacts"></div>
+            <div class="chip-row" id="ov-amounts"></div>
+          </article>
 
-    <div class="otp-grid" id="otp-grid"></div>
-    <p id="otp-error" class="field-error" hidden></p>
+          <article class="card c-safety" style="--tone: var(--tone-safety)">
+            <div class="card-head"><span class="card-icon" data-icon="shield"></span>
+              <h2 data-i18n="tileSafety"></h2>
+              <button class="link" data-view-go="safety" data-i18n="open"></button></div>
+            <textarea id="ov-scam-input" rows="3" data-i18n-ph="checkPlaceholder"></textarea>
+            <button class="btn btn-danger-soft" id="ov-scam-btn"><span data-icon="search"></span><span data-i18n="checkMessage"></span></button>
+            <div class="mini-verdict" id="ov-scam-result" hidden></div>
+          </article>
 
-    <div class="otp-meta">
-      <span id="otp-countdown" class="countdown"></span>
-      <button id="btn-resend" class="link-btn" type="button" data-i18n="resendCode">दोबारा भेजिए</button>
-    </div>
+          <article class="card c-activity" style="--tone: var(--tone-money)">
+            <div class="card-head"><span class="card-icon" data-icon="history"></span>
+              <h2 data-i18n="recentActivity"></h2>
+              <button class="link" data-view-go="balance" data-i18n="seeAll"></button></div>
+            <ul class="txn-list compact" id="ov-txns"></ul>
+          </article>
 
-    <button class="btn btn-primary btn-lg" id="btn-verify" data-i18n="verify">आगे बढ़िए</button>
+          <article class="card c-schemes" style="--tone: var(--tone-scheme)">
+            <div class="card-head"><span class="card-icon" data-icon="scheme"></span>
+              <h2 data-i18n="schemesTitle"></h2>
+              <button class="link" data-view-go="schemes" data-i18n="seeAll"></button></div>
+            <div class="stat-line"><span class="stat-num" id="ov-scheme-count">—</span><span id="ov-scheme-text"></span></div>
+            <p class="muted small" id="ov-scheme-maybe" hidden></p>
+            <ul class="mini-list" id="ov-schemes"></ul>
+          </article>
 
-    <div id="dev-code" class="dev-chip" hidden>
-      <span data-icon="wrench"></span>
-      <span><span data-i18n="devCodeNote"></span> <code id="dev-code-value"></code></span>
-    </div>
-  </section>
+          <div class="bento-pair">
+            <article class="card c-learn" style="--tone: var(--tone-learn)">
+              <div class="ring-wrap">
+                <svg class="ring" viewBox="0 0 44 44" aria-hidden="true">
+                  <circle cx="22" cy="22" r="18" class="ring-track" />
+                  <circle cx="22" cy="22" r="18" class="ring-fill" id="ov-ring" />
+                </svg>
+                <span class="ring-label" id="ov-ring-label">0/8</span>
+              </div>
+              <div class="pair-body">
+                <div class="card-head"><h2 data-i18n="learnTitle"></h2></div>
+                <button class="btn btn-ghost btn-block" id="ov-next-lesson"></button>
+              </div>
+            </article>
 
-  <!-- ──────────── sign up, step 3: name and password ───────── -->
-  <section class="screen" data-screen="details" hidden>
-    <div class="steps" aria-hidden="true">
-      <span class="step done"></span><span class="step done"></span><span class="step now"></span>
-    </div>
-    <h1 class="screen-title" data-i18n="detailsTitle">आपका नाम?</h1>
-    <p class="screen-sub" data-i18n="detailsSub">यही नाम आपको स्क्रीन पर दिखेगा।</p>
+            <article class="card c-scan" style="--tone: var(--tone-scan)">
+              <div class="card-head"><span class="card-icon" data-icon="scan"></span>
+                <h2 data-i18n="navScan"></h2></div>
+              <div class="scan-pair">
+                <button class="tile-btn" data-scan-go="qr"><span data-icon="qr"></span><span data-i18n="qrTab"></span></button>
+                <button class="tile-btn" data-scan-go="note"><span data-icon="note"></span><span data-i18n="noteTab"></span></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-    <form id="details-form" class="form">
-      <label class="field">
-        <span data-i18n="yourName">आपका नाम</span>
-        <input id="reg-name" name="display_name" autocomplete="name" required maxlength="64" />
-      </label>
-      <label class="field">
-        <span data-i18n="choosePassword">पासवर्ड बनाइए</span>
-        <input id="reg-password" name="password" type="password" autocomplete="new-password"
-               minlength="4" required />
-        <span class="field-hint" data-i18n="passwordHint"></span>
-      </label>
-      <p id="details-error" class="field-error" hidden></p>
-      <button class="btn btn-primary btn-lg" type="submit" data-i18n="finish">खाता बनाइए</button>
-    </form>
+      <!-- ───────────────────────────────────────────── balance -->
+      <section class="view" data-view="balance" hidden>
+        <div class="split split-4-8">
+          <div class="stack">
+            <article class="card hero-card" style="--tone: var(--tone-money)">
+              <div class="eyebrow" data-i18n="balanceLabel"></div>
+              <div class="money-xxl"><span class="rupee">₹</span><span class="bal-amount">—</span></div>
+              <div class="stamp bal-stamp"></div>
+              <button class="btn btn-ghost" data-speak-balance><span data-icon="speaker"></span><span data-i18n="listen"></span></button>
+            </article>
+            <article class="card">
+              <div class="eyebrow" data-i18n="yourUpi"></div>
+              <div class="mono-line bal-vpa"></div>
+              <div class="kv-grid">
+                <div><div class="muted small" data-i18n="moneyIn"></div><div class="kv-num pos" id="bal-in">—</div></div>
+                <div><div class="muted small" data-i18n="moneyOut"></div><div class="kv-num neg" id="bal-out">—</div></div>
+              </div>
+            </article>
+          </div>
+          <article class="card pane">
+            <div class="card-head"><h2 data-i18n="historyTitle"></h2>
+              <div class="seg-mini" id="txn-filter">
+                <button data-f="all" aria-pressed="true" data-i18n="filterAll"></button>
+                <button data-f="credit" data-i18n="moneyIn"></button>
+                <button data-f="debit" data-i18n="moneyOut"></button>
+              </div></div>
+            <ul class="txn-list pane-scroll" id="txn-list"></ul>
+          </article>
+        </div>
+      </section>
 
-    <p class="sandbox-note" data-i18n="sandboxNote"></p>
-  </section>
+      <!-- ───────────────────────────────────────────── send -->
+      <section class="view" data-view="send" hidden>
+        <div class="split split-3">
+          <article class="card pane">
+            <div class="card-head"><h2 data-i18n="step1"></h2></div>
+            <div class="contact-list pane-scroll" id="contact-list"></div>
+          </article>
+          <article class="card pane">
+            <div class="card-head"><h2 data-i18n="step2"></h2></div>
+            <div class="amount-display"><span class="rupee">₹</span><span id="amount-value">0</span></div>
+            <div class="chip-row center" id="quick-amounts"></div>
+            <div class="keypad" id="keypad"></div>
+          </article>
+          <article class="card pane review-card">
+            <div class="card-head"><h2 data-i18n="step3"></h2></div>
+            <div class="review-row"><span class="muted" data-i18n="sendTo"></span><strong id="review-payee">—</strong></div>
+            <div class="review-row"><span class="muted" data-i18n="amountLabel"></span><strong id="review-amount">—</strong></div>
+            <div class="review-row"><span class="muted" data-i18n="balanceLabel"></span><span><span class="rupee">₹</span><span class="bal-amount">—</span></span></div>
+            <p class="note" data-i18n="confirmNote"></p>
+            <button class="btn btn-primary btn-block btn-lg" id="btn-review" disabled>
+              <span data-icon="check"></span><span data-i18n="review"></span></button>
+          </article>
+        </div>
+      </section>
 
-  <!-- ────────────────────────────────── home ─────────────────────────────── -->
-  <section class="screen" data-screen="home" hidden>
-    <div class="greeting">
-      <span id="greeting-text" class="greeting-text"></span>
-      <button id="btn-signout" class="text-btn" data-i18n="signOut">बाहर</button>
-    </div>
+      <!-- ───────────────────────────────────────────── schemes -->
+      <section class="view" data-view="schemes" hidden>
+        <div class="split split-7-5">
+          <article class="card pane">
+            <form class="searchbar" id="scheme-search">
+              <span data-icon="search"></span>
+              <input id="scheme-q" data-i18n-ph="searchSchemes" />
+              <button class="btn btn-primary btn-sm" type="submit" data-i18n="find"></button>
+            </form>
+            <div class="filter-row">
+              <div class="seg-mini" id="scheme-filter">
+                <button data-f="all" aria-pressed="true" data-i18n="filterAll"></button>
+                <button data-f="eligible" data-i18n="filterEligible"></button>
+                <button data-f="maybe" data-i18n="filterMaybe"></button>
+                <button data-f="not_eligible" data-i18n="filterNot"></button>
+              </div>
+              <button class="link" id="scheme-clear" hidden data-i18n="clearSearch"></button>
+            </div>
+            <p class="eyebrow" id="scheme-results-label" hidden data-i18n="searchResults"></p>
+            <div class="scheme-list pane-scroll" id="scheme-list"></div>
+          </article>
+          <article class="card pane detail" id="scheme-detail">
+            <div class="empty"><span data-icon="scheme"></span><p data-i18n="pickScheme"></p></div>
+          </article>
+        </div>
+      </section>
 
-    <button class="balance-card" data-go="balance">
-      <span class="balance-label" data-i18n="balanceLabel">आपके पैसे</span>
-      <span class="balance-amount"><span class="rupee">₹</span><span id="home-balance">—</span></span>
-      <span id="balance-stamp" class="balance-stamp"></span>
-    </button>
+      <!-- ───────────────────────────────────────────── learn -->
+      <section class="view" data-view="learn" hidden>
+        <div class="split split-5-7">
+          <article class="card pane">
+            <div class="card-head"><h2 data-i18n="learnTitle"></h2><span class="pill" id="learn-progress"></span></div>
+            <div class="lesson-list pane-scroll" id="lesson-list"></div>
+          </article>
+          <article class="card pane detail" id="lesson-detail">
+            <div class="empty"><span data-icon="learn"></span><p data-i18n="pickLesson"></p></div>
+          </article>
+        </div>
+      </section>
 
-    <div class="tile-grid" id="tile-grid"></div>
+      <!-- ───────────────────────────────────────────── scan -->
+      <section class="view" data-view="scan" hidden>
+        <div class="split split-6-6">
+          <article class="card pane">
+            <div class="seg-mini wide" id="scan-mode">
+              <button data-m="qr" aria-pressed="true"><span data-icon="qr"></span><span data-i18n="qrTab"></span></button>
+              <button data-m="note"><span data-icon="note"></span><span data-i18n="noteTab"></span></button>
+            </div>
+            <div class="viewfinder" id="viewfinder">
+              <video id="camera" playsinline muted hidden></video>
+              <img id="scan-preview" alt="" hidden />
+              <div class="vf-empty" id="vf-empty"><span data-icon="camera"></span></div>
+              <div class="vf-corners" aria-hidden="true"></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-primary" id="btn-camera"><span data-icon="camera"></span><span data-i18n="openCamera"></span></button>
+              <button class="btn btn-primary" id="btn-capture" hidden><span data-icon="check"></span><span data-i18n="capture"></span></button>
+              <label class="btn btn-ghost"><span data-icon="upload"></span><span data-i18n="uploadPhoto"></span>
+                <input type="file" accept="image/*" id="scan-file" hidden /></label>
+            </div>
+            <div class="samples" id="scan-samples">
+              <span class="muted small" data-i18n="trySample"></span>
+              <button class="chip" data-sample="qr_shop_genuine" data-i18n="sampleGenuine"></button>
+              <button class="chip" data-sample="qr_sticker_tampered" data-i18n="sampleSticker"></button>
+              <button class="chip" data-sample="qr_redirect_prefilled" data-i18n="sampleRedirect"></button>
+            </div>
+          </article>
+          <article class="card pane detail" id="scan-result">
+            <div class="empty"><span data-icon="scan"></span><p data-i18n="scanEmpty"></p></div>
+          </article>
+        </div>
+      </section>
 
-    <button class="help-strip" data-go="help">
-      <span data-icon="help"></span>
-      <span data-i18n="helpTitle">मदद चाहिए?</span>
-    </button>
-  </section>
+      <!-- ───────────────────────────────────────────── safety -->
+      <section class="view" data-view="safety" hidden>
+        <div class="split split-7-5">
+          <div class="stack">
+            <article class="card">
+              <div class="card-head"><span class="card-icon" data-icon="shield" style="--tone: var(--tone-safety)"></span><h2 data-i18n="pasteMessage"></h2></div>
+              <textarea id="scam-input" rows="4" data-i18n-ph="checkPlaceholder"></textarea>
+              <button class="btn btn-primary" id="btn-scam-check"><span data-icon="search"></span><span data-i18n="checkMessage"></span></button>
+            </article>
+            <article class="card verdict-card" id="scam-result" hidden></article>
+            <article class="card pane">
+              <div class="card-head"><h2 data-i18n="safetyTips"></h2></div>
+              <div class="tip-grid pane-scroll" id="tip-list"></div>
+            </article>
+          </div>
+          <div class="stack">
+            <article class="card report-card">
+              <div class="card-head"><span class="card-icon" data-icon="alert" style="--tone: var(--danger)"></span>
+                <div><h2 data-i18n="reportTitle"></h2><p class="muted small" data-i18n="reportSub"></p></div></div>
+              <div class="choice-list" id="report-kind">
+                <button data-kind="money_lost"><span data-icon="wallet"></span><span data-i18n="reportMoneyLost"></span></button>
+                <button data-kind="shared_details"><span data-icon="lock"></span><span data-i18n="reportSharedDetails"></span></button>
+                <button data-kind="message_only"><span data-icon="chat"></span><span data-i18n="reportMessageOnly"></span></button>
+              </div>
+              <div id="report-steps" hidden></div>
+              <a class="btn btn-danger btn-block" href="tel:1930"><span data-icon="phoneCall"></span><span data-i18n="call1930"></span></a>
+            </article>
+            <article class="card pane">
+              <div class="card-head"><h2 data-i18n="recentChecks"></h2></div>
+              <ul class="check-history pane-scroll" id="check-history"></ul>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  <!-- ───────────────────────────────── balance ───────────────────────────── -->
-  <section class="screen" data-screen="balance" hidden>
-    <h1 class="screen-title" data-i18n="balanceTitle">आपके पैसे</h1>
-    <div class="big-amount"><span class="rupee">₹</span><span id="detail-balance">—</span></div>
-    <p id="detail-vpa" class="screen-sub"></p>
-    <button class="btn btn-ghost speak-btn" data-speak="#detail-balance">
-      <span data-icon="speaker"></span> <span data-i18n="listen">सुनिए</span>
-    </button>
-    <h2 class="section-head" data-i18n="historyTitle">पिछले लेनदेन</h2>
-    <ul id="txn-list" class="txn-list"></ul>
-  </section>
+      <!-- ───────────────────────────────────────────── help -->
+      <section class="view" data-view="help" hidden>
+        <div class="split split-7-5">
+          <article class="card pane">
+            <div class="card-head"><h2 data-i18n="helpIntro"></h2><span class="muted small" data-i18n="tryPhrase"></span></div>
+            <div class="phrase-grid pane-scroll" id="phrase-list"></div>
+          </article>
+          <div class="stack">
+            <article class="card">
+              <div class="card-head"><h2 data-i18n="howItWorks"></h2></div>
+              <ol class="how-list">
+                <li><span data-icon="mic"></span><span data-i18n="how1"></span></li>
+                <li><span data-icon="check"></span><span data-i18n="how2"></span></li>
+                <li><span data-icon="wifiOff"></span><span data-i18n="how3"></span></li>
+              </ol>
+            </article>
+            <article class="card note-card">
+              <span data-icon="info"></span><p data-i18n="sandboxNote"></p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  <!-- ────────────────────────────────── send ─────────────────────────────── -->
-  <section class="screen" data-screen="send" hidden>
-    <h1 class="screen-title" data-i18n="sendTitle">पैसे भेजिए</h1>
-    <p class="screen-sub" data-i18n="chooseContact">किसे भेजना है?</p>
-    <div id="contact-grid" class="people-grid"></div>
+      <!-- ───────────────────────────────────────────── profile -->
+      <section class="view" data-view="profile" hidden>
+        <article class="card pane profile-card">
+          <div class="card-head"><span class="card-icon" data-icon="user"></span>
+            <div><h2 data-i18n="profileTitle"></h2><p class="muted small" data-i18n="profileSub"></p></div></div>
+          <form id="profile-form" class="profile-grid pane-scroll">
+            <label class="field"><span data-i18n="age"></span><input name="age" type="number" min="0" max="120" inputmode="numeric" /></label>
+            <div class="field"><span data-i18n="gender"></span>
+              <div class="seg-mini wide" data-radio="gender">
+                <button type="button" data-v="F" data-i18n="female"></button>
+                <button type="button" data-v="M" data-i18n="male"></button>
+                <button type="button" data-v="O" data-i18n="otherGender"></button></div></div>
+            <div class="field span-2"><span data-i18n="occupation"></span>
+              <div class="seg-mini wide wrap" data-radio="occupation">
+                <button type="button" data-v="farmer" data-i18n="occFarmer"></button>
+                <button type="button" data-v="labourer" data-i18n="occLabourer"></button>
+                <button type="button" data-v="self_employed" data-i18n="occSelf"></button>
+                <button type="button" data-v="homemaker" data-i18n="occHomemaker"></button>
+                <button type="button" data-v="student" data-i18n="occStudent"></button>
+                <button type="button" data-v="other" data-i18n="occOther"></button></div></div>
+            <label class="field"><span data-i18n="income"></span><input name="annual_income" type="number" min="0" inputmode="numeric" /></label>
+            <label class="field"><span data-i18n="land"></span><input name="land_holding_acres" type="number" min="0" step="0.1" inputmode="decimal" /></label>
+            <div class="field"><span data-i18n="bpl"></span>
+              <div class="seg-mini wide" data-radio="is_bpl">
+                <button type="button" data-v="true" data-i18n="yes"></button>
+                <button type="button" data-v="false" data-i18n="no"></button></div></div>
+            <div class="field"><span data-i18n="hasBank"></span>
+              <div class="seg-mini wide" data-radio="has_bank_account">
+                <button type="button" data-v="true" data-i18n="yes"></button>
+                <button type="button" data-v="false" data-i18n="no"></button></div></div>
+            <label class="field"><span data-i18n="household"></span><input name="household_size" type="number" min="1" max="30" inputmode="numeric" /></label>
+            <label class="field"><span data-i18n="state"></span><input name="state" maxlength="64" /></label>
+            <div class="span-2 form-foot">
+              <button class="btn btn-primary btn-lg" type="submit"><span data-icon="check"></span><span data-i18n="save"></span></button>
+            </div>
+          </form>
+        </article>
+      </section>
 
-    <div id="amount-block" hidden>
-      <p class="screen-sub"><span data-i18n="enterAmount">कितने रुपये?</span> <strong id="amount-payee"></strong></p>
-      <div class="amount-display"><span class="rupee">₹</span><span id="amount-value">0</span></div>
-      <div class="chip-row" id="quick-amounts"></div>
-      <div class="keypad" id="keypad"></div>
-      <button class="btn btn-primary btn-lg" id="btn-review" data-i18n="payNow">आगे बढ़िए</button>
-    </div>
-  </section>
+    </main>
+  </div>
+</div>
 
-  <!-- ───────────────────────────────── schemes ───────────────────────────── -->
-  <section class="screen" data-screen="schemes" hidden>
-    <h1 class="screen-title" data-i18n="schemesTitle">सरकारी योजनाएँ</h1>
-    <div id="scheme-list" class="card-list"></div>
-    <p class="sample-note" data-i18n="sampleContent"></p>
-  </section>
-
-  <!-- ────────────────────────────────── learn ────────────────────────────── -->
-  <section class="screen" data-screen="learn" hidden>
-    <h1 class="screen-title" data-i18n="learnTitle">सीखिए</h1>
-    <div id="lesson-list" class="card-list"></div>
-    <p class="sample-note" data-i18n="sampleContent"></p>
-  </section>
-
-  <!-- ────────────────────────────────── scan ─────────────────────────────── -->
-  <section class="screen" data-screen="scan" hidden>
-    <h1 class="screen-title" data-i18n="scanTitle">कोड या नोट दिखाइए</h1>
-    <div class="scan-choice">
-      <button class="scan-card" data-scan="qr">
-        <span data-icon="qr"></span>
-        <span data-i18n="scanQr">क्यूआर कोड</span>
-      </button>
-      <button class="scan-card" data-scan="note">
-        <span data-icon="note"></span>
-        <span data-i18n="scanNote">नोट पहचानिए</span>
-      </button>
-    </div>
-    <div id="camera-wrap" class="camera-wrap" hidden>
-      <video id="camera" playsinline muted></video>
-      <button class="btn btn-primary btn-lg" id="btn-capture" data-i18n="capture">तस्वीर लीजिए</button>
-    </div>
-    <p id="scan-status" class="sample-note"></p>
-  </section>
-
-  <!-- ───────────────────────────────── safety ───────────────────────────── -->
-  <section class="screen" data-screen="safety" hidden>
-    <h1 class="screen-title" data-i18n="safetyTitle">ठगी से बचिए</h1>
-    <label class="field">
-      <span data-i18n="pasteMessage">संदेश यहाँ डालिए</span>
-      <textarea id="scam-input" rows="3"></textarea>
-    </label>
-    <button class="btn btn-primary btn-lg" id="btn-scam-check" data-i18n="checkMessage">जाँचिए</button>
-    <div id="scam-result" class="verdict" hidden></div>
-    <h2 class="section-head" data-i18n="safetyTips">याद रखिए</h2>
-    <div id="tip-list" class="card-list"></div>
-  </section>
-
-  <!-- ────────────────────────────────── help ────────────────────────────── -->
-  <section class="screen" data-screen="help" hidden>
-    <h1 class="screen-title" data-i18n="helpTitle">मदद</h1>
-    <p class="screen-sub" data-i18n="helpIntro">आप ये कह सकते हैं:</p>
-    <div id="phrase-list" class="card-list"></div>
-    <p class="sandbox-note" data-i18n="sandboxNote"></p>
-  </section>
-
-</main>
-
-<!-- ────────────────────────────── confirmation ────────────────────────────── -->
-<div id="confirm-sheet" class="sheet" hidden role="dialog" aria-modal="true">
-  <div class="sheet-inner">
+<!-- ─────────────────────────────────────────────── confirmation (money only) -->
+<div id="confirm-sheet" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div class="modal-card">
+    <span class="modal-icon" data-icon="send"></span>
+    <h2 id="confirm-title" data-i18n="confirmTitle"></h2>
     <p id="confirm-text" class="confirm-text"></p>
+    <p class="note" data-i18n="confirmNote"></p>
     <div class="confirm-actions">
-      <button id="btn-no" class="btn btn-no btn-lg"><span data-icon="close"></span> <span data-i18n="no">नहीं</span></button>
-      <button id="btn-yes" class="btn btn-yes btn-lg"><span data-icon="check"></span> <span data-i18n="yes">हाँ</span></button>
+      <button id="btn-no" class="btn btn-ghost btn-lg"><span data-icon="close"></span><span data-i18n="no"></span></button>
+      <button id="btn-yes" class="btn btn-primary btn-lg"><span data-icon="check"></span><span data-i18n="yes"></span></button>
     </div>
   </div>
 </div>
 
 <div id="toast" class="toast" hidden></div>
-
-<!-- ───────────────────────────────── mic bar ─────────────────────────────── -->
-<footer class="micbar" id="micbar" hidden>
-  <div id="heard" class="heard" hidden></div>
-  <div class="micbar-row">
-    <button id="btn-type" class="icon-btn ghost" aria-label="Type instead" data-icon="keyboard"></button>
-    <button id="mic" class="mic" aria-label="Speak" data-icon="mic"></button>
-    <button id="btn-home" class="icon-btn ghost" aria-label="Home" data-icon="home"></button>
-  </div>
-  <p id="mic-hint" class="mic-hint" data-i18n="tapToSpeak">बोलने के लिए दबाइए</p>
-  <form id="type-form" class="type-form" hidden>
-    <input id="type-input" data-i18n-ph="typePlaceholder" autocomplete="off" />
-    <button class="btn btn-primary" type="submit" data-i18n="go">भेजिए</button>
-  </form>
-</footer>
 
 <script type="module" src="/app.js"></script>
 </body>

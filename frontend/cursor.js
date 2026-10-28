@@ -23,9 +23,9 @@ const INTERACTIVE =
 
 // Elements the ring should square off against instead of staying round, and
 // which lean towards the pointer.
-const CARD = '.tile, .lang-card, .person-card, .info-card, .scan-card, .balance-card, .seg-btn';
-const MAGNETIC = '.tile, .lang-card, .person-card, .scan-card, .seg-btn, .mic, .btn-lg, .key, .chip';
-const ACCENT = '.mic, .help-strip';
+const CARD = '.lang-card, .person-card, .scheme-item, .lesson-item, .contact, .phrase, .tile-btn, .quiz-opt, .seg-btn, .choice-list button';
+const MAGNETIC = '.lang-card, .person-card, .tile-btn, .seg-btn, .ask-mic, .btn-lg, .key, .chip, .avatar-btn';
+const ACCENT = '.ask-mic, .btn-danger';
 
 // How far a magnetic element is allowed to lean, in px. Small on purpose: past
 // about a sixth of the element it stops feeling responsive and starts feeling

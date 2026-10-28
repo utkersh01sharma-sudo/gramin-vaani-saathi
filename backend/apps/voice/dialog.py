@@ -281,6 +281,26 @@ def _money(value) -> str:
     return str(int(d)) if d == d.to_integral_value() else f"{d:.2f}"
 
 
+# Unicode blocks per language, to tell whether a stored local name is in the
+# script of the sentence it is about to be spoken in.
+_SCRIPT_RANGES = {"hi": ("ऀ", "ॿ"), "ta": ("஀", "௿"), "te": ("ఀ", "౿")}
+
+
+def _display_name(payee: dict, lang: str) -> str:
+    """The payee's name in the reply's own script.
+
+    A contact's ``name_local`` is in its *owner's* language, so a Hindi
+    speaker's contact is stored in Devanagari. Read back inside an English or
+    Tamil sentence that is wrong twice over: unreadable on screen, and
+    mispronounced by the speech engine. Use it only when the script matches.
+    """
+    local = payee.get("name_local") or ""
+    lo_hi = _SCRIPT_RANGES.get(lang)
+    if local and lo_hi and any(lo_hi[0] <= ch <= lo_hi[1] for ch in local):
+        return local
+    return payee.get("name") or local or payee.get("vpa", "")
+
+
 def _contacts_for(user) -> list[dict]:
     return list(user.contacts.values("name", "name_local", "vpa"))
 
@@ -355,9 +375,10 @@ def _handle_send(user, lang: str, result: DialogResult) -> DialogResult:
         "action": "send_money",
         "amount": _money(amount),
         "payee_vpa": payee["vpa"],
-        # Speak the name in the user's own script -- hearing "Ramesh" back
-        # after saying "रमेश" reads as the app having misheard.
-        "payee_name": payee.get("name_local") or payee.get("name") or payee["vpa"],
+        # Speak the name in the reply's script -- hearing "Ramesh" back after
+        # saying "रमेश" reads as the app having misheard, and "सीता" inside an
+        # English sentence cannot be read or pronounced.
+        "payee_name": _display_name(payee, lang),
         "idempotency_key": f"voice-{uuid.uuid4()}",
     }
     result.reply_text = say(

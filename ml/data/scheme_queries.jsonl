@@ -1,0 +1,48 @@
+{"lang": "hi", "text": "मुझे खेती के लिए पैसा चाहिए", "relevant": ["pm-kisan", "kcc"]}
+{"lang": "hi", "text": "बारिश से मेरी फसल खराब हो गई", "relevant": ["pmfby"]}
+{"lang": "hi", "text": "बुढ़ापे में हर महीने पैसा कैसे मिलेगा", "relevant": ["apy", "nsap-old-age"]}
+{"lang": "hi", "text": "मेरी बेटी के लिए बचत करनी है", "relevant": ["sukanya"]}
+{"lang": "hi", "text": "गाँव में पक्का घर बनाना है", "relevant": ["pmay-g"]}
+{"lang": "hi", "text": "छोटी दुकान खोलने के लिए कर्ज़ चाहिए", "relevant": ["mudra", "pm-svanidhi"]}
+{"lang": "hi", "text": "अस्पताल का इलाज मुफ़्त कैसे होगा", "relevant": ["ayushman-bharat"]}
+{"lang": "hi", "text": "मुझे काम चाहिए, मज़दूरी वाला", "relevant": ["nrega"]}
+{"lang": "hi", "text": "खाना बनाने के लिए गैस का कनेक्शन", "relevant": ["ujjwala"]}
+{"lang": "hi", "text": "मेरे पति नहीं रहे, कोई मदद मिलेगी", "relevant": ["nsap-widow"]}
+{"lang": "hi", "text": "बैंक में खाता खोलना है पर पैसे नहीं हैं", "relevant": ["jan-dhan"]}
+{"lang": "hi", "text": "मैं पहली बार माँ बनने वाली हूँ", "relevant": ["pm-matru-vandana"]}
+{"lang": "en", "text": "I need money for seeds and fertiliser", "relevant": ["kcc", "pm-kisan"]}
+{"lang": "en", "text": "my crops were destroyed by the flood", "relevant": ["pmfby"]}
+{"lang": "en", "text": "I sell vegetables on a cart and need a small loan", "relevant": ["pm-svanidhi", "mudra"]}
+{"lang": "en", "text": "insurance in case I die so my family is safe", "relevant": ["pmjjby"]}
+{"lang": "en", "text": "cover if I get hurt in an accident", "relevant": ["pmsby"]}
+{"lang": "en", "text": "I am a potter and want better tools", "relevant": ["pm-vishwakarma"]}
+{"lang": "en", "text": "solar panels on my roof", "relevant": ["pm-ujjwala-solar"]}
+{"lang": "en", "text": "I am a woman and want to start a big business", "relevant": ["stand-up-india", "mudra"]}
+{"lang": "en", "text": "pension for when I am old", "relevant": ["apy", "nsap-old-age"]}
+{"lang": "en", "text": "guaranteed work for a hundred days", "relevant": ["nrega"]}
+{"lang": "en", "text": "free treatment at the hospital", "relevant": ["ayushman-bharat"]}
+{"lang": "en", "text": "a house for my family in the village", "relevant": ["pmay-g"]}
+{"lang": "ta", "text": "விவசாயத்துக்கு பணம் வேண்டும்", "relevant": ["pm-kisan", "kcc"]}
+{"lang": "ta", "text": "வெள்ளத்தில் பயிர் நாசமானது", "relevant": ["pmfby"]}
+{"lang": "ta", "text": "என் மகளுக்காக சேமிக்க வேண்டும்", "relevant": ["sukanya"]}
+{"lang": "ta", "text": "முதுமையில் மாதம் பணம் வேண்டும்", "relevant": ["apy", "nsap-old-age"]}
+{"lang": "ta", "text": "சிறு கடை தொடங்க கடன் வேண்டும்", "relevant": ["mudra", "pm-svanidhi"]}
+{"lang": "ta", "text": "மருத்துவமனை சிகிச்சை இலவசமாக", "relevant": ["ayushman-bharat"]}
+{"lang": "ta", "text": "சமையல் எரிவாயு இணைப்பு வேண்டும்", "relevant": ["ujjwala"]}
+{"lang": "ta", "text": "கிராமத்தில் வீடு கட்ட உதவி", "relevant": ["pmay-g"]}
+{"lang": "ta", "text": "எனக்கு கூலி வேலை வேண்டும்", "relevant": ["nrega"]}
+{"lang": "ta", "text": "என் கணவர் இறந்துவிட்டார், உதவி கிடைக்குமா", "relevant": ["nsap-widow"]}
+{"lang": "ta", "text": "விபத்துக் காப்பீடு வேண்டும்", "relevant": ["pmsby"]}
+{"lang": "ta", "text": "வங்கிக் கணக்கு திறக்க வேண்டும்", "relevant": ["jan-dhan"]}
+{"lang": "te", "text": "వ్యవసాయానికి డబ్బు కావాలి", "relevant": ["pm-kisan", "kcc"]}
+{"lang": "te", "text": "వరదలో పంట పోయింది", "relevant": ["pmfby"]}
+{"lang": "te", "text": "నా కూతురి కోసం పొదుపు చేయాలి", "relevant": ["sukanya"]}
+{"lang": "te", "text": "వృద్ధాప్యంలో నెలకు డబ్బు రావాలి", "relevant": ["apy", "nsap-old-age"]}
+{"lang": "te", "text": "చిన్న దుకాణం పెట్టడానికి అప్పు కావాలి", "relevant": ["mudra", "pm-svanidhi"]}
+{"lang": "te", "text": "ఆసుపత్రిలో ఉచిత వైద్యం", "relevant": ["ayushman-bharat"]}
+{"lang": "te", "text": "వంట గ్యాస్ కనెక్షన్ కావాలి", "relevant": ["ujjwala"]}
+{"lang": "te", "text": "గ్రామంలో ఇల్లు కట్టుకోవాలి", "relevant": ["pmay-g"]}
+{"lang": "te", "text": "నాకు కూలి పని కావాలి", "relevant": ["nrega"]}
+{"lang": "te", "text": "నేను కుండలు చేస్తాను, పనిముట్లు కావాలి", "relevant": ["pm-vishwakarma"]}
+{"lang": "te", "text": "ఇంటి పైకప్పు మీద సోలార్", "relevant": ["pm-ujjwala-solar"]}
+{"lang": "te", "text": "ప్రమాద బీమా కావాలి", "relevant": ["pmsby"]}

@@ -1,0 +1,1167 @@
+{
+  "_comment": [
+    "Twenty central-government schemes, with eligibility expressed as data.",
+    "",
+    "SCOPE AND ACCURACY. These rules are a simplified, teaching-grade model of",
+    "each scheme's published criteria as of the 2024-25 guidelines. Real schemes",
+    "carry exclusions this file does not encode -- income-tax payers, government",
+    "employees, pensioners above a threshold, institutional landholders, and",
+    "state-level variations. This app therefore reports 'you appear to qualify',",
+    "never 'you qualify', and every reply points the user at the official",
+    "channel. Treating a demo rule engine as an entitlement decision would be a",
+    "real harm to a real person, which is why the wording is hedged everywhere",
+    "it surfaces.",
+    "",
+    "Each rule carries two strings per language: 'reason' (why this condition",
+    "exists, shown when it passes or is unknown) and 'unmet' (what to say when",
+    "it fails). Both are written to be *spoken*, because most users will hear",
+    "them rather than read them."
+  ],
+
+  "schemes": [
+    {
+      "id": "pm-kisan",
+      "category": "farming",
+      "icon": "sprout",
+      "tone": "var(--tone-scheme)",
+      "keywords": ["kisan", "farmer", "kheti", "farming", "land", "crop", "किसान", "खेती", "விவசாயம்", "వ్యవసాయం"],
+      "name": {
+        "hi": "पीएम किसान सम्मान निधि",
+        "en": "PM-KISAN",
+        "ta": "பிஎம் கிசான்",
+        "te": "పీఎం కిసాన్"
+      },
+      "summary": {
+        "hi": "छोटे और सीमांत किसानों को हर साल सीधे खाते में मदद।",
+        "en": "Yearly income support paid straight into a small farmer's bank account.",
+        "ta": "சிறு விவசாயிகளின் வங்கிக் கணக்கில் ஆண்டுதோறும் நேரடி உதவி.",
+        "te": "చిన్న రైతుల బ్యాంకు ఖాతాలోకి ఏటా నేరుగా సాయం."
+      },
+      "benefit": {
+        "hi": "साल में ₹6,000, तीन बराबर किस्तों में।",
+        "en": "₹6,000 a year, in three equal instalments.",
+        "ta": "ஆண்டுக்கு ₹6,000, மூன்று சம தவணைகளாக.",
+        "te": "సంవత్సరానికి ₹6,000, మూడు సమాన విడతలుగా."
+      },
+      "rules": [
+        {
+          "field": "occupation", "op": "eq", "value": "farmer",
+          "reason": {
+            "hi": "यह योजना खेती करने वालों के लिए है।",
+            "en": "This scheme is for people who farm.",
+            "ta": "இந்தத் திட்டம் விவசாயம் செய்பவர்களுக்கானது.",
+            "te": "ఈ పథకం వ్యవసాయం చేసేవారి కోసం."
+          },
+          "unmet": {
+            "hi": "यह सिर्फ़ किसानों के लिए है, और आपका काम खेती नहीं लिखा है।",
+            "en": "This is only for farmers, and your work is not listed as farming.",
+            "ta": "இது விவசாயிகளுக்கு மட்டுமே; உங்கள் தொழில் விவசாயம் எனப் பதியப்படவில்லை.",
+            "te": "ఇది రైతులకు మాత్రమే; మీ వృత్తి వ్యవసాయంగా నమోదు కాలేదు."
+          }
+        },
+        {
+          "field": "land_holding_acres", "op": "lte", "value": 5,
+          "reason": {
+            "hi": "छोटे किसानों के लिए — पाँच एकड़ तक ज़मीन।",
+            "en": "For small holdings — up to about five acres of land.",
+            "ta": "சிறு நிலம் வைத்திருப்பவர்களுக்கு — ஏறத்தாழ ஐந்து ஏக்கர் வரை.",
+            "te": "చిన్న కమతాలకు — సుమారు ఐదు ఎకరాల వరకు."
+          },
+          "unmet": {
+            "hi": "आपकी ज़मीन इस योजना की सीमा से ज़्यादा है।",
+            "en": "Your landholding is larger than this scheme allows.",
+            "ta": "உங்கள் நிலம் இத்திட்டத்தின் வரம்பை விட அதிகம்.",
+            "te": "మీ భూమి ఈ పథకం పరిమితి కంటే ఎక్కువ."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "पैसा सीधे बैंक खाते में आता है, इसलिए खाता ज़रूरी है।",
+            "en": "The money is paid into a bank account, so you need one.",
+            "ta": "பணம் வங்கிக் கணக்கில் வரும், எனவே கணக்கு தேவை.",
+            "te": "డబ్బు బ్యాంకు ఖాతాలోకి వస్తుంది, కాబట్టి ఖాతా అవసరం."
+          },
+          "unmet": {
+            "hi": "पहले एक बैंक खाता खुलवाइए — जन धन खाता मुफ़्त में खुलता है।",
+            "en": "Open a bank account first — a Jan Dhan account costs nothing.",
+            "ta": "முதலில் வங்கிக் கணக்கு திறங்கள் — ஜன் தன் கணக்கு இலவசம்.",
+            "te": "ముందుగా బ్యాంకు ఖాతా తెరవండి — జన్ ధన్ ఖాతా ఉచితం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "jan-dhan",
+      "category": "banking",
+      "icon": "bank",
+      "tone": "var(--tone-money)",
+      "keywords": ["bank", "account", "khata", "zero balance", "खाता", "बैंक", "கணக்கு", "ఖాతా"],
+      "name": {
+        "hi": "जन धन खाता",
+        "en": "Jan Dhan Account",
+        "ta": "ஜன் தன் கணக்கு",
+        "te": "జన్ ధన్ ఖాతా"
+      },
+      "summary": {
+        "hi": "बिना कोई पैसा रखे खुलने वाला बैंक खाता।",
+        "en": "A bank account that needs no minimum balance.",
+        "ta": "குறைந்தபட்ச இருப்பு தேவையில்லாத வங்கிக் கணக்கு.",
+        "te": "కనీస నిల్వ అవసరం లేని బ్యాంకు ఖాతా."
+      },
+      "benefit": {
+        "hi": "रुपे कार्ड, ₹2 लाख का दुर्घटना बीमा, और ₹10,000 तक ओवरड्राफ्ट।",
+        "en": "A RuPay card, ₹2 lakh accident cover, and an overdraft of up to ₹10,000.",
+        "ta": "ருபே கார்டு, ₹2 லட்சம் விபத்துக் காப்பீடு, ₹10,000 வரை ஓவர்டிராஃப்ட்.",
+        "te": "రూపే కార్డు, ₹2 లక్షల ప్రమాద బీమా, ₹10,000 వరకు ఓవర్‌డ్రాఫ్ట్."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "gte", "value": 10,
+          "reason": {
+            "hi": "दस साल से बड़ा कोई भी खाता खोल सकता है।",
+            "en": "Anyone above ten years of age can open one.",
+            "ta": "பத்து வயதுக்கு மேல் யார் வேண்டுமானாலும் திறக்கலாம்.",
+            "te": "పదేళ్ల పైబడిన ఎవరైనా తెరవవచ్చు."
+          },
+          "unmet": {
+            "hi": "इसके लिए कम से कम दस साल का होना ज़रूरी है।",
+            "en": "You need to be at least ten years old for this.",
+            "ta": "இதற்கு குறைந்தது பத்து வயது இருக்க வேண்டும்.",
+            "te": "దీనికి కనీసం పదేళ్లు ఉండాలి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "mudra",
+      "category": "business",
+      "icon": "wrench",
+      "tone": "var(--tone-send)",
+      "keywords": ["loan", "business", "shop", "dukan", "karza", "दुकान", "कर्ज़", "கடை", "దుకాణం"],
+      "name": {
+        "hi": "मुद्रा ऋण",
+        "en": "MUDRA Loan",
+        "ta": "முத்ரா கடன்",
+        "te": "ముద్ర రుణం"
+      },
+      "summary": {
+        "hi": "छोटा धंधा शुरू करने या बढ़ाने के लिए बिना गारंटी कर्ज़।",
+        "en": "A collateral-free loan to start or grow a small business.",
+        "ta": "சிறு தொழில் தொடங்க அல்லது வளர்க்க அடமானமில்லாக் கடன்.",
+        "te": "చిన్న వ్యాపారం మొదలుపెట్టడానికి హామీ లేని రుణం."
+      },
+      "benefit": {
+        "hi": "₹20 लाख तक, तीन श्रेणियों में — शिशु, किशोर, तरुण।",
+        "en": "Up to ₹20 lakh, in three tiers — Shishu, Kishor, Tarun.",
+        "ta": "₹20 லட்சம் வரை, மூன்று நிலைகளில் — சிசு, கிஷோர், தருண்.",
+        "te": "₹20 లక్షల వరకు, మూడు స్థాయిలలో — శిశు, కిశోర్, తరుణ్."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "between", "value": [18, 65],
+          "reason": {
+            "hi": "अठारह से पैंसठ साल की उम्र के लिए।",
+            "en": "For applicants between eighteen and sixty-five.",
+            "ta": "பதினெட்டு முதல் அறுபத்தைந்து வயது வரை.",
+            "te": "పద్దెనిమిది నుంచి అరవై ఐదు సంవత్సరాల వారికి."
+          },
+          "unmet": {
+            "hi": "यह कर्ज़ अठारह से पैंसठ साल की उम्र में मिलता है।",
+            "en": "This loan is given between the ages of eighteen and sixty-five.",
+            "ta": "இக்கடன் பதினெட்டு முதல் அறுபத்தைந்து வயதுக்குள் வழங்கப்படும்.",
+            "te": "ఈ రుణం పద్దెనిమిది నుంచి అరవై ఐదేళ్ల మధ్య ఇస్తారు."
+          }
+        },
+        {
+          "field": "occupation", "op": "in", "value": ["self_employed", "farmer", "labourer", "homemaker", "other"],
+          "reason": {
+            "hi": "खेती के अलावा छोटे कामकाज के लिए।",
+            "en": "For small non-corporate enterprise of almost any kind.",
+            "ta": "கிட்டத்தட்ட எந்தச் சிறு தொழிலுக்கும்.",
+            "te": "దాదాపు ఏ చిన్న వ్యాపారానికైనా."
+          },
+          "unmet": {
+            "hi": "यह कर्ज़ छोटे कारोबार के लिए है।",
+            "en": "This loan is meant for small enterprise.",
+            "ta": "இக்கடன் சிறு தொழிலுக்கானது.",
+            "te": "ఈ రుణం చిన్న వ్యాపారానికి ఉద్దేశించినది."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "कर्ज़ बैंक खाते में आता है।",
+            "en": "The loan is disbursed into a bank account.",
+            "ta": "கடன் வங்கிக் கணக்கில் வரும்.",
+            "te": "రుణం బ్యాంకు ఖాతాలోకి వస్తుంది."
+          },
+          "unmet": {
+            "hi": "पहले बैंक खाता खुलवाना होगा।",
+            "en": "You will need a bank account first.",
+            "ta": "முதலில் வங்கிக் கணக்கு தேவை.",
+            "te": "ముందుగా బ్యాంకు ఖాతా కావాలి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pmjjby",
+      "category": "insurance",
+      "icon": "shield",
+      "tone": "var(--tone-safety)",
+      "keywords": ["insurance", "life", "bima", "बीमा", "காப்பீடு", "బీమా"],
+      "name": {
+        "hi": "जीवन ज्योति बीमा",
+        "en": "PMJJBY Life Cover",
+        "ta": "ஜீவன் ஜோதி காப்பீடு",
+        "te": "జీవన్ జ్యోతి బీమా"
+      },
+      "summary": {
+        "hi": "साल भर के लिए सस्ता जीवन बीमा, बैंक खाते से अपने आप कटता है।",
+        "en": "Low-cost one-year life cover, auto-debited from your bank account.",
+        "ta": "ஓராண்டு குறைந்த கட்டண ஆயுள் காப்பீடு, கணக்கிலிருந்து தானாகப் பிடிக்கப்படும்.",
+        "te": "ఒక ఏడాది తక్కువ ఖర్చు జీవిత బీమా, ఖాతా నుంచి ఆటోమేటిక్‌గా."
+      },
+      "benefit": {
+        "hi": "साल में ₹436 देकर ₹2 लाख का जीवन बीमा।",
+        "en": "₹2 lakh of life cover for a premium of ₹436 a year.",
+        "ta": "ஆண்டுக்கு ₹436 கட்டணத்தில் ₹2 லட்சம் ஆயுள் காப்பீடு.",
+        "te": "ఏటా ₹436 ప్రీమియంతో ₹2 లక్షల జీవిత బీమా."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "between", "value": [18, 50],
+          "reason": {
+            "hi": "अठारह से पचास साल की उम्र में शुरू किया जा सकता है।",
+            "en": "You can join between eighteen and fifty.",
+            "ta": "பதினெட்டு முதல் ஐம்பது வயதுக்குள் சேரலாம்.",
+            "te": "పద్దెనిమిది నుంచి యాభై ఏళ్ల మధ్య చేరవచ్చు."
+          },
+          "unmet": {
+            "hi": "यह बीमा अठारह से पचास साल की उम्र में ही शुरू होता है।",
+            "en": "This cover can only be started between eighteen and fifty.",
+            "ta": "இக்காப்பீட்டை பதினெட்டு முதல் ஐம்பது வயதுக்குள் மட்டுமே தொடங்க முடியும்.",
+            "te": "ఈ బీమాను పద్దెనిమిది నుంచి యాభై ఏళ్ల మధ్యే ప్రారంభించగలరు."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "किस्त बैंक खाते से कटती है।",
+            "en": "The premium is debited from a bank account.",
+            "ta": "கட்டணம் வங்கிக் கணக்கிலிருந்து பிடிக்கப்படும்.",
+            "te": "ప్రీమియం బ్యాంకు ఖాతా నుంచి తీసుకుంటారు."
+          },
+          "unmet": {
+            "hi": "इसके लिए बैंक खाता चाहिए।",
+            "en": "A bank account is required for this.",
+            "ta": "இதற்கு வங்கிக் கணக்கு தேவை.",
+            "te": "దీనికి బ్యాంకు ఖాతా అవసరం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pmsby",
+      "category": "insurance",
+      "icon": "shield",
+      "tone": "var(--tone-safety)",
+      "keywords": ["accident", "insurance", "durghatna", "दुर्घटना", "விபத்து", "ప్రమాదం"],
+      "name": {
+        "hi": "सुरक्षा बीमा",
+        "en": "PMSBY Accident Cover",
+        "ta": "சுரக்ஷா காப்பீடு",
+        "te": "సురక్ష బీమా"
+      },
+      "summary": {
+        "hi": "दुर्घटना में मौत या अपंगता पर बीमा, साल में बीस रुपये में।",
+        "en": "Accident death and disability cover for twenty rupees a year.",
+        "ta": "விபத்து மரணம் மற்றும் ஊனத்திற்கான காப்பீடு, ஆண்டுக்கு இருபது ரூபாய்.",
+        "te": "ప్రమాద మరణం, వైకల్యానికి బీమా — ఏడాదికి ఇరవై రూపాయలు."
+      },
+      "benefit": {
+        "hi": "साल में ₹20 देकर ₹2 लाख तक का दुर्घटना बीमा।",
+        "en": "Up to ₹2 lakh of accident cover for ₹20 a year.",
+        "ta": "ஆண்டுக்கு ₹20-இல் ₹2 லட்சம் வரை விபத்துக் காப்பீடு.",
+        "te": "ఏటా ₹20తో ₹2 లక్షల వరకు ప్రమాద బీమా."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "between", "value": [18, 70],
+          "reason": {
+            "hi": "अठारह से सत्तर साल की उम्र के लिए।",
+            "en": "For ages eighteen to seventy.",
+            "ta": "பதினெட்டு முதல் எழுபது வயது வரை.",
+            "te": "పద్దెనిమిది నుంచి డెబ్బై ఏళ్ల వారికి."
+          },
+          "unmet": {
+            "hi": "यह बीमा अठारह से सत्तर साल की उम्र तक मिलता है।",
+            "en": "This cover runs from eighteen to seventy years of age.",
+            "ta": "இக்காப்பீடு பதினெட்டு முதல் எழுபது வயது வரை.",
+            "te": "ఈ బీమా పద్దెనిమిది నుంచి డెబ్బై ఏళ్ల వరకు."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "किस्त बैंक खाते से कटती है।",
+            "en": "The premium is debited from a bank account.",
+            "ta": "கட்டணம் வங்கிக் கணக்கிலிருந்து பிடிக்கப்படும்.",
+            "te": "ప్రీమియం బ్యాంకు ఖాతా నుంచి తీసుకుంటారు."
+          },
+          "unmet": {
+            "hi": "इसके लिए बैंक खाता चाहिए।",
+            "en": "A bank account is required for this.",
+            "ta": "இதற்கு வங்கிக் கணக்கு தேவை.",
+            "te": "దీనికి బ్యాంకు ఖాతా అవసరం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "apy",
+      "category": "pension",
+      "icon": "clock",
+      "tone": "var(--tone-learn)",
+      "keywords": ["pension", "old age", "budhapa", "पेंशन", "ஓய்வூதியம்", "పింఛను"],
+      "name": {
+        "hi": "अटल पेंशन योजना",
+        "en": "Atal Pension Yojana",
+        "ta": "அடல் ஓய்வூதியத் திட்டம்",
+        "te": "అటల్ పింఛను పథకం"
+      },
+      "summary": {
+        "hi": "साठ साल के बाद हर महीने तय पेंशन।",
+        "en": "A guaranteed monthly pension after the age of sixty.",
+        "ta": "அறுபது வயதுக்குப் பிறகு மாதந்தோறும் உறுதி ஓய்வூதியம்.",
+        "te": "అరవై ఏళ్ల తర్వాత ప్రతి నెలా ఖాయమైన పింఛను."
+      },
+      "benefit": {
+        "hi": "साठ के बाद हर महीने ₹1,000 से ₹5,000 तक।",
+        "en": "₹1,000 to ₹5,000 every month after sixty.",
+        "ta": "அறுபதுக்குப் பின் மாதம் ₹1,000 முதல் ₹5,000 வரை.",
+        "te": "అరవై తర్వాత నెలకు ₹1,000 నుంచి ₹5,000 వరకు."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "between", "value": [18, 40],
+          "reason": {
+            "hi": "अठारह से चालीस साल की उम्र में जुड़ना होता है।",
+            "en": "You must join between eighteen and forty.",
+            "ta": "பதினெட்டு முதல் நாற்பது வயதுக்குள் சேர வேண்டும்.",
+            "te": "పద్దెనిమిది నుంచి నలభై ఏళ్ల మధ్య చేరాలి."
+          },
+          "unmet": {
+            "hi": "इस पेंशन में चालीस साल की उम्र तक ही जुड़ा जा सकता है।",
+            "en": "You can only join this pension up to the age of forty.",
+            "ta": "இந்த ஓய்வூதியத்தில் நாற்பது வயது வரை மட்டுமே சேர முடியும்.",
+            "te": "ఈ పింఛనులో నలభై ఏళ్ల వరకే చేరగలరు."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "किस्त बैंक खाते से अपने आप कटती है।",
+            "en": "Contributions are auto-debited from a bank account.",
+            "ta": "பங்களிப்பு வங்கிக் கணக்கிலிருந்து தானாகப் பிடிக்கப்படும்.",
+            "te": "చందా బ్యాంకు ఖాతా నుంచి ఆటోమేటిక్‌గా."
+          },
+          "unmet": {
+            "hi": "इसके लिए बैंक खाता चाहिए।",
+            "en": "A bank account is required for this.",
+            "ta": "இதற்கு வங்கிக் கணக்கு தேவை.",
+            "te": "దీనికి బ్యాంకు ఖాతా అవసరం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "ujjwala",
+      "category": "household",
+      "icon": "flame",
+      "tone": "var(--tone-send)",
+      "keywords": ["gas", "lpg", "cylinder", "chulha", "गैस", "சிலிண்டர்", "గ్యాస్"],
+      "name": {
+        "hi": "उज्ज्वला गैस कनेक्शन",
+        "en": "Ujjwala LPG Connection",
+        "ta": "உஜ்வாலா எரிவாயு இணைப்பு",
+        "te": "ఉజ్వల గ్యాస్ కనెక్షన్"
+      },
+      "summary": {
+        "hi": "गरीब परिवार की महिला के नाम मुफ़्त गैस कनेक्शन।",
+        "en": "A free cooking-gas connection in the name of a woman from a poor household.",
+        "ta": "ஏழைக் குடும்பப் பெண்ணின் பெயரில் இலவச சமையல் எரிவாயு இணைப்பு.",
+        "te": "పేద కుటుంబ మహిళ పేరిట ఉచిత వంట గ్యాస్ కనెక్షన్."
+      },
+      "benefit": {
+        "hi": "मुफ़्त कनेक्शन, चूल्हा और पहला सिलेंडर।",
+        "en": "A free connection, a stove, and the first cylinder.",
+        "ta": "இலவச இணைப்பு, அடுப்பு, முதல் சிலிண்டர்.",
+        "te": "ఉచిత కనెక్షన్, పొయ్యి, మొదటి సిలిండర్."
+      },
+      "rules": [
+        {
+          "field": "gender", "op": "eq", "value": "F",
+          "reason": {
+            "hi": "कनेक्शन घर की महिला के नाम पर दिया जाता है।",
+            "en": "The connection is issued in a woman's name.",
+            "ta": "இணைப்பு பெண்ணின் பெயரில் வழங்கப்படும்.",
+            "te": "కనెక్షన్ మహిళ పేరిట ఇస్తారు."
+          },
+          "unmet": {
+            "hi": "यह कनेक्शन घर की महिला के नाम पर मिलता है — घर में किसी महिला के नाम से आवेदन कीजिए।",
+            "en": "This connection is issued to a woman — apply in the name of a woman in the household.",
+            "ta": "இந்த இணைப்பு பெண்ணுக்கு வழங்கப்படும் — வீட்டிலுள்ள ஒரு பெண்ணின் பெயரில் விண்ணப்பியுங்கள்.",
+            "te": "ఈ కనెక్షన్ మహిళకు ఇస్తారు — ఇంట్లోని ఒక మహిళ పేరిట దరఖాస్తు చేయండి."
+          }
+        },
+        {
+          "field": "age", "op": "gte", "value": 18,
+          "reason": {
+            "hi": "अठारह साल से ऊपर की महिला के नाम।",
+            "en": "In the name of a woman above eighteen.",
+            "ta": "பதினெட்டு வயதுக்கு மேற்பட்ட பெண்ணின் பெயரில்.",
+            "te": "పద్దెనిమిదేళ్లు పైబడిన మహిళ పేరిట."
+          },
+          "unmet": {
+            "hi": "आवेदक की उम्र अठारह साल से ऊपर होनी चाहिए।",
+            "en": "The applicant must be over eighteen.",
+            "ta": "விண்ணப்பதாரர் பதினெட்டு வயதுக்கு மேல் இருக்க வேண்டும்.",
+            "te": "దరఖాస్తుదారు పద్దెనిమిదేళ్లు పైబడి ఉండాలి."
+          }
+        },
+        {
+          "field": "is_bpl", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "गरीबी रेखा से नीचे वाले परिवारों के लिए।",
+            "en": "For households below the poverty line.",
+            "ta": "வறுமைக் கோட்டிற்குக் கீழ் உள்ள குடும்பங்களுக்கு.",
+            "te": "దారిద్య్ర రేఖకు దిగువన ఉన్న కుటుంబాలకు."
+          },
+          "unmet": {
+            "hi": "यह योजना बीपीएल परिवारों के लिए है।",
+            "en": "This scheme is for BPL households.",
+            "ta": "இத்திட்டம் BPL குடும்பங்களுக்கானது.",
+            "te": "ఈ పథకం BPL కుటుంబాల కోసం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pmay-g",
+      "category": "housing",
+      "icon": "home",
+      "tone": "var(--tone-scheme)",
+      "keywords": ["house", "ghar", "makan", "housing", "घर", "வீடு", "ఇల్లు"],
+      "name": {
+        "hi": "प्रधानमंत्री आवास योजना — ग्रामीण",
+        "en": "PM Awas Yojana — Gramin",
+        "ta": "பிரதமர் வீட்டுத் திட்டம் — கிராமம்",
+        "te": "ప్రధానమంత్రి ఆవాస్ యోజన — గ్రామీణ"
+      },
+      "summary": {
+        "hi": "गाँव में पक्का घर बनाने के लिए सरकारी मदद।",
+        "en": "Government assistance to build a permanent house in a village.",
+        "ta": "கிராமத்தில் நிரந்தர வீடு கட்ட அரசு உதவி.",
+        "te": "గ్రామంలో పక్కా ఇల్లు కట్టడానికి ప్రభుత్వ సాయం."
+      },
+      "benefit": {
+        "hi": "मैदानी इलाकों में ₹1.20 लाख तक, पहाड़ी इलाकों में ₹1.30 लाख तक।",
+        "en": "Up to ₹1.20 lakh in the plains, ₹1.30 lakh in hill areas.",
+        "ta": "சமவெளியில் ₹1.20 லட்சம் வரை, மலைப் பகுதிகளில் ₹1.30 லட்சம் வரை.",
+        "te": "మైదాన ప్రాంతాల్లో ₹1.20 లక్షల వరకు, కొండ ప్రాంతాల్లో ₹1.30 లక్షల వరకు."
+      },
+      "rules": [
+        {
+          "field": "is_bpl", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "कच्चे घर में रहने वाले गरीब परिवारों के लिए।",
+            "en": "For poor households living in a kutcha house.",
+            "ta": "குடிசை வீட்டில் வசிக்கும் ஏழைக் குடும்பங்களுக்கு.",
+            "te": "పూరి ఇంట్లో నివసించే పేద కుటుంబాలకు."
+          },
+          "unmet": {
+            "hi": "यह योजना गरीबी रेखा से नीचे वाले परिवारों के लिए है।",
+            "en": "This scheme is for households below the poverty line.",
+            "ta": "இத்திட்டம் வறுமைக் கோட்டிற்குக் கீழ் உள்ள குடும்பங்களுக்கானது.",
+            "te": "ఈ పథకం దారిద్య్ర రేఖకు దిగువన ఉన్న కుటుంబాల కోసం."
+          }
+        },
+        {
+          "field": "annual_income", "op": "lte", "value": 120000,
+          "reason": {
+            "hi": "सालाना आमदनी कम होनी चाहिए।",
+            "en": "Household income must be low.",
+            "ta": "குடும்ப ஆண்டு வருமானம் குறைவாக இருக்க வேண்டும்.",
+            "te": "కుటుంబ వార్షిక ఆదాయం తక్కువగా ఉండాలి."
+          },
+          "unmet": {
+            "hi": "आपकी सालाना आमदनी इस योजना की सीमा से ज़्यादा है।",
+            "en": "Your yearly income is above the limit for this scheme.",
+            "ta": "உங்கள் ஆண்டு வருமானம் இத்திட்ட வரம்பை விட அதிகம்.",
+            "te": "మీ వార్షిక ఆదాయం ఈ పథకం పరిమితి కంటే ఎక్కువ."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "nrega",
+      "category": "work",
+      "icon": "wrench",
+      "tone": "var(--tone-send)",
+      "keywords": ["work", "job", "kaam", "mazdoori", "rozgar", "काम", "வேலை", "పని"],
+      "name": {
+        "hi": "मनरेगा — सौ दिन का काम",
+        "en": "MGNREGA — 100 Days of Work",
+        "ta": "MGNREGA — நூறு நாள் வேலை",
+        "te": "MGNREGA — వంద రోజుల పని"
+      },
+      "summary": {
+        "hi": "हर ग्रामीण परिवार को साल में सौ दिन का काम, तय मज़दूरी के साथ।",
+        "en": "A hundred days of guaranteed wage work a year for every rural household.",
+        "ta": "ஒவ்வொரு கிராமக் குடும்பத்திற்கும் ஆண்டுக்கு நூறு நாள் உத்தரவாத வேலை.",
+        "te": "ప్రతి గ్రామీణ కుటుంబానికి ఏటా వంద రోజుల హామీ పని."
+      },
+      "benefit": {
+        "hi": "साल में 100 दिन का काम, मज़दूरी सीधे बैंक खाते में।",
+        "en": "100 days of work a year, wages paid into the bank account.",
+        "ta": "ஆண்டுக்கு 100 நாள் வேலை, கூலி வங்கிக் கணக்கில்.",
+        "te": "ఏటా 100 రోజుల పని, కూలి బ్యాంకు ఖాతాలోకి."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "gte", "value": 18,
+          "reason": {
+            "hi": "अठारह साल से ऊपर के बालिग़ के लिए।",
+            "en": "For adults above eighteen.",
+            "ta": "பதினெட்டு வயதுக்கு மேற்பட்டவர்களுக்கு.",
+            "te": "పద్దెనిమిదేళ్లు పైబడిన వారికి."
+          },
+          "unmet": {
+            "hi": "इसके लिए अठारह साल से ऊपर होना ज़रूरी है।",
+            "en": "You must be over eighteen for this.",
+            "ta": "இதற்கு பதினெட்டு வயதுக்கு மேல் இருக்க வேண்டும்.",
+            "te": "దీనికి పద్దెనిమిదేళ్లు పైబడి ఉండాలి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "sukanya",
+      "category": "savings",
+      "icon": "sprout",
+      "tone": "var(--tone-learn)",
+      "keywords": ["girl", "daughter", "beti", "savings", "बेटी", "மகள்", "కూతురు"],
+      "name": {
+        "hi": "सुकन्या समृद्धि खाता",
+        "en": "Sukanya Samriddhi Account",
+        "ta": "சுகன்யா சம்ரிதி கணக்கு",
+        "te": "సుకన్య సమృద్ధి ఖాతా"
+      },
+      "summary": {
+        "hi": "बेटी के नाम बचत खाता, सबसे ऊँचा ब्याज और टैक्स से छूट।",
+        "en": "A savings account in a daughter's name, with the highest interest and a tax break.",
+        "ta": "மகளின் பெயரில் சேமிப்புக் கணக்கு, அதிக வட்டி மற்றும் வரிச் சலுகை.",
+        "te": "కూతురి పేరిట పొదుపు ఖాతా, అత్యధిక వడ్డీ, పన్ను మినహాయింపు."
+      },
+      "benefit": {
+        "hi": "साल में ₹250 से ₹1.5 लाख तक जमा, 21 साल में पूरा पैसा ब्याज समेत।",
+        "en": "Deposit ₹250 to ₹1.5 lakh a year; the full amount with interest matures in 21 years.",
+        "ta": "ஆண்டுக்கு ₹250 முதல் ₹1.5 லட்சம் வரை; 21 ஆண்டுகளில் வட்டியுடன் முழுத் தொகை.",
+        "te": "ఏటా ₹250 నుంచి ₹1.5 లక్షల వరకు; 21 ఏళ్లలో వడ్డీతో మొత్తం."
+      },
+      "rules": [
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "खाता बैंक या डाकघर में खुलता है।",
+            "en": "The account is opened at a bank or post office.",
+            "ta": "கணக்கு வங்கியிலோ அஞ்சலகத்திலோ திறக்கப்படும்.",
+            "te": "ఖాతా బ్యాంకు లేదా పోస్టాఫీసులో తెరుస్తారు."
+          },
+          "unmet": {
+            "hi": "इसके लिए बैंक या डाकघर का खाता चाहिए।",
+            "en": "You need a bank or post office account for this.",
+            "ta": "இதற்கு வங்கி அல்லது அஞ்சலகக் கணக்கு தேவை.",
+            "te": "దీనికి బ్యాంకు లేదా పోస్టాఫీసు ఖాతా అవసరం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "stand-up-india",
+      "category": "business",
+      "icon": "growth",
+      "tone": "var(--tone-send)",
+      "keywords": ["loan", "business", "women", "enterprise", "महिला", "கடன்", "రుణం"],
+      "name": {
+        "hi": "स्टैंड अप इंडिया",
+        "en": "Stand-Up India",
+        "ta": "ஸ்டாண்ட் அப் இந்தியா",
+        "te": "స్టాండ్ అప్ ఇండియా"
+      },
+      "summary": {
+        "hi": "महिलाओं और अनुसूचित जाति/जनजाति के उद्यमियों के लिए बड़ा कर्ज़।",
+        "en": "A larger business loan for women and SC/ST entrepreneurs.",
+        "ta": "பெண்கள் மற்றும் SC/ST தொழில்முனைவோருக்கு பெரிய கடன்.",
+        "te": "మహిళలు, SC/ST వ్యాపారవేత్తలకు పెద్ద రుణం."
+      },
+      "benefit": {
+        "hi": "₹10 लाख से ₹1 करोड़ तक का कर्ज़, नया उद्यम शुरू करने के लिए।",
+        "en": "A loan of ₹10 lakh to ₹1 crore to start a new enterprise.",
+        "ta": "புதிய தொழில் தொடங்க ₹10 லட்சம் முதல் ₹1 கோடி வரை கடன்.",
+        "te": "కొత్త వ్యాపారం కోసం ₹10 లక్షల నుంచి ₹1 కోటి వరకు రుణం."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "gte", "value": 18,
+          "reason": {
+            "hi": "अठारह साल से ऊपर के लिए।",
+            "en": "For applicants above eighteen.",
+            "ta": "பதினெட்டு வயதுக்கு மேற்பட்டவர்களுக்கு.",
+            "te": "పద్దెనిమిదేళ్లు పైబడిన వారికి."
+          },
+          "unmet": {
+            "hi": "इसके लिए अठारह साल से ऊपर होना ज़रूरी है।",
+            "en": "You must be over eighteen for this.",
+            "ta": "இதற்கு பதினெட்டு வயதுக்கு மேல் இருக்க வேண்டும்.",
+            "te": "దీనికి పద్దెనిమిదేళ్లు పైబడి ఉండాలి."
+          }
+        },
+        {
+          "field": "gender", "op": "eq", "value": "F",
+          "reason": {
+            "hi": "महिला उद्यमियों के लिए (और अनुसूचित जाति/जनजाति के लिए भी)।",
+            "en": "For women entrepreneurs (and for SC/ST applicants).",
+            "ta": "பெண் தொழில்முனைவோருக்கு (SC/ST விண்ணப்பதாரர்களுக்கும்).",
+            "te": "మహిళా వ్యాపారవేత్తలకు (SC/ST దరఖాస్తుదారులకు కూడా)."
+          },
+          "unmet": {
+            "hi": "यह कर्ज़ महिलाओं और अनुसूचित जाति/जनजाति के लोगों के लिए है। घर में किसी महिला के नाम से देखिए, या मुद्रा ऋण लीजिए।",
+            "en": "This loan is for women and SC/ST applicants. Consider applying in the name of a woman in the household, or look at the MUDRA loan instead.",
+            "ta": "இக்கடன் பெண்கள் மற்றும் SC/ST விண்ணப்பதாரர்களுக்கானது. வீட்டிலுள்ள பெண்ணின் பெயரில் பாருங்கள், அல்லது முத்ரா கடனைப் பாருங்கள்.",
+            "te": "ఈ రుణం మహిళలు, SC/ST దరఖాస్తుదారుల కోసం. ఇంట్లోని మహిళ పేరిట చూడండి, లేదా ముద్ర రుణం చూడండి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pm-svanidhi",
+      "category": "business",
+      "icon": "wrench",
+      "tone": "var(--tone-send)",
+      "keywords": ["street vendor", "thela", "rehri", "hawker", "ठेला", "தெரு வியாபாரி", "వీధి వ్యాపారి"],
+      "name": {
+        "hi": "पीएम स्वनिधि",
+        "en": "PM SVANidhi",
+        "ta": "பிஎம் ஸ்வநிதி",
+        "te": "పీఎం స్వనిధి"
+      },
+      "summary": {
+        "hi": "रेहड़ी-पटरी वालों के लिए छोटा कर्ज़, बिना गारंटी।",
+        "en": "A small collateral-free loan for street vendors.",
+        "ta": "தெரு வியாபாரிகளுக்கு அடமானமில்லாச் சிறு கடன்.",
+        "te": "వీధి వ్యాపారులకు హామీ లేని చిన్న రుణం."
+      },
+      "benefit": {
+        "hi": "पहले ₹10,000, समय पर चुकाने पर ₹20,000 और फिर ₹50,000।",
+        "en": "₹10,000 first; repay on time and the next loans are ₹20,000 and ₹50,000.",
+        "ta": "முதலில் ₹10,000; சரியான நேரத்தில் திருப்பினால் ₹20,000, பின் ₹50,000.",
+        "te": "ముందుగా ₹10,000; సకాలంలో చెల్లిస్తే ₹20,000, ఆపై ₹50,000."
+      },
+      "rules": [
+        {
+          "field": "occupation", "op": "in", "value": ["self_employed", "labourer", "other"],
+          "reason": {
+            "hi": "रेहड़ी, ठेला या छोटी दुकान चलाने वालों के लिए।",
+            "en": "For people running a cart, a stall, or a very small shop.",
+            "ta": "தள்ளுவண்டி, கடை நடத்துபவர்களுக்கு.",
+            "te": "బండి, చిన్న దుకాణం నడిపేవారికి."
+          },
+          "unmet": {
+            "hi": "यह कर्ज़ रेहड़ी-पटरी और छोटे दुकानदारों के लिए है।",
+            "en": "This loan is for street vendors and very small traders.",
+            "ta": "இக்கடன் தெரு வியாபாரிகளுக்கும் மிகச் சிறு வணிகர்களுக்கும்.",
+            "te": "ఈ రుణం వీధి వ్యాపారులు, చాలా చిన్న వర్తకుల కోసం."
+          }
+        },
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "कर्ज़ बैंक खाते में आता है।",
+            "en": "The loan is paid into a bank account.",
+            "ta": "கடன் வங்கிக் கணக்கில் வரும்.",
+            "te": "రుణం బ్యాంకు ఖాతాలోకి వస్తుంది."
+          },
+          "unmet": {
+            "hi": "पहले बैंक खाता खुलवाना होगा।",
+            "en": "You will need a bank account first.",
+            "ta": "முதலில் வங்கிக் கணக்கு தேவை.",
+            "te": "ముందుగా బ్యాంకు ఖాతా కావాలి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "kcc",
+      "category": "farming",
+      "icon": "sprout",
+      "tone": "var(--tone-scheme)",
+      "keywords": ["kisan credit card", "crop loan", "beej", "khad", "किसान क्रेडिट", "பயிர் கடன்", "పంట రుణం"],
+      "name": {
+        "hi": "किसान क्रेडिट कार्ड",
+        "en": "Kisan Credit Card",
+        "ta": "கிசான் கிரெடிட் கார்டு",
+        "te": "కిసాన్ క్రెడిట్ కార్డు"
+      },
+      "summary": {
+        "hi": "बीज, खाद और खेती के खर्च के लिए सस्ता कर्ज़।",
+        "en": "Low-interest credit for seed, fertiliser and other crop costs.",
+        "ta": "விதை, உரம், பயிர்ச் செலவுகளுக்குக் குறைந்த வட்டிக் கடன்.",
+        "te": "విత్తనం, ఎరువు, పంట ఖర్చులకు తక్కువ వడ్డీ రుణం."
+      },
+      "benefit": {
+        "hi": "₹3 लाख तक का कर्ज़ चार प्रतिशत ब्याज पर, समय पर चुकाने पर।",
+        "en": "Up to ₹3 lakh at four percent interest when repaid on time.",
+        "ta": "சரியான நேரத்தில் திருப்பினால் நான்கு சதவீத வட்டியில் ₹3 லட்சம் வரை.",
+        "te": "సకాలంలో చెల్లిస్తే నాలుగు శాతం వడ్డీతో ₹3 లక్షల వరకు."
+      },
+      "rules": [
+        {
+          "field": "occupation", "op": "eq", "value": "farmer",
+          "reason": {
+            "hi": "खेती करने वालों के लिए।",
+            "en": "For people who farm.",
+            "ta": "விவசாயம் செய்பவர்களுக்கு.",
+            "te": "వ్యవసాయం చేసేవారికి."
+          },
+          "unmet": {
+            "hi": "यह कार्ड किसानों के लिए है।",
+            "en": "This card is for farmers.",
+            "ta": "இந்த அட்டை விவசாயிகளுக்கானது.",
+            "te": "ఈ కార్డు రైతుల కోసం."
+          }
+        },
+        {
+          "field": "age", "op": "between", "value": [18, 75],
+          "reason": {
+            "hi": "अठारह से पचहत्तर साल की उम्र के लिए।",
+            "en": "For ages eighteen to seventy-five.",
+            "ta": "பதினெட்டு முதல் எழுபத்தைந்து வயது வரை.",
+            "te": "పద్దెనిమిది నుంచి డెబ్బై ఐదేళ్ల వరకు."
+          },
+          "unmet": {
+            "hi": "यह कार्ड अठारह से पचहत्तर साल की उम्र में मिलता है।",
+            "en": "This card is issued between eighteen and seventy-five.",
+            "ta": "இந்த அட்டை பதினெட்டு முதல் எழுபத்தைந்து வயதுக்குள் வழங்கப்படும்.",
+            "te": "ఈ కార్డు పద్దెనిమిది నుంచి డెబ్బై ఐదేళ్ల మధ్య ఇస్తారు."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pmfby",
+      "category": "farming",
+      "icon": "shield",
+      "tone": "var(--tone-scheme)",
+      "keywords": ["crop insurance", "fasal bima", "फसल बीमा", "பயிர் காப்பீடு", "పంట బీమా"],
+      "name": {
+        "hi": "फसल बीमा योजना",
+        "en": "PM Fasal Bima Yojana",
+        "ta": "பயிர் காப்பீட்டுத் திட்டம்",
+        "te": "పంట బీమా పథకం"
+      },
+      "summary": {
+        "hi": "सूखा, बाढ़ या ओले से फसल खराब होने पर मुआवज़ा।",
+        "en": "Compensation when a crop is lost to drought, flood or hail.",
+        "ta": "வறட்சி, வெள்ளம், ஆலங்கட்டியால் பயிர் இழப்புக்கு இழப்பீடு.",
+        "te": "కరువు, వరద, వడగళ్లతో పంట నష్టానికి పరిహారం."
+      },
+      "benefit": {
+        "hi": "किसान सिर्फ़ 1.5 से 2 प्रतिशत किस्त देता है, बाकी सरकार भरती है।",
+        "en": "The farmer pays only 1.5 to 2 percent of the premium; the government pays the rest.",
+        "ta": "விவசாயி 1.5 முதல் 2 சதவீதம் மட்டுமே கட்டுவார்; மீதியை அரசு செலுத்தும்.",
+        "te": "రైతు 1.5 నుంచి 2 శాతం మాత్రమే చెల్లిస్తారు; మిగతాది ప్రభుత్వం."
+      },
+      "rules": [
+        {
+          "field": "occupation", "op": "eq", "value": "farmer",
+          "reason": {
+            "hi": "फसल उगाने वालों के लिए।",
+            "en": "For people who grow a crop.",
+            "ta": "பயிர் விளைவிப்பவர்களுக்கு.",
+            "te": "పంట పండించేవారికి."
+          },
+          "unmet": {
+            "hi": "यह बीमा फसल उगाने वालों के लिए है।",
+            "en": "This insurance is for crop growers.",
+            "ta": "இக்காப்பீடு பயிர் விளைவிப்பவர்களுக்கானது.",
+            "te": "ఈ బీమా పంట పండించేవారి కోసం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pm-vishwakarma",
+      "category": "business",
+      "icon": "wrench",
+      "tone": "var(--tone-send)",
+      "keywords": ["artisan", "craft", "karigar", "lohar", "badhai", "कारीगर", "கைவினைஞர்", "చేతివృత్తి"],
+      "name": {
+        "hi": "पीएम विश्वकर्मा",
+        "en": "PM Vishwakarma",
+        "ta": "பிஎம் விஸ்வகர்மா",
+        "te": "పీఎం విశ్వకర్మ"
+      },
+      "summary": {
+        "hi": "हाथ का हुनर रखने वाले कारीगरों के लिए ट्रेनिंग, औज़ार और कर्ज़।",
+        "en": "Training, tools and credit for traditional artisans and craftspeople.",
+        "ta": "பாரம்பரியக் கைவினைஞர்களுக்குப் பயிற்சி, கருவிகள், கடன்.",
+        "te": "సంప్రదాయ చేతివృత్తుల వారికి శిక్షణ, పనిముట్లు, రుణం."
+      },
+      "benefit": {
+        "hi": "ट्रेनिंग के दौरान ₹500 रोज़, औज़ार के लिए ₹15,000, और ₹3 लाख तक सस्ता कर्ज़।",
+        "en": "₹500 a day during training, ₹15,000 for tools, and up to ₹3 lakh of cheap credit.",
+        "ta": "பயிற்சியின்போது நாளொன்றுக்கு ₹500, கருவிகளுக்கு ₹15,000, ₹3 லட்சம் வரை மலிவுக் கடன்.",
+        "te": "శిక్షణ సమయంలో రోజుకు ₹500, పనిముట్లకు ₹15,000, ₹3 లక్షల వరకు చౌక రుణం."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "gte", "value": 18,
+          "reason": {
+            "hi": "अठारह साल से ऊपर के कारीगरों के लिए।",
+            "en": "For artisans above eighteen.",
+            "ta": "பதினெட்டு வயதுக்கு மேற்பட்ட கைவினைஞர்களுக்கு.",
+            "te": "పద్దెనిమిదేళ్లు పైబడిన చేతివృత్తుల వారికి."
+          },
+          "unmet": {
+            "hi": "इसके लिए अठारह साल से ऊपर होना ज़रूरी है।",
+            "en": "You must be over eighteen for this.",
+            "ta": "இதற்கு பதினெட்டு வயதுக்கு மேல் இருக்க வேண்டும்.",
+            "te": "దీనికి పద్దెనిమిదేళ్లు పైబడి ఉండాలి."
+          }
+        },
+        {
+          "field": "occupation", "op": "in", "value": ["self_employed", "labourer", "other"],
+          "reason": {
+            "hi": "अठारह पारंपरिक हुनर — लोहार, बढ़ई, कुम्हार, दर्ज़ी और बाकी।",
+            "en": "Eighteen traditional trades — blacksmith, carpenter, potter, tailor and the rest.",
+            "ta": "பதினெட்டு பாரம்பரியத் தொழில்கள் — கொல்லர், தச்சர், குயவர், தையல்காரர் மற்றும் பிற.",
+            "te": "పద్దెనిమిది సంప్రదాయ వృత్తులు — కమ్మరి, వడ్రంగి, కుమ్మరి, దర్జీ తదితరులు."
+          },
+          "unmet": {
+            "hi": "यह योजना हाथ का काम करने वाले कारीगरों के लिए है।",
+            "en": "This scheme is for people working a traditional craft by hand.",
+            "ta": "இத்திட்டம் கைவினைத் தொழில் செய்பவர்களுக்கானது.",
+            "te": "ఈ పథకం చేతివృత్తి చేసేవారి కోసం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "ayushman-bharat",
+      "category": "health",
+      "icon": "shield",
+      "tone": "var(--tone-safety)",
+      "keywords": ["health", "hospital", "ilaj", "bimari", "इलाज", "மருத்துவம்", "ఆరోగ్యం"],
+      "name": {
+        "hi": "आयुष्मान भारत",
+        "en": "Ayushman Bharat PM-JAY",
+        "ta": "ஆயுஷ்மான் பாரத்",
+        "te": "ఆయుష్మాన్ భారత్"
+      },
+      "summary": {
+        "hi": "गरीब परिवारों के लिए अस्पताल में मुफ़्त इलाज।",
+        "en": "Free hospital treatment for poor households.",
+        "ta": "ஏழைக் குடும்பங்களுக்கு இலவச மருத்துவமனை சிகிச்சை.",
+        "te": "పేద కుటుంబాలకు ఉచిత ఆసుపత్రి చికిత్స."
+      },
+      "benefit": {
+        "hi": "हर परिवार को साल में ₹5 लाख तक का मुफ़्त इलाज।",
+        "en": "Up to ₹5 lakh of free treatment per family per year.",
+        "ta": "குடும்பத்திற்கு ஆண்டுக்கு ₹5 லட்சம் வரை இலவச சிகிச்சை.",
+        "te": "కుటుంబానికి ఏటా ₹5 లక్షల వరకు ఉచిత చికిత్స."
+      },
+      "rules": [
+        {
+          "field": "is_bpl", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "गरीब और कमज़ोर परिवारों के लिए।",
+            "en": "For poor and vulnerable households.",
+            "ta": "ஏழை மற்றும் பாதிக்கப்படக்கூடிய குடும்பங்களுக்கு.",
+            "te": "పేద, బలహీన కుటుంబాలకు."
+          },
+          "unmet": {
+            "hi": "यह योजना गरीब परिवारों की सूची के आधार पर मिलती है। अपने नाम की जाँच कॉमन सर्विस सेंटर पर कराइए।",
+            "en": "Eligibility comes from the poor-household list. Ask a Common Service Centre to check whether your name is on it.",
+            "ta": "தகுதி ஏழைக் குடும்பப் பட்டியலிலிருந்து வருகிறது. உங்கள் பெயர் உள்ளதா எனப் பொதுச் சேவை மையத்தில் பாருங்கள்.",
+            "te": "అర్హత పేద కుటుంబాల జాబితా నుంచి వస్తుంది. మీ పేరు ఉందో లేదో కామన్ సర్వీస్ సెంటర్‌లో చూడండి."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pm-matru-vandana",
+      "category": "health",
+      "icon": "user",
+      "tone": "var(--tone-learn)",
+      "keywords": ["pregnant", "mother", "garbhvati", "maa", "गर्भवती", "கர்ப்பிணி", "గర్భిణి"],
+      "name": {
+        "hi": "मातृ वंदना योजना",
+        "en": "PM Matru Vandana Yojana",
+        "ta": "மாத்ரு வந்தனா திட்டம்",
+        "te": "మాతృ వందన పథకం"
+      },
+      "summary": {
+        "hi": "पहली बार माँ बनने वाली महिला को नकद मदद।",
+        "en": "A cash benefit for a woman expecting her first child.",
+        "ta": "முதல் குழந்தையை எதிர்பார்க்கும் பெண்ணுக்குப் பண உதவி.",
+        "te": "మొదటి బిడ్డను ఆశిస్తున్న మహిళకు నగదు సాయం."
+      },
+      "benefit": {
+        "hi": "₹5,000 तीन किस्तों में, जाँच और टीकाकरण पूरा करने पर।",
+        "en": "₹5,000 in three instalments, on completing check-ups and immunisation.",
+        "ta": "பரிசோதனை, தடுப்பூசி முடித்தால் ₹5,000 மூன்று தவணைகளில்.",
+        "te": "పరీక్షలు, టీకాలు పూర్తి చేస్తే ₹5,000 మూడు విడతల్లో."
+      },
+      "rules": [
+        {
+          "field": "gender", "op": "eq", "value": "F",
+          "reason": {
+            "hi": "गर्भवती और स्तनपान कराने वाली महिलाओं के लिए।",
+            "en": "For pregnant and nursing mothers.",
+            "ta": "கர்ப்பிணி மற்றும் பாலூட்டும் தாய்மார்களுக்கு.",
+            "te": "గర్భిణులు, పాలిచ్చే తల్లులకు."
+          },
+          "unmet": {
+            "hi": "यह योजना गर्भवती महिलाओं के लिए है।",
+            "en": "This scheme is for pregnant women.",
+            "ta": "இத்திட்டம் கர்ப்பிணிப் பெண்களுக்கானது.",
+            "te": "ఈ పథకం గర్భిణి స్త్రీల కోసం."
+          }
+        },
+        {
+          "field": "age", "op": "gte", "value": 19,
+          "reason": {
+            "hi": "उन्नीस साल से ऊपर की महिलाओं के लिए।",
+            "en": "For women above nineteen.",
+            "ta": "பத்தொன்பது வயதுக்கு மேற்பட்ட பெண்களுக்கு.",
+            "te": "పందొమ్మిదేళ్లు పైబడిన మహిళలకు."
+          },
+          "unmet": {
+            "hi": "यह मदद उन्नीस साल से ऊपर की महिलाओं को मिलती है।",
+            "en": "This benefit is for women above nineteen.",
+            "ta": "இவ்வுதவி பத்தொன்பது வயதுக்கு மேற்பட்ட பெண்களுக்கு.",
+            "te": "ఈ సాయం పందొమ్మిదేళ్లు పైబడిన మహిళలకు."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "nsap-old-age",
+      "category": "pension",
+      "icon": "clock",
+      "tone": "var(--tone-learn)",
+      "keywords": ["old age pension", "budhapa", "vridha", "बुढ़ापा", "முதியோர்", "వృద్ధాప్యం"],
+      "name": {
+        "hi": "वृद्धावस्था पेंशन",
+        "en": "Old Age Pension (NSAP)",
+        "ta": "முதியோர் ஓய்வூதியம்",
+        "te": "వృద్ధాప్య పింఛను"
+      },
+      "summary": {
+        "hi": "गरीब बुज़ुर्गों को हर महीने पेंशन।",
+        "en": "A monthly pension for elderly people from poor households.",
+        "ta": "ஏழை முதியவர்களுக்கு மாதாந்திர ஓய்வூதியம்.",
+        "te": "పేద వృద్ధులకు నెలవారీ పింఛను."
+      },
+      "benefit": {
+        "hi": "केंद्र से ₹200–₹500 महीना, राज्य अपनी तरफ़ से और जोड़ता है।",
+        "en": "₹200–₹500 a month from the centre, with most states adding more.",
+        "ta": "மத்திய அரசிடமிருந்து மாதம் ₹200–₹500; பல மாநிலங்கள் கூடுதலாகத் தரும்.",
+        "te": "కేంద్రం నుంచి నెలకు ₹200–₹500; చాలా రాష్ట్రాలు అదనంగా ఇస్తాయి."
+      },
+      "rules": [
+        {
+          "field": "age", "op": "gte", "value": 60,
+          "reason": {
+            "hi": "साठ साल से ऊपर के लिए।",
+            "en": "For people above sixty.",
+            "ta": "அறுபது வயதுக்கு மேற்பட்டவர்களுக்கு.",
+            "te": "అరవై ఏళ్లు పైబడిన వారికి."
+          },
+          "unmet": {
+            "hi": "यह पेंशन साठ साल की उम्र के बाद मिलती है।",
+            "en": "This pension starts at the age of sixty.",
+            "ta": "இந்த ஓய்வூதியம் அறுபது வயதுக்குப் பிறகு.",
+            "te": "ఈ పింఛను అరవై ఏళ్ల తర్వాత."
+          }
+        },
+        {
+          "field": "is_bpl", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "गरीबी रेखा से नीचे वाले परिवारों के लिए।",
+            "en": "For households below the poverty line.",
+            "ta": "வறுமைக் கோட்டிற்குக் கீழ் உள்ள குடும்பங்களுக்கு.",
+            "te": "దారిద్య్ర రేఖకు దిగువన ఉన్న కుటుంబాలకు."
+          },
+          "unmet": {
+            "hi": "यह पेंशन बीपीएल परिवारों के लिए है।",
+            "en": "This pension is for BPL households.",
+            "ta": "இந்த ஓய்வூதியம் BPL குடும்பங்களுக்கானது.",
+            "te": "ఈ పింఛను BPL కుటుంబాల కోసం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "nsap-widow",
+      "category": "pension",
+      "icon": "user",
+      "tone": "var(--tone-learn)",
+      "keywords": ["widow pension", "vidhwa", "विधवा", "விதவை", "వితంతు"],
+      "name": {
+        "hi": "विधवा पेंशन",
+        "en": "Widow Pension (NSAP)",
+        "ta": "விதவை ஓய்வூதியம்",
+        "te": "వితంతు పింఛను"
+      },
+      "summary": {
+        "hi": "गरीब विधवा महिलाओं को हर महीने पेंशन।",
+        "en": "A monthly pension for widows from poor households.",
+        "ta": "ஏழை விதவைப் பெண்களுக்கு மாதாந்திர ஓய்வூதியம்.",
+        "te": "పేద వితంతు మహిళలకు నెలవారీ పింఛను."
+      },
+      "benefit": {
+        "hi": "केंद्र से ₹300–₹500 महीना, राज्य अपनी तरफ़ से और जोड़ता है।",
+        "en": "₹300–₹500 a month from the centre, with state top-ups.",
+        "ta": "மத்திய அரசிடமிருந்து மாதம் ₹300–₹500, மாநில கூடுதலுடன்.",
+        "te": "కేంద్రం నుంచి నెలకు ₹300–₹500, రాష్ట్ర అదనంతో."
+      },
+      "rules": [
+        {
+          "field": "gender", "op": "eq", "value": "F",
+          "reason": {
+            "hi": "विधवा महिलाओं के लिए।",
+            "en": "For widowed women.",
+            "ta": "விதவைப் பெண்களுக்கு.",
+            "te": "వితంతు మహిళలకు."
+          },
+          "unmet": {
+            "hi": "यह पेंशन विधवा महिलाओं के लिए है।",
+            "en": "This pension is for widowed women.",
+            "ta": "இந்த ஓய்வூதியம் விதவைப் பெண்களுக்கானது.",
+            "te": "ఈ పింఛను వితంతు మహిళల కోసం."
+          }
+        },
+        {
+          "field": "age", "op": "between", "value": [40, 79],
+          "reason": {
+            "hi": "चालीस से उनासी साल की उम्र के लिए।",
+            "en": "For ages forty to seventy-nine.",
+            "ta": "நாற்பது முதல் எழுபத்தொன்பது வயது வரை.",
+            "te": "నలభై నుంచి డెబ్బై తొమ్మిదేళ్ల వరకు."
+          },
+          "unmet": {
+            "hi": "यह पेंशन चालीस से उनासी साल की उम्र में मिलती है।",
+            "en": "This pension applies between forty and seventy-nine.",
+            "ta": "இந்த ஓய்வூதியம் நாற்பது முதல் எழுபத்தொன்பது வயதுக்குள்.",
+            "te": "ఈ పింఛను నలభై నుంచి డెబ్బై తొమ్మిదేళ్ల మధ్య."
+          }
+        },
+        {
+          "field": "is_bpl", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "गरीबी रेखा से नीचे वाले परिवारों के लिए।",
+            "en": "For households below the poverty line.",
+            "ta": "வறுமைக் கோட்டிற்குக் கீழ் உள்ள குடும்பங்களுக்கு.",
+            "te": "దారిద్య్ర రేఖకు దిగువన ఉన్న కుటుంబాలకు."
+          },
+          "unmet": {
+            "hi": "यह पेंशन बीपीएल परिवारों के लिए है।",
+            "en": "This pension is for BPL households.",
+            "ta": "இந்த ஓய்வூதியம் BPL குடும்பங்களுக்கானது.",
+            "te": "ఈ పింఛను BPL కుటుంబాల కోసం."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "pm-ujjwala-solar",
+      "category": "household",
+      "icon": "sun",
+      "tone": "var(--tone-send)",
+      "keywords": ["solar", "bijli", "electricity", "roof", "बिजली", "சூரிய", "సౌర"],
+      "name": {
+        "hi": "पीएम सूर्य घर — मुफ़्त बिजली",
+        "en": "PM Surya Ghar — Free Electricity",
+        "ta": "பிஎம் சூர்ய கர் — இலவச மின்சாரம்",
+        "te": "పీఎం సూర్య ఘర్ — ఉచిత విద్యుత్"
+      },
+      "summary": {
+        "hi": "छत पर सोलर पैनल लगाने पर सरकारी छूट और मुफ़्त बिजली।",
+        "en": "A subsidy for rooftop solar, and free electricity from it.",
+        "ta": "கூரை சூரிய மின் தகடுகளுக்கு மானியம், அதிலிருந்து இலவச மின்சாரம்.",
+        "te": "పైకప్పు సౌర ఫలకాలకు సబ్సిడీ, దాని నుంచి ఉచిత విద్యుత్."
+      },
+      "benefit": {
+        "hi": "₹78,000 तक की छूट और हर महीने 300 यूनिट तक मुफ़्त बिजली।",
+        "en": "A subsidy of up to ₹78,000 and up to 300 free units of power a month.",
+        "ta": "₹78,000 வரை மானியம், மாதம் 300 யூனிட் வரை இலவச மின்சாரம்.",
+        "te": "₹78,000 వరకు సబ్సిడీ, నెలకు 300 యూనిట్ల వరకు ఉచిత విద్యుత్."
+      },
+      "rules": [
+        {
+          "field": "has_bank_account", "op": "is_true", "value": null,
+          "reason": {
+            "hi": "छूट सीधे बैंक खाते में आती है।",
+            "en": "The subsidy is paid into a bank account.",
+            "ta": "மானியம் வங்கிக் கணக்கில் வரும்.",
+            "te": "సబ్సిడీ బ్యాంకు ఖాతాలోకి వస్తుంది."
+          },
+          "unmet": {
+            "hi": "इसके लिए बैंक खाता चाहिए।",
+            "en": "A bank account is required for this.",
+            "ta": "இதற்கு வங்கிக் கணக்கு தேவை.",
+            "te": "దీనికి బ్యాంకు ఖాతా అవసరం."
+          }
+        },
+        {
+          "field": "annual_income", "op": "lte", "value": 1000000,
+          "reason": {
+            "hi": "आम घरों के लिए, बहुत ऊँची आमदनी वालों के लिए नहीं।",
+            "en": "For ordinary households, not very high earners.",
+            "ta": "சாதாரணக் குடும்பங்களுக்கு, மிக அதிக வருமானம் உள்ளவர்களுக்கு அல்ல.",
+            "te": "సాధారణ కుటుంబాలకు, చాలా ఎక్కువ ఆదాయం ఉన్నవారికి కాదు."
+          },
+          "unmet": {
+            "hi": "आपकी आमदनी इस छूट की सीमा से ज़्यादा है।",
+            "en": "Your income is above the limit for this subsidy.",
+            "ta": "உங்கள் வருமானம் இம்மானிய வரம்பை விட அதிகம்.",
+            "te": "మీ ఆదాయం ఈ సబ్సిడీ పరిమితి కంటే ఎక్కువ."
+          }
+        }
+      ]
+    }
+  ]
+}

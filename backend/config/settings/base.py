@@ -139,9 +139,31 @@ INTENT_MODEL_PATH = os.getenv("INTENT_MODEL_PATH", str(ML_ARTIFACTS_DIR / "inten
 SCAM_MODEL_PATH = os.getenv("SCAM_MODEL_PATH", str(ML_ARTIFACTS_DIR / "scam"))
 NOTE_MODEL_PATH = os.getenv("NOTE_MODEL_PATH", str(ML_ARTIFACTS_DIR / "notes"))
 
+# Multilingual sentence encoder for scheme and lesson search. multilingual-e5
+# rather than paraphrase-multilingual-MiniLM because the latter's training
+# languages do not include Tamil or Telugu. Unset or unloadable -> keyword match.
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "intfloat/multilingual-e5-small")
+
 # Below these thresholds we stop guessing and fall back to icon navigation.
 ASR_MIN_CONFIDENCE = float(os.getenv("ASR_MIN_CONFIDENCE", "0.45"))
-INTENT_MIN_CONFIDENCE = float(os.getenv("INTENT_MIN_CONFIDENCE", "0.55"))
+# Set by ml/calibrate_gate.py, not by hand: 0.40 is the highest-coverage
+# threshold whose silent error (acting on the wrong intent) stays under 5% on
+# the hand-written test set -- 79.8% coverage, 3.3% silent error. The previous
+# 0.55 refused 80% of utterances, most of them correctly understood.
+# See ml/reports/intent_gate.json.
+INTENT_MIN_CONFIDENCE = float(os.getenv("INTENT_MIN_CONFIDENCE", "0.40"))
+
+# ScamNet blends 3-class probabilities: w * transformer + (1 - w) * rules, and
+# takes the argmax. 0.7 was fixed in the design before the test set was scored.
+# Measured result (ml/reports/scam_metrics.json): on the hand-written test the
+# blend equals transformer-only, because the fine-tuned model is near-certain
+# and 30% of rule probability cannot flip it -- the rules supply the spoken
+# reasons rather than the verdict. w=0.5 scores higher on that same test set;
+# it is not used, because choosing it there would be tuning on the test set.
+SCAM_MODEL_WEIGHT = float(os.getenv("SCAM_MODEL_WEIGHT", "0.7"))
+
+# Uploaded images for the QR and note endpoints. A phone photo is 2-5 MB.
+VISION_MAX_UPLOAD_BYTES = int(os.getenv("VISION_MAX_UPLOAD_BYTES", str(10 * 1024 * 1024)))
 
 # One spoken sentence is a few seconds of opus, i.e. tens of kilobytes. The cap
 # is generous enough for a slow speaker and small enough that a malformed or

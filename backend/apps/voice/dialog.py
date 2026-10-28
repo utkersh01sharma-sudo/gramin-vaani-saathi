@@ -217,6 +217,35 @@ R: dict[str, dict[str, str]] = {
         "ta": "எனக்குச் சரியாகக் கேட்கவில்லை. கீழே உள்ள படங்களில் ஒன்றைத் தேர்ந்தெடுங்கள்.",
         "te": "నాకు సరిగ్గా వినిపించలేదు. కింది బొమ్మల్లో ఒకటి ఎంచుకోండి.",
     },
+    "scheme_found": {
+        "hi": "आपके लिए ये योजनाएँ हैं: {items}।",
+        "en": "These schemes may help you: {items}.",
+        "ta": "உங்களுக்கான திட்டங்கள்: {items}.",
+        "te": "మీ కోసం ఈ పథకాలు ఉన్నాయి: {items}.",
+    },
+    "scheme_none": {
+        "hi": "इससे जुड़ी कोई योजना नहीं मिली। योजनाओं की पूरी सूची खोल रहा हूँ।",
+        "en": "I did not find a matching scheme. Opening the full list of schemes.",
+        "ta": "பொருந்தும் திட்டம் கிடைக்கவில்லை. முழுப் பட்டியலைத் திறக்கிறேன்.",
+        "te": "సరిపోయే పథకం దొరకలేదు. పూర్తి జాబితా తెరుస్తున్నాను.",
+    },
+    "verdict_eligible": {"hi": "{name} — आप योग्य लगते हैं", "en": "{name}, which you appear to qualify for",
+                         "ta": "{name} — நீங்கள் தகுதியானவர் போலத் தெரிகிறது", "te": "{name} — మీకు అర్హత ఉన్నట్లుంది"},
+    "verdict_maybe": {"hi": "{name} — कुछ जानकारी और चाहिए", "en": "{name}, where I need a little more information",
+                      "ta": "{name} — இன்னும் சில விவரம் தேவை", "te": "{name} — ఇంకొంచెం సమాచారం కావాలి"},
+    "verdict_not": {"hi": "{name} — शायद आपके लिए नहीं", "en": "{name}, which may not apply to you",
+                    "ta": "{name} — உங்களுக்குப் பொருந்தாமல் இருக்கலாம்", "te": "{name} — మీకు వర్తించకపోవచ్చు"},
+    "scam_result": {"hi": "{headline}। {reason} {advice}", "en": "{headline}. {reason} {advice}",
+                    "ta": "{headline}. {reason} {advice}", "te": "{headline}. {reason} {advice}"},
+    "report_scam": {
+        "hi": "घबराइए मत। अगर पैसा गया है तो अभी 1930 पर फ़ोन कीजिए। शिकायत का फ़ॉर्म खोल रहा हूँ।",
+        "en": "Do not panic. If money was taken, call 1930 right now. Opening the report form.",
+        "ta": "பதற வேண்டாம். பணம் போயிருந்தால் இப்போதே 1930-க்கு அழையுங்கள். புகார் படிவத்தைத் திறக்கிறேன்.",
+        "te": "భయపడకండి. డబ్బు పోయి ఉంటే ఇప్పుడే 1930కి ఫోన్ చేయండి. ఫిర్యాదు ఫారం తెరుస్తున్నాను.",
+    },
+    # The title carries its own stop: "What is UPI?" must not become "UPI?.".
+    "lesson_found": {"hi": "पाठ: {title} {first}", "en": "Lesson: {title} {first}",
+                     "ta": "பாடம்: {title} {first}", "te": "పాఠం: {title} {first}"},
 }
 
 
@@ -338,6 +367,84 @@ def _handle_send(user, lang: str, result: DialogResult) -> DialogResult:
     return result
 
 
+def _handle_scheme(user, lang: str, result: DialogResult) -> DialogResult:
+    """Search the catalogue with what was said, and read back up to two matches
+    with this user's verdict. The screen shows the full ranked list."""
+    from ai.registry import get_embedder
+    from apps.accounts.models import UserProfile
+    from apps.schemes import retrieval
+    from apps.schemes.engine import ELIGIBLE, MAYBE, check
+
+    ranked, backend = retrieval.search(result.transcript, get_embedder(), k=3)
+    if not ranked:
+        result.reply_text = say("scheme_none", lang)
+        result.action_taken = "navigate:schemes"
+        return result
+    profile, _ = UserProfile.objects.get_or_create(user=user)
+    facts = profile.eligibility_facts()
+    checks = [check(s, facts, lang) for s, _ in ranked]
+    key = {ELIGIBLE: "verdict_eligible", MAYBE: "verdict_maybe"}
+    items = ", ".join(say(key.get(c["verdict"], "verdict_not"), lang, name=c["name"]) for c in checks[:2])
+    result.reply_text = say("scheme_found", lang, items=items)
+    result.action_taken = "scheme_search"
+    result.slots["schemes"] = [c["scheme_id"] for c in checks]
+    result.slots["search_backend"] = backend
+    return result
+
+
+# A request to check a message is usually spoken with the message in it ("is
+# this real: your account will be blocked..."). Below this many words it is
+# just the request, and the user is sent to the screen to paste the message.
+SCAM_MIN_WORDS = 8
+
+
+def _handle_check_scam(user, lang: str, result: DialogResult) -> DialogResult:
+    if len(result.transcript.split()) < SCAM_MIN_WORDS:
+        result.reply_text = say("safety", lang)
+        result.action_taken = "navigate:safety"
+        return result
+    from apps.fraud.views import check_text
+
+    verdict = check_text(user, result.transcript, lang)
+    reason = verdict["reasons"][0] if verdict["reasons"] else ""
+    result.reply_text = say("scam_result", lang, headline=verdict["headline"],
+                            reason=reason, advice=verdict["advice"]).replace("  ", " ")
+    result.action_taken = f"scam_check:{verdict['label']}"
+    result.slots["scam"] = verdict
+    return result
+
+
+def _handle_report_scam(user, lang: str, result: DialogResult) -> DialogResult:
+    result.reply_text = say("report_scam", lang)
+    result.action_taken = "navigate:safety"
+    result.slots["open"] = "report"
+    return result
+
+
+def _handle_learn(user, lang: str, result: DialogResult) -> DialogResult:
+    """Pick the lesson whose title or steps share the most words with what was said."""
+    from apps.literacy.catalog import load_lessons
+
+    words = {w for w in result.transcript.lower().split() if len(w) > 2}
+    best, best_hits = None, 0
+    for lesson in load_lessons():
+        text = " ".join([*lesson["title"].values(), *(" ".join(v) for v in lesson["steps"].values())]).lower()
+        hits = sum(1 for w in words if w in text)
+        if hits > best_hits:
+            best, best_hits = lesson, hits
+    if best is None:
+        result.reply_text = say("learn", lang)
+        result.action_taken = "navigate:learn"
+        return result
+    title = best["title"][lang]
+    if not title.endswith(("?", "।", ".")):
+        title += "।" if lang == "hi" else "."
+    result.reply_text = say("lesson_found", lang, title=title, first=best["steps"][lang][0])
+    result.action_taken = "open_lesson"
+    result.slots["lesson_id"] = best["id"]
+    return result
+
+
 def confirm_pending(user, pending: dict, language: str) -> DialogResult:
     """Carry out a previously confirmed action. The only path to the ledger."""
     lang = _language_for(user, language)
@@ -452,18 +559,18 @@ def handle(user, text: str, language: str | None = None, pending: dict | None = 
         "check_balance": _handle_balance,
         "transaction_history": _handle_history,
         "send_money": _handle_send,
+        "find_scheme": _handle_scheme,
+        "check_eligibility": _handle_scheme,
+        "check_scam": _handle_check_scam,
+        "report_scam": _handle_report_scam,
+        "learn_topic": _handle_learn,
     }
     if result.intent in handlers:
         return handlers[result.intent](user, lang, result)
 
     simple = {
-        "find_scheme": "schemes",
-        "check_eligibility": "schemes",
-        "learn_topic": "learn",
         "scan_qr": "scan",
         "identify_note": "scan",
-        "check_scam": "safety",
-        "report_scam": "safety",
         "help": "help",
         "repeat": "help",
     }

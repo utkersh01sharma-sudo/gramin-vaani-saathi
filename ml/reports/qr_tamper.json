@@ -1,0 +1,17 @@
+{
+  "n_posters": 120,
+  "decode_rate": 0.9167,
+  "feature_auc": {
+    "rotation_mismatch_deg": 0.9532,
+    "edge_ratio": 0.7897,
+    "brightness_step": 0.605
+  },
+  "tamper_auc": 0.92,
+  "mean_score_clean": 0.0,
+  "mean_score_tampered": 0.6401,
+  "detection_rate": 0.55,
+  "false_alarm_rate": 0.0,
+  "multiple_qr_seen_when_offset": 0.0,
+  "fraud_vpa_decoded_when_tampered": 0.8333,
+  "caveat": "Synthetic posters from a generator written alongside the heuristic. Necessary evidence, not sufficient: real shop photos are needed for a field number."
+}

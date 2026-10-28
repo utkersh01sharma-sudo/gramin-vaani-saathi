@@ -62,3 +62,10 @@ def get_vision() -> base.VisionAdapter:
     from .local.vision import LocalVision
 
     return LocalVision()
+
+
+@lru_cache(maxsize=1)
+def get_embedder():
+    from .local.embedder import Embedder
+
+    return Embedder()

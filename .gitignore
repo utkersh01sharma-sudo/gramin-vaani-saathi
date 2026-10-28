@@ -37,3 +37,6 @@ frontend/dev-dist/
 Thumbs.db
 .idea/
 .vscode/
+
+# --- Claude Code: local-only settings ---
+.claude/settings.local.json

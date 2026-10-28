@@ -1,0 +1,553 @@
+{
+  "model": "muril_intent",
+  "base_model": "google/muril-base-cased",
+  "device": "cuda",
+  "n": 183,
+  "accuracy": 0.8579,
+  "macro_f1": 0.8604,
+  "per_language": {
+    "en": 0.8605,
+    "hi": 0.8276,
+    "ta": 0.878,
+    "te": 0.878
+  },
+  "per_intent": {
+    "check_balance": {
+      "precision": 0.8571,
+      "recall": 0.8571,
+      "f1": 0.8571,
+      "support": 14
+    },
+    "send_money": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 14
+    },
+    "transaction_history": {
+      "precision": 0.9091,
+      "recall": 0.7692,
+      "f1": 0.8333,
+      "support": 13
+    },
+    "find_scheme": {
+      "precision": 0.9286,
+      "recall": 0.9286,
+      "f1": 0.9286,
+      "support": 14
+    },
+    "check_eligibility": {
+      "precision": 0.9231,
+      "recall": 0.9231,
+      "f1": 0.9231,
+      "support": 13
+    },
+    "scan_qr": {
+      "precision": 0.8462,
+      "recall": 0.8462,
+      "f1": 0.8462,
+      "support": 13
+    },
+    "identify_note": {
+      "precision": 0.9091,
+      "recall": 0.7692,
+      "f1": 0.8333,
+      "support": 13
+    },
+    "report_scam": {
+      "precision": 0.8125,
+      "recall": 1.0,
+      "f1": 0.8966,
+      "support": 13
+    },
+    "check_scam": {
+      "precision": 0.9231,
+      "recall": 0.9231,
+      "f1": 0.9231,
+      "support": 13
+    },
+    "learn_topic": {
+      "precision": 0.8462,
+      "recall": 0.8462,
+      "f1": 0.8462,
+      "support": 13
+    },
+    "set_language": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10
+    },
+    "help": {
+      "precision": 0.6471,
+      "recall": 0.8462,
+      "f1": 0.7333,
+      "support": 13
+    },
+    "repeat": {
+      "precision": 0.7778,
+      "recall": 0.7,
+      "f1": 0.7368,
+      "support": 10
+    },
+    "unknown": {
+      "precision": 0.7333,
+      "recall": 0.6471,
+      "f1": 0.6875,
+      "support": 17
+    }
+  },
+  "mean_confidence": 0.4749,
+  "mean_confidence_when_wrong": 0.3753,
+  "inference_ms_per_utterance": 0.44,
+  "confusion_matrix": [
+    [
+      12,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      14,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      10,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      13,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      12,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      11,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      10,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      13,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      12,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      11,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      10,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      11,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      7,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      3,
+      2,
+      11
+    ]
+  ],
+  "labels": [
+    "check_balance",
+    "send_money",
+    "transaction_history",
+    "find_scheme",
+    "check_eligibility",
+    "scan_qr",
+    "identify_note",
+    "report_scam",
+    "check_scam",
+    "learn_topic",
+    "set_language",
+    "help",
+    "repeat",
+    "unknown"
+  ],
+  "mistakes": [
+    {
+      "text": "खाता खाली तो नहीं हो गया",
+      "language": "hi",
+      "gold": "check_balance",
+      "pred": "report_scam",
+      "confidence": 0.389
+    },
+    {
+      "text": "ఖాతా ఖాళీ అయిపోయిందా",
+      "language": "te",
+      "gold": "check_balance",
+      "pred": "report_scam",
+      "confidence": 0.475
+    },
+    {
+      "text": "purana hisaab kitaab dikha do zara",
+      "language": "hi",
+      "gold": "transaction_history",
+      "pred": "check_balance",
+      "confidence": 0.453
+    },
+    {
+      "text": "who received money from me last time",
+      "language": "en",
+      "gold": "transaction_history",
+      "pred": "report_scam",
+      "confidence": 0.416
+    },
+    {
+      "text": "பழைய கணக்கை காட்டுங்க",
+      "language": "ta",
+      "gold": "transaction_history",
+      "pred": "check_balance",
+      "confidence": 0.381
+    },
+    {
+      "text": "where can i get help to start a small shop",
+      "language": "en",
+      "gold": "find_scheme",
+      "pred": "help",
+      "confidence": 0.439
+    },
+    {
+      "text": "main iske liye apply kar sakta hoon ya nahi",
+      "language": "hi",
+      "gold": "check_eligibility",
+      "pred": "help",
+      "confidence": 0.327
+    },
+    {
+      "text": "கடைக்காரர் காட்டிய கோடை படிச்சு சொல்லு",
+      "language": "ta",
+      "gold": "scan_qr",
+      "pred": "transaction_history",
+      "confidence": 0.452
+    },
+    {
+      "text": "இந்த ஒட்டப்பட்ட கோடு யாருடையது",
+      "language": "ta",
+      "gold": "scan_qr",
+      "pred": "identify_note",
+      "confidence": 0.373
+    },
+    {
+      "text": "ye kagaz ka paisa kितne ka hai batao",
+      "language": "hi",
+      "gold": "identify_note",
+      "pred": "check_scam",
+      "confidence": 0.397
+    },
+    {
+      "text": "கேமராவால் பார்த்து இந்த பணத்தை சொல்லு",
+      "language": "ta",
+      "gold": "identify_note",
+      "pred": "scan_qr",
+      "confidence": 0.297
+    },
+    {
+      "text": "కెమెరాతో చూసి ఈ డబ్బు చెప్పు",
+      "language": "te",
+      "gold": "identify_note",
+      "pred": "scan_qr",
+      "confidence": 0.24
+    },
+    {
+      "text": "koi bol raha hai bijli kat jayegi paise bhejo sahi hai kya",
+      "language": "hi",
+      "gold": "check_scam",
+      "pred": "check_eligibility",
+      "confidence": 0.396
+    },
+    {
+      "text": "upi kaam kaise karta hai thoda samjhao",
+      "language": "hi",
+      "gold": "learn_topic",
+      "pred": "help",
+      "confidence": 0.362
+    },
+    {
+      "text": "bima lene se kya fayda hota hai bataiye",
+      "language": "hi",
+      "gold": "learn_topic",
+      "pred": "find_scheme",
+      "confidence": 0.348
+    },
+    {
+      "text": "teach me how to operate this thing",
+      "language": "en",
+      "gold": "help",
+      "pred": "learn_topic",
+      "confidence": 0.382
+    },
+    {
+      "text": "నేను కొత్త నాకు దారి చూపించు",
+      "language": "te",
+      "gold": "help",
+      "pred": "unknown",
+      "confidence": 0.326
+    },
+    {
+      "text": "आवाज धीमी थी जरा दोहरा दीजिए",
+      "language": "hi",
+      "gold": "repeat",
+      "pred": "unknown",
+      "confidence": 0.355
+    },
+    {
+      "text": "aawaz nahi aayi wapas boliye",
+      "language": "hi",
+      "gold": "repeat",
+      "pred": "unknown",
+      "confidence": 0.37
+    },
+    {
+      "text": "your voice was too soft, say it once more",
+      "language": "en",
+      "gold": "repeat",
+      "pred": "unknown",
+      "confidence": 0.346
+    },
+    {
+      "text": "अच्छा चलो अब बंद करो",
+      "language": "hi",
+      "gold": "unknown",
+      "pred": "repeat",
+      "confidence": 0.396
+    },
+    {
+      "text": "i am not feeling well, suggest some medicine",
+      "language": "en",
+      "gold": "unknown",
+      "pred": "help",
+      "confidence": 0.486
+    },
+    {
+      "text": "okay that is enough, close it now",
+      "language": "en",
+      "gold": "unknown",
+      "pred": "help",
+      "confidence": 0.303
+    },
+    {
+      "text": "சரி போதும் நிறுத்துங்க",
+      "language": "ta",
+      "gold": "unknown",
+      "pred": "repeat",
+      "confidence": 0.397
+    },
+    {
+      "text": "ఒంట్లో బాగోలేదు మందు చెప్పండి",
+      "language": "te",
+      "gold": "unknown",
+      "pred": "learn_topic",
+      "confidence": 0.265
+    },
+    {
+      "text": "సరే చాలు ఇక ఆపేయ్",
+      "language": "te",
+      "gold": "unknown",
+      "pred": "help",
+      "confidence": 0.386
+    }
+  ],
+  "train_minutes": 5.56,
+  "hyperparameters": {
+    "epochs": 4,
+    "batch_size": 8,
+    "grad_accum": 2,
+    "lr": 2e-05,
+    "max_length": 64,
+    "seed": 42,
+    "embeddings_frozen": false
+  },
+  "validation_generated": {
+    "accuracy": 0.9957,
+    "macro_f1": 0.9953
+  },
+  "baseline": {
+    "accuracy": 0.7104,
+    "macro_f1": 0.7536,
+    "per_language": {
+      "hi": 0.569,
+      "en": 0.7209,
+      "ta": 0.7805,
+      "te": 0.8293
+    }
+  }
+}

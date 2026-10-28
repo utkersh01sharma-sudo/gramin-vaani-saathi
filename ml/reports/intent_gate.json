@@ -1,0 +1,175 @@
+{
+  "model": "muril_intent",
+  "test_set": "intent_test_handwritten.jsonl",
+  "n": 183,
+  "accuracy": 0.8579,
+  "mean_confidence_right": 0.4913,
+  "mean_confidence_wrong": 0.3753,
+  "silent_error_budget": 0.05,
+  "recommended_threshold": 0.4,
+  "recommended": {
+    "threshold": 0.4,
+    "coverage": 0.7978,
+    "accepted_n": 146,
+    "accepted_accuracy": 0.9589,
+    "accepted_error": 0.0411,
+    "silent_error": 0.0328,
+    "fallback_rate": 0.2022,
+    "meets_budget": true
+  },
+  "sweep": [
+    {
+      "threshold": 0.1,
+      "coverage": 1.0,
+      "accepted_n": 183,
+      "accepted_accuracy": 0.8579,
+      "accepted_error": 0.1421,
+      "silent_error": 0.1421,
+      "fallback_rate": 0.0
+    },
+    {
+      "threshold": 0.15,
+      "coverage": 1.0,
+      "accepted_n": 183,
+      "accepted_accuracy": 0.8579,
+      "accepted_error": 0.1421,
+      "silent_error": 0.1421,
+      "fallback_rate": 0.0
+    },
+    {
+      "threshold": 0.2,
+      "coverage": 1.0,
+      "accepted_n": 183,
+      "accepted_accuracy": 0.8579,
+      "accepted_error": 0.1421,
+      "silent_error": 0.1421,
+      "fallback_rate": 0.0
+    },
+    {
+      "threshold": 0.25,
+      "coverage": 0.9891,
+      "accepted_n": 181,
+      "accepted_accuracy": 0.8619,
+      "accepted_error": 0.1381,
+      "silent_error": 0.1366,
+      "fallback_rate": 0.0109
+    },
+    {
+      "threshold": 0.3,
+      "coverage": 0.9727,
+      "accepted_n": 178,
+      "accepted_accuracy": 0.8708,
+      "accepted_error": 0.1292,
+      "silent_error": 0.1257,
+      "fallback_rate": 0.0273
+    },
+    {
+      "threshold": 0.35,
+      "coverage": 0.9344,
+      "accepted_n": 171,
+      "accepted_accuracy": 0.8947,
+      "accepted_error": 0.1053,
+      "silent_error": 0.0984,
+      "fallback_rate": 0.0656
+    },
+    {
+      "threshold": 0.4,
+      "coverage": 0.7978,
+      "accepted_n": 146,
+      "accepted_accuracy": 0.9589,
+      "accepted_error": 0.0411,
+      "silent_error": 0.0328,
+      "fallback_rate": 0.2022
+    },
+    {
+      "threshold": 0.45,
+      "coverage": 0.7158,
+      "accepted_n": 131,
+      "accepted_accuracy": 0.9695,
+      "accepted_error": 0.0305,
+      "silent_error": 0.0219,
+      "fallback_rate": 0.2842
+    },
+    {
+      "threshold": 0.5,
+      "coverage": 0.4645,
+      "accepted_n": 85,
+      "accepted_accuracy": 1.0,
+      "accepted_error": 0.0,
+      "silent_error": 0.0,
+      "fallback_rate": 0.5355
+    },
+    {
+      "threshold": 0.55,
+      "coverage": 0.2022,
+      "accepted_n": 37,
+      "accepted_accuracy": 1.0,
+      "accepted_error": 0.0,
+      "silent_error": 0.0,
+      "fallback_rate": 0.7978
+    },
+    {
+      "threshold": 0.6,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.65,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.7,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.75,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.85,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    },
+    {
+      "threshold": 0.9,
+      "coverage": 0.0,
+      "accepted_n": 0,
+      "accepted_accuracy": null,
+      "accepted_error": null,
+      "silent_error": 0.0,
+      "fallback_rate": 1.0
+    }
+  ]
+}

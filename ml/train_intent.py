@@ -217,6 +217,19 @@ def main() -> None:
     # holding 2-3 GB of it. Batch 8 x 2 accumulation trains at an effective
     # batch of 16 without competing with the machine the demo runs on.
     parser.add_argument("--grad-accum", type=int, default=2)
+    # Freeze the embedding matrix. MuRIL's vocabulary is 197k wordpieces, so its
+    # embeddings are 152M of the model's 238M parameters -- 64% of it. Training
+    # them costs 1.8 GB of gradient and Adam state for no benefit we can measure:
+    # those vectors were pre-trained on 17 Indian languages and their
+    # transliterations, which is exactly the distribution we are fine-tuning on,
+    # and 6.7k rows is far too little to improve them without drifting the
+    # under-represented languages. Measured on the 4070: peak 4.45 GB unfrozen
+    # against 2.8 GB frozen. That difference decides whether the run fits in VRAM
+    # beside a browser or silently spills into shared system memory, where a step
+    # takes 76 seconds instead of 0.14 -- a 500x slowdown that looks like a hang,
+    # not an error. Pass --train-embeddings to compare.
+    parser.add_argument("--train-embeddings", action="store_true",
+                        help="Fine-tune the 152M-parameter embedding matrix too.")
     parser.add_argument("--lr", type=float, default=2e-5)
     parser.add_argument("--max-length", type=int, default=64)
     parser.add_argument("--seed", type=int, default=42)
@@ -262,6 +275,14 @@ def main() -> None:
             label2id=LABEL2ID,
         )
 
+        if not args.train_embeddings:
+            for param in model.base_model.embeddings.parameters():
+                param.requires_grad = False
+        trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        total = sum(p.numel() for p in model.parameters())
+        print(f"trainable {trainable / 1e6:.1f}M of {total / 1e6:.1f}M parameters "
+              f"({100 * trainable / total:.0f}%)")
+
         train_ds = build_dataset(train_rows, tokenizer, args.max_length)
         val_ds = build_dataset(val_rows, tokenizer, args.max_length)
 
@@ -296,6 +317,16 @@ def main() -> None:
             compute_metrics=compute_metrics,
         )
 
+        # safetensors refuses to write a tensor whose storage is not contiguous,
+        # and it raises at the first epoch-end checkpoint -- after the epoch has
+        # already been paid for. MuRIL arrives from the hub with several
+        # attention projections sharing a strided view, which is harmless for
+        # the forward pass and fatal for the writer. Pack them once, here, where
+        # it costs nothing, instead of discovering it 20 minutes in.
+        for param in model.parameters():
+            if not param.data.is_contiguous():
+                param.data = param.data.contiguous()
+
         started = time.perf_counter()
         trainer.train()
         minutes = (time.perf_counter() - started) / 60
@@ -306,6 +337,9 @@ def main() -> None:
               f"| macro F1 {val_metrics['eval_macro_f1']:.4f}")
 
         output_dir.mkdir(parents=True, exist_ok=True)
+        for param in trainer.model.parameters():
+            if not param.data.is_contiguous():
+                param.data = param.data.contiguous()
         trainer.save_model(str(output_dir))
         tokenizer.save_pretrained(str(output_dir))
         print(f"saved to {output_dir}")
@@ -321,6 +355,7 @@ def main() -> None:
             "epochs": args.epochs, "batch_size": args.batch_size,
             "grad_accum": args.grad_accum, "lr": args.lr,
             "max_length": args.max_length, "seed": args.seed,
+            "embeddings_frozen": not args.train_embeddings,
         }
         report["validation_generated"] = {
             "accuracy": round(float(val_metrics["eval_accuracy"]), 4),

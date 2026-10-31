@@ -6,6 +6,13 @@
       "runtimeExecutable": "${workspaceFolder}/.venv/Scripts/python.exe",
       "runtimeArgs": ["backend/manage.py", "runserver", "127.0.0.1:8000", "--noreload"],
       "port": 8000
+    },
+    {
+      "name": "vaani-saathi-8001",
+      "runtimeExecutable": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "runtimeArgs": ["backend/manage.py", "runserver", "127.0.0.1:8001", "--noreload"],
+      "port": 8001,
+      "autoPort": false
     }
   ]
 }
